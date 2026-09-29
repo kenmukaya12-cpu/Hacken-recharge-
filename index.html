@@ -37,14 +37,14 @@
   h1,h2,h3{font-family:'Outfit',system-ui,sans-serif;margin:0;}
   .wrap{max-width:760px;margin:0 auto;padding:0 20px;}
   header.hero{
-    padding:48px 20px 40px;text-align:center;
+    padding:28px 20px 26px;text-align:center;
     background:
       radial-gradient(60% 60% at 50% 0%, rgba(73,216,240,.18), transparent 70%),
       var(--bg);
     border-bottom:1px solid var(--line);
   }
-  .brand{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--cyan);font-weight:700;letter-spacing:.02em;font-size:15px;}
-  h1{font-size:clamp(30px,7vw,44px);font-weight:900;margin-top:14px;line-height:1.05;}
+  .brand{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--cyan);font-weight:700;letter-spacing:.02em;font-size:12.5px;}
+  h1{font-size:clamp(20px,5.5vw,26px);font-weight:800;margin-top:10px;line-height:1.15;}
   h1 span{color:var(--cyan);}
   .tag{color:var(--muted);margin-top:12px;font-size:15.5px;}
   section{padding:36px 20px;}
@@ -153,49 +153,135 @@
   .navbar{border-bottom:1px solid var(--gold);}
   section .section-title{position:relative;padding-left:14px;}
   section .section-title::before{content:'';position:absolute;left:0;top:2px;bottom:2px;width:3px;background:var(--gold);border-radius:2px;}
+  .carousel{position:relative;width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:var(--panel);border:1px solid var(--line);}
+  .carousel .slide{
+    position:absolute;inset:0;opacity:0;transition:opacity .6s ease;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .carousel .slide.active{opacity:1;}
+  .carousel .slide img{width:100%;height:100%;object-fit:cover;display:block;}
+  .carousel .slide .placeholder{color:var(--muted);font-size:13px;text-align:center;padding:12px;}
+  .carousel .dots{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:6px;}
+  .carousel .dots span{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.4);transition:background .2s,width .2s;}
+  .carousel .dots span.active{background:var(--cyan);width:18px;border-radius:4px;}
+  @media (max-width:420px){ .carousel{aspect-ratio:4/3;} }
   .pay-options{flex-wrap:wrap;}
   .pay{min-width:100px;}
+  .navbar .logo{flex-direction:column;align-items:flex-start;gap:0;line-height:1.05;}
+  .navbar .logo .hk{font-size:20px;font-weight:900;letter-spacing:.02em;color:var(--cyan);}
+  .navbar .logo .full{font-size:9.5px;font-weight:600;color:var(--muted);letter-spacing:.08em;}
+  .packs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+  @media (min-width:480px){ .packs-grid{grid-template-columns:repeat(3,1fr);} }
+  .pack-card{
+    position:relative;aspect-ratio:1/1;border-radius:14px;overflow:hidden;
+    background:var(--panel);border:1px solid var(--line);cursor:pointer;
+    display:flex;flex-direction:column;transition:border-color .15s;
+  }
+  .pack-card:hover{border-color:var(--cyan-d);}
+  .pack-card.selected{border-color:var(--cyan);box-shadow:0 0 0 2px var(--cyan) inset;}
+  .pack-card .img-slot{flex:1;background:var(--panel2);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .pack-card .img-slot img{width:100%;height:100%;object-fit:cover;display:block;}
+  .pack-card .img-slot .ph{color:var(--muted);font-size:10px;text-align:center;padding:6px;line-height:1.4;}
+  .pack-card .info{padding:8px 6px;text-align:center;}
+  .pack-card .qty{font-weight:700;font-size:14px;}
+  .pack-card .price{font-weight:700;color:var(--cyan);font-size:13px;margin-top:2px;}
+  .pack-card .price.gold{color:var(--gold);}
+  .pack-card input{display:none;}
+  .subhead{font-size:13px;font-weight:700;color:var(--muted);margin:22px 0 10px;text-transform:uppercase;letter-spacing:.04em;}
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:20;padding:16px;overflow-y:auto;}
+  .modal-overlay.open{display:block;}
+  .modal{
+    max-width:480px;margin:20px auto;background:var(--bg);border:1px solid var(--gold);
+    border-radius:14px;padding:20px;
+  }
+  .modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+  .modal-head h3{font-size:17px;}
+  .modal-close{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:6px 10px;cursor:pointer;}
+  .guide-item{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:12.5px;}
+  .guide-item .fn{font-weight:700;color:var(--cyan);font-family:monospace;font-size:12px;}
+  .guide-item .note{color:var(--muted);margin-top:4px;line-height:1.4;}
+  .guide-visuals{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;}
+  .guide-visuals .shot{aspect-ratio:3/4;border-radius:10px;overflow:hidden;background:var(--panel);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;}
+  .guide-visuals .shot img{width:100%;height:100%;object-fit:cover;}
+  .guide-visuals .shot .ph{color:var(--muted);font-size:10px;text-align:center;padding:6px;}
 </style>
 </head>
 <body>
 
 <div class="navbar">
   <div class="logo">
-    <svg class="diamond" viewBox="0 0 24 24" fill="none"><path d="M2 9L7 3H17L22 9L12 21L2 9Z" fill="var(--cyan)" opacity=".3" stroke="var(--cyan)" stroke-width="1.6" stroke-linejoin="round"/></svg>
-    HACKEN STORE
+    <span class="hk">HK</span>
+    <span class="full">HACKEN STORE</span>
   </div>
-  <button class="theme-btn" id="themeToggle" type="button" aria-label="Changer de thème">🌙</button>
+  <div style="display:flex;gap:8px;">
+    <button class="theme-btn" id="guideBtn" type="button">📘 Guide</button>
+    <button class="theme-btn" id="themeToggle" type="button" aria-label="Changer de thème">🌙</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="guideOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>📘 Guide des images</h3>
+      <button class="modal-close" id="guideClose" type="button">✕</button>
+    </div>
+    <div class="guide-item"><span class="fn">pack-100.jpg</span><div class="note">Petit tas de quelques diamants bleus scintillants, fond sombre.</div></div>
+    <div class="guide-item"><span class="fn">pack-235.jpg</span><div class="note">Petit-moyen tas de diamants bleus, un peu plus fourni que pack-100.</div></div>
+    <div class="guide-item"><span class="fn">pack-553.jpg</span><div class="note">Tas moyen de diamants, effet de lumière plus marqué.</div></div>
+    <div class="guide-item"><span class="fn">pack-1188.jpg</span><div class="note">Gros tas de diamants qui déborde légèrement, ambiance premium.</div></div>
+    <div class="guide-item"><span class="fn">pack-2160.jpg</span><div class="note">Grand tas de diamants avec effet de brillance/particules.</div></div>
+    <div class="guide-item"><span class="fn">pack-2420.jpg</span><div class="note">Grand tas de diamants, légèrement plus doré/lumineux que 2160.</div></div>
+    <div class="guide-item"><span class="fn">pack-3240.jpg</span><div class="note">Coffre ouvert débordant de diamants, effet le plus spectaculaire.</div></div>
+    <div class="guide-item"><span class="fn">booyah.jpg</span><div class="note">Carte/badge doré style VIP avec inscription "BOOYAH PASS".</div></div>
+    <div class="guide-item"><span class="fn">abo-hebdo.jpg</span><div class="note">Icône calendrier avec diamants, badge "7 jours", tons dorés.</div></div>
+    <div class="guide-item"><span class="fn">abo-mensuel.jpg</span><div class="note">Icône calendrier avec diamants, badge "30 jours", tons dorés.</div></div>
+    <div class="guide-visuals">
+      <div class="shot"><img src="guide1.jpg" alt="Guide visuel 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>guide1.jpg</div></div>
+      <div class="shot"><img src="guide2.jpg" alt="Guide visuel 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>guide2.jpg</div></div>
+    </div>
+  </div>
 </div>
 
 <header class="hero">
   <div class="brand">
     <svg class="diamond" viewBox="0 0 24 24" fill="none"><path d="M2 9L7 3H17L22 9L12 21L2 9Z" stroke="var(--cyan)" stroke-width="1.6" stroke-linejoin="round"/><path d="M2 9H22M7 3L9.5 9L12 21L14.5 9L17 3" stroke="var(--cyan)" stroke-width="1.2"/></svg>
-    RECHARGE DIAMANTS · FREE FIRE
+    RECHARGE DIAMANTS
   </div>
   <h1>Tes diamants, <span>livrés vite.</span></h1>
-  <p class="tag">Paiement Airtel Money, Orange Money ou Vodacom M-Pesa. Recharge sur ton ID, sans passer par ton compte.</p>
   <div class="verified">✔ Vendeur vérifié</div>
-  <div class="country">🇨🇩 Service disponible uniquement en RDC</div>
+  <div class="country">🇨🇩 RDC uniquement</div>
 </header>
 
 <div class="wrap">
 
 <section>
+  <div class="carousel" id="carousel">
+    <div class="slide active"><img src="bonus1.jpg" alt="Capture bonus 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="placeholder" style="display:none;">Ajoute l'image<br>bonus1.jpg</div></div>
+    <div class="slide"><img src="bonus2.jpg" alt="Capture bonus 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="placeholder" style="display:none;">Ajoute l'image<br>bonus2.jpg</div></div>
+    <div class="slide"><img src="bonus3.jpg" alt="Capture bonus 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="placeholder" style="display:none;">Ajoute l'image<br>bonus3.jpg</div></div>
+    <div class="dots"><span class="active"></span><span></span><span></span></div>
+  </div>
+</section>
+
+<section>
   <div class="section-title">Choisis ton pack</div>
   <div class="section-sub">Le prix s'affiche en Francs Congolais (FC)</div>
-  <div class="packs" id="packs">
-    <label class="pack" data-price="3900"><div class="left"><svg class="diamond" viewBox="0 0 24 24" fill="none"><path d="M2 9L7 3H17L22 9L12 21L2 9Z" fill="#49D8F0" opacity=".25" stroke="#49D8F0" stroke-width="1.4"/></svg><span class="qty">100 💎</span></div><span class="price">3 900 FC</span><input type="radio" name="pack" value="100 diamants — 3 900 FC"></label>
-    <label class="pack" data-price="7400"><div class="left"><svg class="diamond" viewBox="0 0 24 24" fill="none"><path d="M2 9L7 3H17L22 9L12 21L2 9Z" fill="#49D8F0" opacity=".25" stroke="#49D8F0" stroke-width="1.4"/></svg><span class="qty">235 💎</span></div><span class="price">7 400 FC</span><input type="radio" name="pack" value="235 diamants — 7 400 FC"></label>
-    <label class="pack" data-price="13500"><div class="left"><svg class="diamond" viewBox="0 0 24 24" fill="none"><path d="M2 9L7 3H17L22 9L12 21L2 9Z" fill="#49D8F0" opacity=".25" stroke="#49D8F0" stroke-width="1.4"/></svg><span class="qty">553 💎</span></div><span class="price">13 900 FC</span><input type="radio" name="pack" value="553 diamants — 13 900 FC"></label>
-    <label class="pack" data-price="26500"><div class="left"><svg class="diamond" viewBox="0 0 24 24" fill="none"><path d="M2 9L7 3H17L22 9L12 21L2 9Z" fill="#49D8F0" opacity=".25" stroke="#49D8F0" stroke-width="1.4"/></svg><span class="qty">1188 💎</span></div><span class="price">26 500 FC</span><input type="radio" name="pack" value="1188 diamants — 26 500 FC"></label>
-    <label class="pack" data-price="50000"><div class="left"><svg class="diamond" viewBox="0 0 24 24" fill="none"><path d="M2 9L7 3H17L22 9L12 21L2 9Z" fill="#49D8F0" opacity=".25" stroke="#49D8F0" stroke-width="1.4"/></svg><span class="qty">2160 💎</span></div><span class="price">50 000 FC</span><input type="radio" name="pack" value="2160 diamants — 50 000 FC"></label>
-    <label class="pack" data-price="52000"><div class="left"><svg class="diamond" viewBox="0 0 24 24" fill="none"><path d="M2 9L7 3H17L22 9L12 21L2 9Z" fill="#49D8F0" opacity=".25" stroke="#49D8F0" stroke-width="1.4"/></svg><span class="qty">2420 💎</span></div><span class="price">52 000 FC</span><input type="radio" name="pack" value="2420 diamants — 52 000 FC"></label>
-    <label class="pack" data-price="72000"><div class="left"><svg class="diamond" viewBox="0 0 24 24" fill="none"><path d="M2 9L7 3H17L22 9L12 21L2 9Z" fill="#49D8F0" opacity=".25" stroke="#49D8F0" stroke-width="1.4"/></svg><span class="qty">3240 💎</span></div><span class="price">72 000 FC</span><input type="radio" name="pack" value="3240 diamants — 72 000 FC"></label>
+  <div class="packs-grid" id="packs">
+    <label class="pack-card" data-price="4000"><div class="img-slot"><img src="pack-100.jpg" alt="100 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-100.jpg</div></div><div class="info"><div class="qty">100 💎</div><div class="price">4 000 FC</div></div><input type="radio" name="pack" value="100 diamants — 4 000 FC"></label>
+    <label class="pack-card" data-price="7500"><div class="img-slot"><img src="pack-235.jpg" alt="235 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-235.jpg</div></div><div class="info"><div class="qty">235 💎</div><div class="price">7 500 FC</div></div><input type="radio" name="pack" value="235 diamants — 7 500 FC"></label>
+    <label class="pack-card" data-price="14000"><div class="img-slot"><img src="pack-553.jpg" alt="553 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-553.jpg</div></div><div class="info"><div class="qty">553 💎</div><div class="price">14 000 FC</div></div><input type="radio" name="pack" value="553 diamants — 14 000 FC"></label>
+    <label class="pack-card" data-price="26000"><div class="img-slot"><img src="pack-1188.jpg" alt="1188 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-1188.jpg</div></div><div class="info"><div class="qty">1188 💎</div><div class="price">26 000 FC</div></div><input type="radio" name="pack" value="1188 diamants — 26 000 FC"></label>
+    <label class="pack-card" data-price="50000"><div class="img-slot"><img src="pack-2160.jpg" alt="2160 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-2160.jpg</div></div><div class="info"><div class="qty">2160 💎</div><div class="price">50 000 FC</div></div><input type="radio" name="pack" value="2160 diamants — 50 000 FC"></label>
+    <label class="pack-card" data-price="52000"><div class="img-slot"><img src="pack-2420.jpg" alt="2420 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-2420.jpg</div></div><div class="info"><div class="qty">2420 💎</div><div class="price">52 000 FC</div></div><input type="radio" name="pack" value="2420 diamants — 52 000 FC"></label>
+    <label class="pack-card" data-price="72000"><div class="img-slot"><img src="pack-3240.jpg" alt="3240 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-3240.jpg</div></div><div class="info"><div class="qty">3240 💎</div><div class="price">72 000 FC</div></div><input type="radio" name="pack" value="3240 diamants — 72 000 FC"></label>
   </div>
 
-  <label class="pack extra" data-price="8500"><div class="left"><svg class="diamond" viewBox="0 0 24 24" fill="none"><path d="M4 7L12 3L20 7V13C20 17 16.5 20 12 21C7.5 20 4 17 4 13V7Z" fill="var(--gold)" opacity=".22" stroke="var(--gold)" stroke-width="1.4"/></svg><div><div class="qty">Booyah Pass</div><div class="sub">Débloque des récompenses exclusives</div></div></div><span class="price" style="color:var(--gold)">8 500 FC</span><input type="radio" name="pack" value="Booyah Pass — 8 500 FC"></label>
-  <label class="pack extra" data-price="6000"><div class="left"><svg class="diamond" viewBox="0 0 24 24" fill="none"><path d="M4 7L12 3L20 7V13C20 17 16.5 20 12 21C7.5 20 4 17 4 13V7Z" fill="var(--gold)" opacity=".22" stroke="var(--gold)" stroke-width="1.4"/></svg><div><div class="qty">Abonnement hebdomadaire</div><div class="sub">450 💎 + avantages 7 jours</div></div></div><span class="price" style="color:var(--gold)">6 000 FC</span><input type="radio" name="pack" value="Abonnement hebdomadaire — 6 000 FC"></label>
-  <label class="pack extra" data-price="26000"><div class="left"><svg class="diamond" viewBox="0 0 24 24" fill="none"><path d="M4 7L12 3L20 7V13C20 17 16.5 20 12 21C7.5 20 4 17 4 13V7Z" fill="var(--gold)" opacity=".22" stroke="var(--gold)" stroke-width="1.4"/></svg><div><div class="qty">Abonnement mensuel</div><div class="sub">2600 💎 + avantages 30 jours</div></div></div><span class="price" style="color:var(--gold)">26 000 FC</span><input type="radio" name="pack" value="Abonnement mensuel — 26 000 FC"></label>
+  <div class="subhead">Booyah Pass & Abonnements</div>
+  <div class="packs-grid">
+    <label class="pack-card" data-price="8500"><div class="img-slot"><img src="booyah.jpg" alt="Booyah Pass" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>booyah.jpg</div></div><div class="info"><div class="qty">Booyah Pass</div><div class="price gold">8 500 FC</div></div><input type="radio" name="pack" value="Booyah Pass — 8 500 FC"></label>
+    <label class="pack-card" data-price="6000"><div class="img-slot"><img src="abo-hebdo.jpg" alt="Abonnement hebdomadaire" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>abo-hebdo.jpg</div></div><div class="info"><div class="qty">Hebdomadaire</div><div class="price gold">6 000 FC</div></div><input type="radio" name="pack" value="Abonnement hebdomadaire — 6 000 FC"></label>
+    <label class="pack-card" data-price="26000"><div class="img-slot"><img src="abo-mensuel.jpg" alt="Abonnement mensuel" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>abo-mensuel.jpg</div></div><div class="info"><div class="qty">Mensuel</div><div class="price gold">26 000 FC</div></div><input type="radio" name="pack" value="Abonnement mensuel — 26 000 FC"></label>
+  </div>
 </section>
 
 <section style="padding-top:0;">
@@ -299,10 +385,24 @@
     this.textContent = next === 'dark' ? '🌙' : '☀️';
     try{ localStorage.setItem('hkstore-theme', next); }catch(e){}
   });
+  (function(){
+    const slides = document.querySelectorAll('#carousel .slide');
+    const dots = document.querySelectorAll('#carousel .dots span');
+    let idx = 0;
+    if(slides.length > 1){
+      setInterval(function(){
+        slides[idx].classList.remove('active');
+        dots[idx].classList.remove('active');
+        idx = (idx + 1) % slides.length;
+        slides[idx].classList.add('active');
+        dots[idx].classList.add('active');
+      }, 3500);
+    }
+  })();
   let selectedPrice = 0, selectedLabel = '';
-  document.querySelectorAll('.pack').forEach(p=>{
+  document.querySelectorAll('.pack-card').forEach(p=>{
     p.addEventListener('click',()=>{
-      document.querySelectorAll('.pack').forEach(x=>x.classList.remove('selected'));
+      document.querySelectorAll('.pack-card').forEach(x=>x.classList.remove('selected'));
       p.classList.add('selected');
       p.querySelector('input').checked = true;
       selectedPrice = parseInt(p.dataset.price,10);
