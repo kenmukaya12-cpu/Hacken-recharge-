@@ -123,6 +123,10 @@
   }
   .navbar .logo{display:flex;align-items:center;gap:8px;font-family:'Outfit';font-weight:800;font-size:17px;}
   .theme-btn{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px 10px;cursor:pointer;font-size:14px;}
+  .icon-btn{
+    width:34px;height:34px;border-radius:50%;background:var(--panel);border:1px solid var(--line);
+    color:var(--text);cursor:pointer;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;
+  }
   .reviews{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch;}
   .review{
     flex:0 0 220px;background:var(--panel);border:1px solid var(--line);border-radius:12px;
@@ -186,6 +190,7 @@
   .pack-card .qty{font-weight:700;font-size:14px;}
   .pack-card .price{font-weight:700;color:var(--cyan);font-size:13px;margin-top:2px;}
   .pack-card .price.gold{color:var(--gold);}
+  .pack-card .old-price{text-decoration:line-through;color:var(--muted);font-size:10.5px;margin-right:4px;font-weight:500;}
   .pack-card input{display:none;}
   .subhead{font-size:13px;font-weight:700;color:var(--muted);margin:22px 0 10px;text-transform:uppercase;letter-spacing:.04em;}
   .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:20;padding:16px;overflow-y:auto;}
@@ -204,6 +209,40 @@
   .guide-visuals .shot{aspect-ratio:3/4;border-radius:10px;overflow:hidden;background:var(--panel);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;}
   .guide-visuals .shot img{width:100%;height:100%;object-fit:cover;}
   .guide-visuals .shot .ph{color:var(--muted);font-size:10px;text-align:center;padding:6px;}
+  .compte-actions{display:flex;gap:10px;margin-top:12px;}
+  .compte-actions .pay{flex:0 0 auto;padding:12px 16px;}
+  .compte-details{
+    display:none;margin-top:10px;background:var(--panel);border:1px solid var(--line);
+    border-radius:10px;padding:12px 14px;font-size:13px;color:var(--muted);line-height:1.5;
+  }
+  .compte-details.open{display:block;}
+  .guild-btn{
+    display:block;text-align:center;margin-top:14px;background:linear-gradient(135deg,#2BD67B,#1E9E5C);
+    color:#06250f;text-decoration:none;font-weight:800;padding:14px;border-radius:12px;
+    font-family:'Outfit',sans-serif;font-size:15px;
+  }
+
+  .sale-price{display:flex;align-items:baseline;justify-content:center;gap:4px;flex-wrap:wrap;}
+  .sale-price .old-price{text-decoration:line-through;color:var(--muted);font-size:10.5px;font-weight:500;}
+  .sale-price .new-price{font-weight:800;color:var(--cyan);}
+  .welcome-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:50;padding:16px;overflow-y:auto;}
+  .welcome-overlay.open{display:flex;align-items:center;justify-content:center;}
+  .welcome-card{max-width:520px;width:100%;background:var(--bg);border:1px solid var(--gold);border-radius:16px;padding:22px;box-shadow:0 18px 60px rgba(0,0,0,.35);}
+  .welcome-card h2{font-size:22px;margin-bottom:8px;color:var(--cyan);}
+  .welcome-card p,.welcome-card li{color:var(--muted);font-size:13.5px;}
+  .welcome-card ul{padding-left:20px;margin:12px 0 18px;}
+  .welcome-card .welcome-warning{background:var(--panel);border:1px solid var(--gold);border-radius:10px;padding:12px;margin:14px 0;}
+  .account-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;}
+  .account-card .account-image{width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--panel2);}
+  .account-card .account-image img{width:100%;height:100%;object-fit:cover;display:block;}
+  .account-card .account-name{font-weight:800;margin-top:10px;}
+  .account-card .account-price{color:var(--cyan);font-weight:800;margin-top:3px;}
+  .account-card .account-actions{display:flex;gap:8px;margin-top:10px;}
+  .account-card .account-actions button,.account-card .account-actions a{flex:1;text-align:center;}
+  .account-details-panel{display:none;margin-top:10px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px;font-size:13px;color:var(--muted);}
+  .account-details-panel.open{display:block;}
+  .account-buy{display:block;text-decoration:none;background:linear-gradient(135deg,var(--cyan),var(--cyan-d));color:#06222b;font-weight:800;padding:11px;border-radius:10px;}
+
 </style>
 </head>
 <body>
@@ -214,30 +253,48 @@
     <span class="full">HACKEN STORE</span>
   </div>
   <div style="display:flex;gap:8px;">
-    <button class="theme-btn" id="guideBtn" type="button">📘 Guide</button>
-    <button class="theme-btn" id="themeToggle" type="button" aria-label="Changer de thème">🌙</button>
+    <button class="icon-btn" id="guideBtn" type="button" aria-label="Aide">?</button>
+    <button class="icon-btn" id="settingsBtn" type="button" aria-label="Paramètres">⚙️</button>
   </div>
 </div>
 
 <div class="modal-overlay" id="guideOverlay">
   <div class="modal">
     <div class="modal-head">
-      <h3>📘 Guide des images</h3>
+      <h3>❓ Comment commander</h3>
       <button class="modal-close" id="guideClose" type="button">✕</button>
     </div>
-    <div class="guide-item"><span class="fn">pack-100.jpg</span><div class="note">Petit tas de quelques diamants bleus scintillants, fond sombre.</div></div>
-    <div class="guide-item"><span class="fn">pack-235.jpg</span><div class="note">Petit-moyen tas de diamants bleus, un peu plus fourni que pack-100.</div></div>
-    <div class="guide-item"><span class="fn">pack-553.jpg</span><div class="note">Tas moyen de diamants, effet de lumière plus marqué.</div></div>
-    <div class="guide-item"><span class="fn">pack-1188.jpg</span><div class="note">Gros tas de diamants qui déborde légèrement, ambiance premium.</div></div>
-    <div class="guide-item"><span class="fn">pack-2160.jpg</span><div class="note">Grand tas de diamants avec effet de brillance/particules.</div></div>
-    <div class="guide-item"><span class="fn">pack-2420.jpg</span><div class="note">Grand tas de diamants, légèrement plus doré/lumineux que 2160.</div></div>
-    <div class="guide-item"><span class="fn">pack-3240.jpg</span><div class="note">Coffre ouvert débordant de diamants, effet le plus spectaculaire.</div></div>
-    <div class="guide-item"><span class="fn">booyah.jpg</span><div class="note">Carte/badge doré style VIP avec inscription "BOOYAH PASS".</div></div>
-    <div class="guide-item"><span class="fn">abo-hebdo.jpg</span><div class="note">Icône calendrier avec diamants, badge "7 jours", tons dorés.</div></div>
-    <div class="guide-item"><span class="fn">abo-mensuel.jpg</span><div class="note">Icône calendrier avec diamants, badge "30 jours", tons dorés.</div></div>
+    <div class="guide-item"><span class="fn">1. Choisis ton article</span><div class="note">Clique sur un pack de diamants, le Booyah Pass ou un abonnement.</div></div>
+    <div class="guide-item"><span class="fn">2. Remplis ton ID joueur</span><div class="note">C'est l'identifiant de ton compte Free Fire, visible dans ton profil.</div></div>
+    <div class="guide-item"><span class="fn">3. Choisis ton paiement</span><div class="note">Airtel Money ou Orange Money (Vodacom en maintenance).</div></div>
+    <div class="guide-item"><span class="fn">4. Envoie l'argent</span><div class="note">Envoie le montant exact au numéro affiché, au nom indiqué.</div></div>
+    <div class="guide-item"><span class="fn">5. Complète et confirme</span><div class="note">Indique le numéro qui a envoyé l'argent et le numéro de transaction, puis confirme.</div></div>
+    <div class="guide-item"><span class="fn">6. Envoie sur WhatsApp</span><div class="note">Le message se prépare automatiquement, il ne reste qu'à l'envoyer.</div></div>
+    <div class="guide-item" style="border-color:var(--gold);">
+      <span class="fn" style="color:var(--gold);">⚠️ Condition importante</span>
+      <div class="note">L'argent doit être envoyé AVANT d'envoyer la confirmation sur WhatsApp. Toute confirmation sans paiement réel déjà effectué ne sera pas traitée.</div>
+    </div>
     <div class="guide-visuals">
       <div class="shot"><img src="guide1.jpg" alt="Guide visuel 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>guide1.jpg</div></div>
       <div class="shot"><img src="guide2.jpg" alt="Guide visuel 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>guide2.jpg</div></div>
+    </div>
+    <button class="submit" id="guideUnderstood" type="button" style="margin-top:14px;">J'ai compris</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="settingsOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>⚙️ Paramètres</h3>
+      <button class="modal-close" id="settingsClose" type="button">✕</button>
+    </div>
+    <div class="guide-item">
+      <span class="fn">Thème d'affichage</span>
+      <div class="note" style="margin-bottom:10px;">Choisis l'apparence du site sur cet appareil.</div>
+      <div class="pay-options">
+        <label class="pay" id="themeLightBtn" type="button">☀️ Clair</label>
+        <label class="pay" id="themeDarkBtn" type="button">🌙 Sombre</label>
+      </div>
     </div>
   </div>
 </div>
@@ -267,13 +324,13 @@
   <div class="section-title">Choisis ton pack</div>
   <div class="section-sub">Le prix s'affiche en Francs Congolais (FC)</div>
   <div class="packs-grid" id="packs">
-    <label class="pack-card" data-price="4000"><div class="img-slot"><img src="pack-100.jpg" alt="100 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-100.jpg</div></div><div class="info"><div class="qty">100 💎</div><div class="price">4 000 FC</div></div><input type="radio" name="pack" value="100 diamants — 4 000 FC"></label>
-    <label class="pack-card" data-price="7000"><div class="img-slot"><img src="pack-235.jpg" alt="235 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-235.jpg</div></div><div class="info"><div class="qty">235 💎</div><div class="price">7 000 FC</div></div><input type="radio" name="pack" value="235 diamants — 7000 FC"></label>
-    <label class="pack-card" data-price="14000"><div class="img-slot"><img src="pack-553.jpg" alt="553 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-553.jpg</div></div><div class="info"><div class="qty">553 💎</div><div class="price">14 000 FC</div></div><input type="radio" name="pack" value="553 diamants — 14 000 FC"></label>
-    <label class="pack-card" data-price="26000"><div class="img-slot"><img src="pack-1188.jpg" alt="1188 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-1188.jpg</div></div><div class="info"><div class="qty">1188 💎</div><div class="price">26 000 FC</div></div><input type="radio" name="pack" value="1188 diamants — 26 000 FC"></label>
-    <label class="pack-card" data-price="50000"><div class="img-slot"><img src="pack-2160.jpg" alt="2160 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-2160.jpg</div></div><div class="info"><div class="qty">2160 💎</div><div class="price">50 000 FC</div></div><input type="radio" name="pack" value="2160 diamants — 50 000 FC"></label>
-    <label class="pack-card" data-price="52000"><div class="img-slot"><img src="pack-2420.jpg" alt="2420 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-2420.jpg</div></div><div class="info"><div class="qty">2420 💎</div><div class="price">52 000 FC</div></div><input type="radio" name="pack" value="2420 diamants — 52 000 FC"></label>
-    <label class="pack-card" data-price="72000"><div class="img-slot"><img src="pack-3240.jpg" alt="3240 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-3240.jpg</div></div><div class="info"><div class="qty">3240 💎</div><div class="price">72 000 FC</div></div><input type="radio" name="pack" value="3240 diamants — 72 000 FC"></label>
+    <label class="pack-card" data-price="3900"><div class="img-slot"><img src="pack-100.jpg" alt="100 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-100.jpg</div></div><div class="info"><div class="qty">100 💎</div><div class="price"><span class="old-price">4 000 FC</span>3 900 FC</div></div><input type="radio" name="pack" value="100 diamants — 3 900 FC"></label>
+    <label class="pack-card" data-price="6900"><div class="img-slot"><img src="pack-235.jpg" alt="235 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-235.jpg</div></div><div class="info"><div class="qty">235 💎</div><div class="price"><span class="old-price">7 500 FC</span>6 900 FC</div></div><input type="radio" name="pack" value="235 diamants — 6 900 FC"></label>
+    <label class="pack-card" data-price="13900"><div class="img-slot"><img src="pack-553.jpg" alt="553 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-553.jpg</div></div><div class="info"><div class="qty">553 💎</div><div class="price"><span class="old-price">14 000 FC</span>13 900 FC</div></div><input type="radio" name="pack" value="553 diamants — 13 900 FC"></label>
+    <label class="pack-card" data-price="26300"><div class="img-slot"><img src="pack-1188.jpg" alt="1188 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-1188.jpg</div></div><div class="info"><div class="qty">1188 💎</div><div class="price"><span class="old-price">26 000 FC</span>26 300 FC</div></div><input type="radio" name="pack" value="1188 diamants — 26 300 FC"></label>
+    <label class="pack-card" data-price="49900"><div class="img-slot"><img src="pack-2160.jpg" alt="2160 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-2160.jpg</div></div><div class="info"><div class="qty">2160 💎</div><div class="price"><span class="old-price">50 000 FC</span>49 900 FC</div></div><input type="radio" name="pack" value="2160 diamants — 49 900 FC"></label>
+    <label class="pack-card" data-price="51900"><div class="img-slot"><img src="pack-2420.jpg" alt="2420 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-2420.jpg</div></div><div class="info"><div class="qty">2420 💎</div><div class="price"><span class="old-price">52 000 FC</span>51 900 FC</div></div><input type="radio" name="pack" value="2420 diamants — 51 900 FC"></label>
+    <label class="pack-card" data-price="71900"><div class="img-slot"><img src="pack-3240.jpg" alt="3240 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-3240.jpg</div></div><div class="info"><div class="qty">3240 💎</div><div class="price"><span class="old-price">72 000 FC</span>71 900 FC</div></div><input type="radio" name="pack" value="3240 diamants — 71 900 FC"></label>
   </div>
 
   <div class="subhead">Booyah Pass & Abonnements</div>
@@ -328,6 +385,77 @@
   </form>
 </section>
 
+<section style="padding-top:0;">
+  <div class="section-title">Comptes à vendre</div>
+  <div class="section-sub">Clique sur un compte pour le sélectionner. Les détails restent cachés jusqu'à « En savoir plus ».</div>
+
+  <div class="packs-grid" id="accountsGrid">
+    <div class="account-card" data-account="Compte 1" data-price="0" data-details="Rang, niveau, skins, armes et autres informations à compléter.">
+      <div class="account-image"><img src="compte1.jpg" alt="Compte à vendre 1" onerror="this.style.display='none';"></div>
+      <div class="account-name">Compte 1</div>
+      <div class="account-price">Prix : à confirmer</div>
+      <div class="account-actions">
+        <button class="pay account-info-btn" type="button">En savoir plus</button>
+        <button class="submit account-order-btn" type="button">Commander</button>
+      </div>
+      <div class="account-details-panel"></div>
+    </div>
+
+    <div class="account-card" data-account="Compte 2" data-price="0" data-details="Rang, niveau, skins, armes et autres informations à compléter.">
+      <div class="account-image"><img src="compte2.jpg" alt="Compte à vendre 2" onerror="this.style.display='none';"></div>
+      <div class="account-name">Compte 2</div>
+      <div class="account-price">Prix : à confirmer</div>
+      <div class="account-actions">
+        <button class="pay account-info-btn" type="button">En savoir plus</button>
+        <button class="submit account-order-btn" type="button">Commander</button>
+      </div>
+      <div class="account-details-panel"></div>
+    </div>
+
+    <div class="account-card" data-account="Compte 3" data-price="0" data-details="Rang, niveau, skins, armes et autres informations à compléter.">
+      <div class="account-image"><img src="compte3.jpg" alt="Compte à vendre 3" onerror="this.style.display='none';"></div>
+      <div class="account-name">Compte 3</div>
+      <div class="account-price">Prix : à confirmer</div>
+      <div class="account-actions">
+        <button class="pay account-info-btn" type="button">En savoir plus</button>
+        <button class="submit account-order-btn" type="button">Commander</button>
+      </div>
+      <div class="account-details-panel"></div>
+    </div>
+
+    <div class="account-card" data-account="Compte 4" data-price="0" data-details="Rang, niveau, skins, armes et autres informations à compléter.">
+      <div class="account-image"><img src="compte4.jpg" alt="Compte à vendre 4" onerror="this.style.display='none';"></div>
+      <div class="account-name">Compte 4</div>
+      <div class="account-price">Prix : à confirmer</div>
+      <div class="account-actions">
+        <button class="pay account-info-btn" type="button">En savoir plus</button>
+        <button class="submit account-order-btn" type="button">Commander</button>
+      </div>
+      <div class="account-details-panel"></div>
+    </div>
+
+    <div class="account-card" data-account="Compte 5" data-price="0" data-details="Rang, niveau, skins, armes et autres informations à compléter.">
+      <div class="account-image"><img src="compte5.jpg" alt="Compte à vendre 5" onerror="this.style.display='none';"></div>
+      <div class="account-name">Compte 5</div>
+      <div class="account-price">Prix : à confirmer</div>
+      <div class="account-actions">
+        <button class="pay account-info-btn" type="button">En savoir plus</button>
+        <button class="submit account-order-btn" type="button">Commander</button>
+      </div>
+      <div class="account-details-panel"></div>
+    </div>
+  </div>
+
+  <a class="guild-btn" href="https://chat.whatsapp.com/Jgo3WcNSCP9GeD6JmUSGiF" target="_blank" rel="noopener">👥 Rejoindre la guilde</a>
+
+  <div class="guide-item" style="margin-top:14px;">
+    <span class="fn">📌 Commande de compte</span>
+    <div class="note">Un compte peut être commandé comme les diamants. Consulte les détails, sélectionne le compte et contacte Hacken Store pour finaliser la commande et vérifier le paiement.</div>
+  </div>
+
+
+
+
 
 <section style="padding-top:0;">
   <div class="section-title">Pourquoi Hacken Store</div>
@@ -368,26 +496,25 @@
 <footer>Hacken Store — Recharge Diamants Free Fire. Service disponible uniquement en RDC 🇨🇩. Indépendant, non affilié à Garena.</footer>
 
 <script>
+  function setTheme(mode){
+    document.documentElement.setAttribute('data-theme', mode);
+    try{ localStorage.setItem('hkstore-theme', mode); }catch(e){}
+  }
   (function(){
     try{
       const saved = localStorage.getItem('hkstore-theme');
-      if(saved === 'light' || saved === 'dark'){
-        document.documentElement.setAttribute('data-theme', saved);
-        document.getElementById('themeToggle').textContent = saved === 'dark' ? '🌙' : '☀️';
-      }
+      if(saved === 'light' || saved === 'dark'){ document.documentElement.setAttribute('data-theme', saved); }
     }catch(e){}
   })();
-  document.getElementById('themeToggle').addEventListener('click', function(){
-    const current = document.documentElement.getAttribute('data-theme');
-    const isDark = current ? current === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const next = isDark ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    this.textContent = next === 'dark' ? '🌙' : '☀️';
-    try{ localStorage.setItem('hkstore-theme', next); }catch(e){}
-  });
-  (function(){
-    const slides = document.querySelectorAll('#carousel .slide');
-    const dots = document.querySelectorAll('#carousel .dots span');
+  document.getElementById('themeLightBtn').addEventListener('click', ()=> setTheme('light'));
+  document.getElementById('themeDarkBtn').addEventListener('click', ()=> setTheme('dark'));
+  document.getElementById('guideBtn').addEventListener('click', ()=> document.getElementById('guideOverlay').classList.add('open'));
+  document.getElementById('guideClose').addEventListener('click', ()=> document.getElementById('guideOverlay').classList.remove('open'));
+  document.getElementById('settingsBtn').addEventListener('click', ()=> document.getElementById('settingsOverlay').classList.add('open'));
+  document.getElementById('settingsClose').addEventListener('click', ()=> document.getElementById('settingsOverlay').classList.remove('open'));
+  document.querySelectorAll('.carousel').forEach(function(carousel){
+    const slides = carousel.querySelectorAll('.slide');
+    const dots = carousel.querySelectorAll('.dots span');
     let idx = 0;
     if(slides.length > 1){
       setInterval(function(){
@@ -398,7 +525,7 @@
         dots[idx].classList.add('active');
       }, 3500);
     }
-  })();
+  });
   let selectedPrice = 0, selectedLabel = '';
   document.querySelectorAll('.pack-card').forEach(p=>{
     p.addEventListener('click',()=>{
@@ -456,6 +583,71 @@
     document.getElementById('confirm').style.display = 'block';
     document.getElementById('confirm').scrollIntoView({behavior:'smooth', block:'center'});
   });
+
+  // Message de bienvenue affiché à la première visite sur cet appareil.
+  const welcomeOverlay = document.getElementById('welcomeOverlay');
+  const welcomeUnderstood = document.getElementById('welcomeUnderstood');
+  let welcomeSeen = false;
+  try { welcomeSeen = localStorage.getItem('hkstore-welcome-seen') === '1'; } catch(e){}
+  if(!welcomeSeen) welcomeOverlay.classList.add('open');
+  welcomeUnderstood.addEventListener('click', ()=>{
+    welcomeOverlay.classList.remove('open');
+    try { localStorage.setItem('hkstore-welcome-seen','1'); } catch(e){}
+  });
+
+  // Comptes à vendre : bouton "En savoir plus" et commande directe vers WhatsApp.
+  document.querySelectorAll('.account-card').forEach(card=>{
+    const detailsBtn = card.querySelector('.account-info-btn');
+    const orderBtn = card.querySelector('.account-order-btn');
+    const detailsPanel = card.querySelector('.account-details-panel');
+    const name = card.dataset.account;
+    const price = parseInt(card.dataset.price || '0', 10);
+    const details = card.dataset.details || 'Détails du compte à compléter.';
+
+    detailsPanel.textContent = details;
+
+    detailsBtn.addEventListener('click', ()=>{
+      detailsPanel.classList.toggle('open');
+      detailsBtn.textContent = detailsPanel.classList.contains('open') ? 'Masquer les détails' : 'En savoir plus';
+    });
+
+    orderBtn.addEventListener('click', ()=>{
+      const ref = 'ACC' + Date.now().toString().slice(-6);
+      const priceText = price > 0 ? price.toLocaleString('fr-FR') + ' FC' : 'Prix à confirmer';
+      const msg =
+        `🎮 *COMMANDE — COMPTE FREE FIRE*\n` +
+        `Référence : ${ref}\n` +
+        `━━━━━━━━━━━━━━━━━━━\n` +
+        `👤 Compte : ${name}\n` +
+        `💰 Prix : ${priceText}\n` +
+        `━━━━━━━━━━━━━━━━━━━\n` +
+        `⚠️ Le paiement doit être effectué avant l'envoi de la confirmation sur WhatsApp.\n` +
+        `Merci de confirmer la disponibilité et les modalités de paiement.`;
+      window.open('https://wa.me/243971160692?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+    });
+  });
+
 </script>
+
+<div class="welcome-overlay" id="welcomeOverlay">
+  <div class="welcome-card">
+    <h2>👋 Bienvenue sur Hacken Store</h2>
+    <p>Avant de commander, prends quelques secondes pour lire ces règles importantes.</p>
+    <ul>
+      <li>Choisis ton article et vérifie soigneusement les informations.</li>
+      <li>Pour une recharge, envoie d'abord le montant exact au moyen de paiement indiqué.</li>
+      <li>Après le paiement, remplis les informations demandées puis envoie la confirmation sur WhatsApp.</li>
+      <li>Pour un compte à vendre, sélectionne le compte puis utilise le bouton de commande.</li>
+      <li>Vérifie toujours les informations du compte avant de commander.</li>
+    </ul>
+    <div class="welcome-warning">
+      <b>⚠️ Condition de paiement</b><br>
+      Le paiement doit être effectué <b>avant</b> l'envoi de la confirmation sur WhatsApp.
+      Une confirmation sans paiement réel effectué ne sera pas traitée.
+    </div>
+    <button class="submit" id="welcomeUnderstood" type="button">J'ai compris</button>
+  </div>
+</div>
+
 </body>
 </html>
