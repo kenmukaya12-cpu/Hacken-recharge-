@@ -33,3 +33,578 @@
   body{
     margin:0;height:100%;background:var(--bg);color:var(--text);
     font-family:'Inter',system-ui,sans-serif;line-height:1.5;
+  }
+  h1,h2,h3{font-family:'Outfit',system-ui,sans-serif;margin:0;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px;}
+  header.hero{
+    padding:28px 20px 26px;text-align:center;
+    background:
+      radial-gradient(60% 60% at 50% 0%, rgba(73,216,240,.18), transparent 70%),
+      var(--bg);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--cyan);font-weight:700;letter-spacing:.02em;font-size:12.5px;}
+  h1{font-size:clamp(20px,5.5vw,26px);font-weight:800;margin-top:10px;line-height:1.15;}
+  h1 span{color:var(--cyan);}
+  .tag{color:var(--muted);margin-top:12px;font-size:15.5px;}
+  section{padding:36px 20px;}
+  .section-title{font-size:22px;font-weight:700;margin-bottom:4px;}
+  .section-sub{color:var(--muted);font-size:14px;margin-bottom:20px;}
+  .packs{display:grid;gap:10px;}
+  .pack{
+    display:flex;align-items:center;justify-content:space-between;gap:14px;
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:14px 16px;cursor:pointer;transition:border-color .15s,background .15s;
+  }
+  .pack:hover{border-color:var(--cyan-d);}
+  .pack.selected{border-color:var(--cyan);background:var(--panel2);}
+  .pack .left{display:flex;align-items:center;gap:12px;}
+  .diamond{width:26px;height:26px;flex-shrink:0;}
+  .pack .qty{font-weight:600;font-size:16px;}
+  .pack .sub{color:var(--muted);font-size:12px;margin-top:2px;font-weight:400;}
+  .pack .price{font-weight:700;color:var(--cyan);font-size:16px;white-space:nowrap;}
+  .pack input{accent-color:var(--cyan);width:18px;height:18px;}
+  .extra{
+    display:flex;align-items:center;justify-content:space-between;gap:14px;
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:14px 16px;margin-top:10px;
+  }
+  .extra .name{font-weight:600;font-size:15px;}
+  .extra .sub{color:var(--muted);font-size:12.5px;margin-top:2px;}
+  .extra .price{font-weight:700;color:var(--gold);white-space:nowrap;}
+  form{margin-top:26px;display:flex;flex-direction:column;gap:14px;}
+  label{font-size:13.5px;color:var(--muted);display:block;margin-bottom:6px;}
+  input[type=text],input[type=tel]{
+    width:100%;background:var(--panel);border:1px solid var(--line);color:var(--text);
+    padding:13px 14px;border-radius:10px;font-size:15px;font-family:inherit;
+  }
+  input[type=text]:focus,input[type=tel]:focus{outline:2px solid var(--cyan);outline-offset:1px;border-color:var(--cyan);}
+  .pay-options{display:flex;gap:10px;}
+  .pay{
+    flex:1;display:flex;align-items:center;justify-content:center;gap:8px;
+    background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    padding:12px;cursor:pointer;font-weight:600;font-size:14px;
+  }
+  .pay.selected{border-color:var(--cyan);background:var(--panel2);color:var(--cyan);}
+  .pay input{display:none;}
+  .pay.disabled{opacity:.45;cursor:not-allowed;}
+  .pay .maint{display:block;font-size:10px;font-weight:600;color:var(--gold);margin-top:2px;}
+  .pay-details{
+    display:none;background:var(--panel2);border:1px solid var(--gold);border-radius:12px;
+    padding:14px 16px;font-size:13.5px;
+  }
+  .pay-details .pd-title{font-weight:700;margin-bottom:8px;}
+  .pay-details .pd-line{display:flex;justify-content:space-between;padding:4px 0;color:var(--muted);}
+  .pay-details .pd-line b{color:var(--text);}
+  .summary{
+    background:var(--panel2);border:1px solid var(--line);border-radius:12px;
+    padding:16px;display:flex;justify-content:space-between;align-items:center;
+  }
+  .summary .lbl{color:var(--muted);font-size:13.5px;}
+  .summary .val{font-size:20px;font-weight:800;color:var(--cyan);}
+  button.submit{
+    background:linear-gradient(135deg,var(--cyan),var(--cyan-d));
+    color:#06222b;border:none;border-radius:12px;padding:16px;
+    font-size:16px;font-weight:800;font-family:'Outfit',sans-serif;cursor:pointer;
+  }
+  button.submit:active{transform:scale(.98);}
+  .note{font-size:12.5px;color:var(--muted);text-align:center;}
+  .trust{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;padding:26px 20px 10px;color:var(--muted);font-size:12.5px;}
+  .trust div{display:flex;align-items:center;gap:6px;}
+  footer{border-top:1px solid var(--line);padding:24px 20px 40px;text-align:center;color:var(--muted);font-size:12.5px;}
+  #confirm{display:none;background:var(--panel2);border:1px solid var(--cyan-d);border-radius:12px;padding:18px;text-align:center;margin-top:14px;}
+  #confirm h3{color:var(--cyan);margin-bottom:8px;}
+  #confirm p{color:var(--muted);font-size:14px;margin:0 0 12px;}
+  #confirm a{display:inline-block;background:var(--cyan);color:var(--btn-text);text-decoration:none;font-weight:700;padding:12px 20px;border-radius:10px;}
+  .navbar{
+    position:sticky;top:env(safe-area-inset-top,0px);z-index:10;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:12px 20px;background:var(--bg);border-bottom:1px solid var(--line);
+  }
+  .navbar .logo{display:flex;align-items:center;gap:8px;font-family:'Outfit';font-weight:800;font-size:17px;}
+  .theme-btn{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px 10px;cursor:pointer;font-size:14px;}
+  .icon-btn{
+    width:34px;height:34px;border-radius:50%;background:var(--panel);border:1px solid var(--line);
+    color:var(--text);cursor:pointer;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;
+  }
+  .reviews{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch;}
+  .review{
+    flex:0 0 220px;background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:14px;font-size:13.5px;
+  }
+  .review .stars{color:var(--gold);font-size:13px;margin-bottom:6px;}
+  .review .name{font-weight:600;margin-top:8px;font-size:13px;color:var(--muted);}
+  details.faq{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:8px;}
+  details.faq summary{cursor:pointer;font-weight:600;font-size:14.5px;list-style:none;}
+  details.faq summary::-webkit-details-marker{display:none;}
+  details.faq summary::after{content:'+';float:right;color:var(--cyan);font-weight:800;}
+  details.faq[open] summary::after{content:'–';}
+  details.faq p{color:var(--muted);font-size:13.5px;margin:10px 0 0;}
+  .badges{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .badge{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 8px;text-align:center;font-size:12px;color:var(--muted);}
+  .badge .ic{font-size:20px;display:block;margin-bottom:6px;}
+  .navbar .logo{font-family:'Outfit';font-weight:900;font-size:18px;letter-spacing:.01em;}
+  .verified{
+    display:inline-flex;align-items:center;gap:6px;background:var(--panel2);
+    border:1px solid var(--gold);color:var(--gold);font-size:12px;font-weight:700;
+    padding:6px 12px;border-radius:999px;margin-top:16px;
+  }
+  .country{
+    display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:12.5px;
+    margin-top:8px;
+  }
+  header.hero{border-bottom:1px solid var(--gold);}
+  .navbar{border-bottom:1px solid var(--gold);}
+  section .section-title{position:relative;padding-left:14px;}
+  section .section-title::before{content:'';position:absolute;left:0;top:2px;bottom:2px;width:3px;background:var(--gold);border-radius:2px;}
+  .carousel{position:relative;width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:var(--panel);border:1px solid var(--line);}
+  .carousel .slide{
+    position:absolute;inset:0;opacity:0;transition:opacity .6s ease;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .carousel .slide.active{opacity:1;}
+  .carousel .slide img{width:100%;height:100%;object-fit:cover;display:block;}
+  .carousel .slide .placeholder{color:var(--muted);font-size:13px;text-align:center;padding:12px;}
+  .carousel .dots{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:6px;}
+  .carousel .dots span{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.4);transition:background .2s,width .2s;}
+  .carousel .dots span.active{background:var(--cyan);width:18px;border-radius:4px;}
+  @media (max-width:420px){ .carousel{aspect-ratio:4/3;} }
+  .pay-options{flex-wrap:wrap;}
+  .pay{min-width:100px;}
+  .navbar .logo{flex-direction:column;align-items:flex-start;gap:0;line-height:1.05;}
+  .navbar .logo .hk{font-size:20px;font-weight:900;letter-spacing:.02em;color:var(--cyan);}
+  .navbar .logo .full{font-size:9.5px;font-weight:600;color:var(--muted);letter-spacing:.08em;}
+  .packs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+  @media (min-width:480px){ .packs-grid{grid-template-columns:repeat(3,1fr);} }
+  .pack-card{
+    position:relative;aspect-ratio:1/1;border-radius:14px;overflow:hidden;
+    background:var(--panel);border:1px solid var(--line);cursor:pointer;
+    display:flex;flex-direction:column;transition:border-color .15s;
+  }
+  .pack-card:hover{border-color:var(--cyan-d);}
+  .pack-card.selected{border-color:var(--cyan);box-shadow:0 0 0 2px var(--cyan) inset;}
+  .pack-card .img-slot{flex:1;background:var(--panel2);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .pack-card .img-slot img{width:100%;height:100%;object-fit:cover;display:block;}
+  .pack-card .img-slot .ph{color:var(--muted);font-size:10px;text-align:center;padding:6px;line-height:1.4;}
+  .pack-card .info{padding:8px 6px;text-align:center;}
+  .pack-card .qty{font-weight:700;font-size:14px;}
+  .pack-card .price{font-weight:700;color:var(--cyan);font-size:13px;margin-top:2px;}
+  .pack-card .price.gold{color:var(--gold);}
+  .pack-card .old-price{text-decoration:line-through;color:var(--muted);font-size:10.5px;margin-right:4px;font-weight:500;}
+  .pack-card input{display:none;}
+  .subhead{font-size:13px;font-weight:700;color:var(--muted);margin:22px 0 10px;text-transform:uppercase;letter-spacing:.04em;}
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:20;padding:16px;overflow-y:auto;}
+  .modal-overlay.open{display:block;}
+  .modal{
+    max-width:480px;margin:20px auto;background:var(--bg);border:1px solid var(--gold);
+    border-radius:14px;padding:20px;
+  }
+  .modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+  .modal-head h3{font-size:17px;}
+  .modal-close{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:6px 10px;cursor:pointer;}
+  .guide-item{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:12.5px;}
+  .guide-item .fn{font-weight:700;color:var(--cyan);font-family:monospace;font-size:12px;}
+  .guide-item .note{color:var(--muted);margin-top:4px;line-height:1.4;}
+  .guide-visuals{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;}
+  .guide-visuals .shot{aspect-ratio:3/4;border-radius:10px;overflow:hidden;background:var(--panel);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;}
+  .guide-visuals .shot img{width:100%;height:100%;object-fit:cover;}
+  .guide-visuals .shot .ph{color:var(--muted);font-size:10px;text-align:center;padding:6px;}
+  .compte-actions{display:flex;gap:10px;margin-top:12px;}
+  .compte-actions .pay{flex:0 0 auto;padding:12px 16px;}
+  .compte-details{
+    display:none;margin-top:10px;background:var(--panel);border:1px solid var(--line);
+    border-radius:10px;padding:12px 14px;font-size:13px;color:var(--muted);line-height:1.5;
+  }
+  .compte-details.open{display:block;}
+  .guild-btn{
+    display:block;text-align:center;margin-top:14px;background:linear-gradient(135deg,#2BD67B,#1E9E5C);
+    color:#06250f;text-decoration:none;font-weight:800;padding:14px;border-radius:12px;
+    font-family:'Outfit',sans-serif;font-size:15px;
+  }
+
+  .btn-sec{flex:0 0 auto;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:12px 16px;cursor:pointer;font-weight:600;font-size:14px;font-family:inherit;}
+  #carouselComptes{cursor:zoom-in;}
+  .car-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:34px;height:34px;border-radius:50%;border:none;background:rgba(0,0,0,.5);color:#fff;font-size:18px;cursor:pointer;}
+  .car-arrow.prev{left:8px;} .car-arrow.next{right:8px;}
+  .acc-meta{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:10px;}
+  .acc-meta .nm{font-weight:700;font-size:16px;}
+  .acc-meta .pr{font-weight:800;color:var(--gold);font-size:17px;white-space:nowrap;}
+  .acc-meta .old{text-decoration:line-through;color:var(--muted);font-size:12px;font-weight:500;margin-right:6px;}
+  .acc-hint{color:var(--muted);font-size:12px;margin-top:4px;}
+  .conditions{background:var(--panel2);border:1px solid var(--gold);border-radius:12px;padding:14px 16px;font-size:13px;}
+  .conditions .ct{font-weight:700;color:var(--gold);margin-bottom:8px;}
+  .conditions ol{margin:0;padding-left:18px;color:var(--muted);line-height:1.55;}
+  .conditions ol b{color:var(--text);}
+  .accept{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--text);margin:0;cursor:pointer;}
+  .accept input{margin-top:3px;width:18px;height:18px;accent-color:var(--cyan);flex-shrink:0;}
+  .chosen{font-size:13px;color:var(--muted);text-align:center;}
+  .chosen b{color:var(--cyan);}
+  .lightbox img{width:100%;border-radius:10px;display:block;}
+  .lightbox .cap{color:var(--muted);font-size:13px;margin-top:10px;text-align:center;}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <div class="logo">
+    <span class="hk">HK</span>
+    <span class="full">HACKEN STORE</span>
+  </div>
+  <div style="display:flex;gap:8px;">
+    <button class="icon-btn" id="guideBtn" type="button" aria-label="Aide">?</button>
+    <button class="icon-btn" id="settingsBtn" type="button" aria-label="Paramètres">⚙️</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="guideOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>❓ Comment commander</h3>
+      <button class="modal-close" id="guideClose" type="button">✕</button>
+    </div>
+    <div class="guide-item"><span class="fn">1. Choisis ton article</span><div class="note">Clique sur un pack de diamants, le Booyah Pass ou un abonnement.</div></div>
+    <div class="guide-item"><span class="fn">2. Remplis ton ID joueur</span><div class="note">C'est l'identifiant de ton compte Free Fire, visible dans ton profil.</div></div>
+    <div class="guide-item"><span class="fn">3. Choisis ton paiement</span><div class="note">Airtel Money ou Orange Money (Vodacom en maintenance).</div></div>
+    <div class="guide-item"><span class="fn">4. Envoie l'argent</span><div class="note">Envoie le montant exact au numéro affiché, au nom indiqué.</div></div>
+    <div class="guide-item"><span class="fn">5. Complète et confirme</span><div class="note">Indique le numéro qui a envoyé l'argent et le numéro de transaction, puis confirme.</div></div>
+    <div class="guide-item"><span class="fn">6. Envoie sur WhatsApp</span><div class="note">Le message se prépare automatiquement, il ne reste qu'à l'envoyer.</div></div>
+    <div class="guide-item" style="border-color:var(--gold);">
+      <span class="fn" style="color:var(--gold);">⚠️ Condition importante</span>
+      <div class="note">L'argent doit être envoyé AVANT d'envoyer la confirmation sur WhatsApp. Toute confirmation sans paiement réel déjà effectué ne sera pas traitée.</div>
+    </div>
+    <div class="guide-visuals">
+      <div class="shot"><img src="guide1.jpg" alt="Guide visuel 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>guide1.jpg</div></div>
+      <div class="shot"><img src="guide2.jpg" alt="Guide visuel 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>guide2.jpg</div></div>
+    </div>
+    <button class="submit" id="guideUnderstood" type="button" style="margin-top:14px;">J'ai compris</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="settingsOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>⚙️ Paramètres</h3>
+      <button class="modal-close" id="settingsClose" type="button">✕</button>
+    </div>
+    <div class="guide-item">
+      <span class="fn">Thème d'affichage</span>
+      <div class="note" style="margin-bottom:10px;">Choisis l'apparence du site sur cet appareil.</div>
+      <div class="pay-options">
+        <label class="pay" id="themeLightBtn" type="button">☀️ Clair</label>
+        <label class="pay" id="themeDarkBtn" type="button">🌙 Sombre</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="lightboxOverlay">
+  <div class="modal lightbox">
+    <div class="modal-head"><h3 id="lbTitle">Compte</h3><button class="modal-close" id="lbClose" type="button">✕</button></div>
+    <img id="lbImg" src="" alt="Compte agrandi" onerror="this.style.display='none';">
+    <div class="cap" id="lbCap"></div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="brand">
+    <svg class="diamond" viewBox="0 0 24 24" fill="none"><path d="M2 9L7 3H17L22 9L12 21L2 9Z" stroke="var(--cyan)" stroke-width="1.6" stroke-linejoin="round"/><path d="M2 9H22M7 3L9.5 9L12 21L14.5 9L17 3" stroke="var(--cyan)" stroke-width="1.2"/></svg>
+    RECHARGE DIAMANTS
+  </div>
+  <h1>Tes diamants, <span>livrés vite.</span></h1>
+  <div class="verified">✔ Vendeur vérifié</div>
+  <div class="country">🇨🇩 RDC uniquement</div>
+</header>
+
+<div class="wrap">
+
+<section>
+  <div class="carousel" id="carousel">
+    <div class="slide active"><img src="bonus1.jpg" alt="Capture bonus 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="placeholder" style="display:none;">Ajoute l'image<br>bonus1.jpg</div></div>
+    <div class="slide"><img src="bonus2.jpg" alt="Capture bonus 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="placeholder" style="display:none;">Ajoute l'image<br>bonus2.jpg</div></div>
+    <div class="slide"><img src="bonus3.jpg" alt="Capture bonus 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="placeholder" style="display:none;">Ajoute l'image<br>bonus3.jpg</div></div>
+    <div class="dots"><span class="active"></span><span></span><span></span></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">Choisis ton pack</div>
+  <div class="section-sub">Le prix s'affiche en Francs Congolais (FC)</div>
+  <div class="packs-grid" id="packs">
+    <label class="pack-card" data-price="3900"><div class="img-slot"><img src="pack-100.jpg" alt="100 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-100.jpg</div></div><div class="info"><div class="qty">100 💎</div><div class="price"><span class="old-price">4 000 FC</span>3 900 FC</div></div><input type="radio" name="pack" value="100 diamants — 3 900 FC"></label>
+    <label class="pack-card" data-price="6900"><div class="img-slot"><img src="pack-235.jpg" alt="235 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-235.jpg</div></div><div class="info"><div class="qty">235 💎</div><div class="price"><span class="old-price">7 500 FC</span>6 900 FC</div></div><input type="radio" name="pack" value="235 diamants — 6 900 FC"></label>
+    <label class="pack-card" data-price="13900"><div class="img-slot"><img src="pack-553.jpg" alt="553 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-553.jpg</div></div><div class="info"><div class="qty">553 💎</div><div class="price"><span class="old-price">14 000 FC</span>13 900 FC</div></div><input type="radio" name="pack" value="553 diamants — 13 900 FC"></label>
+    <label class="pack-card" data-price="26300"><div class="img-slot"><img src="pack-1188.jpg" alt="1188 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-1188.jpg</div></div><div class="info"><div class="qty">1188 💎</div><div class="price"><span class="old-price">26 000 FC</span>26 300 FC</div></div><input type="radio" name="pack" value="1188 diamants — 26 300 FC"></label>
+    <label class="pack-card" data-price="49900"><div class="img-slot"><img src="pack-2160.jpg" alt="2160 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-2160.jpg</div></div><div class="info"><div class="qty">2160 💎</div><div class="price"><span class="old-price">50 000 FC</span>49 900 FC</div></div><input type="radio" name="pack" value="2160 diamants — 49 900 FC"></label>
+    <label class="pack-card" data-price="51900"><div class="img-slot"><img src="pack-2420.jpg" alt="2420 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-2420.jpg</div></div><div class="info"><div class="qty">2420 💎</div><div class="price"><span class="old-price">52 000 FC</span>51 900 FC</div></div><input type="radio" name="pack" value="2420 diamants — 51 900 FC"></label>
+    <label class="pack-card" data-price="71900"><div class="img-slot"><img src="pack-3240.jpg" alt="3240 diamants" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>pack-3240.jpg</div></div><div class="info"><div class="qty">3240 💎</div><div class="price"><span class="old-price">72 000 FC</span>71 900 FC</div></div><input type="radio" name="pack" value="3240 diamants — 71 900 FC"></label>
+  </div>
+
+  <div class="subhead">Booyah Pass & Abonnements</div>
+  <div class="packs-grid">
+    <label class="pack-card" data-price="8500"><div class="img-slot"><img src="booyah.jpg" alt="Booyah Pass" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>booyah.jpg</div></div><div class="info"><div class="qty">Booyah Pass</div><div class="price gold">8 500 FC</div></div><input type="radio" name="pack" value="Booyah Pass — 8 500 FC"></label>
+    <label class="pack-card" data-price="6000"><div class="img-slot"><img src="abo-hebdo.jpg" alt="Abonnement hebdomadaire" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>abo-hebdo.jpg</div></div><div class="info"><div class="qty">Hebdomadaire</div><div class="price gold">6 000 FC</div></div><input type="radio" name="pack" value="Abonnement hebdomadaire — 6 000 FC"></label>
+    <label class="pack-card" data-price="26000"><div class="img-slot"><img src="abo-mensuel.jpg" alt="Abonnement mensuel" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none;">Image<br>abo-mensuel.jpg</div></div><div class="info"><div class="qty">Mensuel</div><div class="price gold">26 000 FC</div></div><input type="radio" name="pack" value="Abonnement mensuel — 26 000 FC"></label>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="section-title">Tes infos</div>
+  <div class="section-sub">La recharge se fait directement sur ton ID joueur</div>
+  <form id="orderForm">
+    <div>
+      <label for="playerId">ID joueur Free Fire</label>
+      <input type="text" id="playerId" placeholder="Ex : 123456789" required>
+    </div>
+    <div>
+      <label>Moyen de paiement</label>
+      <div class="pay-options">
+        <label class="pay" id="payAirtel"><input type="radio" name="pay" value="Airtel Money">Airtel Money</label>
+        <label class="pay" id="payOrange"><input type="radio" name="pay" value="Orange Money">Orange Money</label>
+        <label class="pay disabled" id="payVodacom"><input type="radio" name="pay" value="Vodacom M-Pesa" disabled>Vodacom M-Pesa<span class="maint">En maintenance</span></label>
+      </div>
+    </div>
+    <div class="pay-details" id="payDetails">
+      <div class="pd-title">💳 Envoie le montant exact à ce numéro :</div>
+      <div class="pd-line"><span>Opérateur</span><b id="pdOperator">—</b></div>
+      <div class="pd-line"><span>Numéro</span><b id="pdNumber">—</b></div>
+      <div class="pd-line"><span>Nom du bénéficiaire</span><b id="pdName">—</b></div>
+    </div>
+    <div>
+      <label for="senderPhone">Numéro qui a envoyé l'argent</label>
+      <input type="tel" id="senderPhone" placeholder="Ex : 099 000 0000" required>
+    </div>
+    <div>
+      <label for="txId">Numéro de transaction (reçu après le transfert)</label>
+      <input type="text" id="txId" placeholder="Ex : MP240918.1922.A12345" required>
+    </div>
+    <div class="conditions">
+      <div class="ct">📜 Conditions de vente</div>
+      <ol>
+        <li><b>Envoie d'abord l'argent</b>, puis seulement ensuite envoie la confirmation sur WhatsApp.</li>
+        <li>Une confirmation sans paiement réellement effectué ne sera <b>pas traitée</b>.</li>
+        <li>Envoie le <b>montant exact</b> au numéro et au nom indiqués.</li>
+        <li>Vérifie ton ID joueur avant de payer : aucune annulation après l'envoi.</li>
+        <li>Comptes à vendre : les accès sont remis sur WhatsApp après validation du paiement.</li>
+      </ol>
+    </div>
+    <label class="accept"><input type="checkbox" id="acceptCond" required><span>J'ai lu les conditions et j'ai déjà envoyé l'argent.</span></label>
+    <div class="chosen" id="chosenLabel">Aucun article choisi</div>
+    <div class="summary">
+      <span class="lbl">Total à payer</span>
+      <span class="val" id="totalVal">—</span>
+    </div>
+    <button type="submit" class="submit">Confirmer la commande</button>
+    <p class="note">Envoie d'abord l'argent au numéro affiché ci-dessus, puis confirme ta commande.</p>
+    <div id="confirm">
+      <h3>Commande enregistrée ✔</h3>
+      <p>Envoie-la sur WhatsApp pour que Hacken Store valide ta recharge.</p>
+      <a id="waLink" href="#" target="_blank" rel="noopener">Envoyer sur WhatsApp</a>
+    </div>
+  </form>
+</section>
+
+<section style="padding-top:0;">
+  <div class="section-title">Comptes à vendre</div>
+  <div class="carousel" id="carouselComptes">
+    <div class="slide active" data-name="Compte 1" data-price="30000" data-old="35000" data-details="Détails à compléter : rang, niveau, skins, armes, nombre de diamants restants..."><img src="compte1.jpg" alt="Compte à vendre 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="placeholder" style="display:none;">Ajoute l'image<br>compte1.jpg</div></div>
+    <div class="slide" data-name="Compte 2" data-price="30000" data-old="35000" data-details="Détails à compléter : rang, niveau, skins, armes, nombre de diamants restants..."><img src="compte2.jpg" alt="Compte à vendre 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="placeholder" style="display:none;">Ajoute l'image<br>compte2.jpg</div></div>
+    <div class="slide" data-name="Compte 3" data-price="30000" data-old="35000" data-details="Détails à compléter : rang, niveau, skins, armes, nombre de diamants restants..."><img src="compte3.jpg" alt="Compte à vendre 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="placeholder" style="display:none;">Ajoute l'image<br>compte3.jpg</div></div>
+    <div class="slide" data-name="Compte 4" data-price="30000" data-old="35000" data-details="Détails à compléter : rang, niveau, skins, armes, nombre de diamants restants..."><img src="compte4.jpg" alt="Compte à vendre 4" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="placeholder" style="display:none;">Ajoute l'image<br>compte4.jpg</div></div>
+    <div class="slide" data-name="Compte 5" data-price="30000" data-old="35000" data-details="Détails à compléter : rang, niveau, skins, armes, nombre de diamants restants..."><img src="compte5.jpg" alt="Compte à vendre 5" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="placeholder" style="display:none;">Ajoute l'image<br>compte5.jpg</div></div>
+    <button class="car-arrow prev" id="accPrev" type="button" aria-label="Précédent">‹</button>
+    <button class="car-arrow next" id="accNext" type="button" aria-label="Suivant">›</button>
+    <div class="dots"><span class="active"></span><span></span><span></span><span></span><span></span></div>
+  </div>
+  <div class="acc-meta"><span class="nm" id="accName">Compte 1</span><span class="pr"><span class="old" id="accOld"></span><span id="accPrice"></span></span></div>
+  <div class="acc-hint">Touche l'image pour l'agrandir</div>
+  <div class="compte-actions">
+    <button class="btn-sec" id="compteDetailsBtn" type="button">En savoir plus</button>
+    <button class="submit" id="compteOrderBtn" type="button" style="flex:1;padding:12px;">Commander ce compte</button>
+  </div>
+  <div class="compte-details" id="compteDetails"></div>
+  <a class="guild-btn" href="https://chat.whatsapp.com/Jgo3WcNSCP9GeD6JmUSGiF" target="_blank" rel="noopener">👥 Rejoindre la guilde</a>
+</section>
+
+
+
+
+<section style="padding-top:0;">
+  <div class="section-title">Pourquoi Hacken Store</div>
+  <div class="badges">
+    <div class="badge"><span class="ic">⚡</span>Recharge en moins de 15 min</div>
+    <div class="badge"><span class="ic">🔒</span>Paiement 100% sécurisé</div>
+    <div class="badge"><span class="ic">🤝</span>Support direct sur WhatsApp</div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="section-title">Ils nous font confiance</div>
+  <div class="reviews">
+    <div class="review"><div class="stars">★★★★★</div>Recharge reçue en 10 minutes, super rapide.<div class="name">— Client Kinshasa</div></div>
+    <div class="review"><div class="stars">★★★★★</div>Prix corrects et vendeur sérieux, je recommande.<div class="name">— Client Lubumbashi</div></div>
+    <div class="review"><div class="stars">★★★★☆</div>Paiement Orange Money accepté sans souci.<div class="name">— Client Goma</div></div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="section-title">Questions fréquentes</div>
+  <details class="faq">
+    <summary>Combien de temps prend la recharge ?</summary>
+    <p>En général entre 5 et 15 minutes après confirmation du paiement, selon l'affluence.</p>
+  </details>
+  <details class="faq">
+    <summary>Que faire si je me trompe d'ID joueur ?</summary>
+    <p>Contacte-nous immédiatement sur WhatsApp avant la recharge pour corriger l'ID.</p>
+  </details>
+  <details class="faq">
+    <summary>Le paiement est-il remboursable en cas d'erreur ?</summary>
+    <p>Si l'ID fourni était incorrect, la recharge ne peut pas être annulée une fois envoyée — vérifie bien ton ID avant de payer.</p>
+  </details>
+</section>
+
+</div>
+
+<footer>Hacken Store — Recharge Diamants Free Fire. Service disponible uniquement en RDC 🇨🇩. Indépendant, non affilié à Garena.</footer>
+
+<script>
+  function setTheme(mode){
+    document.documentElement.setAttribute('data-theme', mode);
+    try{ localStorage.setItem('hkstore-theme', mode); }catch(e){}
+  }
+  (function(){
+    try{
+      const saved = localStorage.getItem('hkstore-theme');
+      if(saved === 'light' || saved === 'dark'){ document.documentElement.setAttribute('data-theme', saved); }
+    }catch(e){}
+  })();
+  document.getElementById('themeLightBtn').addEventListener('click', ()=> setTheme('light'));
+  document.getElementById('themeDarkBtn').addEventListener('click', ()=> setTheme('dark'));
+  document.getElementById('guideBtn').addEventListener('click', ()=> document.getElementById('guideOverlay').classList.add('open'));
+  document.getElementById('guideClose').addEventListener('click', ()=> document.getElementById('guideOverlay').classList.remove('open'));
+  document.getElementById('settingsBtn').addEventListener('click', ()=> document.getElementById('settingsOverlay').classList.add('open'));
+  document.getElementById('settingsClose').addEventListener('click', ()=> document.getElementById('settingsOverlay').classList.remove('open'));
+  document.querySelectorAll('.carousel:not(#carouselComptes)').forEach(function(carousel){
+    const slides = carousel.querySelectorAll('.slide');
+    const dots = carousel.querySelectorAll('.dots span');
+    let idx = 0;
+    if(slides.length > 1){
+      setInterval(function(){
+        slides[idx].classList.remove('active');
+        dots[idx].classList.remove('active');
+        idx = (idx + 1) % slides.length;
+        slides[idx].classList.add('active');
+        dots[idx].classList.add('active');
+      }, 3500);
+    }
+  });
+  let selectedPrice = 0, selectedLabel = '', isCompte = false;
+  function setChosen(label, price, compte){
+    selectedLabel = label; selectedPrice = price; isCompte = compte;
+    document.getElementById('totalVal').textContent = price.toLocaleString('fr-FR')+' FC';
+    document.getElementById('chosenLabel').innerHTML = 'Article choisi : <b>'+label+'</b>';
+    document.getElementById('playerId').required = !compte;
+  }
+  document.querySelectorAll('.pack-card').forEach(p=>{
+    p.addEventListener('click',()=>{
+      document.querySelectorAll('.pack-card').forEach(x=>x.classList.remove('selected'));
+      p.classList.add('selected');
+      p.querySelector('input').checked = true;
+      setChosen(p.querySelector('input').value, parseInt(p.dataset.price,10), false);
+    });
+  });
+  let selectedPay = '';
+  const payAccounts = {
+    'Airtel Money': { operator: 'Airtel Money', number: '0971160692', name: 'KEN' },
+    'Orange Money': { operator: 'Orange Money', number: '0899067411', name: 'KEN' }
+  };
+  document.querySelectorAll('#orderForm .pay').forEach(el=>{
+    el.addEventListener('click',(e)=>{
+      const input = el.querySelector('input');
+      if(input.disabled){ e.preventDefault(); return; }
+      document.querySelectorAll('#orderForm .pay').forEach(x=>x.classList.remove('selected'));
+      el.classList.add('selected');
+      input.checked = true;
+      selectedPay = input.value;
+      const acc = payAccounts[selectedPay];
+      if(acc){
+        document.getElementById('pdOperator').textContent = acc.operator;
+        document.getElementById('pdNumber').textContent = acc.number;
+        document.getElementById('pdName').textContent = acc.name;
+        document.getElementById('payDetails').style.display = 'block';
+      }
+    });
+  });
+  document.getElementById('orderForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const id = document.getElementById('playerId').value.trim();
+    const senderPhone = document.getElementById('senderPhone').value.trim();
+    const txId = document.getElementById('txId').value.trim();
+    if(!selectedLabel){ alert('Choisis un article à commander.'); return; }
+    if(!selectedPay){ alert('Choisis un moyen de paiement.'); return; }
+    if((!isCompte && !id) || !senderPhone || !txId){ alert("Merci de remplir tous les champs demandés."); return; }
+    const ref = 'HK' + Date.now().toString().slice(-6);
+    const msg = `🧊 *NOUVELLE COMMANDE — HACKEN STORE* 🧊\n`
+      + `Référence : ${ref}\n`
+      + `━━━━━━━━━━━━━━━━━━━\n`
+      + `🎮 Article : ${selectedLabel}\n`
+      + (isCompte ? '' : `🆔 ID joueur : ${id}\n`)
+      + `💳 Paiement : ${selectedPay}\n`
+      + `📱 Numéro qui a envoyé l'argent : ${senderPhone}\n`
+      + `🔢 Numéro de transaction : ${txId}\n`
+      + `━━━━━━━━━━━━━━━━━━━\n`
+      + `✅ Je confirme avoir déjà envoyé l'argent.\n`
+      + `Merci de vérifier et confirmer la recharge.`;
+    const waNumber = '243971160692';
+    document.getElementById('waLink').href = 'https://wa.me/'+waNumber+'?text='+encodeURIComponent(msg);
+    document.getElementById('confirm').style.display = 'block';
+    document.getElementById('confirm').scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  // Guide : s'affiche à chaque entrée sur le site
+  document.getElementById('guideOverlay').classList.add('open');
+  document.getElementById('guideUnderstood').addEventListener('click', ()=> document.getElementById('guideOverlay').classList.remove('open'));
+
+  // Comptes à vendre
+  (function(){
+    const car = document.getElementById('carouselComptes');
+    const slides = car.querySelectorAll('.slide');
+    const dots = car.querySelectorAll('.dots span');
+    const fmt = n => parseInt(n,10).toLocaleString('fr-FR')+' FC';
+    let i = 0;
+    function show(n){
+      slides[i].classList.remove('active'); dots[i].classList.remove('active');
+      i = (n + slides.length) % slides.length;
+      slides[i].classList.add('active'); dots[i].classList.add('active');
+      const d = slides[i].dataset;
+      document.getElementById('accName').textContent = d.name;
+      document.getElementById('accPrice').textContent = fmt(d.price);
+      document.getElementById('accOld').textContent = d.old ? fmt(d.old) : '';
+      document.getElementById('compteDetails').textContent = d.details;
+    }
+    show(0);
+    document.getElementById('accPrev').addEventListener('click', e=>{ e.stopPropagation(); show(i-1); });
+    document.getElementById('accNext').addEventListener('click', e=>{ e.stopPropagation(); show(i+1); });
+    document.getElementById('compteDetailsBtn').addEventListener('click', function(){
+      const box = document.getElementById('compteDetails');
+      const open = box.classList.toggle('open');
+      this.textContent = open ? 'Masquer' : 'En savoir plus';
+    });
+    car.addEventListener('click', function(){
+      const d = slides[i].dataset, img = slides[i].querySelector('img');
+      const lb = document.getElementById('lbImg');
+      lb.style.display = 'block'; lb.src = img.getAttribute('src');
+      document.getElementById('lbTitle').textContent = d.name;
+      document.getElementById('lbCap').textContent = fmt(d.price);
+      document.getElementById('lightboxOverlay').classList.add('open');
+    });
+    document.getElementById('lbClose').addEventListener('click', ()=> document.getElementById('lightboxOverlay').classList.remove('open'));
+    document.getElementById('compteOrderBtn').addEventListener('click', function(){
+      const d = slides[i].dataset;
+      document.querySelectorAll('.pack-card').forEach(x=>x.classList.remove('selected'));
+      setChosen(d.name+' (compte à vendre) — '+fmt(d.price), parseInt(d.price,10), true);
+      document.getElementById('orderForm').scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  })();
+</script>
+</body>
+</html>
