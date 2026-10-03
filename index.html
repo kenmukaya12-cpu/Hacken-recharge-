@@ -302,6 +302,32 @@
     .rv{opacity:1;transform:none;}
     html{scroll-behavior:auto;}
   }
+
+  /* ===== PROFIL, AMIS, MESSAGES ===== */
+  .avatar{width:72px;height:72px;border-radius:50%;margin:0 auto 8px;background:linear-gradient(135deg,var(--cyan),var(--gold));color:#04202A;display:grid;place-items:center;font-family:var(--f-head);font-weight:700;font-size:34px;}
+  .prof-head{text-align:center;margin-bottom:14px;}
+  .prof-head b{font-family:var(--f-head);font-size:24px;}
+  .prof-head .bdg svg{width:22px;height:22px;}
+  .bchip{display:inline-block;margin-top:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;border:1px solid currentColor;}
+  .prof-meta{font-size:12.5px;color:var(--muted);margin-top:6px;}
+  .prof-bio{font-size:14px;color:var(--muted);margin-top:8px;white-space:pre-wrap;word-break:break-word;}
+  .prof-sec{margin-top:16px;}
+  .prof-sec .subhead{margin:0 0 8px;}
+  .frow{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px 10px;margin-bottom:8px;}
+  .frow .av{flex:0 0 34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--gold));color:#04202A;display:grid;place-items:center;font-weight:900;font-family:var(--f-head);}
+  .frow .fn{flex:1;min-width:0;font-family:var(--f-head);font-size:17px;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .frow .btn{padding:7px 11px;font-size:14px;}
+  .prof-acts{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px;}
+  .chat-top{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+  .chat-top b{font-family:var(--f-head);font-size:19px;}
+  .chat-list{height:min(52vh,380px);overflow-y:auto;display:flex;flex-direction:column;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px;}
+  .msg{max-width:80%;padding:8px 12px;border-radius:14px;font-size:14px;background:var(--panel2);align-self:flex-start;word-break:break-word;white-space:pre-wrap;}
+  .msg.me{align-self:flex-end;background:var(--cyan);color:var(--on-cyan);}
+  .msg small{display:block;font-size:10px;opacity:.65;margin-top:2px;}
+  .chat-row{display:flex;gap:8px;margin-top:10px;}
+  .chat-row input{flex:1;min-width:0;}
+  .icon-btn.dot{position:relative;}
+  .icon-btn.dot::after{content:'';position:absolute;top:5px;right:5px;width:9px;height:9px;border-radius:50%;background:var(--red);}
 </style>
 </head>
 <body>
@@ -655,6 +681,13 @@
   </div>
 </div>
 
+<div class="overlay" id="profOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Profil">
+    <div class="modal-head"><h3>👤 Profil</h3><button class="x" type="button" data-close>✕</button></div>
+    <div id="profBody"></div>
+  </div>
+</div>
+
 <div class="overlay" id="wheelOverlay">
   <div class="modal" role="dialog" aria-modal="true" aria-label="Roue HK">
     <div class="modal-head"><h3>🎡 Roue HK de 20h</h3><button class="x" type="button" data-close>✕</button></div>
@@ -735,6 +768,7 @@ const ADMIN = { apiKey:'AIzaSyCdXkvGy90NDqYvOjYjmDwpuRSCTi3C95Q' };
 /* =====================================================
    OUTILS
    ===================================================== */
+const HK = {};
 const $ = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => [...r.querySelectorAll(s)];
 const fmt = n => Math.round(n).toLocaleString('fr-FR') + ' FC';
@@ -1080,12 +1114,14 @@ $('#orderForm').addEventListener('submit', e => {
       const left = Math.max(1, Math.ceil((p.t + TTL - Date.now()) / DAY));
       $('i', d).textContent = l.length - i;
       $('b', d).textContent = p.name;
+      if(p.uid && HK.badgeEl){ const bd = HK.badgeEl(p.uid); if(bd) $('b', d).appendChild(bd); }
       $('span', d).textContent = 'ID ' + p.id + ' · encore ' + left + ' j';
       const a = $('a', d); a.textContent = '📱 ' + p.phone; a.href = 'https://wa.me/' + intl(p.phone);
       box.appendChild(d);
     });
   }
   const reload = () => getAll().then(render);
+  HK.tReload = reload;
   reload();
 
   $('#tForm').addEventListener('submit', async e => {
@@ -1099,7 +1135,8 @@ $('#orderForm').addEventListener('submit', e => {
     const list = await getAll();
     if(list.some(p => p.id === id)) return toast('Cet ID est déjà inscrit.', true);
     try{
-      await add({ name, phone, id, t: Date.now() });
+      const mu = HK.me && HK.me();
+      await add({ name, phone, id, t: Date.now(), uid: mu ? mu.uid : '' });
     }catch(err){ return toast('Inscription impossible, réessaie.', true); }
     $('#tForm').reset();
     toast('🏆 Inscription enregistrée !');
@@ -1216,6 +1253,7 @@ $('#orderForm').addEventListener('submit', e => {
     champion:{ c:'#FF7A2F', label:'Champion de tournoi' }
   };
   const BADGE_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.4 1.8 3-.4 1.2 2.8 2.8 1.2-.4 3L22 12l-1.8 2.4.4 3-2.8 1.2-1.2 2.8-3-.4L12 22l-2.4-1.8-3 .4-1.2-2.8-2.8-1.2.4-3L2 12l1.8-2.4-.4-3 2.8-1.2 1.2-2.8 3 .4z" fill="currentColor"/><path d="M8 12.4l2.7 2.7 5.3-5.5" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  HK.me = () => me; HK.badgeEl = uid => badgeEl(uid);
   function badgeEl(uid){
     const b = BADGES[uid]; if(!b || !BADGE_INFO[b]) return null;
     const e = document.createElement('span'); e.className = 'bdg'; e.title = BADGE_INFO[b].label; e.style.color = BADGE_INFO[b].c; e.innerHTML = BADGE_SVG;
@@ -1261,7 +1299,7 @@ $('#orderForm').addEventListener('submit', e => {
       w.appendChild(btn);
     }
   }
-  $('#userBtn').addEventListener('click', () => openAuth(''));
+  $('#userBtn').addEventListener('click', () => me ? openProfile(me.uid, me.name) : openAuth(''));
   $('#auOut').addEventListener('click', () => logout());
   $$('#auForm [data-mode]').forEach(b => b.addEventListener('click', () => {
     mode = b.dataset.mode;
@@ -1331,6 +1369,7 @@ $('#orderForm').addEventListener('submit', e => {
     d.innerHTML = '<div class="po-head"><i></i><div><b></b><span></span></div></div>' + (okImg(p.img) ? '<img alt="Publication">' : '') + '<p></p><div class="post-act"></div>';
     $('i', d).textContent = (p.name || '?').charAt(0).toUpperCase();
     $('.po-head b', d).textContent = p.name; { const bd = badgeEl(p.uid); if(bd) $('.po-head b', d).appendChild(bd); }
+    if(p.uid){ const hb = $('.po-head b', d); hb.style.cursor = 'pointer'; hb.addEventListener('click', () => openProfile(p.uid, p.name)); }
     $('.po-head span', d).textContent = when(p.t) + (p.ta ? ' · ⏳ ' + Math.max(1, Math.ceil((p.ta + 172800000 - Date.now()) / 3600000)) + 'h' : '');
     if(okImg(p.img)) $('img', d).src = p.img;
     $('p', d).textContent = p.text || '';
@@ -1357,7 +1396,7 @@ $('#orderForm').addEventListener('submit', e => {
       const list = document.createElement('div');
       const addCm = (cid, c) => {
         const e = document.createElement('div'); e.className = 'cm'; e.innerHTML = '<b></b> <span></span>';
-        $('b', e).textContent = c.name; $('span', e).textContent = c.text; { const bd = badgeEl(c.uid); if(bd) $('b', e).after(bd); }
+        $('b', e).textContent = c.name; if(c.uid){ $('b', e).style.cursor = 'pointer'; $('b', e).addEventListener('click', () => openProfile(c.uid, c.name)); } $('span', e).textContent = c.text; { const bd = badgeEl(c.uid); if(bd) $('b', e).after(bd); }
         if(token && cid){
           const x = document.createElement('button'); x.type = 'button'; x.className = 'x'; x.textContent = '🗑';
           x.addEventListener('click', async () => { try{ await api('DELETE', 'publications/' + id + '/comments/' + cid); e.remove(); }catch(err){ toast('Action impossible.', true); } });
@@ -1417,7 +1456,7 @@ $('#orderForm').addEventListener('submit', e => {
     try{
       const r = await fetch(url('publications') + '?orderBy=%22ta%22&startAt=' + (Date.now() - 172800000) + '&limitToLast=15');
       if(!r.ok) throw 0;
-      try{ BADGES = (await (await fetch(url('badges'))).json()) || {}; }catch(e){}
+      try{ BADGES = (await (await fetch(url('badges'))).json()) || {}; }catch(e){} HK.tReload && HK.tReload();
       authUI();
       const o = await r.json() || {};
       const list = Object.entries(o).filter(([k, v]) => v.ta && Date.now() - v.ta < 172800000).sort((a, b) => b[1].ta - a[1].ta);
@@ -1578,7 +1617,7 @@ $('#orderForm').addEventListener('submit', e => {
     l.forEach(m => {
       const r = document.createElement('div'); r.className = 'trow';
       r.innerHTML = '<div class="tm"><b></b><span></span></div><select></select>';
-      $('b', r).textContent = m.name;
+      $('b', r).textContent = m.name; { const bd = badgeEl(m.id); if(bd) $('b', r).appendChild(bd); }
       $('span', r).textContent = m.t ? 'Inscrit le ' + new Date(m.t).toLocaleDateString('fr-FR') : '';
       const sel = $('select', r);
       [['', 'Aucun badge'], ['verified', '✔ Vérifié (bleu)'], ['officiel', '✔ Officiel (or)'], ['vip', '✔ VIP (violet)'], ['champion', '✔ Champion (orange)']].forEach(([v, t]) => { const o = document.createElement('option'); o.value = v; o.textContent = t; sel.appendChild(o); });
@@ -1594,6 +1633,175 @@ $('#orderForm').addEventListener('submit', e => {
     });
   }
   $('#mbSearch').addEventListener('input', renderMembers);
+
+  /* ===== Profil, amis, messages ===== */
+  const el = (t, c, x) => { const e = document.createElement(t); if(c) e.className = c; if(x != null) e.textContent = x; return e; };
+  const cid = (a, b) => a < b ? a + '_' + b : b + '_' + a;
+  let chatT = 0;
+  async function fb(method, path, body, q){
+    const r = await fetch(await uurl(path) + (q || ''), { method, body: body === undefined ? undefined : JSON.stringify(body) });
+    if(!r.ok) throw new Error(r.status);
+    return r.json();
+  }
+  function nameB(uid, name){ const b = el('b', '', name); const bd = badgeEl(uid); if(bd) b.appendChild(bd); return b; }
+  async function ensureBadges(){
+    if(Object.keys(BADGES).length) return;
+    try{ BADGES = (await (await fetch(url('badges'))).json()) || {}; }catch(e){}
+  }
+  const profBox = () => $('#profBody');
+  function frow(uid, name){
+    const r = el('div', 'frow'); r.appendChild(el('span', 'av', (name || '?').charAt(0).toUpperCase()));
+    const n = el('span', 'fn'); n.appendChild(nameB(uid, name)); n.addEventListener('click', () => openProfile(uid, name));
+    r.appendChild(n); return r;
+  }
+  async function acceptFr(fid, fname){
+    try{
+      await fb('PUT', 'friends/' + me.uid + '/' + fid, { name: fname, t: Date.now() });
+      await fb('PUT', 'friends/' + fid + '/' + me.uid, { name: me.name, t: Date.now() });
+      await fb('DELETE', 'friend_req/' + me.uid + '/' + fid);
+      toast('Ami ajouté 🤝'); openProfile(fid, fname);
+    }catch(e){ toast('Action impossible.', true); }
+  }
+  async function openProfile(uid, name){
+    clearInterval(chatT);
+    if(!me) return openAuth('Connecte-toi pour voir les profils.');
+    open('#profOverlay');
+    const box = profBox(); box.innerHTML = '<div class="t-empty">Chargement...</div>';
+    const mine = uid === me.uid;
+    try{
+      await ensureBadges();
+      const [u, fr, rq, sent, got] = await Promise.all([
+        fb('GET', 'users/' + uid), fb('GET', 'friends/' + me.uid),
+        mine ? fb('GET', 'friend_req/' + me.uid) : null,
+        mine ? null : fb('GET', 'friend_req/' + uid + '/' + me.uid),
+        mine ? null : fb('GET', 'friend_req/' + me.uid + '/' + uid)
+      ]);
+      const user = u || {}, friends = fr || {}, nm = user.name || name || '?';
+      box.innerHTML = '';
+      const head = el('div', 'prof-head');
+      head.appendChild(el('div', 'avatar', nm.charAt(0).toUpperCase()));
+      head.appendChild(nameB(uid, nm));
+      const bg = BADGES[uid];
+      if(bg && BADGE_INFO[bg]){ const c = el('div', 'bchip', '✔ ' + BADGE_INFO[bg].label); c.style.color = BADGE_INFO[bg].c; head.appendChild(c); }
+      const meta = (user.t ? 'Membre depuis le ' + new Date(user.t).toLocaleDateString('fr-FR') : '') + (mine ? ' · ' + Object.keys(friends).length + ' ami(s)' : '');
+      if(meta) head.appendChild(el('div', 'prof-meta', meta));
+      if(!mine && user.bio) head.appendChild(el('div', 'prof-bio', user.bio));
+      box.appendChild(head);
+
+      if(mine){
+        const s = el('div', 'prof-sec');
+        const ta = el('textarea'); ta.maxLength = 160; ta.placeholder = 'Ta bio (160 caractères max)'; ta.value = user.bio || '';
+        const sv = el('button', 'btn btn-ghost btn-block', '💾 Enregistrer la bio'); sv.type = 'button'; sv.style.marginTop = '8px';
+        sv.addEventListener('click', async () => { try{ await fb('PUT', 'users/' + me.uid + '/bio', ta.value.trim()); toast('Bio enregistrée ✅'); }catch(e){ toast('Action impossible.', true); } });
+        s.append(ta, sv); box.appendChild(s);
+
+        const rs = Object.entries(rq || {});
+        if(rs.length){
+          const s2 = el('div', 'prof-sec'); s2.appendChild(el('div', 'subhead', '🔔 Demandes d\'amis (' + rs.length + ')'));
+          rs.forEach(([fid, v]) => {
+            const r = frow(fid, v.name);
+            const ok = el('button', 'btn btn-primary', '✔'); ok.type = 'button';
+            const no = el('button', 'btn btn-ghost', '✕'); no.type = 'button';
+            ok.addEventListener('click', () => acceptFr(fid, v.name));
+            no.addEventListener('click', async () => { try{ await fb('DELETE', 'friend_req/' + me.uid + '/' + fid); openProfile(me.uid, me.name); }catch(e){ toast('Action impossible.', true); } });
+            r.append(ok, no); s2.appendChild(r);
+          });
+          box.appendChild(s2);
+        }
+
+        const fs = Object.entries(friends);
+        const s3 = el('div', 'prof-sec'); s3.appendChild(el('div', 'subhead', '👥 Mes amis (' + fs.length + ')'));
+        if(!fs.length) s3.appendChild(el('div', 't-empty', 'Pas encore d\'amis. Cherche un pseudo ci-dessous ou touche un nom dans la communauté.'));
+        fs.forEach(([fid, v]) => {
+          const r = frow(fid, v.name); const m = el('button', 'btn btn-primary', '💬'); m.type = 'button';
+          m.addEventListener('click', () => openChat(fid, v.name)); r.appendChild(m); s3.appendChild(r);
+        });
+        box.appendChild(s3);
+
+        const s4 = el('div', 'prof-sec'); s4.appendChild(el('div', 'subhead', '🔎 Trouver un joueur'));
+        const row = el('div', 'chat-row'); const qi = el('input'); qi.type = 'text'; qi.placeholder = 'Pseudo exact';
+        const qb = el('button', 'btn btn-ghost', 'Chercher'); qb.type = 'button';
+        qb.addEventListener('click', async () => {
+          const q = qi.value.trim(); if(!q) return;
+          try{
+            const r = await fetch(await uurl('users') + '&orderBy=%22name%22&equalTo=' + encodeURIComponent('"' + q + '"'));
+            if(!r.ok) throw 0;
+            const o = Object.entries(await r.json() || {})[0];
+            if(!o) return toast('Aucun joueur avec ce pseudo.', true);
+            openProfile(o[0], o[1].name);
+          }catch(e){ toast('Recherche impossible.', true); }
+        });
+        row.append(qi, qb); s4.appendChild(row); box.appendChild(s4);
+
+        const lo = el('button', 'btn btn-ghost btn-block', 'Se déconnecter'); lo.type = 'button'; lo.style.marginTop = '16px';
+        lo.addEventListener('click', () => logout()); box.appendChild(lo);
+      } else {
+        const a = el('div', 'prof-acts');
+        const mk = (t, c, f) => { const b = el('button', 'btn ' + c, t); b.type = 'button'; b.addEventListener('click', f); a.appendChild(b); };
+        if(friends[uid]){
+          mk('💬 Message', 'btn-primary', () => openChat(uid, nm));
+          mk('Retirer', 'btn-ghost', async () => {
+            if(!confirm('Retirer cet ami ?')) return;
+            try{ await fb('DELETE', 'friends/' + me.uid + '/' + uid); await fb('DELETE', 'friends/' + uid + '/' + me.uid); openProfile(uid, nm); }
+            catch(e){ toast('Action impossible.', true); }
+          });
+        } else if(got){
+          mk('✔ Accepter sa demande', 'btn-primary', () => acceptFr(uid, nm));
+        } else if(sent){
+          mk('⏳ Demande envoyée', 'btn-ghost', () => {});
+        } else {
+          mk('➕ Ajouter en ami', 'btn-primary', async () => {
+            try{ await fb('PUT', 'friend_req/' + uid + '/' + me.uid, { name: me.name, t: Date.now() }); toast('Demande envoyée 🤝'); openProfile(uid, nm); }
+            catch(e){ toast('Action impossible.', true); }
+          });
+        }
+        box.appendChild(a);
+      }
+    }catch(e){ box.innerHTML = '<div class="t-empty">Profil indisponible (règles Firebase ou connexion).</div>'; }
+  }
+  function openChat(fid, fname){
+    clearInterval(chatT);
+    const box = profBox(); box.innerHTML = '';
+    const id = cid(me.uid, fid);
+    const top = el('div', 'chat-top');
+    const back = el('button', 'btn btn-ghost', '‹'); back.type = 'button'; back.addEventListener('click', () => openProfile(me.uid, me.name));
+    top.append(back, nameB(fid, fname)); box.appendChild(top);
+    const list = el('div', 'chat-list'); box.appendChild(list);
+    const row = el('div', 'chat-row'); const inp = el('input'); inp.type = 'text'; inp.maxLength = 500; inp.placeholder = 'Écris un message...';
+    const sb = el('button', 'btn btn-primary', 'Envoyer'); sb.type = 'button'; row.append(inp, sb); box.appendChild(row);
+    let sig = '';
+    async function pull(){
+      if(!$('#profOverlay').classList.contains('open') || !document.body.contains(list)){ clearInterval(chatT); return; }
+      try{
+        const o = Object.values(await fb('GET', 'chats/' + id, undefined, '&orderBy=%22%24key%22&limitToLast=60') || {}).sort((a, b) => a.t - b.t);
+        const s = o.length + ':' + (o.length ? o[o.length - 1].t : 0);
+        if(s === sig) return; sig = s;
+        list.innerHTML = '';
+        if(!o.length) list.appendChild(el('div', 't-empty', 'Commence la conversation 👋'));
+        o.forEach(m => {
+          const d = el('div', 'msg' + (m.from === me.uid ? ' me' : ''), m.text);
+          d.appendChild(el('small', '', new Date(m.t).toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' })));
+          list.appendChild(d);
+        });
+        list.scrollTop = list.scrollHeight;
+      }catch(e){}
+    }
+    async function send(){
+      const text = inp.value.trim(); if(!text) return;
+      inp.value = '';
+      try{ await fb('POST', 'chats/' + id, { from: me.uid, name: me.name, text, t: Date.now() }); pull(); }
+      catch(e){ inp.value = text; toast('Message non envoyé.', true); }
+    }
+    sb.addEventListener('click', send);
+    inp.addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); send(); } });
+    pull(); chatT = setInterval(pull, 3500); inp.focus();
+  }
+  async function notif(){
+    const b = $('#userBtn');
+    if(!me) return b.classList.remove('dot');
+    try{ const o = await fb('GET', 'friend_req/' + me.uid); b.classList.toggle('dot', !!o && Object.keys(o).length > 0); }catch(e){}
+  }
+  notif(); setInterval(notif, 60000);
 
   loadFeed();
 })();
