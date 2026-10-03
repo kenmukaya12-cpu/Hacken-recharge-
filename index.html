@@ -201,6 +201,32 @@
   .trow .tw{font-size:12.5px;font-weight:700;color:var(--cyan-d);text-decoration:none;white-space:nowrap;}
   .t-empty{text-align:center;color:var(--muted);font-size:13.5px;padding:18px;border:1px dashed var(--line);border-radius:12px;}
 
+  textarea,input[type=password]{width:100%;background:var(--panel);border:1px solid var(--line);color:var(--text);padding:13px 14px;border-radius:12px;font-size:16px;font-family:inherit;}
+  textarea{resize:vertical;min-height:90px;}
+  textarea:focus,input[type=password]:focus{outline:2px solid var(--cyan);outline-offset:1px;border-color:var(--cyan);}
+  textarea.bad{border-color:var(--red);}
+  .photo-btn{display:inline-flex;align-items:center;gap:8px;cursor:pointer;padding:11px 16px;border:1px dashed var(--cyan-d);border-radius:12px;color:var(--cyan);font-weight:600;font-size:14px;align-self:flex-start;}
+  .photo-btn input{display:none;}
+  #pPrevBox{display:none;position:relative;}
+  #pPrevBox img{width:100%;max-height:260px;object-fit:cover;border-radius:12px;display:block;}
+  #pRm{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.6);color:#fff;}
+  .feed{display:flex;flex-direction:column;gap:14px;margin-top:16px;}
+  .post{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+  .po-head{display:flex;align-items:center;gap:10px;padding:12px 14px;}
+  .po-head i{flex:0 0 36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--gold));color:#04202A;font-style:normal;font-weight:900;display:grid;place-items:center;font-family:var(--f-head);font-size:18px;}
+  .po-head b{display:block;font-family:var(--f-head);font-size:17px;line-height:1.1;}
+  .po-head span{font-size:12px;color:var(--muted);}
+  .post img{width:100%;max-height:420px;object-fit:cover;display:block;}
+  .post p{margin:0;padding:12px 14px;font-size:14.5px;white-space:pre-wrap;word-break:break-word;}
+  .post-act{display:flex;gap:8px;padding:0 14px 14px;flex-wrap:wrap;}
+  .post-act .btn{font-size:14px;padding:9px 14px;}
+  .notice{position:relative;z-index:1;text-align:center;padding:8px 14px;font-size:13px;font-weight:700;background:linear-gradient(90deg,var(--gold),#FFD47A);color:#2A1A00;}
+  .ed-body{padding-top:12px;}
+  .ed-item{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:10px;display:grid;gap:8px;}
+  .ed-item>b{font-family:var(--f-head);font-size:16px;color:var(--gold);}
+  .ed-f{display:block;}
+  .ed-f span{display:block;font-size:12px;color:var(--muted);margin-bottom:3px;}
+  .ed-f input{padding:10px 12px;font-size:15px;}
   .badges{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
   .badge{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 8px;text-align:center;font-size:12.5px;color:var(--muted);}
   .badge .ic{font-size:24px;display:block;margin-bottom:6px;}
@@ -314,6 +340,7 @@
   <div class="chips">
     <a class="chip" href="#packs">💎 Packs</a>
     <a class="chip" href="#tournoi">🏆 Tournois</a>
+    <a class="chip" href="#communaute">📰 Actus</a>
     <a class="chip" href="#comptes">🎮 Comptes</a>
     <a class="chip" href="#faq">❓ FAQ</a>
   </div>
@@ -458,6 +485,22 @@
   <div class="tlist" id="tList"></div>
 </section>
 
+<section id="communaute" class="rv">
+  <h2 class="sec-title">📰 Communauté</h2>
+  <p class="sec-sub">Partage une photo, une victoire ou une note. Chaque publication est vérifiée avant d'apparaître.</p>
+  <form id="pForm" class="t-card" novalidate>
+    <div><label class="lbl" for="pName">Ton nom ou pseudo</label>
+      <input type="text" id="pName" maxlength="24" autocomplete="nickname" placeholder="Ex : HK_Sniper"></div>
+    <div><label class="lbl" for="pText">Ta note</label>
+      <textarea id="pText" maxlength="400" placeholder="Raconte ta victoire, pose une question, partage un conseil..."></textarea></div>
+    <label class="photo-btn">📷 Ajouter une photo<input type="file" id="pFile" accept="image/*"></label>
+    <div id="pPrevBox"><img id="pPrev" alt="Aperçu"><button type="button" class="x" id="pRm" aria-label="Retirer la photo">✕</button></div>
+    <p class="note">Pas d'insultes, pas de pub, pas de numéros personnels.</p>
+    <button type="submit" class="btn btn-primary btn-block">📨 Publier</button>
+  </form>
+  <div class="feed" id="feed"></div>
+</section>
+
 <section class="rv">
   <h2 class="sec-title">Pourquoi Hacken Store</h2>
   <p class="sec-sub"></p>
@@ -495,7 +538,7 @@
   <span class="hk">HK · HACKEN STORE</span>
   Recharge Diamants Free Fire. Service disponible uniquement en RDC 🇨🇩.<br>Indépendant, non affilié à Garena.<br>
   <a class="btn btn-wa" id="supportBtn" href="#" target="_blank" rel="noopener">💬 Contacter le support</a><br>
-  <small>© 2026 Hacken Store</small>
+  <small>© 2026 Hacken Store · <a href="#" id="adminLink" style="color:inherit;opacity:.5;">Admin</a></small>
 </footer>
 
 <button class="fab" type="button" data-open-wheel>🎡 Roue HK</button>
@@ -541,6 +584,33 @@
   </div>
 </div>
 
+<div class="overlay" id="adminOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Administration">
+    <div class="modal-head"><h3>🔒 Admin</h3><button class="x" type="button" data-close>✕</button></div>
+    <form id="adLogin" novalidate>
+      <input type="text" id="adMail" autocomplete="username" placeholder="Email admin">
+      <input type="password" id="adPass" autocomplete="current-password" placeholder="Mot de passe">
+      <button class="btn btn-primary btn-block" type="submit">Se connecter</button>
+    </form>
+    <div id="adPanel" style="display:none;">
+      <div class="pay-options" id="adTabs" style="margin-bottom:14px;">
+        <button type="button" class="pay sel" data-tab="posts">📰 Publications</button>
+        <button type="button" class="pay" data-tab="edit">⚙️ Prix &amp; images</button>
+      </div>
+      <div id="adPosts">
+        <div class="subhead" style="margin-top:0;">En attente (<span id="adCount">0</span>)</div>
+        <div class="feed" id="adList"></div>
+      </div>
+      <div id="adEdit" style="display:none;">
+        <p class="note" style="text-align:left;margin-bottom:12px;">Modifie, puis appuie sur Enregistrer. Les visiteurs voient les changements au prochain chargement du site.</p>
+        <div id="edList"></div>
+        <button class="btn btn-gold btn-block" type="button" id="edSave">💾 Enregistrer les changements</button>
+      </div>
+      <button class="btn btn-ghost btn-block" type="button" id="adLogout" style="margin-top:12px;">Se déconnecter</button>
+    </div>
+  </div>
+</div>
+
 <div class="overlay" id="wheelOverlay">
   <div class="modal" role="dialog" aria-modal="true" aria-label="Roue HK">
     <div class="modal-head"><h3>🎡 Roue HK de 20h</h3><button class="x" type="button" data-close>✕</button></div>
@@ -556,6 +626,15 @@
 </div>
 
 <script>
+(async function(){
+const HK_DB = 'https://kenmukaya-f3f46-default-rtdb.europe-west1.firebasedatabase.app';
+const CFG = await (async () => {
+  try{
+    const c = new AbortController(); setTimeout(() => c.abort(), 2500);
+    const r = await fetch(HK_DB + '/config.json', { signal: c.signal });
+    return (await r.json()) || {};
+  }catch(e){ return {}; }
+})();
 /* =====================================================
    CONFIGURATION — modifie ici tes prix, comptes et numéros
    ===================================================== */
@@ -595,8 +674,19 @@ const TOURNOI = {
   titre:'Tournoi Hacken Store',
   infos:'Date, mode de jeu et récompenses annoncés sur WhatsApp après ton inscription.',
   jours:30,
-  api:'https://kenmukaya-f3f46-default-rtdb.europe-west1.firebasedatabase.app'
+  api:HK_DB
 };
+// Admin : colle ici la "Clé API Web" de ton projet Firebase (Paramètres du projet)
+const ADMIN = { apiKey:'AIzaSyCdXkvGy90NDqYvOjYjmDwpuRSCTi3C95Q' };
+(function(){
+  const n = (v, d) => (v === '' || v == null || isNaN(+v)) ? d : +v;
+  (CFG.diamonds || []).forEach((d, i) => { if(!DIAMONDS[i] || !d) return; DIAMONDS[i][0] = n(d[0], DIAMONDS[i][0]); DIAMONDS[i][1] = n(d[1], DIAMONDS[i][1]); DIAMONDS[i][2] = n(d[2], 0) || null; });
+  (CFG.subs || []).forEach((d, i) => { if(!SUBS[i] || !d) return; if(d[0]) SUBS[i][0] = d[0]; SUBS[i][1] = n(d[1], SUBS[i][1]); });
+  (CFG.accounts || []).forEach((a, i) => { if(!ACCOUNTS[i] || !a) return; if(a.name) ACCOUNTS[i].name = a.name; ACCOUNTS[i].price = n(a.price, ACCOUNTS[i].price); ACCOUNTS[i].old = n(a.old, 0) || null; if(a.details) ACCOUNTS[i].details = a.details; });
+  Object.keys(CFG.imgs || {}).forEach(k => { const i = +k.slice(1), t = k[0]; if(t === 'd' && DIAMONDS[i]) DIAMONDS[i][3] = 'db:' + k; if(t === 's' && SUBS[i]) SUBS[i][2] = 'db:' + k; if(t === 'c' && ACCOUNTS[i]) ACCOUNTS[i].img = 'db:' + k; });
+  if(CFG.pays) ['airtel', 'orange'].forEach(k => { const q = CFG.pays[k]; if(q){ if(q.number) PAYS[k].number = q.number; if(q.name) PAYS[k].name = q.name; } });
+  if(CFG.tournoi){ if(CFG.tournoi.titre) TOURNOI.titre = CFG.tournoi.titre; if(CFG.tournoi.infos) TOURNOI.infos = CFG.tournoi.infos; }
+})();
 
 /* =====================================================
    OUTILS
@@ -605,12 +695,20 @@ const $ = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => [...r.querySelectorAll(s)];
 const fmt = n => Math.round(n).toLocaleString('fr-FR') + ' FC';
 const PH_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 9l5-6h10l5 6-10 12L2 9Z"/><path d="M2 9h20"/></svg>';
+const IMGC = {};
+function imgSrc(src){
+  if(src.indexOf('db:') !== 0) return Promise.resolve(src);
+  const k = src.slice(3);
+  return IMGC[k] || (IMGC[k] = fetch(HK_DB + '/images/' + k + '.json').then(r => r.json()).then(d => (typeof d === 'string' && d.indexOf('data:image/jpeg;base64,') === 0) ? d : ''));
+}
 function picHTML(src, alt){
   const i = document.createElement('img');
-  i.src = src; i.alt = alt; i.loading = 'lazy';
+  i.alt = alt; i.loading = 'lazy';
   const ph = document.createElement('div');
-  ph.className = 'ph'; ph.innerHTML = PH_SVG + '<span>Ajoute l\'image<br>' + src + '</span>';
-  i.addEventListener('error', () => { i.style.display = 'none'; ph.style.display = 'flex'; });
+  ph.className = 'ph'; ph.innerHTML = PH_SVG + '<span>Ajoute l\'image<br>' + (src.indexOf('db:') === 0 ? '' : src) + '</span>';
+  const fail = () => { i.style.display = 'none'; ph.style.display = 'flex'; };
+  i.addEventListener('error', fail);
+  imgSrc(src).then(d => { if(d) i.src = d; else fail(); }).catch(fail);
   return [i, ph];
 }
 let toastT;
@@ -705,7 +803,8 @@ function Carousel(root, opts){
 
 (function(){
   const track = $('#carBonus .car-track');
-  JSON.parse(track.dataset.slides).forEach(([src, alt]) => {
+  JSON.parse(track.dataset.slides).forEach(([src0, alt], bi) => {
+    const src = (CFG.imgs || {})['b' + bi] ? 'db:b' + bi : src0;
     const s = document.createElement('div'); s.className = 'slide';
     picHTML(src, alt).forEach(el => s.appendChild(el));
     track.appendChild(s);
@@ -867,7 +966,7 @@ $('#orderForm').addEventListener('submit', e => {
     picHTML(a.img, a.name).forEach(el => s.appendChild(el));
     track.appendChild(s);
     const t = document.createElement('button'); t.type = 'button'; t.className = 'thumb'; t.setAttribute('aria-label', a.name);
-    const im = document.createElement('img'); im.src = a.img; im.alt = ''; im.loading = 'lazy';
+    const im = document.createElement('img'); imgSrc(a.img).then(d => { if(d) im.src = d; }); im.alt = ''; im.loading = 'lazy';
     im.addEventListener('error', () => { im.style.visibility = 'hidden'; });
     t.appendChild(im); t.addEventListener('click', () => car.go(k, true)); thumbs.appendChild(t);
   });
@@ -883,7 +982,7 @@ $('#orderForm').addEventListener('submit', e => {
   $('#carComptes').addEventListener('click', e => {
     if(e.target.closest('.car-arrow') || car.moved) return;
     const a = ACCOUNTS[car.index];
-    const lb = $('#lbImg'); lb.style.display = 'block'; lb.src = a.img;
+    const lb = $('#lbImg'); lb.style.display = 'block'; imgSrc(a.img).then(d => { lb.src = d; });
     lb.onerror = () => { lb.style.display = 'none'; };
     $('#lbTitle').textContent = a.name; $('#lbCap').textContent = fmt(a.price);
     open('#lightboxOverlay');
@@ -1057,6 +1156,223 @@ $('#orderForm').addEventListener('submit', e => {
 })();
 
 /* =====================================================
+   COMMUNAUTÉ — publications validées par l'admin
+   ===================================================== */
+(function(){
+  const DB = TOURNOI.api ? TOURNOI.api.replace(/\/$/, '') : '';
+  const feed = $('#feed');
+  let token = '', imgData = '';
+  const url = (p, auth) => DB + '/' + p + '.json' + (auth && token ? '?auth=' + token : '');
+  const okImg = s => typeof s === 'string' && s.indexOf('data:image/jpeg;base64,') === 0;
+  const when = t => new Date(t).toLocaleDateString('fr-FR', { day:'numeric', month:'short' }) + ' · ' + new Date(t).toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+  $$('#pForm input, #pForm textarea').forEach(i => i.addEventListener('input', () => i.classList.remove('bad')));
+
+  function compress(file, max){
+    return new Promise((res, rej) => {
+      const r = new FileReader();
+      r.onerror = rej;
+      r.onload = () => {
+        const im = new Image();
+        im.onerror = rej;
+        im.onload = () => {
+          const k = Math.min(1, (max || 900) / Math.max(im.width, im.height));
+          const c = document.createElement('canvas');
+          c.width = Math.round(im.width * k); c.height = Math.round(im.height * k);
+          c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
+          let q = .72, d = c.toDataURL('image/jpeg', q);
+          while(d.length > 200000 && q > .3){ q -= .1; d = c.toDataURL('image/jpeg', q); }
+          d.length > 240000 ? rej(new Error('big')) : res(d);
+        };
+        im.src = r.result;
+      };
+      r.readAsDataURL(file);
+    });
+  }
+
+  function postEl(id, p, mode){
+    const d = document.createElement('article'); d.className = 'post';
+    d.innerHTML = '<div class="po-head"><i></i><div><b></b><span></span></div></div>' + (okImg(p.img) ? '<img alt="Publication">' : '') + '<p></p><div class="post-act"></div>';
+    $('i', d).textContent = (p.name || '?').charAt(0).toUpperCase();
+    $('.po-head b', d).textContent = p.name;
+    $('.po-head span', d).textContent = when(p.t);
+    if(okImg(p.img)) $('img', d).src = p.img;
+    $('p', d).textContent = p.text || '';
+    const act = $('.post-act', d);
+    const mk = (txt, cls, fn) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn ' + cls; b.textContent = txt; b.addEventListener('click', fn); act.appendChild(b); };
+    if(mode === 'pending'){
+      mk('✅ Approuver', 'btn-primary', () => approve(id, p));
+      mk('🗑 Refuser', 'btn-ghost', () => remove('pub_attente', id, loadPending));
+    } else {
+      mk('📤 Partager', 'btn-ghost', () => window.open('https://wa.me/?text=' + encodeURIComponent('📰 ' + p.name + ' sur Hacken Store :\n' + (p.text || '') + '\n' + location.href.split('#')[0]), '_blank'));
+      if(token) mk('🗑 Supprimer', 'btn-ghost', () => remove('publications', id, loadFeed));
+    }
+    return d;
+  }
+
+  async function api(method, path, body){
+    const r = await fetch(url(path, true), { method, body: body ? JSON.stringify(body) : undefined });
+    if(!r.ok){ if(r.status === 401) token = ''; throw new Error(r.status); }
+    return r.json();
+  }
+  async function approve(id, p){
+    try{ await api('PUT', 'publications/' + id, p); await api('DELETE', 'pub_attente/' + id); toast('Publication approuvée ✅'); loadPending(); loadFeed(); }
+    catch(e){ toast('Action impossible (reconnecte-toi).', true); }
+  }
+  async function remove(node, id, after){
+    if(!confirm('Supprimer cette publication ?')) return;
+    try{ await api('DELETE', node + '/' + id); toast('Supprimée'); after(); }
+    catch(e){ toast('Action impossible (reconnecte-toi).', true); }
+  }
+
+  async function loadFeed(){
+    if(!DB){ feed.innerHTML = '<div class="t-empty">Communauté indisponible.</div>'; return; }
+    feed.innerHTML = '<div class="t-empty">Chargement...</div>';
+    try{
+      const r = await fetch(url('publications') + '?orderBy=%22t%22&limitToLast=20');
+      if(!r.ok) throw 0;
+      const o = await r.json() || {};
+      const list = Object.entries(o).sort((a, b) => b[1].t - a[1].t);
+      feed.innerHTML = '';
+      if(!list.length){ feed.innerHTML = '<div class="t-empty">Aucune publication pour le moment. Sois le premier !</div>'; return; }
+      list.forEach(([id, p]) => feed.appendChild(postEl(id, p, 'feed')));
+    }catch(e){ feed.innerHTML = '<div class="t-empty">Impossible de charger les publications.</div>'; }
+  }
+
+  $('#pFile').addEventListener('change', async e => {
+    const f = e.target.files[0]; if(!f) return;
+    if(!/^image\//.test(f.type)) return toast('Choisis une image.', true);
+    try{ imgData = await compress(f); $('#pPrev').src = imgData; $('#pPrevBox').style.display = 'block'; }
+    catch(err){ imgData = ''; $('#pFile').value = ''; toast('Image trop lourde ou illisible.', true); }
+  });
+  $('#pRm').addEventListener('click', () => { imgData = ''; $('#pFile').value = ''; $('#pPrevBox').style.display = 'none'; });
+
+  $('#pForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const nEl = $('#pName'), tEl = $('#pText');
+    const name = nEl.value.trim(), text = tEl.value.trim();
+    if(!DB) return toast('Communauté indisponible.', true);
+    if(name.length < 2) return bad(nEl, 'Entre ton nom ou pseudo.');
+    if(text.length < 3 && !imgData) return bad(tEl, 'Écris une note ou ajoute une photo.');
+    let last = 0; try{ last = +localStorage.getItem('hkstore-lastpost') || 0; }catch(x){}
+    if(Date.now() - last < 6e5) return toast('Attends quelques minutes avant de republier.', true);
+    const post = { name, text, t: Date.now() }; if(imgData) post.img = imgData;
+    try{
+      const r = await fetch(url('pub_attente'), { method:'POST', body: JSON.stringify(post) });
+      if(!r.ok) throw 0;
+      try{ localStorage.setItem('hkstore-lastpost', String(Date.now())); }catch(x){}
+      $('#pForm').reset(); imgData = ''; $('#pPrevBox').style.display = 'none';
+      toast('📨 Envoyé ! Visible après validation.');
+    }catch(err){ toast('Envoi impossible, réessaie.', true); }
+  });
+
+  /* Admin */
+  function showAdmin(){
+    $('#adLogin').style.display = token ? 'none' : 'flex';
+    $('#adPanel').style.display = token ? 'block' : 'none';
+    if(token) loadPending();
+  }
+  async function loadPending(){
+    const box = $('#adList'); box.innerHTML = '<div class="t-empty">Chargement...</div>';
+    try{
+      const o = await api('GET', 'pub_attente') || {};
+      const list = Object.entries(o).sort((a, b) => a[1].t - b[1].t);
+      box.innerHTML = ''; $('#adCount').textContent = list.length;
+      if(!list.length){ box.innerHTML = '<div class="t-empty">Rien en attente 👌</div>'; return; }
+      list.forEach(([id, p]) => box.appendChild(postEl(id, p, 'pending')));
+    }catch(e){ box.innerHTML = '<div class="t-empty">Erreur de lecture (règles ou connexion).</div>'; }
+  }
+  $('#adminLink').addEventListener('click', e => { e.preventDefault(); open('#adminOverlay'); showAdmin(); });
+  $('#adLogout').addEventListener('click', () => { token = ''; showAdmin(); loadFeed(); });
+  $('#adLogin').addEventListener('submit', async e => {
+    e.preventDefault();
+    if(!ADMIN.apiKey) return toast('Ajoute ADMIN.apiKey dans le code.', true);
+    try{
+      const r = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + ADMIN.apiKey, {
+        method:'POST', headers:{ 'Content-Type':'application/json' },
+        body: JSON.stringify({ email: $('#adMail').value.trim(), password: $('#adPass').value, returnSecureToken: true })
+      });
+      const d = await r.json(); if(!r.ok) throw 0;
+      token = d.idToken; setTimeout(() => { token = ''; }, 3300000);
+      $('#adPass').value = ''; showAdmin(); loadFeed();
+    }catch(err){ toast('Connexion refusée.', true); }
+  });
+
+  /* Éditeur du site : prix, images, paiement, annonce */
+  if(CFG.notice){ const nb = document.createElement('div'); nb.className = 'notice'; nb.textContent = CFG.notice; $('.navbar').after(nb); }
+  const IM = Object.assign({}, CFG.imgs || {}), staged = {}, F = {};
+  function section(title){
+    const d = document.createElement('details'); d.className = 'faq';
+    d.innerHTML = '<summary></summary><div class="ed-body"></div>';
+    $('summary', d).textContent = title; $('#edList').appendChild(d); return $('.ed-body', d);
+  }
+  function item(parent, title){
+    const d = document.createElement('div'); d.className = 'ed-item';
+    const b = document.createElement('b'); b.textContent = title; d.appendChild(b); parent.appendChild(d); return d;
+  }
+  function mkField(parent, label, key, val, num){
+    const l = document.createElement('label'); l.className = 'ed-f';
+    const t = document.createElement('span'); t.textContent = label;
+    const i = document.createElement('input'); i.type = 'text'; if(num) i.inputMode = 'numeric';
+    i.value = val == null ? '' : val; F[key] = i;
+    l.append(t, i); parent.appendChild(l);
+  }
+  function mkImg(parent, key, label){
+    const l = document.createElement('label'); l.className = 'photo-btn';
+    const t = document.createElement('span'); t.textContent = '📷 ' + label + (IM[key] ? ' ✓' : '');
+    const f = document.createElement('input'); f.type = 'file'; f.accept = 'image/*';
+    f.addEventListener('change', async () => {
+      if(!f.files[0]) return;
+      try{ staged[key] = await compress(f.files[0]); t.textContent = '📷 ' + label + ' ✓ (nouvelle)'; }
+      catch(err){ toast('Image trop lourde ou illisible.', true); }
+    });
+    l.append(t, f); parent.appendChild(l);
+  }
+  function buildEditor(){
+    $('#edList').innerHTML = '';
+    let b = section('💎 Packs de diamants');
+    DIAMONDS.forEach((d, i) => { const it = item(b, 'Pack ' + (i + 1)); mkField(it, 'Diamants', 'd' + i + '_q', d[0], 1); mkField(it, 'Prix (FC)', 'd' + i + '_p', d[1], 1); mkField(it, 'Ancien prix (vide = aucun)', 'd' + i + '_o', d[2] || '', 1); mkImg(it, 'd' + i, 'Changer l\'image'); });
+    b = section('🎟 Booyah Pass et abonnements');
+    SUBS.forEach((d, i) => { const it = item(b, d[3]); mkField(it, 'Nom affiché', 's' + i + '_n', d[0]); mkField(it, 'Prix (FC)', 's' + i + '_p', d[1], 1); mkImg(it, 's' + i, 'Changer l\'image'); });
+    b = section('🎮 Comptes à vendre');
+    ACCOUNTS.forEach((a, i) => { const it = item(b, 'Compte ' + (i + 1)); mkField(it, 'Nom', 'c' + i + '_n', a.name); mkField(it, 'Prix (FC)', 'c' + i + '_p', a.price, 1); mkField(it, 'Ancien prix (vide = aucun)', 'c' + i + '_o', a.old || '', 1); mkField(it, 'Détails (rang, niveau, skins...)', 'c' + i + '_t', a.details); mkImg(it, 'c' + i, 'Changer l\'image'); });
+    b = section('🖼 Images du carrousel bonus');
+    for(let i = 0; i < 3; i++) mkImg(item(b, 'Bonus ' + (i + 1)), 'b' + i, 'Changer l\'image');
+    b = section('💳 Numéros de paiement');
+    ['airtel', 'orange'].forEach(k => { const it = item(b, PAYS[k].operator); mkField(it, 'Numéro', k + '_num', PAYS[k].number); mkField(it, 'Nom du bénéficiaire', k + '_name', PAYS[k].name); });
+    b = section('🏆 Tournoi et annonce');
+    const it = item(b, 'Textes'); mkField(it, 'Titre du tournoi', 't_titre', TOURNOI.titre); mkField(it, 'Infos du tournoi', 't_infos', TOURNOI.infos); mkField(it, 'Bandeau d\'annonce en haut du site (vide = aucun)', 'notice', CFG.notice || '');
+  }
+  async function saveCfg(){
+    const g = k => F[k].value.trim();
+    const cfg = {
+      diamonds: DIAMONDS.map((d, i) => [g('d' + i + '_q'), g('d' + i + '_p'), g('d' + i + '_o')]),
+      subs: SUBS.map((d, i) => [g('s' + i + '_n'), g('s' + i + '_p')]),
+      accounts: ACCOUNTS.map((a, i) => ({ name: g('c' + i + '_n'), price: g('c' + i + '_p'), old: g('c' + i + '_o'), details: g('c' + i + '_t') })),
+      pays: { airtel: { number: g('airtel_num'), name: g('airtel_name') }, orange: { number: g('orange_num'), name: g('orange_name') } },
+      tournoi: { titre: g('t_titre'), infos: g('t_infos') },
+      notice: g('notice')
+    };
+    $('#edSave').disabled = true; $('#edSave').textContent = 'Enregistrement...';
+    try{
+      for(const k of Object.keys(staged)){ await api('PUT', 'images/' + k, staged[k]); IM[k] = 1; delete staged[k]; }
+      cfg.imgs = IM;
+      await api('PUT', 'config', cfg);
+      toast('✅ Site mis à jour. Recharge la page pour voir.');
+    }catch(err){ toast('Échec : reconnecte-toi ou vérifie les règles.', true); }
+    $('#edSave').disabled = false; $('#edSave').textContent = '💾 Enregistrer les changements';
+  }
+  $$('#adTabs button').forEach(b => b.addEventListener('click', () => {
+    $$('#adTabs button').forEach(x => x.classList.toggle('sel', x === b));
+    $('#adPosts').style.display = b.dataset.tab === 'posts' ? 'block' : 'none';
+    $('#adEdit').style.display = b.dataset.tab === 'edit' ? 'block' : 'none';
+    if(b.dataset.tab === 'edit' && !$('#edList').children.length) buildEditor();
+  }));
+  $('#edSave').addEventListener('click', saveCfg);
+
+  loadFeed();
+})();
+
+/* =====================================================
    FOND ANIMÉ : diamants flottants
    ===================================================== */
 (function(){
@@ -1089,6 +1405,7 @@ $('#orderForm').addEventListener('submit', e => {
   if(!('IntersectionObserver' in window)){ els.forEach(e => e.classList.add('in')); return; }
   const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .08 });
   els.forEach(e => io.observe(e));
+})();
 })();
 </script>
 </body>
