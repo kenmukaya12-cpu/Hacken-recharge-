@@ -233,9 +233,14 @@
   .cm .x{padding:1px 7px;margin-left:6px;font-size:11px;}
   .cm-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
   .cm-row input{padding:10px 12px;font-size:15px;}
-  .cm-row input:first-child{flex:1 1 100%;}
-  .cm-row input:nth-child(2){flex:1 1 0;min-width:0;}
+  .cm-row input{flex:1 1 0;min-width:0;}
+  .cm-row .btn-ghost{flex:1 1 100%;}
   .cm-row .btn{padding:9px 14px;font-size:15px;}
+  .who{font-size:14px;color:var(--muted);}
+  .who b{color:var(--text);font-family:var(--f-head);font-size:17px;}
+  .bdg{display:inline-flex;vertical-align:middle;margin-left:4px;}
+  .bdg svg{width:18px;height:18px;}
+  .trow select{background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px;font-size:14px;max-width:150px;}
   .badges{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
   .badge{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 8px;text-align:center;font-size:12.5px;color:var(--muted);}
   .badge .ic{font-size:24px;display:block;margin-bottom:6px;}
@@ -325,6 +330,7 @@
     <div><span class="hk">HK</span><span class="full">HACKEN STORE</span></div>
   </a>
   <div class="nav-actions">
+    <button class="icon-btn" id="userBtn" type="button" aria-label="Mon compte">👤</button>
     <button class="icon-btn" id="guideBtn" type="button" aria-label="Aide">?</button>
     <button class="icon-btn" id="settingsBtn" type="button" aria-label="Paramètres">⚙️</button>
   </div>
@@ -496,10 +502,9 @@
 
 <section id="communaute" class="rv">
   <h2 class="sec-title">📰 Communauté</h2>
-  <p class="sec-sub">Partage une photo, une victoire ou une note. Chaque publication est vérifiée avant d'apparaître et disparaît après 48h.</p>
+  <p class="sec-sub">Partage une photo, une victoire ou une note. Crée un compte gratuit pour publier, aimer et commenter. Chaque publication est vérifiée et disparaît après 48h.</p>
   <form id="pForm" class="t-card" novalidate>
-    <div><label class="lbl" for="pName">Ton nom ou pseudo</label>
-      <input type="text" id="pName" maxlength="24" autocomplete="nickname" placeholder="Ex : HK_Sniper"></div>
+    <div id="pWho" class="who"></div>
     <div><label class="lbl" for="pText">Ta note</label>
       <textarea id="pText" maxlength="400" placeholder="Raconte ta victoire, pose une question, partage un conseil..."></textarea></div>
     <label class="photo-btn">📷 Ajouter une photo<input type="file" id="pFile" accept="image/*"></label>
@@ -605,10 +610,15 @@
       <div class="pay-options" id="adTabs" style="margin-bottom:14px;">
         <button type="button" class="pay sel" data-tab="posts">📰 Publications</button>
         <button type="button" class="pay" data-tab="edit">⚙️ Prix &amp; images</button>
+        <button type="button" class="pay" data-tab="members">👥 Membres</button>
       </div>
       <div id="adPosts">
         <div class="subhead" style="margin-top:0;">En attente (<span id="adCount">0</span>)</div>
         <div class="feed" id="adList"></div>
+      </div>
+      <div id="adMembers" style="display:none;">
+        <input type="text" id="mbSearch" placeholder="Chercher un pseudo..." style="margin-bottom:10px;">
+        <div class="feed" id="mbList" style="margin-top:0;"></div>
       </div>
       <div id="adEdit" style="display:none;">
         <p class="note" style="text-align:left;margin-bottom:12px;">Modifie, puis appuie sur Enregistrer. Les visiteurs voient les changements au prochain chargement du site.</p>
@@ -616,6 +626,31 @@
         <button class="btn btn-gold btn-block" type="button" id="edSave">💾 Enregistrer les changements</button>
       </div>
       <button class="btn btn-ghost btn-block" type="button" id="adLogout" style="margin-top:12px;">Se déconnecter</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="authOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Compte">
+    <div class="modal-head"><h3 id="auTitle">👤 Compte</h3><button class="x" type="button" data-close>✕</button></div>
+    <div id="auMsg" class="note" style="margin-bottom:10px;color:var(--gold);"></div>
+    <form id="auForm" novalidate>
+      <div class="pay-options">
+        <button type="button" class="pay sel" data-mode="in">Connexion</button>
+        <button type="button" class="pay" data-mode="up">Inscription</button>
+      </div>
+      <div><label class="lbl" for="auName">Pseudo</label>
+        <input type="text" id="auName" maxlength="20" autocomplete="username" placeholder="Ex : HK_Sniper">
+        <div class="hint">3 à 20 caractères : lettres, chiffres, point, tiret, underscore.</div></div>
+      <div><label class="lbl" for="auPass">Mot de passe</label>
+        <input type="password" id="auPass" autocomplete="current-password" placeholder="6 caractères minimum"></div>
+      <button class="btn btn-primary btn-block" type="submit" id="auGo">Se connecter</button>
+      <p class="note">Garde bien ton mot de passe : il ne peut pas être récupéré par e-mail.</p>
+    </form>
+    <div id="auMe" style="display:none;text-align:center;">
+      <div id="auWho" style="font-family:var(--f-head);font-size:26px;font-weight:700;"></div>
+      <p class="note" id="auBadge" style="margin:8px 0 14px;"></p>
+      <button class="btn btn-ghost btn-block" type="button" id="auOut">Se déconnecter</button>
     </div>
   </div>
 </div>
@@ -1172,6 +1207,98 @@ $('#orderForm').addEventListener('submit', e => {
   const feed = $('#feed');
   let token = '', imgData = '', lastCm = 0;
   const dev = (() => { try{ let d = localStorage.getItem('hkstore-dev'); if(!d){ d = Math.random().toString(36).slice(2, 12); localStorage.setItem('hkstore-dev', d); } return d; }catch(e){ return 'x' + Math.random().toString(36).slice(2, 10); } })();
+  /* ===== Comptes membres (pseudo + mot de passe) et badges ===== */
+  let me = null, utok = '', uexp = 0, rtok = '', BADGES = {}, mode = 'in';
+  const BADGE_INFO = {
+    verified:{ c:'#1D9BF0', label:'Compte vérifié' },
+    officiel:{ c:'#F2B84B', label:'Officiel Hacken Store' },
+    vip:{ c:'#9B6BFF', label:'Client VIP' },
+    champion:{ c:'#FF7A2F', label:'Champion de tournoi' }
+  };
+  const BADGE_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.4 1.8 3-.4 1.2 2.8 2.8 1.2-.4 3L22 12l-1.8 2.4.4 3-2.8 1.2-1.2 2.8-3-.4L12 22l-2.4-1.8-3 .4-1.2-2.8-2.8-1.2.4-3L2 12l1.8-2.4-.4-3 2.8-1.2 1.2-2.8 3 .4z" fill="currentColor"/><path d="M8 12.4l2.7 2.7 5.3-5.5" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  function badgeEl(uid){
+    const b = BADGES[uid]; if(!b || !BADGE_INFO[b]) return null;
+    const e = document.createElement('span'); e.className = 'bdg'; e.title = BADGE_INFO[b].label; e.style.color = BADGE_INFO[b].c; e.innerHTML = BADGE_SVG;
+    return e;
+  }
+  try{ const sv = JSON.parse(localStorage.getItem('hkstore-session') || 'null'); if(sv && sv.uid && sv.rt){ me = { uid: sv.uid, name: sv.name }; rtok = sv.rt; } }catch(e){}
+  function saveSession(){ try{ localStorage.setItem('hkstore-session', JSON.stringify({ uid: me.uid, name: me.name, rt: rtok })); }catch(e){} }
+  function logout(silent){
+    me = null; utok = ''; rtok = '';
+    try{ localStorage.removeItem('hkstore-session'); }catch(e){}
+    authUI();
+    if(!silent){ closeAll(); loadFeed(); toast('Déconnecté'); }
+  }
+  async function userToken(){
+    if(!me) return '';
+    if(utok && Date.now() < uexp - 60000) return utok;
+    try{
+      const r = await fetch('https://securetoken.googleapis.com/v1/token?key=' + ADMIN.apiKey, { method:'POST', headers:{ 'Content-Type':'application/x-www-form-urlencoded' }, body:'grant_type=refresh_token&refresh_token=' + encodeURIComponent(rtok) });
+      const d = await r.json(); if(!r.ok) throw 0;
+      utok = d.id_token; uexp = Date.now() + (+d.expires_in) * 1000; rtok = d.refresh_token || rtok; saveSession();
+      return utok;
+    }catch(e){ logout(true); return ''; }
+  }
+  const uurl = async path => DB + '/' + path + '.json?auth=' + await userToken();
+  function openAuth(msg){ $('#auMsg').textContent = msg || ''; authUI(); open('#authOverlay'); }
+  function authUI(){
+    $('#auForm').style.display = me ? 'none' : 'flex';
+    $('#auMe').style.display = me ? 'block' : 'none';
+    $('#auTitle').textContent = me ? '👤 Mon compte' : '👤 Compte';
+    if(me){
+      $('#auWho').textContent = me.name;
+      const b = BADGES[me.uid];
+      $('#auBadge').textContent = b && BADGE_INFO[b] ? 'Badge : ' + BADGE_INFO[b].label : 'Pas encore de badge. Les badges sont donnés par Hacken Store.';
+    }
+    const w = $('#pWho'); w.innerHTML = '';
+    if(me){
+      w.append('Publier en tant que ');
+      const b = document.createElement('b'); b.textContent = me.name; w.appendChild(b);
+      const bd = badgeEl(me.uid); if(bd) w.appendChild(bd);
+    }else{
+      const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'btn btn-ghost';
+      btn.textContent = '🔒 Se connecter pour publier'; btn.addEventListener('click', () => openAuth(''));
+      w.appendChild(btn);
+    }
+  }
+  $('#userBtn').addEventListener('click', () => openAuth(''));
+  $('#auOut').addEventListener('click', () => logout());
+  $$('#auForm [data-mode]').forEach(b => b.addEventListener('click', () => {
+    mode = b.dataset.mode;
+    $$('#auForm [data-mode]').forEach(x => x.classList.toggle('sel', x === b));
+    $('#auGo').textContent = mode === 'in' ? 'Se connecter' : 'Créer mon compte';
+    $('#auPass').autocomplete = mode === 'in' ? 'current-password' : 'new-password';
+  }));
+  const AUTH_ERR = { EMAIL_EXISTS:'Ce pseudo est déjà pris.', INVALID_LOGIN_CREDENTIALS:'Pseudo ou mot de passe incorrect.', INVALID_PASSWORD:'Pseudo ou mot de passe incorrect.', EMAIL_NOT_FOUND:'Pseudo ou mot de passe incorrect.', WEAK_PASSWORD:'Mot de passe trop court (6 caractères minimum).', TOO_MANY_ATTEMPTS_TRY_LATER:'Trop d\'essais, réessaie plus tard.' };
+  $('#auForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const name = $('#auName').value.trim(), pw = $('#auPass').value;
+    if(!ADMIN.apiKey) return toast('Clé API manquante dans le code.', true);
+    if(!/^[A-Za-z0-9._-]{3,20}$/.test(name)) return bad($('#auName'), 'Pseudo : 3 à 20 caractères (lettres, chiffres, . _ -).');
+    if(pw.length < 6) return bad($('#auPass'), 'Mot de passe : 6 caractères minimum.');
+    const btn = $('#auGo'); btn.disabled = true;
+    try{
+      const r = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:' + (mode === 'up' ? 'signUp' : 'signInWithPassword') + '?key=' + ADMIN.apiKey, {
+        method:'POST', headers:{ 'Content-Type':'application/json' },
+        body: JSON.stringify({ email: name.toLowerCase() + '@hackenstore.app', password: pw, returnSecureToken: true })
+      });
+      const d = await r.json();
+      if(!r.ok){ const k = ((d.error && d.error.message) || '').split(' ')[0]; throw new Error(AUTH_ERR[k] || 'Connexion impossible.'); }
+      utok = d.idToken; uexp = Date.now() + (+d.expiresIn) * 1000; rtok = d.refreshToken;
+      let pname = name;
+      if(mode === 'up'){
+        const w = await fetch(DB + '/users/' + d.localId + '.json?auth=' + utok, { method:'PUT', body: JSON.stringify({ name, t: Date.now() }) });
+        if(!w.ok) throw new Error('Compte créé, mais profil impossible (règles Firebase).');
+      }else{
+        try{ const pr = await (await fetch(DB + '/users/' + d.localId + '.json?auth=' + utok)).json(); if(pr && pr.name) pname = pr.name; }catch(x){}
+      }
+      me = { uid: d.localId, name: pname }; saveSession();
+      $('#auPass').value = ''; closeAll(); authUI(); loadFeed(); toast('👋 Bienvenue ' + pname);
+    }catch(err){ toast(err.message || 'Connexion impossible.', true); }
+    btn.disabled = false;
+  });
+  authUI();
+
   const url = (p, auth) => DB + '/' + p + '.json' + (auth && token ? '?auth=' + token : '');
   const okImg = s => typeof s === 'string' && s.indexOf('data:image/jpeg;base64,') === 0;
   const when = t => new Date(t).toLocaleDateString('fr-FR', { day:'numeric', month:'short' }) + ' · ' + new Date(t).toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
@@ -1203,7 +1330,7 @@ $('#orderForm').addEventListener('submit', e => {
     const d = document.createElement('article'); d.className = 'post';
     d.innerHTML = '<div class="po-head"><i></i><div><b></b><span></span></div></div>' + (okImg(p.img) ? '<img alt="Publication">' : '') + '<p></p><div class="post-act"></div>';
     $('i', d).textContent = (p.name || '?').charAt(0).toUpperCase();
-    $('.po-head b', d).textContent = p.name;
+    $('.po-head b', d).textContent = p.name; { const bd = badgeEl(p.uid); if(bd) $('.po-head b', d).appendChild(bd); }
     $('.po-head span', d).textContent = when(p.t) + (p.ta ? ' · ⏳ ' + Math.max(1, Math.ceil((p.ta + 172800000 - Date.now()) / 3600000)) + 'h' : '');
     if(okImg(p.img)) $('img', d).src = p.img;
     $('p', d).textContent = p.text || '';
@@ -1213,11 +1340,12 @@ $('#orderForm').addEventListener('submit', e => {
       mk('✅ Approuver', 'btn-primary', () => approve(id, p));
       mk('🗑 Refuser', 'btn-ghost', () => remove('pub_attente', id, loadPending));
     } else {
-      let liked = !!(p.likes && p.likes[dev]), nl = p.likes ? Object.keys(p.likes).length : 0;
+      let liked = !!(me && p.likes && p.likes[me.uid]), nl = p.likes ? Object.keys(p.likes).length : 0;
       const lb = mk('', 'btn-ghost', async () => {
+        if(!me) return openAuth('Connecte-toi pour aimer une publication.');
         liked = !liked; nl += liked ? 1 : -1; paint();
         try{
-          const r = await fetch(url('publications/' + id + '/likes/' + dev), liked ? { method:'PUT', body:'true' } : { method:'DELETE' });
+          const r = await fetch(await uurl('publications/' + id + '/likes/' + me.uid), liked ? { method:'PUT', body:'true' } : { method:'DELETE' });
           if(!r.ok) throw 0;
         }catch(e){ liked = !liked; nl += liked ? 1 : -1; paint(); toast('Action impossible.', true); }
       });
@@ -1229,7 +1357,7 @@ $('#orderForm').addEventListener('submit', e => {
       const list = document.createElement('div');
       const addCm = (cid, c) => {
         const e = document.createElement('div'); e.className = 'cm'; e.innerHTML = '<b></b> <span></span>';
-        $('b', e).textContent = c.name; $('span', e).textContent = c.text;
+        $('b', e).textContent = c.name; $('span', e).textContent = c.text; { const bd = badgeEl(c.uid); if(bd) $('b', e).after(bd); }
         if(token && cid){
           const x = document.createElement('button'); x.type = 'button'; x.className = 'x'; x.textContent = '🗑';
           x.addEventListener('click', async () => { try{ await api('DELETE', 'publications/' + id + '/comments/' + cid); e.remove(); }catch(err){ toast('Action impossible.', true); } });
@@ -1239,19 +1367,18 @@ $('#orderForm').addEventListener('submit', e => {
       };
       cmts.forEach(([cid, c]) => addCm(cid, c));
       const row = document.createElement('div'); row.className = 'cm-row';
-      row.innerHTML = '<input type="text" maxlength="24" placeholder="Ton nom"><input type="text" maxlength="200" placeholder="Écris un commentaire..."><button type="button" class="btn btn-primary">Envoyer</button>';
-      const [ni, ti, sb] = $$('input, button', row);
-      try{ ni.value = localStorage.getItem('hkstore-name') || ''; }catch(e){}
+      row.innerHTML = me ? '<input type="text" maxlength="200" placeholder="Écris un commentaire..."><button type="button" class="btn btn-primary">Envoyer</button>' : '<button type="button" class="btn btn-ghost">🔒 Se connecter pour commenter</button>';
+      const ti = $('input', row), sb = $('button', row);
       sb.addEventListener('click', async () => {
-        const name = ni.value.trim(), text = ti.value.trim();
-        if(name.length < 2 || !text) return toast('Entre ton nom et un commentaire.', true);
+        if(!me) return openAuth('Connecte-toi pour commenter.');
+        const text = ti.value.trim();
+        if(!text) return toast('Écris un commentaire.', true);
         if(Date.now() - lastCm < 15000) return toast('Attends quelques secondes.', true);
-        const c = { name, text, t: Date.now() };
+        const c = { name: me.name, uid: me.uid, text, t: Date.now() };
         try{
-          const r = await fetch(url('publications/' + id + '/comments'), { method:'POST', body: JSON.stringify(c) });
+          const r = await fetch(await uurl('publications/' + id + '/comments'), { method:'POST', body: JSON.stringify(c) });
           if(!r.ok) throw 0;
           lastCm = Date.now();
-          try{ localStorage.setItem('hkstore-name', name); }catch(e){}
           addCm('', c); cmts.push(['', c]); cb.textContent = '💬 ' + cmts.length; ti.value = '';
         }catch(err){ toast('Commentaire impossible.', true); }
       });
@@ -1290,6 +1417,8 @@ $('#orderForm').addEventListener('submit', e => {
     try{
       const r = await fetch(url('publications') + '?orderBy=%22ta%22&startAt=' + (Date.now() - 172800000) + '&limitToLast=15');
       if(!r.ok) throw 0;
+      try{ BADGES = (await (await fetch(url('badges'))).json()) || {}; }catch(e){}
+      authUI();
       const o = await r.json() || {};
       const list = Object.entries(o).filter(([k, v]) => v.ta && Date.now() - v.ta < 172800000).sort((a, b) => b[1].ta - a[1].ta);
       feed.innerHTML = '';
@@ -1308,16 +1437,16 @@ $('#orderForm').addEventListener('submit', e => {
 
   $('#pForm').addEventListener('submit', async e => {
     e.preventDefault();
-    const nEl = $('#pName'), tEl = $('#pText');
-    const name = nEl.value.trim(), text = tEl.value.trim();
+    const tEl = $('#pText');
+    const text = tEl.value.trim();
+    if(!me) return openAuth('Connecte-toi pour publier.');
     if(!DB) return toast('Communauté indisponible.', true);
-    if(name.length < 2) return bad(nEl, 'Entre ton nom ou pseudo.');
     if(text.length < 3 && !imgData) return bad(tEl, 'Écris une note ou ajoute une photo.');
     let last = 0; try{ last = +localStorage.getItem('hkstore-lastpost') || 0; }catch(x){}
     if(Date.now() - last < 6e5) return toast('Attends quelques minutes avant de republier.', true);
-    const post = { name, text, t: Date.now() }; if(imgData) post.img = imgData;
+    const post = { name: me.name, uid: me.uid, text, t: Date.now() }; if(imgData) post.img = imgData;
     try{
-      const r = await fetch(url('pub_attente'), { method:'POST', body: JSON.stringify(post) });
+      const r = await fetch(await uurl('pub_attente'), { method:'POST', body: JSON.stringify(post) });
       if(!r.ok) throw 0;
       try{ localStorage.setItem('hkstore-lastpost', String(Date.now())); }catch(x){}
       $('#pForm').reset(); imgData = ''; $('#pPrevBox').style.display = 'none';
@@ -1425,9 +1554,46 @@ $('#orderForm').addEventListener('submit', e => {
     $$('#adTabs button').forEach(x => x.classList.toggle('sel', x === b));
     $('#adPosts').style.display = b.dataset.tab === 'posts' ? 'block' : 'none';
     $('#adEdit').style.display = b.dataset.tab === 'edit' ? 'block' : 'none';
+    $('#adMembers').style.display = b.dataset.tab === 'members' ? 'block' : 'none';
     if(b.dataset.tab === 'edit' && !$('#edList').children.length) buildEditor();
+    if(b.dataset.tab === 'members') loadMembers();
   }));
   $('#edSave').addEventListener('click', saveCfg);
+
+  /* Admin : membres et badges */
+  let MB = [];
+  async function loadMembers(){
+    const box = $('#mbList'); box.innerHTML = '<div class="t-empty">Chargement...</div>';
+    try{
+      const [u, bg] = await Promise.all([api('GET', 'users'), api('GET', 'badges')]);
+      BADGES = bg || {};
+      MB = Object.entries(u || {}).map(([id, v]) => ({ id, name: v.name || '?', t: v.t || 0 })).sort((x, y) => y.t - x.t);
+      renderMembers();
+    }catch(e){ box.innerHTML = '<div class="t-empty">Erreur de lecture (règles ou connexion).</div>'; }
+  }
+  function renderMembers(){
+    const q = $('#mbSearch').value.trim().toLowerCase(), box = $('#mbList'); box.innerHTML = '';
+    const l = MB.filter(m => !q || m.name.toLowerCase().indexOf(q) > -1).slice(0, 60);
+    if(!l.length){ box.innerHTML = '<div class="t-empty">Aucun membre.</div>'; return; }
+    l.forEach(m => {
+      const r = document.createElement('div'); r.className = 'trow';
+      r.innerHTML = '<div class="tm"><b></b><span></span></div><select></select>';
+      $('b', r).textContent = m.name;
+      $('span', r).textContent = m.t ? 'Inscrit le ' + new Date(m.t).toLocaleDateString('fr-FR') : '';
+      const sel = $('select', r);
+      [['', 'Aucun badge'], ['verified', '✔ Vérifié (bleu)'], ['officiel', '✔ Officiel (or)'], ['vip', '✔ VIP (violet)'], ['champion', '✔ Champion (orange)']].forEach(([v, t]) => { const o = document.createElement('option'); o.value = v; o.textContent = t; sel.appendChild(o); });
+      sel.value = BADGES[m.id] || '';
+      sel.addEventListener('change', async () => {
+        try{
+          if(sel.value){ await api('PUT', 'badges/' + m.id, sel.value); BADGES[m.id] = sel.value; }
+          else{ await api('DELETE', 'badges/' + m.id); delete BADGES[m.id]; }
+          toast('Badge mis à jour ✅');
+        }catch(e){ toast('Action impossible (reconnecte-toi).', true); }
+      });
+      box.appendChild(r);
+    });
+  }
+  $('#mbSearch').addEventListener('input', renderMembers);
 
   loadFeed();
 })();
