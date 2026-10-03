@@ -227,6 +227,15 @@
   .ed-f{display:block;}
   .ed-f span{display:block;font-size:12px;color:var(--muted);margin-bottom:3px;}
   .ed-f input{padding:10px 12px;font-size:15px;}
+  .cmts{padding:0 14px 14px;}
+  .cm{font-size:13.5px;padding:7px 0;border-top:1px dashed var(--line);word-break:break-word;}
+  .cm b{color:var(--cyan);}
+  .cm .x{padding:1px 7px;margin-left:6px;font-size:11px;}
+  .cm-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+  .cm-row input{padding:10px 12px;font-size:15px;}
+  .cm-row input:first-child{flex:1 1 100%;}
+  .cm-row input:nth-child(2){flex:1 1 0;min-width:0;}
+  .cm-row .btn{padding:9px 14px;font-size:15px;}
   .badges{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
   .badge{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 8px;text-align:center;font-size:12.5px;color:var(--muted);}
   .badge .ic{font-size:24px;display:block;margin-bottom:6px;}
@@ -487,7 +496,7 @@
 
 <section id="communaute" class="rv">
   <h2 class="sec-title">📰 Communauté</h2>
-  <p class="sec-sub">Partage une photo, une victoire ou une note. Chaque publication est vérifiée avant d'apparaître.</p>
+  <p class="sec-sub">Partage une photo, une victoire ou une note. Chaque publication est vérifiée avant d'apparaître et disparaît après 48h.</p>
   <form id="pForm" class="t-card" novalidate>
     <div><label class="lbl" for="pName">Ton nom ou pseudo</label>
       <input type="text" id="pName" maxlength="24" autocomplete="nickname" placeholder="Ex : HK_Sniper"></div>
@@ -1161,7 +1170,8 @@ $('#orderForm').addEventListener('submit', e => {
 (function(){
   const DB = TOURNOI.api ? TOURNOI.api.replace(/\/$/, '') : '';
   const feed = $('#feed');
-  let token = '', imgData = '';
+  let token = '', imgData = '', lastCm = 0;
+  const dev = (() => { try{ let d = localStorage.getItem('hkstore-dev'); if(!d){ d = Math.random().toString(36).slice(2, 12); localStorage.setItem('hkstore-dev', d); } return d; }catch(e){ return 'x' + Math.random().toString(36).slice(2, 10); } })();
   const url = (p, auth) => DB + '/' + p + '.json' + (auth && token ? '?auth=' + token : '');
   const okImg = s => typeof s === 'string' && s.indexOf('data:image/jpeg;base64,') === 0;
   const when = t => new Date(t).toLocaleDateString('fr-FR', { day:'numeric', month:'short' }) + ' · ' + new Date(t).toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
@@ -1194,15 +1204,58 @@ $('#orderForm').addEventListener('submit', e => {
     d.innerHTML = '<div class="po-head"><i></i><div><b></b><span></span></div></div>' + (okImg(p.img) ? '<img alt="Publication">' : '') + '<p></p><div class="post-act"></div>';
     $('i', d).textContent = (p.name || '?').charAt(0).toUpperCase();
     $('.po-head b', d).textContent = p.name;
-    $('.po-head span', d).textContent = when(p.t);
+    $('.po-head span', d).textContent = when(p.t) + (p.ta ? ' · ⏳ ' + Math.max(1, Math.ceil((p.ta + 172800000 - Date.now()) / 3600000)) + 'h' : '');
     if(okImg(p.img)) $('img', d).src = p.img;
     $('p', d).textContent = p.text || '';
     const act = $('.post-act', d);
-    const mk = (txt, cls, fn) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn ' + cls; b.textContent = txt; b.addEventListener('click', fn); act.appendChild(b); };
+    const mk = (txt, cls, fn) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn ' + cls; b.textContent = txt; b.addEventListener('click', fn); act.appendChild(b); return b; };
     if(mode === 'pending'){
       mk('✅ Approuver', 'btn-primary', () => approve(id, p));
       mk('🗑 Refuser', 'btn-ghost', () => remove('pub_attente', id, loadPending));
     } else {
+      let liked = !!(p.likes && p.likes[dev]), nl = p.likes ? Object.keys(p.likes).length : 0;
+      const lb = mk('', 'btn-ghost', async () => {
+        liked = !liked; nl += liked ? 1 : -1; paint();
+        try{
+          const r = await fetch(url('publications/' + id + '/likes/' + dev), liked ? { method:'PUT', body:'true' } : { method:'DELETE' });
+          if(!r.ok) throw 0;
+        }catch(e){ liked = !liked; nl += liked ? 1 : -1; paint(); toast('Action impossible.', true); }
+      });
+      const paint = () => { lb.textContent = (liked ? '❤️ ' : '🤍 ') + nl; };
+      paint();
+      const cmts = p.comments ? Object.entries(p.comments).sort((a, b) => a[1].t - b[1].t) : [];
+      const cb = mk('💬 ' + cmts.length, 'btn-ghost', () => { box.style.display = box.style.display === 'none' ? 'block' : 'none'; });
+      const box = document.createElement('div'); box.className = 'cmts'; box.style.display = 'none';
+      const list = document.createElement('div');
+      const addCm = (cid, c) => {
+        const e = document.createElement('div'); e.className = 'cm'; e.innerHTML = '<b></b> <span></span>';
+        $('b', e).textContent = c.name; $('span', e).textContent = c.text;
+        if(token && cid){
+          const x = document.createElement('button'); x.type = 'button'; x.className = 'x'; x.textContent = '🗑';
+          x.addEventListener('click', async () => { try{ await api('DELETE', 'publications/' + id + '/comments/' + cid); e.remove(); }catch(err){ toast('Action impossible.', true); } });
+          e.appendChild(x);
+        }
+        list.appendChild(e);
+      };
+      cmts.forEach(([cid, c]) => addCm(cid, c));
+      const row = document.createElement('div'); row.className = 'cm-row';
+      row.innerHTML = '<input type="text" maxlength="24" placeholder="Ton nom"><input type="text" maxlength="200" placeholder="Écris un commentaire..."><button type="button" class="btn btn-primary">Envoyer</button>';
+      const [ni, ti, sb] = $$('input, button', row);
+      try{ ni.value = localStorage.getItem('hkstore-name') || ''; }catch(e){}
+      sb.addEventListener('click', async () => {
+        const name = ni.value.trim(), text = ti.value.trim();
+        if(name.length < 2 || !text) return toast('Entre ton nom et un commentaire.', true);
+        if(Date.now() - lastCm < 15000) return toast('Attends quelques secondes.', true);
+        const c = { name, text, t: Date.now() };
+        try{
+          const r = await fetch(url('publications/' + id + '/comments'), { method:'POST', body: JSON.stringify(c) });
+          if(!r.ok) throw 0;
+          lastCm = Date.now();
+          try{ localStorage.setItem('hkstore-name', name); }catch(e){}
+          addCm('', c); cmts.push(['', c]); cb.textContent = '💬 ' + cmts.length; ti.value = '';
+        }catch(err){ toast('Commentaire impossible.', true); }
+      });
+      box.append(list, row); d.appendChild(box);
       mk('📤 Partager', 'btn-ghost', () => window.open('https://wa.me/?text=' + encodeURIComponent('📰 ' + p.name + ' sur Hacken Store :\n' + (p.text || '') + '\n' + location.href.split('#')[0]), '_blank'));
       if(token) mk('🗑 Supprimer', 'btn-ghost', () => remove('publications', id, loadFeed));
     }
@@ -1215,7 +1268,7 @@ $('#orderForm').addEventListener('submit', e => {
     return r.json();
   }
   async function approve(id, p){
-    try{ await api('PUT', 'publications/' + id, p); await api('DELETE', 'pub_attente/' + id); toast('Publication approuvée ✅'); loadPending(); loadFeed(); }
+    try{ await api('PUT', 'publications/' + id, Object.assign({}, p, { ta: Date.now() })); await api('DELETE', 'pub_attente/' + id); toast('Publication approuvée ✅'); loadPending(); loadFeed(); }
     catch(e){ toast('Action impossible (reconnecte-toi).', true); }
   }
   async function remove(node, id, after){
@@ -1224,14 +1277,21 @@ $('#orderForm').addEventListener('submit', e => {
     catch(e){ toast('Action impossible (reconnecte-toi).', true); }
   }
 
+  async function purge(){
+    try{
+      const r = await fetch(url('publications', true) + '&orderBy=%22ta%22&endAt=' + (Date.now() - 172800000));
+      const o = r.ok ? await r.json() : null;
+      for(const id of Object.keys(o || {})) await api('DELETE', 'publications/' + id);
+    }catch(e){}
+  }
   async function loadFeed(){
     if(!DB){ feed.innerHTML = '<div class="t-empty">Communauté indisponible.</div>'; return; }
     feed.innerHTML = '<div class="t-empty">Chargement...</div>';
     try{
-      const r = await fetch(url('publications') + '?orderBy=%22t%22&limitToLast=20');
+      const r = await fetch(url('publications') + '?orderBy=%22ta%22&startAt=' + (Date.now() - 172800000) + '&limitToLast=15');
       if(!r.ok) throw 0;
       const o = await r.json() || {};
-      const list = Object.entries(o).sort((a, b) => b[1].t - a[1].t);
+      const list = Object.entries(o).filter(([k, v]) => v.ta && Date.now() - v.ta < 172800000).sort((a, b) => b[1].ta - a[1].ta);
       feed.innerHTML = '';
       if(!list.length){ feed.innerHTML = '<div class="t-empty">Aucune publication pour le moment. Sois le premier !</div>'; return; }
       list.forEach(([id, p]) => feed.appendChild(postEl(id, p, 'feed')));
@@ -1293,7 +1353,7 @@ $('#orderForm').addEventListener('submit', e => {
       });
       const d = await r.json(); if(!r.ok) throw 0;
       token = d.idToken; setTimeout(() => { token = ''; }, 3300000);
-      $('#adPass').value = ''; showAdmin(); loadFeed();
+      $('#adPass').value = ''; showAdmin(); purge().then(loadFeed);
     }catch(err){ toast('Connexion refusée.', true); }
   });
 
