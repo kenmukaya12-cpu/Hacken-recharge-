@@ -328,6 +328,50 @@
   .chat-row input{flex:1;min-width:0;}
   .icon-btn.dot{position:relative;}
   .icon-btn.dot::after{content:'';position:absolute;top:5px;right:5px;width:9px;height:9px;border-radius:50%;background:var(--red);}
+  /* ===== NOTIFS, AVATARS, MESSAGERIE ===== */
+  .cnt{display:none;position:absolute;top:-5px;right:-5px;min-width:17px;height:17px;padding:0 4px;border-radius:9px;background:var(--red);color:#fff;font:700 10px/17px var(--f-body);text-align:center;place-items:center;}
+  .img{background-size:cover!important;background-position:center!important;color:transparent!important;font-size:0!important;}
+  .avatar.edit{cursor:pointer;position:relative;}
+  .avatar.edit::after{content:'📷';position:absolute;right:-4px;bottom:-2px;font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:50%;width:24px;height:24px;display:grid;place-items:center;}
+  .hub-tabs{display:flex;gap:8px;margin-bottom:12px;}
+  .hub-tabs .pay{min-width:0;}
+  .hub-search{margin-bottom:10px;}
+  .hub-tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px;}
+  .hub-tools .btn{font-size:14px;padding:8px 12px;}
+  .conv{display:flex;align-items:center;gap:12px;padding:10px 8px;border-radius:14px;cursor:pointer;transition:background .15s;}
+  .conv:hover{background:var(--panel);}
+  .conv.unread{background:color-mix(in srgb,var(--cyan) 10%,transparent);}
+  .av-lg{flex:0 0 46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--gold));color:#04202A;display:grid;place-items:center;font-weight:900;font-family:var(--f-head);font-size:22px;}
+  .conv-mid{flex:1;min-width:0;}
+  .conv-mid b{font-family:var(--f-head);font-size:17px;display:block;}
+  .conv-mid span{display:block;font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .conv.unread .conv-mid span{color:var(--text);font-weight:600;}
+  .notif .conv-mid b{display:inline;}
+  .notif .conv-mid span{display:inline;white-space:normal;}
+  .conv-r{display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-size:11px;color:var(--muted);}
+  .dotb{width:10px;height:10px;border-radius:50%;background:var(--cyan);display:block;}
+  .chatm{display:flex;flex-direction:column;height:calc(100dvh - 32px);max-height:720px;padding:0;overflow:hidden;margin:0 auto;}
+  #chatBody{display:flex;flex-direction:column;flex:1;min-height:0;}
+  .chat-head{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--panel);}
+  .chat-ic{background:var(--panel2);border:1px solid var(--line);border-radius:10px;width:36px;height:36px;cursor:pointer;font-size:18px;flex-shrink:0;}
+  .chat-who{flex:1;min-width:0;}
+  .chat-who b{font-family:var(--f-head);font-size:18px;display:block;cursor:pointer;}
+  .chat-who small{color:var(--muted);font-size:12px;}
+  .chat-msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:3px;background:radial-gradient(circle at 20% 0,color-mix(in srgb,var(--cyan) 6%,transparent),transparent 60%);}
+  .day{align-self:center;font-size:11px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px 12px;margin:10px 0 6px;}
+  .bub{max-width:80%;align-self:flex-start;background:var(--panel2);border:1px solid var(--line);padding:8px 12px 6px;border-radius:16px 16px 16px 4px;font-size:14.5px;word-break:break-word;white-space:pre-wrap;margin-top:6px;}
+  .bub.cont{margin-top:0;}
+  .bub.me{align-self:flex-end;background:linear-gradient(135deg,var(--cyan),var(--cyan-d));color:var(--on-cyan);border-color:transparent;border-radius:16px 16px 4px 16px;}
+  .bub small{display:block;text-align:right;font-size:10px;opacity:.65;margin-top:2px;}
+  .bub em{display:block;text-align:right;font-style:normal;font-size:10px;opacity:.8;}
+  .bub .del{display:none;margin-top:6px;border:0;border-radius:8px;padding:4px 8px;font-size:12px;background:rgba(0,0,0,.25);color:#fff;cursor:pointer;}
+  .bub.act .del{display:inline-block;}
+  .chat-empty{margin:auto;color:var(--muted);font-size:14px;}
+  .emo{display:flex;gap:4px;padding:6px 10px 0;overflow-x:auto;}
+  .emo button{border:0;background:none;font-size:20px;cursor:pointer;padding:2px 4px;}
+  .chat-bar{display:flex;gap:8px;align-items:flex-end;padding:8px 10px calc(env(safe-area-inset-bottom,0px) + 10px);}
+  .chat-bar textarea{min-height:44px;max-height:110px;resize:none;border-radius:22px;padding:11px 16px;}
+  .chat-send{flex:0 0 44px;height:44px;border:0;border-radius:50%;cursor:pointer;background:linear-gradient(135deg,var(--cyan),var(--cyan-d));color:var(--on-cyan);font-size:18px;}
 </style>
 </head>
 <body>
@@ -356,6 +400,8 @@
     <div><span class="hk">HK</span><span class="full">HACKEN STORE</span></div>
   </a>
   <div class="nav-actions">
+    <button class="icon-btn" id="msgBtn" type="button" aria-label="Messages">💬<b class="cnt" id="msgCnt"></b></button>
+    <button class="icon-btn" id="bellBtn" type="button" aria-label="Notifications">🔔<b class="cnt" id="bellCnt"></b></button>
     <button class="icon-btn" id="userBtn" type="button" aria-label="Mon compte">👤</button>
     <button class="icon-btn" id="guideBtn" type="button" aria-label="Aide">?</button>
     <button class="icon-btn" id="settingsBtn" type="button" aria-label="Paramètres">⚙️</button>
@@ -686,6 +732,21 @@
     <div class="modal-head"><h3>👤 Profil</h3><button class="x" type="button" data-close>✕</button></div>
     <div id="profBody"></div>
   </div>
+</div>
+
+<div class="overlay" id="hubOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Messagerie">
+    <div class="modal-head"><h3>💬 Messagerie</h3><button class="x" type="button" data-close>✕</button></div>
+    <div class="hub-tabs" id="hubTabs">
+      <button type="button" class="pay sel" data-hub="msg">💬 Messages</button>
+      <button type="button" class="pay" data-hub="notif">🔔 Notifications</button>
+    </div>
+    <div id="hubBody"></div>
+  </div>
+</div>
+
+<div class="overlay" id="chatOverlay">
+  <div class="modal chatm" role="dialog" aria-modal="true" aria-label="Conversation"><div id="chatBody"></div></div>
 </div>
 
 <div class="overlay" id="wheelOverlay">
@@ -1367,7 +1428,7 @@ $('#orderForm').addEventListener('submit', e => {
   function postEl(id, p, mode){
     const d = document.createElement('article'); d.className = 'post';
     d.innerHTML = '<div class="po-head"><i></i><div><b></b><span></span></div></div>' + (okImg(p.img) ? '<img alt="Publication">' : '') + '<p></p><div class="post-act"></div>';
-    $('i', d).textContent = (p.name || '?').charAt(0).toUpperCase();
+    $('i', d).textContent = (p.name || '?').charAt(0).toUpperCase(); setAv($('i', d), p.uid);
     $('.po-head b', d).textContent = p.name; { const bd = badgeEl(p.uid); if(bd) $('.po-head b', d).appendChild(bd); }
     if(p.uid){ const hb = $('.po-head b', d); hb.style.cursor = 'pointer'; hb.addEventListener('click', () => openProfile(p.uid, p.name)); }
     $('.po-head span', d).textContent = when(p.t) + (p.ta ? ' · ⏳ ' + Math.max(1, Math.ceil((p.ta + 172800000 - Date.now()) / 3600000)) + 'h' : '');
@@ -1384,7 +1445,7 @@ $('#orderForm').addEventListener('submit', e => {
         if(!me) return openAuth('Connecte-toi pour aimer une publication.');
         liked = !liked; nl += liked ? 1 : -1; paint();
         try{
-          const r = await fetch(await uurl('publications/' + id + '/likes/' + me.uid), liked ? { method:'PUT', body:'true' } : { method:'DELETE' });
+          const r = await fetch(await uurl('publications/' + id + '/likes/' + me.uid), liked ? { method:'PUT', body:'true' } : { method:'DELETE' }); if(r.ok && liked && p.uid && p.uid !== me.uid) pushNotif(p.uid, 'like', 'a aimé ta publication', 'like_' + id + '_' + me.uid);
           if(!r.ok) throw 0;
         }catch(e){ liked = !liked; nl += liked ? 1 : -1; paint(); toast('Action impossible.', true); }
       });
@@ -1417,7 +1478,7 @@ $('#orderForm').addEventListener('submit', e => {
         try{
           const r = await fetch(await uurl('publications/' + id + '/comments'), { method:'POST', body: JSON.stringify(c) });
           if(!r.ok) throw 0;
-          lastCm = Date.now();
+          lastCm = Date.now(); if(p.uid && p.uid !== me.uid) pushNotif(p.uid, 'comment', 'a commenté : ' + text);
           addCm('', c); cmts.push(['', c]); cb.textContent = '💬 ' + cmts.length; ti.value = '';
         }catch(err){ toast('Commentaire impossible.', true); }
       });
@@ -1626,7 +1687,7 @@ $('#orderForm').addEventListener('submit', e => {
         try{
           if(sel.value){ await api('PUT', 'badges/' + m.id, sel.value); BADGES[m.id] = sel.value; }
           else{ await api('DELETE', 'badges/' + m.id); delete BADGES[m.id]; }
-          toast('Badge mis à jour ✅');
+          if(sel.value) api('POST', 'notifs/' + m.id, { type:'badge', from:'admin', name:'Hacken Store', text:'t\'a donné le badge ' + BADGE_INFO[sel.value].label, t: Date.now() }).catch(() => {}); toast('Badge mis à jour ✅');
         }catch(e){ toast('Action impossible (reconnecte-toi).', true); }
       });
       box.appendChild(r);
@@ -1650,7 +1711,7 @@ $('#orderForm').addEventListener('submit', e => {
   }
   const profBox = () => $('#profBody');
   function frow(uid, name){
-    const r = el('div', 'frow'); r.appendChild(el('span', 'av', (name || '?').charAt(0).toUpperCase()));
+    const r = el('div', 'frow'); { const a = el('span', 'av', (name || '?').charAt(0).toUpperCase()); setAv(a, uid); r.appendChild(a); }
     const n = el('span', 'fn'); n.appendChild(nameB(uid, name)); n.addEventListener('click', () => openProfile(uid, name));
     r.appendChild(n); return r;
   }
@@ -1659,13 +1720,13 @@ $('#orderForm').addEventListener('submit', e => {
       await fb('PUT', 'friends/' + me.uid + '/' + fid, { name: fname, t: Date.now() });
       await fb('PUT', 'friends/' + fid + '/' + me.uid, { name: me.name, t: Date.now() });
       await fb('DELETE', 'friend_req/' + me.uid + '/' + fid);
-      toast('Ami ajouté 🤝'); openProfile(fid, fname);
+      pushNotif(fid, 'accept', 'a accepté ta demande d\'ami'); toast('Ami ajouté 🤝'); openProfile(fid, fname);
     }catch(e){ toast('Action impossible.', true); }
   }
   async function openProfile(uid, name){
     clearInterval(chatT);
     if(!me) return openAuth('Connecte-toi pour voir les profils.');
-    open('#profOverlay');
+    closeAll(); ST.open = ''; open('#profOverlay');
     const box = profBox(); box.innerHTML = '<div class="t-empty">Chargement...</div>';
     const mine = uid === me.uid;
     try{
@@ -1679,14 +1740,14 @@ $('#orderForm').addEventListener('submit', e => {
       const user = u || {}, friends = fr || {}, nm = user.name || name || '?';
       box.innerHTML = '';
       const head = el('div', 'prof-head');
-      head.appendChild(el('div', 'avatar', nm.charAt(0).toUpperCase()));
+      { const av = el('div', 'avatar', nm.charAt(0).toUpperCase()); setAv(av, uid); if(mine){ av.classList.add('edit'); av.title = 'Changer ma photo'; av.addEventListener('click', pickAvatar); } head.appendChild(av); }
       head.appendChild(nameB(uid, nm));
       const bg = BADGES[uid];
       if(bg && BADGE_INFO[bg]){ const c = el('div', 'bchip', '✔ ' + BADGE_INFO[bg].label); c.style.color = BADGE_INFO[bg].c; head.appendChild(c); }
       const meta = (user.t ? 'Membre depuis le ' + new Date(user.t).toLocaleDateString('fr-FR') : '') + (mine ? ' · ' + Object.keys(friends).length + ' ami(s)' : '');
       if(meta) head.appendChild(el('div', 'prof-meta', meta));
       if(!mine && user.bio) head.appendChild(el('div', 'prof-bio', user.bio));
-      box.appendChild(head);
+      box.appendChild(head); presence(uid).then(t => { if(t) head.appendChild(el('div', 'prof-meta', t)); });
 
       if(mine){
         const s = el('div', 'prof-sec');
@@ -1759,49 +1820,244 @@ $('#orderForm').addEventListener('submit', e => {
       }
     }catch(e){ box.innerHTML = '<div class="t-empty">Profil indisponible (règles Firebase ou connexion).</div>'; }
   }
-  function openChat(fid, fname){
-    clearInterval(chatT);
-    const box = profBox(); box.innerHTML = '';
-    const id = cid(me.uid, fid);
-    const top = el('div', 'chat-top');
-    const back = el('button', 'btn btn-ghost', '‹'); back.type = 'button'; back.addEventListener('click', () => openProfile(me.uid, me.name));
-    top.append(back, nameB(fid, fname)); box.appendChild(top);
-    const list = el('div', 'chat-list'); box.appendChild(list);
-    const row = el('div', 'chat-row'); const inp = el('input'); inp.type = 'text'; inp.maxLength = 500; inp.placeholder = 'Écris un message...';
-    const sb = el('button', 'btn btn-primary', 'Envoyer'); sb.type = 'button'; row.append(inp, sb); box.appendChild(row);
-    let sig = '';
-    async function pull(){
-      if(!$('#profOverlay').classList.contains('open') || !document.body.contains(list)){ clearInterval(chatT); return; }
+  /* ===== Avatars, présence, notifications, messagerie ===== */
+  const TITLE0 = document.title;
+  const ST = { req:{}, inbox:{}, notifs:{}, tick:0, maxT:0, sg:'', open:'' };
+  const AV = {};
+  const avData = uid => AV[uid] || (AV[uid] = fetch(DB + '/avatars/' + uid + '.json').then(r => r.ok ? r.json() : null).then(d => okImg(d) ? d : '').catch(() => ''));
+  function setAv(node, uid){
+    if(!uid) return;
+    avData(uid).then(d => { if(d){ node.style.backgroundImage = 'url(' + d + ')'; node.classList.add('img'); } });
+  }
+  function squareImg(file, S){
+    return new Promise((res, rej) => {
+      const r = new FileReader(); r.onerror = rej;
+      r.onload = () => { const im = new Image(); im.onerror = rej; im.onload = () => {
+        const c = document.createElement('canvas'); c.width = c.height = S;
+        const m = Math.min(im.width, im.height);
+        c.getContext('2d').drawImage(im, (im.width - m) / 2, (im.height - m) / 2, m, m, 0, 0, S, S);
+        res(c.toDataURL('image/jpeg', .8));
+      }; im.src = r.result; };
+      r.readAsDataURL(file);
+    });
+  }
+  function pickAvatar(){
+    const f = document.createElement('input'); f.type = 'file'; f.accept = 'image/*';
+    f.addEventListener('change', async () => {
+      if(!f.files[0]) return;
       try{
-        const o = Object.values(await fb('GET', 'chats/' + id, undefined, '&orderBy=%22%24key%22&limitToLast=60') || {}).sort((a, b) => a.t - b.t);
-        const s = o.length + ':' + (o.length ? o[o.length - 1].t : 0);
+        const d = await squareImg(f.files[0], 160);
+        await fb('PUT', 'avatars/' + me.uid, d);
+        AV[me.uid] = Promise.resolve(d);
+        toast('Photo mise à jour ✅'); openProfile(me.uid, me.name); loadFeed();
+      }catch(e){ toast('Photo impossible.', true); }
+    });
+    f.click();
+  }
+  const hm = t => new Date(t).toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+  const dayLbl = t => { const d = new Date(t), n = new Date(), y = new Date(); y.setDate(n.getDate() - 1); return d.toDateString() === n.toDateString() ? 'Aujourd\'hui' : d.toDateString() === y.toDateString() ? 'Hier' : d.toLocaleDateString('fr-FR', { day:'numeric', month:'long' }); };
+  const short = (t, n) => (t || '').length > n ? t.slice(0, n) + '…' : (t || '');
+  const fmtAgo = t => { const m = Math.round((Date.now() - t) / 60000); return m < 1 ? 'à l\'instant' : m < 60 ? 'il y a ' + m + ' min' : m < 1440 ? 'il y a ' + Math.round(m / 60) + ' h' : 'il y a ' + Math.round(m / 1440) + ' j'; };
+  async function presence(uid){
+    try{ const t = await fb('GET', 'presence/' + uid); if(!t) return ''; return Date.now() - t < 120000 ? '🟢 En ligne' : 'Vu ' + fmtAgo(t); }catch(e){ return ''; }
+  }
+  async function pushNotif(to, type, text, id){
+    if(!me || !to || to === me.uid) return;
+    const n = { type, from: me.uid, name: me.name, text: short(text, 80), t: Date.now() };
+    try{ if(id) await fb('PUT', 'notifs/' + to + '/' + id, n); else await fb('POST', 'notifs/' + to, n); }catch(e){}
+  }
+  let SND = true; try{ SND = localStorage.getItem('hkstore-snd') !== '0'; }catch(e){}
+  function ping(){
+    if(navigator.vibrate) navigator.vibrate(60);
+    if(!SND) return;
+    try{ const a = new (window.AudioContext || window.webkitAudioContext)(), o = a.createOscillator(), g = a.createGain(); o.connect(g); g.connect(a.destination); o.frequency.value = 880; g.gain.setValueAtTime(.08, a.currentTime); g.gain.exponentialRampToValueAtTime(.001, a.currentTime + .25); o.start(); o.stop(a.currentTime + .25); }catch(e){}
+  }
+  function setCounts(m, b){
+    const set = (id, n) => { const e = $(id); e.textContent = n > 9 ? '9+' : n; e.style.display = n ? 'grid' : 'none'; };
+    set('#msgCnt', m); set('#bellCnt', b);
+    document.title = (m + b ? '(' + (m + b) + ') ' : '') + TITLE0;
+  }
+  async function poll(){
+    if(!me){ setCounts(0, 0); return; }
+    try{
+      const [rq, ib, nf] = await Promise.all([fb('GET', 'friend_req/' + me.uid), fb('GET', 'inbox/' + me.uid), fb('GET', 'notifs/' + me.uid)]);
+      ST.req = rq || {}; ST.inbox = ib || {}; ST.notifs = nf || {};
+      const inc = Object.entries(ST.inbox).filter(([k, x]) => x.from !== me.uid && !x.r);
+      const nn = Object.values(ST.notifs).filter(x => !x.r).length;
+      setCounts(inc.length, Object.keys(ST.req).length + nn);
+      const items = [
+        ...inc.filter(([k]) => k !== ST.open).map(([k, x]) => ({ t: x.t, txt: x.name + ' : ' + x.text })),
+        ...Object.values(ST.req).map(v => ({ t: v.t, txt: v.name + ' veut devenir ton ami' })),
+        ...Object.values(ST.notifs).filter(x => !x.r).map(x => ({ t: x.t, txt: x.name + ' ' + x.text }))
+      ].sort((a, b) => b.t - a.t);
+      if(items.length && items[0].t > ST.maxT){
+        if(ST.maxT){
+          ping(); toast('🔔 ' + items[0].txt);
+          if(document.hidden && window.Notification && Notification.permission === 'granted'){ try{ new Notification('Hacken Store', { body: items[0].txt }); }catch(e){} }
+        }
+        ST.maxT = items[0].t;
+      }
+      if(!ST.maxT) ST.maxT = Date.now();
+      const sg = JSON.stringify([ST.req, ST.inbox, ST.notifs]);
+      if(sg !== ST.sg){ ST.sg = sg; if($('#hubOverlay').classList.contains('open')) renderHub(); }
+      if(ST.tick++ % 6 === 0) fb('PUT', 'presence/' + me.uid, Date.now()).catch(() => {});
+    }catch(e){}
+  }
+  let hubTab = 'msg';
+  function openHub(tab){
+    if(!me) return openAuth('Connecte-toi pour voir tes messages.');
+    hubTab = tab; closeAll(); ST.open = ''; clearInterval(chatT); open('#hubOverlay'); renderHub(); poll();
+  }
+  $('#msgBtn').addEventListener('click', () => openHub('msg'));
+  $('#bellBtn').addEventListener('click', () => openHub('notif'));
+  $$('#hubTabs button').forEach(b => b.addEventListener('click', () => { hubTab = b.dataset.hub; renderHub(); }));
+  function renderHub(){
+    $$('#hubTabs button').forEach(b => b.classList.toggle('sel', b.dataset.hub === hubTab));
+    const box = $('#hubBody'); box.innerHTML = '';
+    if(hubTab === 'msg') renderConvs(box); else renderNotifs(box);
+  }
+  async function renderConvs(box){
+    const sr = el('input', 'hub-search'); sr.type = 'text'; sr.placeholder = '🔎 Chercher une conversation'; box.appendChild(sr);
+    const list = el('div'); box.appendChild(list);
+    let fr = {};
+    try{ fr = await fb('GET', 'friends/' + me.uid) || {}; }catch(e){}
+    const ib = ST.inbox || {};
+    const ids = Array.from(new Set([...Object.keys(fr), ...Object.keys(ib)]));
+    const rows = ids.map(k => ({ id: k, name: (fr[k] && fr[k].name) || (ib[k] && ib[k].name) || '?', e: ib[k] })).sort((a, b) => ((b.e && b.e.t) || 0) - ((a.e && a.e.t) || 0));
+    const draw = () => {
+      list.innerHTML = ''; const q = sr.value.trim().toLowerCase();
+      const l = rows.filter(r => !q || r.name.toLowerCase().includes(q));
+      if(!l.length){
+        list.appendChild(el('div', 't-empty', rows.length ? 'Aucun résultat.' : 'Pas encore de conversation. Ajoute des amis pour discuter.'));
+        if(!rows.length){ const b = el('button', 'btn btn-primary btn-block', '🔎 Trouver des amis'); b.type = 'button'; b.style.marginTop = '10px'; b.addEventListener('click', () => openProfile(me.uid, me.name)); list.appendChild(b); }
+        return;
+      }
+      l.forEach(r => {
+        const unread = r.e && r.e.from !== me.uid && !r.e.r;
+        const row = el('div', 'conv' + (unread ? ' unread' : ''));
+        const av = el('div', 'av-lg', r.name.charAt(0).toUpperCase()); setAv(av, r.id);
+        const mid = el('div', 'conv-mid'); mid.appendChild(nameB(r.id, r.name));
+        mid.appendChild(el('span', '', r.e ? (r.e.from === me.uid ? 'Toi : ' : '') + r.e.text : 'Dis bonjour 👋'));
+        const right = el('div', 'conv-r');
+        if(r.e) right.appendChild(el('small', '', dayLbl(r.e.t) === 'Aujourd\'hui' ? hm(r.e.t) : dayLbl(r.e.t)));
+        if(unread) right.appendChild(el('i', 'dotb'));
+        row.append(av, mid, right); row.addEventListener('click', () => openChat(r.id, r.name)); list.appendChild(row);
+      });
+    };
+    sr.addEventListener('input', draw); draw();
+  }
+  function renderNotifs(box){
+    const tools = el('div', 'hub-tools');
+    const mkb = (t, f) => { const b = el('button', 'btn btn-ghost', t); b.type = 'button'; b.addEventListener('click', f); tools.appendChild(b); };
+    mkb('✔ Tout lu', async () => {
+      await Promise.all(Object.entries(ST.notifs).filter(([k, n]) => !n.r).map(([k]) => fb('PUT', 'notifs/' + me.uid + '/' + k + '/r', true).catch(() => {})));
+      toast('Tout est lu'); poll();
+    });
+    mkb(SND ? '🔊 Son : oui' : '🔇 Son : non', () => { SND = !SND; try{ localStorage.setItem('hkstore-snd', SND ? '1' : '0'); }catch(e){} renderHub(); });
+    if('Notification' in window && Notification.permission === 'default') mkb('🔔 Alertes navigateur', () => Notification.requestPermission().then(renderHub));
+    box.appendChild(tools);
+    const rq = Object.entries(ST.req || {});
+    if(rq.length){
+      box.appendChild(el('div', 'subhead', '🤝 Demandes d\'amis'));
+      rq.forEach(([fid, v]) => {
+        const r = frow(fid, v.name);
+        const ok = el('button', 'btn btn-primary', '✔'); ok.type = 'button'; ok.addEventListener('click', () => acceptFr(fid, v.name));
+        const no = el('button', 'btn btn-ghost', '✕'); no.type = 'button';
+        no.addEventListener('click', async () => { try{ await fb('DELETE', 'friend_req/' + me.uid + '/' + fid); poll(); }catch(e){ toast('Action impossible.', true); } });
+        r.append(ok, no); box.appendChild(r);
+      });
+    }
+    box.appendChild(el('div', 'subhead', 'Activité'));
+    const nf = Object.entries(ST.notifs || {}).sort((a, b) => b[1].t - a[1].t).slice(0, 40);
+    if(!nf.length) box.appendChild(el('div', 't-empty', 'Aucune notification pour le moment.'));
+    const ic = { like:'❤️', comment:'💬', accept:'🤝', badge:'✔' };
+    nf.forEach(([k, n]) => {
+      const row = el('div', 'conv notif' + (n.r ? '' : ' unread'));
+      const av = el('div', 'av-lg', ic[n.type] || '🔔'); if(n.from && n.from !== 'admin') setAv(av, n.from);
+      const mid = el('div', 'conv-mid'); mid.append(el('b', '', n.name || ''), el('span', '', ' ' + n.text));
+      const right = el('div', 'conv-r'); right.appendChild(el('small', '', fmtAgo(n.t)));
+      row.append(av, mid, right);
+      row.addEventListener('click', () => {
+        if(!n.r) fb('PUT', 'notifs/' + me.uid + '/' + k + '/r', true).then(poll).catch(() => {});
+        if(n.type === 'badge') openProfile(me.uid, me.name); else if(n.from) openProfile(n.from, n.name);
+      });
+      box.appendChild(row);
+    });
+  }
+  function openChat(fid, fname){
+    closeAll(); clearInterval(chatT); ST.open = fid; open('#chatOverlay');
+    const id = cid(me.uid, fid), box = $('#chatBody'); box.innerHTML = '';
+    const stop = () => { ST.open = ''; clearInterval(chatT); };
+    const head = el('div', 'chat-head');
+    const back = el('button', 'chat-ic', '‹'); back.type = 'button'; back.addEventListener('click', () => { stop(); openHub('msg'); });
+    const av = el('div', 'av-lg', (fname || '?').charAt(0).toUpperCase()); setAv(av, fid);
+    const who = el('div', 'chat-who'), nb = nameB(fid, fname), st = el('small', '', '');
+    nb.addEventListener('click', () => { stop(); openProfile(fid, fname); }); who.append(nb, st);
+    const x = el('button', 'chat-ic', '✕'); x.type = 'button'; x.addEventListener('click', () => { stop(); closeAll(); });
+    head.append(back, av, who, x); box.appendChild(head);
+    presence(fid).then(t => { st.textContent = t; });
+    const list = el('div', 'chat-msgs'); box.appendChild(list);
+    const emo = el('div', 'emo');
+    ['😀', '😂', '🔥', '💎', '👍', '❤️', '😎', '🎮', '🏆'].forEach(e => { const b = el('button', '', e); b.type = 'button'; b.addEventListener('click', () => { inp.value += e; inp.focus(); }); emo.appendChild(b); });
+    const bar = el('div', 'chat-bar'), inp = el('textarea'), sb = el('button', 'chat-send', '➤');
+    inp.rows = 1; inp.maxLength = 500; inp.placeholder = 'Écris un message...'; sb.type = 'button';
+    inp.addEventListener('input', () => { inp.style.height = 'auto'; inp.style.height = Math.min(inp.scrollHeight, 110) + 'px'; });
+    bar.append(inp, sb); box.append(emo, bar);
+    let sig = '', peerRead = 0, first = true;
+    function render(msgs, near){
+      list.innerHTML = '';
+      if(!msgs.length){ list.appendChild(el('div', 'chat-empty', 'Aucun message. Dis bonjour 👋')); return; }
+      let lastDay = '', lastFrom = '', lastMine = null;
+      msgs.forEach(([k, m]) => {
+        const dl = dayLbl(m.t);
+        if(dl !== lastDay){ list.appendChild(el('div', 'day', dl)); lastDay = dl; lastFrom = ''; }
+        const mine = m.from === me.uid;
+        const b = el('div', 'bub' + (mine ? ' me' : '') + (lastFrom === m.from ? ' cont' : ''));
+        b.append(el('span', '', m.text), el('small', '', hm(m.t)));
+        if(mine){
+          b.addEventListener('click', () => b.classList.toggle('act'));
+          const del = el('button', 'del', '🗑 Supprimer'); del.type = 'button';
+          del.addEventListener('click', async e => { e.stopPropagation(); try{ await fb('DELETE', 'chats/' + id + '/' + k); sig = ''; pull(); }catch(x){ toast('Suppression impossible.', true); } });
+          b.appendChild(del); lastMine = [b, m.t];
+        }
+        list.appendChild(b); lastFrom = m.from;
+      });
+      if(lastMine) lastMine[0].appendChild(el('em', '', peerRead >= lastMine[1] ? '✓✓ Vu' : '✓ Envoyé'));
+      if(near) list.scrollTop = list.scrollHeight;
+    }
+    async function pull(){
+      if(!$('#chatOverlay').classList.contains('open') || !document.body.contains(list)){ stop(); return; }
+      try{
+        const [o, pe, mi] = await Promise.all([
+          fb('GET', 'chats/' + id, undefined, '&orderBy=%22%24key%22&limitToLast=80'),
+          fb('GET', 'inbox/' + fid + '/' + me.uid), fb('GET', 'inbox/' + me.uid + '/' + fid)
+        ]);
+        if(mi && mi.from !== me.uid && !mi.r){ fb('PUT', 'inbox/' + me.uid + '/' + fid + '/r', true).then(poll).catch(() => {}); }
+        peerRead = pe ? (pe.from !== me.uid ? Infinity : (pe.r ? pe.t : 0)) : 0;
+        const msgs = Object.entries(o || {}).sort((a, b) => a[1].t - b[1].t);
+        const s = msgs.map(([k]) => k).join() + peerRead;
         if(s === sig) return; sig = s;
-        list.innerHTML = '';
-        if(!o.length) list.appendChild(el('div', 't-empty', 'Commence la conversation 👋'));
-        o.forEach(m => {
-          const d = el('div', 'msg' + (m.from === me.uid ? ' me' : ''), m.text);
-          d.appendChild(el('small', '', new Date(m.t).toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' })));
-          list.appendChild(d);
-        });
-        list.scrollTop = list.scrollHeight;
+        const near = first || list.scrollHeight - list.scrollTop - list.clientHeight < 120;
+        first = false; render(msgs, near);
       }catch(e){}
     }
     async function send(){
       const text = inp.value.trim(); if(!text) return;
-      inp.value = '';
-      try{ await fb('POST', 'chats/' + id, { from: me.uid, name: me.name, text, t: Date.now() }); pull(); }
-      catch(e){ inp.value = text; toast('Message non envoyé.', true); }
+      inp.value = ''; inp.style.height = 'auto';
+      const t = Date.now();
+      try{
+        await fb('POST', 'chats/' + id, { from: me.uid, name: me.name, text, t });
+        const e = { name: me.name, text: short(text, 60), t, from: me.uid };
+        fb('PUT', 'inbox/' + fid + '/' + me.uid, e).catch(() => {});
+        fb('PUT', 'inbox/' + me.uid + '/' + fid, Object.assign({}, e, { name: fname })).catch(() => {});
+        pull();
+      }catch(err){ inp.value = text; toast('Message non envoyé.', true); }
     }
     sb.addEventListener('click', send);
-    inp.addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); send(); } });
-    pull(); chatT = setInterval(pull, 3500); inp.focus();
+    inp.addEventListener('keydown', e => { if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); send(); } });
+    pull(); chatT = setInterval(pull, 3000); setTimeout(() => inp.focus(), 150);
   }
-  async function notif(){
-    const b = $('#userBtn');
-    if(!me) return b.classList.remove('dot');
-    try{ const o = await fb('GET', 'friend_req/' + me.uid); b.classList.toggle('dot', !!o && Object.keys(o).length > 0); }catch(e){}
-  }
-  notif(); setInterval(notif, 60000);
+  poll(); setInterval(poll, 10000);
 
   loadFeed();
 })();
