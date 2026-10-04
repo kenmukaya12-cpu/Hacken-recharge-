@@ -372,6 +372,43 @@
   .chat-bar{display:flex;gap:8px;align-items:flex-end;padding:8px 10px calc(env(safe-area-inset-bottom,0px) + 10px);}
   .chat-bar textarea{min-height:44px;max-height:110px;resize:none;border-radius:22px;padding:11px 16px;}
   .chat-send{flex:0 0 44px;height:44px;border:0;border-radius:50%;cursor:pointer;background:linear-gradient(135deg,var(--cyan),var(--cyan-d));color:var(--on-cyan);font-size:18px;}
+  /* ===== BANNIÈRES DE NOTIFICATION ===== */
+  .nstack{position:fixed;top:calc(env(safe-area-inset-top,0px) + 62px);left:0;right:0;z-index:95;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none;padding:0 12px;}
+  .nb{pointer-events:auto;width:min(420px,100%);display:flex;align-items:center;gap:12px;background:var(--panel2);border:1px solid var(--cyan);border-left:5px solid var(--cyan);border-radius:16px;padding:10px 12px;box-shadow:0 14px 34px -10px rgba(0,0,0,.65);cursor:pointer;animation:nbin .4s cubic-bezier(.2,.9,.3,1.2);transition:opacity .3s,transform .3s;}
+  .nb.msg{border-color:var(--cyan);}
+  .nb.req{border-color:var(--gold);border-left-color:var(--gold);}
+  .nb.ntf{border-color:var(--green);border-left-color:var(--green);}
+  .nb.out{opacity:0;transform:translateY(-14px);}
+  .nb .t{flex:1;min-width:0;}
+  .nb .t b{display:block;font-family:var(--f-head);font-size:16px;line-height:1.2;}
+  .nb .t span{display:block;font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  @keyframes nbin{from{opacity:0;transform:translateY(-22px) scale(.94);}}
+  .icon-btn.ring{animation:ring .6s ease 3;}
+  @keyframes ring{25%{transform:rotate(-16deg);}75%{transform:rotate(16deg);}}
+  .cnt{animation:cntp 1.6s ease-in-out infinite;}
+  @keyframes cntp{50%{transform:scale(1.18);}}
+  /* ===== PARRAINAGE ===== */
+  .ref{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--gold);border-radius:16px;padding:14px;}
+  .ref-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:8px;}
+  .ref-top b{font-family:var(--f-logo);font-size:26px;color:var(--gold);}
+  .ref-top span{font-size:12px;color:var(--muted);text-align:right;}
+  .ref-bar{height:10px;border-radius:6px;background:var(--line);overflow:hidden;}
+  .ref-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--gold));border-radius:6px;transition:width .6s;}
+  .ref-code{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px;}
+  .ref-code code{font-family:var(--f-logo);font-size:15px;letter-spacing:.1em;padding:8px 12px;border:1px dashed var(--gold);border-radius:10px;flex:1;text-align:center;}
+  .ref-code .btn{padding:8px 12px;font-size:14px;}
+  .ref-list{font-size:12.5px;color:var(--muted);margin-top:10px;}
+  /* ===== ICÔNES SVG (remplacent les emoji) ===== */
+  .ico{width:1.15em;height:1.15em;vertical-align:-.22em;display:inline-block;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .ico.i-dia,.ico.i-flagcd,.ico.i-online{stroke:none;}
+  .ico.i-dia{width:1.2em;height:1.2em;filter:drop-shadow(0 0 4px var(--glow));}
+  .ico.i-flagcd{width:1.3em;}
+  .ico.i-heartf{color:var(--red);fill:var(--red);stroke:var(--red);}
+  .ico.i-online{color:var(--green);fill:var(--green);}
+  .ico.i-check2{width:1.3em;}
+  .badge .ic{color:var(--cyan);font-size:26px;}
+  .ico.i-star{fill:currentColor;stroke:none;}
+  .stars .ico{width:1em;height:1em;}
 </style>
 </head>
 <body>
@@ -390,6 +427,55 @@
     <path d="M20 10h24l14 14-26 34L6 24Z" fill="none" stroke="#F2B84B" stroke-width="2.4" stroke-linejoin="round"/>
     <path d="M50 3v9M45.5 7.5h9" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
   </symbol>
+</svg>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wheel" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><path d="M12 3v7M12 14v7M3 12h7M14 12h7M5.6 5.6l4.9 4.9M13.5 13.5l4.9 4.9M18.4 5.6l-4.9 4.9M10.5 13.5l-4.9 4.9"/></symbol>
+  <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0V4Z"/><path d="M8 6H5v1a3 3 0 0 0 3 3M16 6h3v1a3 3 0 0 1-3 3M12 13v4M8.5 20h7M10 17h4"/></symbol>
+  <symbol id="i-news" viewBox="0 0 24 24"><rect x="4" y="4" width="13" height="16" rx="2"/><path d="M17 8h3v10a2 2 0 0 1-2 2M7.5 8h6M7.5 12h6M7.5 16h4"/></symbol>
+  <symbol id="i-game" viewBox="0 0 24 24"><path d="M7 8h10a4 4 0 0 1 4 4l-1 5a2 2 0 0 1-3.4 1L15 16H9l-1.6 2A2 2 0 0 1 4 17l-1-5a4 4 0 0 1 4-4Z"/><path d="M8 11v3M6.5 12.5h3M15.5 11.5h.01M17.5 13.5h.01"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7M12 17h.01"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-check2" viewBox="0 0 24 24"><path d="M2.5 12.5l4.5 4.5L15 8M10 15l1.5 1.5L21 7.5"/></symbol>
+  <symbol id="i-checkc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></symbol>
+  <symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M12 11h2M8 15h2M12 15h2M16 11v6"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h3"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7z"/><path d="M15 3v4h4M10 12h6M10 16h6"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-friend" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0M18 8v6M15 11h6"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5Z"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 20a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9L7 7M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20a6 6 0 0 1 12 0M15 14.5a5 5 0 0 1 6 5"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3L10 14M21 3l-7 18-4-7-7-4z"/></symbol>
+  <symbol id="i-heartf" viewBox="0 0 24 24"><path d="M12 20s-8-5-8-10.5A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8 2.5C20 15 12 20 12 20z"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-8-5-8-10.5A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8 2.5C20 15 12 20 12 20z"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 15V4M8 8l4-4 4 4M5 13v7h14v-7"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></symbol>
+  <symbol id="i-hourglass" viewBox="0 0 24 24"><path d="M6 3h12M6 21h12M7 3c0 5 5 5 5 9s-5 4-5 9M17 3c0 5-5 5-5 9s5 4 5 9"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="12" rx="1"/><path d="M12 9v12M3 13h18M12 9C9 9 7 7 8.5 5.5S12 6 12 9c0-3 2-4.5 3.5-3S15 9 12 9z"/></symbol>
+  <symbol id="i-medal" viewBox="0 0 24 24"><circle cx="12" cy="15" r="5"/><path d="M8.5 11L6 3h4l2 4 2-4h4l-2.5 8"/></symbol>
+  <symbol id="i-save" viewBox="0 0 24 24"><path d="M5 3h12l3 3v15H5z"/><path d="M8 3v6h8V3M8 21v-7h8v7"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l6 6"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="M4 18l5-5 4 4 3-3 5 5"/></symbol>
+  <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3 7h18v3a2 2 0 0 0 0 4v3H3v-3a2 2 0 0 0 0-4z"/><path d="M14 7v10" stroke-dasharray="2 2"/></symbol>
+  <symbol id="i-vol" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4zM16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></symbol>
+  <symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4zM17 9l5 6M22 9l-5 6"/></symbol>
+  <symbol id="i-online" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-party" viewBox="0 0 24 24"><path d="M4 20l5-14 9 9z"/><path d="M14 4v2M19 8h2M17 3l1 1M20 13l1 1"/></symbol>
+  <symbol id="i-wave" viewBox="0 0 24 24"><path d="M7 12V6a1.5 1.5 0 0 1 3 0v4M10 10V4.5a1.5 1.5 0 0 1 3 0V10M13 10V5.5a1.5 1.5 0 0 1 3 0V12M16 9a1.5 1.5 0 0 1 3 0v4c0 4-3 7-7 7s-6-2-7-5l-1-3a1.5 1.5 0 0 1 3-1l1 2"/></symbol>
+  <symbol id="i-fire" viewBox="0 0 24 24"><path d="M12 21c-4 0-6-2.6-6-5.5 0-3 2.5-4.5 3-8 2 1 3 3 3 4 1-1 1.5-2.5 1-4.5 3 2 5 5 5 8.5 0 3-2 5.5-6 5.5z"/></symbol>
+  <symbol id="i-clip" viewBox="0 0 24 24"><rect x="6" y="5" width="12" height="16" rx="2"/><path d="M9 5V3h6v2M9 11h6M9 15h4"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 17l-5.6 3 1.3-6.2L3 9.5l6.3-.7z"/></symbol>
+  <symbol id="i-staro" viewBox="0 0 24 24"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 17l-5.6 3 1.3-6.2L3 9.5l6.3-.7z"/></symbol>
+  <symbol id="i-flagcd" viewBox="0 0 24 24"><clipPath id="fcd"><rect x="1" y="4" width="22" height="16" rx="2.5"/></clipPath><g clip-path="url(#fcd)"><rect x="1" y="4" width="22" height="16" fill="#007FFF"/><path d="M0 20L24 4" stroke="#F7D618" stroke-width="6" fill="none"/><path d="M0 20L24 4" stroke="#CE1021" stroke-width="3.6" fill="none"/><path d="M6.5 6.2l.8 2.2 2.3.1-1.8 1.4.6 2.3-1.9-1.3-1.9 1.3.6-2.3-1.8-1.4 2.3-.1z" fill="#F7D618"/></g></symbol>
 </svg>
 
 <canvas id="fx" aria-hidden="true"></canvas>
@@ -633,6 +719,7 @@
   <button class="btn btn-primary" type="button" id="barBtn">Commander</button>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="nstack" id="nstack" aria-live="assertive"></div>
 
 <div class="overlay" id="guideOverlay">
   <div class="modal" role="dialog" aria-modal="true" aria-label="Comment commander">
@@ -716,6 +803,9 @@
         <div class="hint">3 à 20 caractères : lettres, chiffres, point, tiret, underscore.</div></div>
       <div><label class="lbl" for="auPass">Mot de passe</label>
         <input type="password" id="auPass" autocomplete="current-password" placeholder="6 caractères minimum"></div>
+      <div id="auRefBox" style="display:none;"><label class="lbl" for="auRef">Code parrain (facultatif)</label>
+        <input type="text" id="auRef" maxlength="12" autocomplete="off" placeholder="Ex : kCF9zuZF">
+        <div class="hint">Si un ami t'a invité, entre son code : il gagne 2 points.</div></div>
       <button class="btn btn-primary btn-block" type="submit" id="auGo">Se connecter</button>
       <p class="note">Garde bien ton mot de passe : il ne peut pas être récupéré par e-mail.</p>
     </form>
@@ -1366,7 +1456,7 @@ $('#orderForm').addEventListener('submit', e => {
     mode = b.dataset.mode;
     $$('#auForm [data-mode]').forEach(x => x.classList.toggle('sel', x === b));
     $('#auGo').textContent = mode === 'in' ? 'Se connecter' : 'Créer mon compte';
-    $('#auPass').autocomplete = mode === 'in' ? 'current-password' : 'new-password';
+    $('#auPass').autocomplete = mode === 'in' ? 'current-password' : 'new-password'; $('#auRefBox').style.display = mode === 'up' ? 'block' : 'none';
   }));
   const AUTH_ERR = { EMAIL_EXISTS:'Ce pseudo est déjà pris.', INVALID_LOGIN_CREDENTIALS:'Pseudo ou mot de passe incorrect.', INVALID_PASSWORD:'Pseudo ou mot de passe incorrect.', EMAIL_NOT_FOUND:'Pseudo ou mot de passe incorrect.', WEAK_PASSWORD:'Mot de passe trop court (6 caractères minimum).', TOO_MANY_ATTEMPTS_TRY_LATER:'Trop d\'essais, réessaie plus tard.' };
   $('#auForm').addEventListener('submit', async e => {
@@ -1391,7 +1481,7 @@ $('#orderForm').addEventListener('submit', e => {
       }else{
         try{ const pr = await (await fetch(DB + '/users/' + d.localId + '.json?auth=' + utok)).json(); if(pr && pr.name) pname = pr.name; }catch(x){}
       }
-      me = { uid: d.localId, name: pname }; saveSession();
+      me = { uid: d.localId, name: pname }; saveSession(); if(mode === 'up'){ const rc = ($('#auRef').value || '').trim(); if(rc) await useRef(rc); }
       $('#auPass').value = ''; closeAll(); authUI(); loadFeed(); toast('👋 Bienvenue ' + pname);
     }catch(err){ toast(err.message || 'Connexion impossible.', true); }
     btn.disabled = false;
@@ -1661,11 +1751,11 @@ $('#orderForm').addEventListener('submit', e => {
   $('#edSave').addEventListener('click', saveCfg);
 
   /* Admin : membres et badges */
-  let MB = [];
+  let MB = [], RF = {};
   async function loadMembers(){
     const box = $('#mbList'); box.innerHTML = '<div class="t-empty">Chargement...</div>';
     try{
-      const [u, bg] = await Promise.all([api('GET', 'users'), api('GET', 'badges')]);
+      const [u, bg, rf] = await Promise.all([api('GET', 'users'), api('GET', 'badges'), api('GET', 'referrals').catch(() => ({}))]); RF = rf || {};
       BADGES = bg || {};
       MB = Object.entries(u || {}).map(([id, v]) => ({ id, name: v.name || '?', t: v.t || 0 })).sort((x, y) => y.t - x.t);
       renderMembers();
@@ -1679,7 +1769,7 @@ $('#orderForm').addEventListener('submit', e => {
       const r = document.createElement('div'); r.className = 'trow';
       r.innerHTML = '<div class="tm"><b></b><span></span></div><select></select>';
       $('b', r).textContent = m.name; { const bd = badgeEl(m.id); if(bd) $('b', r).appendChild(bd); }
-      $('span', r).textContent = m.t ? 'Inscrit le ' + new Date(m.t).toLocaleDateString('fr-FR') : '';
+      $('span', r).textContent = (m.t ? 'Inscrit le ' + new Date(m.t).toLocaleDateString('fr-FR') : '') + (RF[m.id] ? ' · 🎁 ' + Object.keys(RF[m.id]).length * 2 + ' pts' : '');
       const sel = $('select', r);
       [['', 'Aucun badge'], ['verified', '✔ Vérifié (bleu)'], ['officiel', '✔ Officiel (or)'], ['vip', '✔ VIP (violet)'], ['champion', '✔ Champion (orange)']].forEach(([v, t]) => { const o = document.createElement('option'); o.value = v; o.textContent = t; sel.appendChild(o); });
       sel.value = BADGES[m.id] || '';
@@ -1731,11 +1821,12 @@ $('#orderForm').addEventListener('submit', e => {
     const mine = uid === me.uid;
     try{
       await ensureBadges();
-      const [u, fr, rq, sent, got] = await Promise.all([
+      const [u, fr, rq, sent, got, refs, myRef] = await Promise.all([
         fb('GET', 'users/' + uid), fb('GET', 'friends/' + me.uid),
         mine ? fb('GET', 'friend_req/' + me.uid) : null,
         mine ? null : fb('GET', 'friend_req/' + uid + '/' + me.uid),
-        mine ? null : fb('GET', 'friend_req/' + me.uid + '/' + uid)
+        mine ? null : fb('GET', 'friend_req/' + me.uid + '/' + uid),
+        fb('GET', 'referrals/' + uid).catch(() => null), mine ? fb('GET', 'referred/' + me.uid).catch(() => null) : null
       ]);
       const user = u || {}, friends = fr || {}, nm = user.name || name || '?';
       box.innerHTML = '';
@@ -1745,7 +1836,7 @@ $('#orderForm').addEventListener('submit', e => {
       const bg = BADGES[uid];
       if(bg && BADGE_INFO[bg]){ const c = el('div', 'bchip', '✔ ' + BADGE_INFO[bg].label); c.style.color = BADGE_INFO[bg].c; head.appendChild(c); }
       const meta = (user.t ? 'Membre depuis le ' + new Date(user.t).toLocaleDateString('fr-FR') : '') + (mine ? ' · ' + Object.keys(friends).length + ' ami(s)' : '');
-      if(meta) head.appendChild(el('div', 'prof-meta', meta));
+      if(meta) head.appendChild(el('div', 'prof-meta', meta)); if(!mine && refs && Object.keys(refs).length) head.appendChild(el('div', 'prof-meta', '🎁 ' + Object.keys(refs).length * 2 + ' points de parrainage'));
       if(!mine && user.bio) head.appendChild(el('div', 'prof-bio', user.bio));
       box.appendChild(head); presence(uid).then(t => { if(t) head.appendChild(el('div', 'prof-meta', t)); });
 
@@ -1754,7 +1845,7 @@ $('#orderForm').addEventListener('submit', e => {
         const ta = el('textarea'); ta.maxLength = 160; ta.placeholder = 'Ta bio (160 caractères max)'; ta.value = user.bio || '';
         const sv = el('button', 'btn btn-ghost btn-block', '💾 Enregistrer la bio'); sv.type = 'button'; sv.style.marginTop = '8px';
         sv.addEventListener('click', async () => { try{ await fb('PUT', 'users/' + me.uid + '/bio', ta.value.trim()); toast('Bio enregistrée ✅'); }catch(e){ toast('Action impossible.', true); } });
-        s.append(ta, sv); box.appendChild(s);
+        s.append(ta, sv); box.appendChild(s); renderRef(box, refs || {}, myRef);
 
         const rs = Object.entries(rq || {});
         if(rs.length){
@@ -1820,9 +1911,54 @@ $('#orderForm').addEventListener('submit', e => {
       }
     }catch(e){ box.innerHTML = '<div class="t-empty">Profil indisponible (règles Firebase ou connexion).</div>'; }
   }
+  /* ===== Parrainage ===== */
+  const GOAL = 100;
+  const refCode = () => me.uid.slice(0, 8);
+  async function useRef(code){
+    code = (code || '').trim();
+    if(code.length < 8){ toast('Code invalide (8 caractères).', true); return false; }
+    try{
+      const r = await fetch(await uurl('users') + '&orderBy=%22%24key%22&startAt=' + encodeURIComponent('"' + code + '"') + '&endAt=' + encodeURIComponent('"' + code + '\uf8ff"') + '&limitToFirst=1');
+      if(!r.ok) throw 0;
+      const o = Object.entries(await r.json() || {})[0];
+      if(!o || o[0] === me.uid){ toast('Code parrain introuvable.', true); return false; }
+      await fb('PUT', 'referred/' + me.uid, o[0]);
+      await fb('PUT', 'referrals/' + o[0] + '/' + me.uid, { name: me.name, t: Date.now() });
+      pushNotif(o[0], 'ref', 'a utilisé ton code parrain : +2 points 🎁', 'ref_' + me.uid);
+      try{ localStorage.removeItem('hkstore-ref'); }catch(e){}
+      toast('Parrain validé ✅'); return true;
+    }catch(e){ toast('Code refusé (déjà parrainé ou invalide).', true); return false; }
+  }
+  function renderRef(box, refs, myRef){
+    const list = Object.values(refs || {}).sort((a, b) => b.t - a.t), pts = list.length * 2;
+    const s = el('div', 'prof-sec'); s.appendChild(el('div', 'subhead', '🎁 Parrainage'));
+    const c = el('div', 'ref'); s.appendChild(c);
+    const top = el('div', 'ref-top'); top.append(el('b', '', pts + ' pts'), el('span', '', list.length + ' filleul(s) · 2 pts par ami invité'));
+    const bar = el('div', 'ref-bar'); const fill = el('i'); fill.style.width = Math.min(100, pts / GOAL * 100) + '%'; bar.appendChild(fill);
+    c.append(top, bar, el('div', 'prof-meta', pts >= GOAL ? '🎉 Objectif atteint : contacte-nous pour ton badge !' : 'Encore ' + (GOAL - pts) + ' pts pour pouvoir demander un badge'));
+    const link = location.href.split('#')[0].split('?')[0] + '?ref=' + refCode();
+    const row = el('div', 'ref-code'); row.appendChild(el('code', '', refCode()));
+    const cp = el('button', 'btn btn-ghost', '📋 Lien'); cp.type = 'button'; cp.addEventListener('click', () => copyText(link, 'Lien de parrainage copié'));
+    const sh = el('button', 'btn btn-wa', 'Partager'); sh.type = 'button';
+    sh.addEventListener('click', () => window.open('https://wa.me/?text=' + encodeURIComponent('Rejoins Hacken Store 💎 recharge Free Fire en RDC. Inscris-toi avec mon code ' + refCode() + ' : ' + link), '_blank'));
+    row.append(cp, sh); c.appendChild(row);
+    if(pts >= GOAL){
+      const g = el('button', 'btn btn-gold btn-block', '🏅 Demander mon badge sur WhatsApp'); g.type = 'button'; g.style.marginTop = '12px';
+      g.addEventListener('click', () => window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent('Bonjour Hacken Store, je suis ' + me.name + ' (code ' + refCode() + '). J\'ai ' + pts + ' points de parrainage, je demande mon badge.'), '_blank'));
+      c.appendChild(g);
+    }
+    if(list.length) c.appendChild(el('div', 'ref-list', 'Filleuls : ' + list.slice(0, 12).map(x => x.name).join(', ') + (list.length > 12 ? '…' : '')));
+    if(!myRef){
+      const r2 = el('div', 'chat-row'); const qi = el('input'); qi.type = 'text'; qi.maxLength = 12; qi.placeholder = 'Tu as un code parrain ?';
+      const qb = el('button', 'btn btn-ghost', 'Valider'); qb.type = 'button';
+      qb.addEventListener('click', async () => { if(await useRef(qi.value)) openProfile(me.uid, me.name); });
+      r2.append(qi, qb); c.appendChild(r2);
+    } else c.appendChild(el('div', 'prof-meta', '✔ Tu as été parrainé'));
+    box.appendChild(s);
+  }
   /* ===== Avatars, présence, notifications, messagerie ===== */
   const TITLE0 = document.title;
-  const ST = { req:{}, inbox:{}, notifs:{}, tick:0, maxT:0, sg:'', open:'' };
+  const ST = { req:{}, inbox:{}, notifs:{}, tick:0, sg:'', open:'', uid:'', init:false, seen:new Set() };
   const AV = {};
   const avData = uid => AV[uid] || (AV[uid] = fetch(DB + '/avatars/' + uid + '.json').then(r => r.ok ? r.json() : null).then(d => okImg(d) ? d : '').catch(() => ''));
   function setAv(node, uid){
@@ -1867,37 +2003,69 @@ $('#orderForm').addEventListener('submit', e => {
     try{ if(id) await fb('PUT', 'notifs/' + to + '/' + id, n); else await fb('POST', 'notifs/' + to, n); }catch(e){}
   }
   let SND = true; try{ SND = localStorage.getItem('hkstore-snd') !== '0'; }catch(e){}
+  let AC = null;
+  addEventListener('pointerdown', () => { try{ AC = AC || new (window.AudioContext || window.webkitAudioContext)(); AC.resume(); }catch(e){} }, { once:true });
   function ping(){
-    if(navigator.vibrate) navigator.vibrate(60);
-    if(!SND) return;
-    try{ const a = new (window.AudioContext || window.webkitAudioContext)(), o = a.createOscillator(), g = a.createGain(); o.connect(g); g.connect(a.destination); o.frequency.value = 880; g.gain.setValueAtTime(.08, a.currentTime); g.gain.exponentialRampToValueAtTime(.001, a.currentTime + .25); o.start(); o.stop(a.currentTime + .25); }catch(e){}
+    if(navigator.vibrate) navigator.vibrate([80, 40, 80]);
+    if(!SND || !AC) return;
+    try{
+      [[880, 0], [1320, .13]].forEach(([f, d]) => {
+        const o = AC.createOscillator(), g = AC.createGain(); o.connect(g); g.connect(AC.destination); o.frequency.value = f;
+        const t0 = AC.currentTime + d;
+        g.gain.setValueAtTime(.001, t0); g.gain.exponentialRampToValueAtTime(.12, t0 + .02); g.gain.exponentialRampToValueAtTime(.001, t0 + .22);
+        o.start(t0); o.stop(t0 + .25);
+      });
+    }catch(e){}
+  }
+  function ring(){ ['#msgBtn', '#bellBtn'].forEach(id => { const b = $(id); b.classList.remove('ring'); void b.offsetWidth; b.classList.add('ring'); }); }
+  function banner(o){
+    const st = $('#nstack'); while(st.children.length >= 3) st.firstChild.remove();
+    const b = el('div', 'nb ' + (o.kind || 'msg'));
+    const av = el('div', 'av-lg', o.icon || '🔔'); if(o.uid) setAv(av, o.uid);
+    const t = el('div', 't'); t.append(el('b', '', o.title), el('span', '', o.text));
+    const x = el('button', 'chat-ic', '✕'); x.type = 'button';
+    const kill = () => { b.classList.add('out'); setTimeout(() => b.remove(), 300); };
+    x.addEventListener('click', e => { e.stopPropagation(); kill(); });
+    b.addEventListener('click', () => { kill(); if(o.onClick) o.onClick(); });
+    b.append(av, t, x); st.appendChild(b); setTimeout(kill, o.ms || 7000);
+  }
+  let flashT = 0;
+  function flashTitle(txt){
+    clearInterval(flashT); if(!document.hidden) return;
+    let on = true;
+    flashT = setInterval(() => { if(!document.hidden){ clearInterval(flashT); return; } document.title = on ? txt : TITLE0; on = !on; }, 1000);
   }
   function setCounts(m, b){
     const set = (id, n) => { const e = $(id); e.textContent = n > 9 ? '9+' : n; e.style.display = n ? 'grid' : 'none'; };
     set('#msgCnt', m); set('#bellCnt', b);
     document.title = (m + b ? '(' + (m + b) + ') ' : '') + TITLE0;
   }
+  const ICONS = { like:'❤️', comment:'💬', accept:'🤝', badge:'✔', ref:'🎁' };
   async function poll(){
     if(!me){ setCounts(0, 0); return; }
+    if(ST.uid !== me.uid){ ST.uid = me.uid; ST.init = false; ST.seen = new Set(); }
     try{
       const [rq, ib, nf] = await Promise.all([fb('GET', 'friend_req/' + me.uid), fb('GET', 'inbox/' + me.uid), fb('GET', 'notifs/' + me.uid)]);
       ST.req = rq || {}; ST.inbox = ib || {}; ST.notifs = nf || {};
       const inc = Object.entries(ST.inbox).filter(([k, x]) => x.from !== me.uid && !x.r);
       const nn = Object.values(ST.notifs).filter(x => !x.r).length;
       setCounts(inc.length, Object.keys(ST.req).length + nn);
-      const items = [
-        ...inc.filter(([k]) => k !== ST.open).map(([k, x]) => ({ t: x.t, txt: x.name + ' : ' + x.text })),
-        ...Object.values(ST.req).map(v => ({ t: v.t, txt: v.name + ' veut devenir ton ami' })),
-        ...Object.values(ST.notifs).filter(x => !x.r).map(x => ({ t: x.t, txt: x.name + ' ' + x.text }))
-      ].sort((a, b) => b.t - a.t);
-      if(items.length && items[0].t > ST.maxT){
-        if(ST.maxT){
-          ping(); toast('🔔 ' + items[0].txt);
-          if(document.hidden && window.Notification && Notification.permission === 'granted'){ try{ new Notification('Hacken Store', { body: items[0].txt }); }catch(e){} }
-        }
-        ST.maxT = items[0].t;
+      const items = [];
+      inc.forEach(([k, x]) => { if(k !== ST.open) items.push({ key:'m:' + k + ':' + x.t, kind:'msg', icon:'💬', uid:k, title:'💬 ' + x.name, text:x.text, onClick:() => openChat(k, x.name) }); });
+      Object.entries(ST.req).forEach(([k, v]) => items.push({ key:'r:' + k, kind:'req', icon:'🤝', uid:k, title:'🤝 ' + v.name, text:'veut devenir ton ami', onClick:() => openHub('notif') }));
+      Object.entries(ST.notifs).forEach(([k, x]) => { if(!x.r) items.push({ key:'n:' + k, kind:'ntf', icon:ICONS[x.type] || '🔔', uid:x.from !== 'admin' ? x.from : '', title:x.name, text:x.text, onClick:() => openHub('notif') }); });
+      const fresh = items.filter(i => !ST.seen.has(i.key));
+      fresh.forEach(i => ST.seen.add(i.key));
+      if(!ST.init){
+        ST.init = true;
+        if(items.length) banner({ icon:'🔔', kind:'ntf', title:'Tu as ' + items.length + ' nouveauté' + (items.length > 1 ? 's' : ''), text:inc.length + ' message(s) non lu(s) · ' + (items.length - inc.length) + ' notification(s)', onClick:() => openHub(inc.length ? 'msg' : 'notif'), ms:8000 });
+      } else if(fresh.length){
+        ping(); ring();
+        if(fresh.length > 3) banner({ icon:'🔔', kind:'ntf', title:fresh.length + ' nouvelles notifications', text:'Touche pour les voir', onClick:() => openHub('msg') });
+        else fresh.forEach(banner);
+        const f = fresh[0]; flashTitle(noEmoji(f.title) + ' : ' + f.text);
+        if(document.hidden && window.Notification && Notification.permission === 'granted'){ try{ new Notification('Hacken Store — ' + noEmoji(f.title), { body:f.text }); }catch(e){} }
       }
-      if(!ST.maxT) ST.maxT = Date.now();
       const sg = JSON.stringify([ST.req, ST.inbox, ST.notifs]);
       if(sg !== ST.sg){ ST.sg = sg; if($('#hubOverlay').classList.contains('open')) renderHub(); }
       if(ST.tick++ % 6 === 0) fb('PUT', 'presence/' + me.uid, Date.now()).catch(() => {});
@@ -1937,7 +2105,7 @@ $('#orderForm').addEventListener('submit', e => {
         const row = el('div', 'conv' + (unread ? ' unread' : ''));
         const av = el('div', 'av-lg', r.name.charAt(0).toUpperCase()); setAv(av, r.id);
         const mid = el('div', 'conv-mid'); mid.appendChild(nameB(r.id, r.name));
-        mid.appendChild(el('span', '', r.e ? (r.e.from === me.uid ? 'Toi : ' : '') + r.e.text : 'Dis bonjour 👋'));
+        mid.appendChild(el('span', '', r.e ? (r.e.from === me.uid ? 'Toi : ' : '') + r.e.text : 'Dis bonjour'));
         const right = el('div', 'conv-r');
         if(r.e) right.appendChild(el('small', '', dayLbl(r.e.t) === 'Aujourd\'hui' ? hm(r.e.t) : dayLbl(r.e.t)));
         if(unread) right.appendChild(el('i', 'dotb'));
@@ -1970,7 +2138,7 @@ $('#orderForm').addEventListener('submit', e => {
     box.appendChild(el('div', 'subhead', 'Activité'));
     const nf = Object.entries(ST.notifs || {}).sort((a, b) => b[1].t - a[1].t).slice(0, 40);
     if(!nf.length) box.appendChild(el('div', 't-empty', 'Aucune notification pour le moment.'));
-    const ic = { like:'❤️', comment:'💬', accept:'🤝', badge:'✔' };
+    const ic = { like:'❤️', comment:'💬', accept:'🤝', badge:'✔', ref:'🎁' };
     nf.forEach(([k, n]) => {
       const row = el('div', 'conv notif' + (n.r ? '' : ' unread'));
       const av = el('div', 'av-lg', ic[n.type] || '🔔'); if(n.from && n.from !== 'admin') setAv(av, n.from);
@@ -1998,12 +2166,12 @@ $('#orderForm').addEventListener('submit', e => {
     presence(fid).then(t => { st.textContent = t; });
     const list = el('div', 'chat-msgs'); box.appendChild(list);
     const emo = el('div', 'emo');
-    ['😀', '😂', '🔥', '💎', '👍', '❤️', '😎', '🎮', '🏆'].forEach(e => { const b = el('button', '', e); b.type = 'button'; b.addEventListener('click', () => { inp.value += e; inp.focus(); }); emo.appendChild(b); });
+    
     const bar = el('div', 'chat-bar'), inp = el('textarea'), sb = el('button', 'chat-send', '➤');
     inp.rows = 1; inp.maxLength = 500; inp.placeholder = 'Écris un message...'; sb.type = 'button';
     inp.addEventListener('input', () => { inp.style.height = 'auto'; inp.style.height = Math.min(inp.scrollHeight, 110) + 'px'; });
-    bar.append(inp, sb); box.append(emo, bar);
-    let sig = '', peerRead = 0, first = true;
+    bar.append(inp, sb); box.append(bar);
+    let sig = '', peerRead = 0, first = true, lastKey = '';
     function render(msgs, near){
       list.innerHTML = '';
       if(!msgs.length){ list.appendChild(el('div', 'chat-empty', 'Aucun message. Dis bonjour 👋')); return; }
@@ -2038,7 +2206,7 @@ $('#orderForm').addEventListener('submit', e => {
         const s = msgs.map(([k]) => k).join() + peerRead;
         if(s === sig) return; sig = s;
         const near = first || list.scrollHeight - list.scrollTop - list.clientHeight < 120;
-        first = false; render(msgs, near);
+        const lm = msgs[msgs.length - 1]; if(!first && lm && lm[1].from !== me.uid && lm[0] !== lastKey) ping(); lastKey = lm ? lm[0] : ''; first = false; render(msgs, near);
       }catch(e){}
     }
     async function send(){
@@ -2057,7 +2225,16 @@ $('#orderForm').addEventListener('submit', e => {
     inp.addEventListener('keydown', e => { if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); send(); } });
     pull(); chatT = setInterval(pull, 3000); setTimeout(() => inp.focus(), 150);
   }
-  poll(); setInterval(poll, 10000);
+  document.addEventListener('visibilitychange', () => { if(!document.hidden){ clearInterval(flashT); poll(); } });
+  addEventListener('focus', () => poll());
+  try{
+    const q = new URLSearchParams(location.search).get('ref');
+    if(q && q.length >= 8) localStorage.setItem('hkstore-ref', q);
+    const sr = localStorage.getItem('hkstore-ref') || '';
+    $('#auRef').value = sr;
+    if(sr && !me){ setTimeout(() => { $('#auForm [data-mode="up"]').click(); openAuth('🎁 Tu as été invité ! Crée ton compte : le code parrain est déjà rempli.'); }, 1200); }
+  }catch(e){}
+  poll(); setInterval(poll, 5000);
 
   loadFeed();
 })();
@@ -2096,6 +2273,51 @@ $('#orderForm').addEventListener('submit', e => {
   const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .08 });
   els.forEach(e => io.observe(e));
 })();
+  /* =====================================================
+     ICÔNES : remplace automatiquement les emoji par des icônes SVG
+     ===================================================== */
+  const ICON_MAP = {
+    '💎':'dia','🎡':'wheel','🏆':'trophy','📰':'news','🎮':'game','❓':'help','🧮':'calc','💳':'card','📜':'doc','⚡':'bolt',
+    '🔒':'lock','🤝':'friend','💬':'chat','🔔':'bell','👤':'user','⚙':'gear','👥':'users','📷':'camera','📨':'send','➤':'send',
+    '❤':'heartf','🤍':'heart','📤':'share','🗑':'trash','⏳':'hourglass','🎁':'gift','🏅':'medal','💾':'save','🔎':'search',
+    '🖼':'image','🎟':'ticket','🔊':'vol','🔇':'mute','🟢':'online','➕':'plus','🎉':'party','👋':'wave','✅':'checkc','👌':'checkc',
+    '📱':'phone','📲':'phone','🔥':'fire','🇨🇩':'flagcd','✔':'check','✓✓':'check2','✓':'check','📋':'clip','☀':'sun','🌙':'moon','★':'star','☆':'staro'
+  };
+  const EMO_SRC = '(' + Object.keys(ICON_MAP).sort((a, b) => b.length - a.length).join('|') + ')\uFE0F?';
+  const EMO_RE = new RegExp(EMO_SRC, 'g'), EMO_T = new RegExp(EMO_SRC);
+  const EMO_SKIP = 'script,style,textarea,input,option,svg,.post p,.bub > span,.cm span,.prof-bio,.conv:not(.notif) .conv-mid span,.nb.msg .t span';
+  function noEmoji(s){ return String(s).replace(EMO_RE, '').replace(/\s{2,}/g, ' ').trim(); }
+  function icoEl(n){
+    const NS = 'http://www.w3.org/2000/svg', s = document.createElementNS(NS, 'svg'), u = document.createElementNS(NS, 'use');
+    s.setAttribute('class', 'ico i-' + n); s.setAttribute('viewBox', n === 'dia' ? '0 0 64 64' : '0 0 24 24'); s.setAttribute('aria-hidden', 'true');
+    u.setAttribute('href', n === 'dia' ? '#dia' : '#i-' + n); s.appendChild(u); return s;
+  }
+  function emoTxt(n){
+    if(!EMO_T.test(n.nodeValue)) return;
+    const p = n.parentElement; if(!p || p.closest(EMO_SKIP)) return;
+    const f = document.createDocumentFragment();
+    n.nodeValue.split(EMO_RE).forEach((part, i) => { if(i % 2) f.appendChild(icoEl(ICON_MAP[part])); else if(part) f.appendChild(document.createTextNode(part)); });
+    n.replaceWith(f);
+  }
+  function emoAttrs(e){
+    ['placeholder', 'title', 'aria-label'].forEach(a => { const v = e.getAttribute && e.getAttribute(a); if(v && EMO_T.test(v)) e.setAttribute(a, noEmoji(v)); });
+    if(e.tagName === 'OPTION' && EMO_T.test(e.textContent)) e.textContent = noEmoji(e.textContent);
+  }
+  function emojify(root){
+    if(root.nodeType === 3){ emoTxt(root); return; }
+    if(root.nodeType !== 1) return;
+    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), list = [];
+    while(w.nextNode()) list.push(w.currentNode);
+    list.forEach(emoTxt);
+    emoAttrs(root); root.querySelectorAll('[placeholder],[title],[aria-label],option').forEach(emoAttrs);
+  }
+  const EMO_MO = new MutationObserver(ms => {
+    EMO_MO.disconnect();
+    ms.forEach(m => { if(m.type === 'characterData') emojify(m.target); else m.addedNodes.forEach(emojify); });
+    EMO_MO.observe(document.body, { childList:true, subtree:true, characterData:true });
+  });
+  emojify(document.body);
+  EMO_MO.observe(document.body, { childList:true, subtree:true, characterData:true });
 })();
 </script>
 </body>
