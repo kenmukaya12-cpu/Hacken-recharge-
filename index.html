@@ -242,8 +242,9 @@
   .toast.on{opacity:1;transform:translate(-50%,0);}
   .toast.err{border-color:var(--red);}
 
-  .rv{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s;}
-  .rv.in{opacity:1;transform:none;}
+  .rv{opacity:1;transform:none;transition:opacity .6s,transform .6s;}
+.js-on .rv{opacity:0;transform:translateY(18px);}
+.js-on .rv.in{opacity:1;transform:none;}
   @media (prefers-reduced-motion: reduce){
     *{animation:none!important;transition:none!important;}
     .rv{opacity:1;transform:none;}
@@ -413,7 +414,7 @@
 </style>
 </head>
 <body>
-
+<script>document.body.classList.add('js-on');</script>
 <!-- Logo diamant (réutilisé partout) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="dia" viewBox="0 0 64 64">
@@ -2931,7 +2932,7 @@ loadFeed(); HK.sug();
 
 /* APPARITION DES SECTIONS */
 (function(){
-  const els = $$('.rv');
+  const els = [...document.querySelectorAll('.rv')];
   if(!('IntersectionObserver' in window)){ els.forEach(e => e.classList.add('in')); return; }
   const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .08 });
   els.forEach(e => io.observe(e));
