@@ -9,6 +9,11 @@
 <meta property="og:description" content="Recharge directe sur ton ID, tournois et comptes Free Fire.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M20 10h24l14 14-26 34L6 24Z' fill='%2349D8F0' stroke='%23F2B84B' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E">
 <title>Hacken Store — Recharge Diamants Free Fire RDC</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Hacken Store">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -851,9 +856,8 @@
     <div class="wheel-res" id="wheelRes"></div>
     <button class="btn btn-gold btn-block" type="button" id="spinBtn">Tourner la roue</button>
   </div>
-</div>
-
-<script>
+ </div>
+  <script>
 (async function(){
 const HK_DB = 'https://kenmukaya-f3f46-default-rtdb.europe-west1.firebasedatabase.app';
 const CFG = await (async () => {
@@ -896,15 +900,13 @@ const WHEEL = [3, 0, 5, 2, 10, 0, 5, 3];
 // La roue est ouverte chaque jour de 20h à minuit (heure de l'appareil)
 const WHEEL_OPEN_H = 20, WHEEL_CLOSE_H = 24;
 // Tournois : infos affichées, durée d'affichage (jours) et base de données partagée.
-// api = URL Firebase Realtime Database (ex : 'https://mon-projet-default-rtdb.firebaseio.com').
-// Laisse api vide : la liste n'est alors visible que sur l'appareil du visiteur.
 const TOURNOI = {
   titre:'Tournoi Hacken Store',
   infos:'Date, mode de jeu et récompenses annoncés sur WhatsApp après ton inscription.',
   jours:30,
   api:HK_DB
 };
-// Admin : colle ici la "Clé API Web" de ton projet Firebase (Paramètres du projet)
+// Admin : "Clé API Web" de ton projet Firebase
 const ADMIN = { apiKey:'AIzaSyCdXkvGy90NDqYvOjYjmDwpuRSCTi3C95Q' };
 (function(){
   const n = (v, d) => (v === '' || v == null || isNaN(+v)) ? d : +v;
@@ -2152,6 +2154,7 @@ $('#orderForm').addEventListener('submit', e => {
       box.appendChild(row);
     });
   }
+  /* ===== CONVERSATION (corrigée) ===== */
   function openChat(fid, fname){
     closeAll(); clearInterval(chatT); ST.open = fid; open('#chatOverlay');
     const id = cid(me.uid, fid), box = $('#chatBody'); box.innerHTML = '';
@@ -2165,8 +2168,6 @@ $('#orderForm').addEventListener('submit', e => {
     head.append(back, av, who, x); box.appendChild(head);
     presence(fid).then(t => { st.textContent = t; });
     const list = el('div', 'chat-msgs'); box.appendChild(list);
-    const emo = el('div', 'emo');
-    
     const bar = el('div', 'chat-bar'), inp = el('textarea'), sb = el('button', 'chat-send', '➤');
     inp.rows = 1; inp.maxLength = 500; inp.placeholder = 'Écris un message...'; sb.type = 'button';
     inp.addEventListener('input', () => { inp.style.height = 'auto'; inp.style.height = Math.min(inp.scrollHeight, 110) + 'px'; });
@@ -2198,7 +2199,8 @@ $('#orderForm').addEventListener('submit', e => {
       try{
         const [o, pe, mi] = await Promise.all([
           fb('GET', 'chats/' + id, undefined, '&orderBy=%22%24key%22&limitToLast=80'),
-          fb('GET', 'inbox/' + fid + '/' + me.uid), fb('GET', 'inbox/' + me.uid + '/' + fid)
+          fb('GET', 'inbox/' + fid + '/' + me.uid).catch(() => null),
+          fb('GET', 'inbox/' + me.uid + '/' + fid).catch(() => null)
         ]);
         if(mi && mi.from !== me.uid && !mi.r){ fb('PUT', 'inbox/' + me.uid + '/' + fid + '/r', true).then(poll).catch(() => {}); }
         peerRead = pe ? (pe.from !== me.uid ? Infinity : (pe.r ? pe.t : 0)) : 0;
@@ -2206,8 +2208,12 @@ $('#orderForm').addEventListener('submit', e => {
         const s = msgs.map(([k]) => k).join() + peerRead;
         if(s === sig) return; sig = s;
         const near = first || list.scrollHeight - list.scrollTop - list.clientHeight < 120;
-        const lm = msgs[msgs.length - 1]; if(!first && lm && lm[1].from !== me.uid && lm[0] !== lastKey) ping(); lastKey = lm ? lm[0] : ''; first = false; render(msgs, near);
-      }catch(e){}
+        const lm = msgs[msgs.length - 1];
+        if(!first && lm && lm[1].from !== me.uid && lm[0] !== lastKey) ping();
+        lastKey = lm ? lm[0] : ''; first = false; render(msgs, near);
+      }catch(e){
+        if(first){ first = false; list.innerHTML = ''; list.appendChild(el('div', 'chat-empty', 'Impossible de charger les messages.')); }
+      }
     }
     async function send(){
       const text = inp.value.trim(); if(!text) return;
@@ -2320,5 +2326,13 @@ $('#orderForm').addEventListener('submit', e => {
   EMO_MO.observe(document.body, { childList:true, subtree:true, characterData:true });
 })();
 </script>
+
+<!-- PWA : enregistrement du service worker -->
+<script>
+if('serviceWorker' in navigator){
+  addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+}
+</script>
 </body>
-</html>
+  </html>
+                                          
