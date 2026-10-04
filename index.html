@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Hacken Store : recharge de diamants Free Fire dans la région MENA, Booyah Pass, abonnements, comptes et tournois. Paiement Airtel Money et Orange Money.">
+<meta name="description" content="Hacken Store : discussions, amis, publications, tournois et recharge Free Fire sur le serveur MENA.">
 <meta name="theme-color" content="#070D1A">
-<meta property="og:title" content="Hacken Store — Recharge Diamants Free Fire MENA">
-<meta property="og:description" content="Recharge directe sur ton ID, tournois et comptes Free Fire.">
+<meta property="og:title" content="Hacken Store — Discussions, amis, tournois et recharge">
+<meta property="og:description" content="Discute, ajoute des amis, publie, rejoins des groupes et participe aux tournois.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M20 10h24l14 14-26 34L6 24Z' fill='%2349D8F0' stroke='%23F2B84B' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E">
-<title>Hacken Store — Recharge Diamants Free Fire MENA</title>
+<title>Hacken Store — Discussions, amis, tournois et recharge</title>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="mobile-web-app-capable" content="yes">
@@ -237,14 +237,11 @@
   .cm b{color:var(--cyan);}
   .cm .x{padding:1px 7px;margin-left:6px;font-size:11px;}
   .cm-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
-  .cm-row input{padding:10px 12px;font-size:15px;}
-  .cm-row input{flex:1 1 0;min-width:0;}
+  .cm-row input{padding:10px 12px;font-size:15px;flex:1 1 0;min-width:0;}
   .cm-row .btn-ghost{flex:1 1 100%;}
   .cm-row .btn{padding:9px 14px;font-size:15px;}
   .who{font-size:14px;color:var(--muted);}
   .who b{color:var(--text);font-family:var(--f-head);font-size:17px;}
-  .bdg{display:inline-flex;vertical-align:middle;margin-left:4px;}
-  .bdg svg{width:18px;height:18px;}
   .trow select{background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px;font-size:14px;max-width:150px;}
   .badges{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
   .badge{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 8px;text-align:center;font-size:12.5px;color:var(--muted);}
@@ -348,11 +345,11 @@
   .conv.unread{background:color-mix(in srgb,var(--cyan) 10%,transparent);}
   .av-lg{flex:0 0 46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--gold));color:#04202A;display:grid;place-items:center;font-weight:900;font-family:var(--f-head);font-size:22px;}
   .conv-mid{flex:1;min-width:0;}
-  .conv-mid b{font-family:var(--f-head);font-size:17px;display:block;}
-  .conv-mid span{display:block;font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .conv.unread .conv-mid span{color:var(--text);font-weight:600;}
-  .notif .conv-mid b{display:inline;}
-  .notif .conv-mid span{display:inline;white-space:normal;}
+  .conv-mid b{font-family:var(--f-head);font-size:17px;}
+  .conv-mid>span{display:block;font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .conv.unread .conv-mid>span{color:var(--text);font-weight:600;}
+  .notif .conv-mid b{display:inline-flex;}
+  .notif .conv-mid>span{display:inline;white-space:normal;}
   .conv-r{display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-size:11px;color:var(--muted);}
   .dotb{width:10px;height:10px;border-radius:50%;background:var(--cyan);display:block;}
   .chatm{display:flex;flex-direction:column;height:calc(100dvh - 32px);max-height:720px;padding:0;overflow:hidden;margin:0 auto;}
@@ -360,8 +357,8 @@
   .chat-head{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--panel);}
   .chat-ic{background:var(--panel2);border:1px solid var(--line);border-radius:10px;width:36px;height:36px;cursor:pointer;font-size:18px;flex-shrink:0;}
   .chat-who{flex:1;min-width:0;}
-  .chat-who b{font-family:var(--f-head);font-size:18px;display:block;cursor:pointer;}
-  .chat-who small{color:var(--muted);font-size:12px;}
+  .chat-who b{font-family:var(--f-head);font-size:18px;cursor:pointer;}
+  .chat-who small{display:block;color:var(--muted);font-size:12px;}
   .chat-msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:3px;background:radial-gradient(circle at 20% 0,color-mix(in srgb,var(--cyan) 6%,transparent),transparent 60%);}
   .day{align-self:center;font-size:11px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px 12px;margin:10px 0 6px;}
   .bub{max-width:80%;align-self:flex-start;background:var(--panel2);border:1px solid var(--line);padding:8px 12px 6px;border-radius:16px 16px 16px 4px;font-size:14.5px;word-break:break-word;white-space:pre-wrap;margin-top:6px;}
@@ -369,6 +366,8 @@
   .bub.me{align-self:flex-end;background:linear-gradient(135deg,var(--cyan),var(--cyan-d));color:var(--on-cyan);border-color:transparent;border-radius:16px 16px 4px 16px;}
   .bub small{display:block;text-align:right;font-size:10px;opacity:.65;margin-top:2px;}
   .bub em{display:block;text-align:right;font-style:normal;font-size:10px;opacity:.8;}
+  .bub .gn{display:flex;align-items:center;font-family:var(--f-head);font-weight:700;font-size:13px;color:var(--gold);margin-bottom:2px;}
+  .bub img.gi{display:block;max-width:100%;max-height:260px;border-radius:10px;margin-bottom:4px;cursor:zoom-in;}
   .bub .del{display:none;margin-top:6px;border:0;border-radius:8px;padding:4px 8px;font-size:12px;background:rgba(0,0,0,.25);color:#fff;cursor:pointer;}
   .bub.act .del{display:inline-block;}
   .chat-empty{margin:auto;color:var(--muted);font-size:14px;}
@@ -377,6 +376,8 @@
   .chat-bar{display:flex;gap:8px;align-items:flex-end;padding:8px 10px calc(env(safe-area-inset-bottom,0px) + 10px);}
   .chat-bar textarea{min-height:44px;max-height:110px;resize:none;border-radius:22px;padding:11px 16px;}
   .chat-send{flex:0 0 44px;height:44px;border:0;border-radius:50%;cursor:pointer;background:linear-gradient(135deg,var(--cyan),var(--cyan-d));color:var(--on-cyan);font-size:18px;}
+  .chat-photo{flex:0 0 44px;height:44px;border-radius:50%;display:grid;place-items:center;cursor:pointer;background:var(--panel2);border:1px solid var(--line);color:var(--cyan);}
+  .chat-photo input{display:none;}
   /* ===== BANNIÈRES DE NOTIFICATION ===== */
   .nstack{position:fixed;top:calc(env(safe-area-inset-top,0px) + 62px);left:0;right:0;z-index:95;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none;padding:0 12px;}
   .nb{pointer-events:auto;width:min(420px,100%);display:flex;align-items:center;gap:12px;background:var(--panel2);border:1px solid var(--cyan);border-left:5px solid var(--cyan);border-radius:16px;padding:10px 12px;box-shadow:0 14px 34px -10px rgba(0,0,0,.65);cursor:pointer;animation:nbin .4s cubic-bezier(.2,.9,.3,1.2);transition:opacity .3s,transform .3s;}
@@ -405,40 +406,41 @@
   .ref-list{font-size:12.5px;color:var(--muted);margin-top:10px;}
   /* ===== ICÔNES SVG (remplacent les emoji) ===== */
   .ico{width:1.15em;height:1.15em;vertical-align:-.22em;display:inline-block;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
-  .ico.i-dia,.ico.i-flagcd,.ico.i-online{stroke:none;}
+  .ico.i-dia,.ico.i-online{stroke:none;}
   .ico.i-dia{width:1.2em;height:1.2em;filter:drop-shadow(0 0 4px var(--glow));}
-  .ico.i-flagcd{width:1.3em;}
   .ico.i-heartf{color:var(--red);fill:var(--red);stroke:var(--red);}
   .ico.i-online{color:var(--green);fill:var(--green);}
   .ico.i-check2{width:1.3em;}
   .badge .ic{color:var(--cyan);font-size:26px;}
   .ico.i-star{fill:currentColor;stroke:none;}
   .stars .ico{width:1em;height:1em;}
-/* Badge toujours collé au nom, partout */
-.bdg{display:inline-flex;vertical-align:middle;margin-left:4px;flex:none;}
-.bdg svg{width:18px;height:18px;flex:none;}
-.conv-mid b,.po-head b,.chat-who b,.fn b,.tm b,.cm b,.prof-head b{display:inline-flex;align-items:center;gap:2px;max-width:100%;white-space:nowrap;}
-.conv-mid>b,.chat-who>b,.po-head>div>b{display:flex;}
-/* Boutique masquée */
-.shop-wrap{display:none;}
-.shop-wrap.open{display:block;}
-/* Suggestions */
-.sug{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory;}
-.sug-card{flex:0 0 130px;scroll-snap-align:start;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 8px;text-align:center;}
-.sug-card .avatar{width:56px;height:56px;font-size:26px;}
-.sug-card b{display:flex;justify-content:center;font-family:var(--f-head);font-size:16px;}
-.sug-card .btn{padding:7px 10px;font-size:14px;margin-top:8px;width:100%;}
-/* Groupes */
-.grp-photo{margin-bottom:12px;}
-.grp-av{width:80px;height:80px;border-radius:50%;margin:0 auto 10px;}
-.pick{display:flex;align-items:center;gap:10px;padding:8px 4px;}
-.pick input{width:19px;height:19px;accent-color:var(--cyan);}
-.sw{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-top:1px dashed var(--line);font-size:14px;}
-.bub .who-n{display:block;font-family:var(--f-head);font-size:13px;color:var(--cyan-d);}
-.bub.sys{align-self:center;background:transparent;border:0;font-size:12px;color:var(--muted);}
-.bub img.pic{display:block;max-width:100%;max-height:260px;border-radius:12px;margin-bottom:4px;cursor:zoom-in;}
-.chat-photo{flex:0 0 44px;height:44px;border:0;border-radius:50%;cursor:pointer;background:var(--panel2);}
-.post.pend{opacity:.55;border-style:dashed;}
+  
+
+  /* ===== NOUVEAU : BADGE TOUJOURS À CÔTÉ DU NOM ===== */
+  .nm-b{display:inline-flex;align-items:center;gap:4px;max-width:100%;min-width:0;vertical-align:middle;}
+  .conv-mid b,.po-head b,.chat-who b,.frow .fn b,.trow .tm b,.prof-head>b,.cm b,.gn b{display:inline-flex;align-items:center;gap:4px;max-width:100%;}
+  .conv-mid b,.po-head b{display:flex;}
+  .bdg,.conv-mid .bdg,.po-head .bdg{display:inline-flex!important;flex:0 0 auto;margin-left:0;white-space:nowrap;}
+  .bdg svg{width:18px;height:18px;flex:0 0 auto;}
+  /* ===== NOUVEAU : BOUTIQUE MASQUÉE ===== */
+  body:not(.shop-open) .bar,body:not(.shop-open) .fab{display:none!important;}
+  #shopWrap{display:none;}
+  body.shop-open #shopWrap{display:block;}
+  body.shop-open #shopEntry{display:none;}
+  .shop-enter{text-align:center;padding:10px 0;}
+  .shop-bar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 62px);z-index:20;padding:8px 0;}
+  /* ===== NOUVEAU : LANGUE, GROUPES, SUGGESTIONS ===== */
+  .lang-row{display:flex;gap:8px;margin-bottom:12px;}
+  .sug-row{display:flex;gap:10px;overflow-x:auto;padding:4px 0 10px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;}
+  .sug{flex:0 0 132px;scroll-snap-align:start;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 8px;text-align:center;}
+  .sug .av-lg{margin:0 auto 6px;}
+  .sug b{display:flex;justify-content:center;align-items:center;gap:4px;font-family:var(--f-head);font-size:16px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+  .sug .btn{margin-top:8px;padding:6px 10px;font-size:14px;width:100%;}
+  .grp{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-bottom:8px;cursor:pointer;}
+  .grp .av-lg{border-radius:14px;}
+  .grp .btn{padding:7px 12px;font-size:14px;}
+  .grp-meta{font-size:12px;color:var(--muted);}
+  .lock-tag{font-size:11px;font-weight:700;color:var(--gold);}
 </style>
 </head>
 <body>
@@ -505,13 +507,15 @@
   <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></symbol>
   <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 17l-5.6 3 1.3-6.2L3 9.5l6.3-.7z"/></symbol>
   <symbol id="i-staro" viewBox="0 0 24 24"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 17l-5.6 3 1.3-6.2L3 9.5l6.3-.7z"/></symbol>
-  <symbol id="i-flagcd" viewBox="0 0 24 24"><clipPath id="fcd"><rect x="1" y="4" width="22" height="16" rx="2.5"/></clipPath><g clip-path="url(#fcd)"><rect x="1" y="4" width="22" height="16" fill="#007FFF"/><path d="M0 20L24 4" stroke="#F7D618" stroke-width="6" fill="none"/><path d="M0 20L24 4" stroke="#CE1021" stroke-width="3.6" fill="none"/><path d="M6.5 6.2l.8 2.2 2.3.1-1.8 1.4.6 2.3-1.9-1.3-1.9 1.3.6-2.3-1.8-1.4 2.3-.1z" fill="#F7D618"/></g></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></symbol>
+  <symbol id="i-shop" viewBox="0 0 24 24"><path d="M4 9l1.5-5h13L20 9M4 9h16v11H4zM4 9a3 3 0 0 0 5.3 1.9A3 3 0 0 0 14.7 10.9 3 3 0 0 0 20 9M10 20v-5h4v5"/></symbol>
+  <symbol id="i-group" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><circle cx="5.5" cy="10" r="2.2"/><circle cx="18.5" cy="10" r="2.2"/><path d="M7 20a5 5 0 0 1 10 0M2 19a3.5 3.5 0 0 1 4-3.4M22 19a3.5 3.5 0 0 0-4-3.4"/></symbol>
 </svg>
 
 <canvas id="fx" aria-hidden="true"></canvas>
 
 <nav class="navbar">
-  <a class="logo" href="#top" aria-label="Hacken Store — accueil">
+  <a class="logo" href="#top" aria-label="Hacken Store">
     <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#dia"/></svg>
     <div><span class="hk">HK</span><span class="full">HACKEN STORE</span></div>
   </a>
@@ -530,10 +534,9 @@
   <svg class="hero-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#dia"/></svg>
   <h1>HK</h1>
   <div class="store">HACKEN STORE</div>
-  <p class="claim">Recharge tes diamants Free Fire directement sur ton ID, en quelques minutes.</p>
+  <p class="claim" data-i18n="claim">Discute, ajoute des amis, publie et participe aux tournois.</p>
   <div class="hero-cta">
-    <button class="btn btn-primary" type="button" data-open-shop>💎 Entrer dans la boutique</button>
-    <button class="btn btn-gold" type="button" data-open-wheel>🎡 Roue HK de 20h</button>
+    <button class="btn btn-primary" type="button" data-shop>🛒 Entrer dans la boutique</button>
   </div>
   <div class="chips">
     <span class="chip gold">✔ Vendeur vérifié</span>
@@ -541,20 +544,77 @@
     <span class="chip">📲 Airtel · Orange</span>
   </div>
   <div class="chips">
-    <a class="chip" href="#shopBtn" data-open-shop>💎 Packs</a>
-    <a class="chip" href="#tournoi">🏆 Tournois</a>
     <a class="chip" href="#communaute">📰 Actus</a>
-    <a class="chip" href="#shopBtn" data-open-shop>🎮 Comptes</a>
-    <a class="chip" href="#faq">❓ FAQ</a>
-  </div>
-  <div class="stats">
-    <div class="stat"><b>5–15 min</b><span>Délai habituel</span></div>
-    <div class="stat"><b>7</b><span>Packs diamants</span></div>
-    <div class="stat"><b>24/7</b><span>Support WhatsApp</span></div>
+    <a class="chip" href="#groupes">👥 Groupes</a>
+    <a class="chip" href="#tournoi">🏆 Tournois</a>
   </div>
 </header>
 
 <div class="wrap">
+    
+<section id="shopEntry" class="shop-enter rv">
+  <button class="btn btn-primary btn-block" type="button" data-shop>🛒 Entrer dans la boutique</button>
+</section>
+
+<!-- ============ SUGGESTIONS ============ -->
+<section id="suggest" class="rv" style="display:none;">
+  <h2 class="sec-title">🤝 Suggestions</h2>
+  <p class="sec-sub">Nouveaux joueurs et gens à ajouter en ami.</p>
+  <div class="sug-row" id="sugRow"></div>
+</section>
+
+<!-- ============ GROUPES ============ -->
+<section id="groupes" class="rv">
+  <h2 class="sec-title">👥 Groupes</h2>
+  <p class="sec-sub">Discute à plusieurs, envoie des photos. Les messages disparaissent après 48h.</p>
+  <div class="hub-tools">
+    <button class="btn btn-primary" type="button" id="grpNew">➕ Créer un groupe</button>
+    <button class="btn btn-ghost" type="button" id="grpJoinCode">🔑 Rejoindre avec un code</button>
+  </div>
+  <input type="text" class="hub-search" id="grpSearch" placeholder="🔎 Chercher un groupe">
+  <div id="grpList"></div>
+</section>
+
+<!-- ============ COMMUNAUTÉ ============ -->
+<section id="communaute" class="rv">
+  <h2 class="sec-title">📰 Communauté</h2>
+  <p class="sec-sub">Partage une photo, une victoire ou une note. Crée un compte gratuit pour publier, aimer et commenter. Chaque publication est vérifiée et disparaît après 48h.</p>
+  <form id="pForm" class="t-card" novalidate>
+    <div id="pWho" class="who"></div>
+    <div><label class="lbl" for="pText">Ta note</label>
+      <textarea id="pText" maxlength="400" placeholder="Raconte ta victoire, pose une question, partage un conseil..."></textarea></div>
+    <label class="photo-btn">📷 Ajouter une photo<input type="file" id="pFile" accept="image/*"></label>
+    <div id="pPrevBox"><img id="pPrev" alt="Aperçu"><button type="button" class="x" id="pRm" aria-label="Retirer la photo">✕</button></div>
+    <p class="note">Pas d'insultes, pas de pub, pas de numéros personnels.</p>
+    <button type="submit" class="btn btn-primary btn-block">📨 Publier</button>
+  </form>
+  <div class="feed" id="feed"></div>
+</section>
+
+<!-- ============ TOURNOIS ============ -->
+<section id="tournoi" class="rv">
+  <h2 class="sec-title">🏆 Tournois</h2>
+  <p class="sec-sub">Inscription gratuite. Ton nom reste dans la liste pendant 30 jours.</p>
+  <div class="t-card">
+    <div class="t-info"><b id="tTitle"></b><span id="tInfos"></span></div>
+    <form id="tForm" novalidate>
+      <div><label class="lbl" for="tName">Ton nom ou pseudo</label>
+        <input type="text" id="tName" maxlength="24" autocomplete="nickname" placeholder="Ex : HK_Sniper"></div>
+      <div><label class="lbl" for="tPhone">Numéro WhatsApp</label>
+        <input type="tel" id="tPhone" inputmode="tel" placeholder="Ex : 099 000 0000"></div>
+      <div><label class="lbl" for="tId">ID joueur Free Fire</label>
+        <input type="text" id="tId" inputmode="numeric" autocomplete="off" placeholder="Ex : 123456789"></div>
+      <label class="accept"><input type="checkbox" id="tOk"><span>J'accepte que mon nom, mon ID et mon numéro WhatsApp soient visibles par tous pendant 30 jours.</span></label>
+      <button type="submit" class="btn btn-gold btn-block">🏆 M'inscrire au tournoi</button>
+    </form>
+  </div>
+  <div class="subhead">Participants <span id="tCount"></span></div>
+  <div class="tlist" id="tList"></div>
+</section>
+
+<!-- ============ BOUTIQUE (masquée tant qu'on n'y entre pas) ============ -->
+<div id="shopWrap">
+<div class="shop-bar"><button type="button" class="btn btn-ghost btn-block" id="shopExit">← Quitter la boutique</button></div>
 
 <section class="rv">
   <div class="car" id="carBonus">
@@ -565,18 +625,12 @@
   </div>
 </section>
 
-<section class="rv">
-  <button class="btn btn-gold btn-block" type="button" id="shopBtn" data-open-shop>🛒 Boutique</button>
-</section>
-<div id="shop" class="shop-wrap">
 <section id="packs" class="rv">
   <h2 class="sec-title">Choisis ton pack</h2>
   <p class="sec-sub">Les prix sont en Francs Congolais (FC). Touche un pack pour le choisir.</p>
   <div class="grid" id="gridDiamonds"></div>
-
   <div class="subhead">Booyah Pass et abonnements</div>
   <div class="grid" id="gridSubs"></div>
-
   <div class="calc">
     <b>🧮 Quel pack pour mon budget ?</b>
     <div class="calc-row">
@@ -596,7 +650,6 @@
       <input type="text" id="playerId" inputmode="numeric" autocomplete="off" placeholder="Ex : 123456789">
       <div class="hint">Ton ID est dans ton profil Free Fire. Vérifie-le bien avant de payer.</div>
     </div>
-
     <div>
       <span class="lbl">Moyen de paiement</span>
       <div class="pay-options" id="payOptions">
@@ -605,7 +658,6 @@
         <button type="button" class="pay" disabled>Vodacom M-Pesa<span class="maint">En maintenance</span></button>
       </div>
     </div>
-
     <div class="pay-details" id="payDetails">
       <div class="pd-title">💳 Envoie le montant exact à ce numéro</div>
       <div class="pd-line"><span>Opérateur</span><b id="pdOperator">—</b></div>
@@ -613,7 +665,6 @@
       <div class="pd-line"><span>Nom du bénéficiaire</span><b id="pdName">—</b></div>
       <div class="pd-line"><span>Montant à envoyer</span><span><b id="pdAmount">—</b><button type="button" class="copy" id="copyAmt">Copier</button></span></div>
     </div>
-
     <div>
       <label class="lbl" for="senderPhone">Numéro qui a envoyé l'argent</label>
       <input type="tel" id="senderPhone" inputmode="tel" placeholder="Ex : 099 000 0000">
@@ -622,7 +673,6 @@
       <label class="lbl" for="txId">Numéro de transaction (reçu après le transfert)</label>
       <input type="text" id="txId" autocomplete="off" placeholder="Ex : MP240918.1922.A12345">
     </div>
-
     <div class="conditions">
       <div class="ct">📜 Conditions de vente</div>
       <ol>
@@ -634,7 +684,6 @@
       </ol>
     </div>
     <label class="accept"><input type="checkbox" id="acceptCond"><span>J'ai lu les conditions et j'ai déjà envoyé l'argent.</span></label>
-
     <div class="chosen" id="chosenLabel">Aucun article choisi</div>
     <div class="promo-line" id="promoLine"><span>🎁 Code <b id="promoCode"></b> appliqué</span><b id="promoPct"></b></div>
     <div class="summary">
@@ -643,7 +692,6 @@
     </div>
     <button type="submit" class="btn btn-primary btn-block">Confirmer la commande</button>
     <p class="note">Envoie d'abord l'argent au numéro affiché ci-dessus, puis confirme ta commande.</p>
-
     <div id="confirm">
       <h3>Commande prête ✔</h3>
       <p>Envoie-la sur WhatsApp : Hacken Store vérifie ton paiement et valide ta recharge.</p>
@@ -669,47 +717,6 @@
   </div>
   <div class="compte-details" id="compteDetails"></div>
   <a class="btn btn-wa btn-block" style="margin-top:14px;" href="https://chat.whatsapp.com/Jgo3WcNSCP9GeD6JmUSGiF" target="_blank" rel="noopener">👥 Rejoindre la guilde</a>
-</section>
-
-</div>
-<!-- ============ TOURNOIS ============ -->
-<section id="tournoi" class="rv">
-  <h2 class="sec-title">🏆 Tournois</h2>
-  <p class="sec-sub">Inscription gratuite. Ton nom reste dans la liste pendant 30 jours.</p>
-  <div class="t-card">
-    <div class="t-info"><b id="tTitle"></b><span id="tInfos"></span></div>
-    <form id="tForm" novalidate>
-      <div><label class="lbl" for="tName">Ton nom ou pseudo</label>
-        <input type="text" id="tName" maxlength="24" autocomplete="nickname" placeholder="Ex : HK_Sniper"></div>
-      <div><label class="lbl" for="tPhone">Numéro WhatsApp</label>
-        <input type="tel" id="tPhone" inputmode="tel" placeholder="Ex : 099 000 0000"></div>
-      <div><label class="lbl" for="tId">ID joueur Free Fire</label>
-        <input type="text" id="tId" inputmode="numeric" autocomplete="off" placeholder="Ex : 123456789"></div>
-      <label class="accept"><input type="checkbox" id="tOk"><span>J'accepte que mon nom, mon ID et mon numéro WhatsApp soient visibles par tous pendant 30 jours.</span></label>
-      <button type="submit" class="btn btn-gold btn-block">🏆 M'inscrire au tournoi</button>
-    </form>
-  </div>
-  <div class="subhead">Participants <span id="tCount"></span></div>
-  <div class="tlist" id="tList"></div>
-</section>
-
-<section id="communaute" class="rv">
-  <h2 class="sec-title">📰 Communauté</h2>
-  <p class="sec-sub">Partage une photo, une victoire ou une note. Crée un compte gratuit pour publier, aimer et commenter. Chaque publication est vérifiée et disparaît après 48h.</p>
-  <div id="sugBox" style="display:none;margin-bottom:16px;">
-  <div class="subhead" style="margin-top:0;" data-i18n="sug_title">👋 Nouveaux joueurs</div>
-  <div class="sug" id="sugList"></div>
-</div>
-  <form id="pForm" class="t-card" novalidate>
-    <div id="pWho" class="who"></div>
-    <div><label class="lbl" for="pText">Ta note</label>
-      <textarea id="pText" maxlength="400" placeholder="Raconte ta victoire, pose une question, partage un conseil..."></textarea></div>
-    <label class="photo-btn">📷 Ajouter une photo<input type="file" id="pFile" accept="image/*"></label>
-    <div id="pPrevBox"><img id="pPrev" alt="Aperçu"><button type="button" class="x" id="pRm" aria-label="Retirer la photo">✕</button></div>
-    <p class="note">Pas d'insultes, pas de pub, pas de numéros personnels.</p>
-    <button type="submit" class="btn btn-primary btn-block">📨 Publier</button>
-  </form>
-  <div class="feed" id="feed"></div>
 </section>
 
 <section class="rv">
@@ -741,13 +748,14 @@
   <details class="faq"><summary>Comment marche la Roue HK ?</summary><p>La roue s'ouvre chaque soir à 20h. Tu peux la tourner une fois par jour sur cet appareil. Si tu gagnes une réduction, un code s'affiche et le total se met à jour. La réduction est valable le jour même, sur les diamants, le Booyah Pass et les abonnements.</p></details>
   <details class="faq"><summary>Comment participer à un tournoi ?</summary><p>Remplis ton nom, ton numéro WhatsApp et ton ID Free Fire dans la section Tournois. Tu apparais ensuite dans la liste des participants pendant 30 jours.</p></details>
 </section>
+</div>
 
 </div>
 </main>
 
 <footer>
   <span class="hk">HK · HACKEN STORE</span>
-  Recharge Diamants Free Fire. Service disponible dans la région MENA 🌍.<br>Indépendant, non affilié à Garena.<br>
+  Discussions, amis, groupes, tournois et recharge Free Fire. Disponible sur le serveur MENA 🌍.<br>Indépendant, non affilié à Garena.<br>
   <a class="btn btn-wa" id="supportBtn" href="#" target="_blank" rel="noopener">💬 Contacter le support</a><br>
   <small>© 2026 Hacken Store · <a href="#" id="adminLink" style="color:inherit;opacity:.5;">Admin</a></small>
 </footer>
@@ -761,16 +769,13 @@
 <div class="nstack" id="nstack" aria-live="assertive"></div>
 
 <div class="overlay" id="guideOverlay">
-  <div class="modal" role="dialog" aria-modal="true" aria-label="Comment commander">
-    <div class="modal-head"><h3>❓ Comment commander</h3><button class="x" type="button" data-close>✕</button></div>
-    <div class="step"><i>1</i><div><b>Choisis ton article</b><span>Touche un pack de diamants, le Booyah Pass ou un abonnement.</span></div></div>
-    <div class="step"><i>2</i><div><b>Écris ton ID joueur</b><span>C'est l'identifiant de ton compte Free Fire, visible dans ton profil.</span></div></div>
-    <div class="step"><i>3</i><div><b>Choisis ton paiement</b><span>Airtel Money ou Orange Money (Vodacom est en maintenance).</span></div></div>
-    <div class="step"><i>4</i><div><b>Envoie l'argent</b><span>Envoie le montant exact au numéro affiché, au nom indiqué.</span></div></div>
-    <div class="step"><i>5</i><div><b>Complète et confirme</b><span>Indique le numéro qui a envoyé l'argent et le numéro de transaction.</span></div></div>
-    <div class="step"><i>6</i><div><b>Envoie sur WhatsApp</b><span>Le message se prépare tout seul, il ne reste qu'à l'envoyer.</span></div></div>
-    <div class="step"><i>🏆</i><div><b>Tournois et Roue HK</b><span>Inscris-toi aux tournois et tente la roue chaque soir à 20h.</span></div></div>
-    <div class="step warn"><i>!</i><div><b>Condition importante</b><span>L'argent doit être envoyé AVANT la confirmation sur WhatsApp. Toute confirmation sans paiement déjà effectué ne sera pas traitée.</span></div></div>
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Aide">
+    <div class="modal-head"><h3>❓ Bienvenue sur Hacken Store</h3><button class="x" type="button" data-close>✕</button></div>
+    <div class="step"><i>1</i><div><b>Crée ton compte</b><span>Choisis ta langue, un pseudo et un mot de passe.</span></div></div>
+    <div class="step"><i>2</i><div><b>Ajoute des amis</b><span>Regarde les suggestions ou cherche un pseudo.</span></div></div>
+    <div class="step"><i>3</i><div><b>Discute et publie</b><span>Messages privés, groupes avec photos, publications. Les messages disparaissent après 48h.</span></div></div>
+    <div class="step"><i>🏆</i><div><b>Tournois</b><span>Inscris-toi gratuitement dans la section Tournois.</span></div></div>
+    <div class="step"><i>🛒</i><div><b>Boutique</b><span>Touche « Entrer dans la boutique » pour recharger tes diamants. L'argent doit être envoyé AVANT la confirmation sur WhatsApp.</span></div></div>
     <button class="btn btn-primary btn-block" type="button" data-close style="margin-top:12px;">J'ai compris</button>
   </div>
 </div>
@@ -779,26 +784,23 @@
   <div class="modal" role="dialog" aria-modal="true" aria-label="Paramètres">
     <div class="modal-head"><h3>⚙️ Paramètres</h3><button class="x" type="button" data-close>✕</button></div>
     <div class="step" style="display:block;">
+      <b>Langue</b><span>Français ou English.</span>
+      <div class="lang-row" style="margin:10px 0 0;"><button type="button" class="pay" data-lang="fr">Français</button><button type="button" class="pay" data-lang="en">English</button></div>
+    </div>
+    <div class="step" style="display:block;">
       <b>Thème d'affichage</b><span>Choisis l'apparence du site sur cet appareil.</span>
       <div class="pay-options" style="margin-top:10px;">
         <button type="button" class="pay" id="themeLight">☀️ Clair</button>
         <button type="button" class="pay" id="themeDark">🌙 Sombre</button>
       </div>
     </div>
-    <div class="step" style="display:block;">
-  <b data-i18n="lang">Langue</b>
-  <div class="pay-options" style="margin-top:10px;">
-    <button type="button" class="pay" data-lang="fr">Français</button>
-    <button type="button" class="pay" data-lang="en">English</button>
-  </div>
-</div>
   </div>
 </div>
 
 <div class="overlay" id="lightboxOverlay">
   <div class="modal lightbox">
     <div class="modal-head"><h3 id="lbTitle">Compte</h3><button class="x" type="button" data-close>✕</button></div>
-    <img id="lbImg" src="" alt="Compte agrandi">
+    <img id="lbImg" src="" alt="Image agrandie">
     <div class="cap" id="lbCap"></div>
   </div>
 </div>
@@ -814,11 +816,11 @@
     <div id="adPanel" style="display:none;">
       <div class="pay-options" id="adTabs" style="margin-bottom:14px;">
         <button type="button" class="pay sel" data-tab="posts">📰 Publications</button>
-        <button type="button" class="pay" data-tab="edit">⚙️ Prix &amp; images</button>
         <button type="button" class="pay" data-tab="members">👥 Membres</button>
+        <button type="button" class="pay" data-tab="groups">🗂 Groupes</button>
+        <button type="button" class="pay" data-tab="texts">✏️ Textes</button>
+        <button type="button" class="pay" data-tab="edit">⚙️ Prix &amp; images</button>
         <button type="button" class="pay" data-tab="stats">📊 Stats</button>
-        <button type="button" class="pay" data-tab="parts">🏆 Participants</button>
-        <button type="button" class="pay" data-tab="groups">👥 Groupes</button>
       </div>
       <div id="adPosts">
         <div class="subhead" style="margin-top:0;">En attente (<span id="adCount">0</span>)</div>
@@ -828,14 +830,14 @@
         <input type="text" id="mbSearch" placeholder="Chercher un pseudo..." style="margin-bottom:10px;">
         <div class="feed" id="mbList" style="margin-top:0;"></div>
       </div>
+      <div id="adGroups" style="display:none;"><div class="feed" id="gpList" style="margin-top:0;"></div></div>
+      <div id="adTexts" style="display:none;"></div>
+      <div id="adStats" style="display:none;"></div>
       <div id="adEdit" style="display:none;">
         <p class="note" style="text-align:left;margin-bottom:12px;">Modifie, puis appuie sur Enregistrer. Les visiteurs voient les changements au prochain chargement du site.</p>
         <div id="edList"></div>
         <button class="btn btn-gold btn-block" type="button" id="edSave">💾 Enregistrer les changements</button>
       </div>
-      <div id="adStats" style="display:none;"></div>
-      <div id="adParts" style="display:none;"></div>
-      <div id="adGroups" style="display:none;"></div>
       <button class="btn btn-ghost btn-block" type="button" id="adLogout" style="margin-top:12px;">Se déconnecter</button>
     </div>
   </div>
@@ -850,24 +852,13 @@
         <button type="button" class="pay sel" data-mode="in">Connexion</button>
         <button type="button" class="pay" data-mode="up">Inscription</button>
       </div>
+      <div><span class="lbl">Langue</span>
+        <div class="lang-row" style="margin:0;"><button type="button" class="pay" data-lang="fr">Français</button><button type="button" class="pay" data-lang="en">English</button></div></div>
       <div><label class="lbl" for="auName">Pseudo</label>
         <input type="text" id="auName" maxlength="20" autocomplete="username" placeholder="Ex : HK_Sniper">
         <div class="hint">3 à 20 caractères : lettres, chiffres, point, tiret, underscore.</div></div>
       <div><label class="lbl" for="auPass">Mot de passe</label>
         <input type="password" id="auPass" autocomplete="current-password" placeholder="6 caractères minimum"></div>
-      <div class="overlay" id="grpOverlay">
-  <div class="modal" role="dialog" aria-modal="true" aria-label="Groupe">
-    <div class="modal-head"><h3 id="grpTitle" data-i18n="grp_new">Nouveau groupe</h3><button class="x" type="button" data-close>✕</button></div>
-    <form id="grpForm" novalidate>
-      <label class="photo-btn grp-photo"><span id="grpPhotoLbl" data-i18n="grp_photo">📷 Photo du groupe</span><input type="file" id="grpPhoto" accept="image/*"></label>
-      <div><label class="lbl" for="grpName" data-i18n="grp_name">Nom du groupe</label><input type="text" id="grpName" maxlength="30"></div>
-      <div><label class="lbl" for="grpDesc" data-i18n="grp_desc">Description</label><textarea id="grpDesc" maxlength="200"></textarea></div>
-      <div><span class="lbl" data-i18n="grp_members">Membres (tes amis)</span><div id="grpPick"></div></div>
-      <button class="btn btn-primary btn-block" type="submit" data-i18n="grp_create">Créer le groupe</button>
-    </form>
-    <div id="grpInfo" style="display:none;"></div>
-  </div>
-</div>
       <div id="auRefBox" style="display:none;"><label class="lbl" for="auRef">Code parrain (facultatif)</label>
         <input type="text" id="auRef" maxlength="12" autocomplete="off" placeholder="Ex : kCF9zuZF">
         <div class="hint">Si un ami t'a invité, entre son code : il gagne 2 points.</div></div>
@@ -893,10 +884,9 @@
   <div class="modal" role="dialog" aria-modal="true" aria-label="Messagerie">
     <div class="modal-head"><h3>💬 Messagerie</h3><button class="x" type="button" data-close>✕</button></div>
     <div class="hub-tabs" id="hubTabs">
-  <button type="button" class="pay sel" data-hub="msg" data-i18n="tab_msg">💬 Messages</button>
-  <button type="button" class="pay" data-hub="grp" data-i18n="tab_grp">👥 Groupes</button>
-  <button type="button" class="pay" data-hub="notif" data-i18n="tab_notif">🔔 Alertes</button>
-</div>
+      <button type="button" class="pay sel" data-hub="msg">💬 Messages</button>
+      <button type="button" class="pay" data-hub="notif">🔔 Notifications</button>
+    </div>
     <div id="hubBody"></div>
   </div>
 </div>
@@ -905,27 +895,17 @@
   <div class="modal chatm" role="dialog" aria-modal="true" aria-label="Conversation"><div id="chatBody"></div></div>
 </div>
 
-<div class="overlay" id="grpOverlay">
-  <div class="modal" role="dialog" aria-modal="true" aria-label="Groupe">
-    <div class="modal-head"><h3 id="grpTitle" data-i18n="grp_new">Nouveau groupe</h3><button class="x" type="button" data-close>✕</button></div>
+<div class="overlay" id="grpNewOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Créer un groupe">
+    <div class="modal-head"><h3>👥 Créer un groupe</h3><button class="x" type="button" data-close>✕</button></div>
     <form id="grpForm" novalidate>
-      <label class="photo-btn grp-photo"><span id="grpPhotoLbl" data-i18n="grp_photo">📷 Photo du groupe</span><input type="file" id="grpPhoto" accept="image/*"></label>
-      <div><label class="lbl" for="grpName" data-i18n="grp_name">Nom du groupe</label><input type="text" id="grpName" maxlength="30"></div>
-      <div><label class="lbl" for="grpDesc" data-i18n="grp_desc">Description</label><textarea id="grpDesc" maxlength="200"></textarea></div>
-      <div><span class="lbl" data-i18n="grp_members">Membres (tes amis)</span><div id="grpPick"></div></div>
-      <button class="btn btn-primary btn-block" type="submit" data-i18n="grp_create">Créer le groupe</button>
+      <div><label class="lbl" for="gName">Nom du groupe</label><input type="text" id="gName" maxlength="30" placeholder="Ex : Les Snipers HK"></div>
+      <div><label class="lbl" for="gDesc">Description (facultatif)</label><input type="text" id="gDesc" maxlength="120" placeholder="De quoi on parle ?"></div>
+      <div><span class="lbl">Type de groupe</span>
+        <div class="pay-options" id="gType"><button type="button" class="pay sel" data-pub="1">🌍 Public</button><button type="button" class="pay" data-pub="0">🔒 Privé (code)</button></div></div>
+      <div><label class="lbl" for="gMax">Nombre max de membres</label><input type="number" id="gMax" min="2" max="200" value="50"></div>
+      <button class="btn btn-primary btn-block" type="submit">Créer le groupe</button>
     </form>
-    <div id="grpInfo" style="display:none;"></div>
-  </div>
-</div>
-
-<div class="overlay" id="langOverlay">
-  <div class="modal" role="dialog" aria-modal="true" aria-label="Language">
-    <div class="modal-head"><h3>🌍 Langue / Language</h3></div>
-    <div class="pay-options">
-      <button type="button" class="pay" data-lang="fr">Français</button>
-      <button type="button" class="pay" data-lang="en">English</button>
-    </div>
   </div>
 </div>
 
@@ -942,6 +922,7 @@
     <button class="btn btn-gold btn-block" type="button" id="spinBtn">Tourner la roue</button>
   </div>
 </div>
+
 <script>
 (async function(){
 const HK_DB = 'https://kenmukaya-f3f46-default-rtdb.europe-west1.firebasedatabase.app';
@@ -980,18 +961,14 @@ const ACCOUNTS = [1,2,3,4,5].map(n => ({
   name:'Compte '+n, price:30000, old:35000, img:'compte'+n+'.jpg',
   details:'Détails à compléter : rang, niveau, skins, armes, nombre de diamants restants...'
 }));
-// Roue : réductions possibles (0 = pas de gain)
 const WHEEL = [3, 0, 5, 2, 10, 0, 5, 3];
-// La roue est ouverte chaque jour de 20h à minuit (heure de l'appareil)
 const WHEEL_OPEN_H = 20, WHEEL_CLOSE_H = 24;
-// Tournois : infos affichées, durée d'affichage (jours) et base de données partagée.
 const TOURNOI = {
   titre:'Tournoi Hacken Store',
   infos:'Date, mode de jeu et récompenses annoncés sur WhatsApp après ton inscription.',
   jours:30,
   api:HK_DB
 };
-// Admin : "Clé API Web" de ton projet Firebase
 const ADMIN = { apiKey:'AIzaSyCdXkvGy90NDqYvOjYjmDwpuRSCTi3C95Q' };
 (function(){
   const n = (v, d) => (v === '' || v == null || isNaN(+v)) ? d : +v;
@@ -1027,9 +1004,94 @@ function picHTML(src, alt){
   imgSrc(src).then(d => { if(d) i.src = d; else fail(); }).catch(fail);
   return [i, ph];
 }
+
+/* ===== LANGUE FR / EN ===== */
+let LANG = 'fr'; try{ if(localStorage.getItem('hkstore-lang') === 'en') LANG = 'en'; }catch(e){}
+document.documentElement.lang = LANG;
+const D = {
+'Discute, ajoute des amis, publie et participe aux tournois.':'Chat, add friends, post and join tournaments.',
+'Entrer dans la boutique':'Enter the shop','Quitter la boutique':'Leave the shop','← Quitter la boutique':'← Leave the shop',
+'Vendeur vérifié':'Verified seller','Serveur MENA':'MENA server','Actus':'News','Groupes':'Groups','Tournois':'Tournaments',
+'Suggestions':'Suggestions','Nouveaux joueurs et gens à ajouter en ami.':'New players and people to add as friends.',
+'Discute à plusieurs, envoie des photos. Les messages disparaissent après 48h.':'Chat in groups and send photos. Messages disappear after 48h.',
+'Créer un groupe':'Create a group','Rejoindre avec un code':'Join with a code','Chercher un groupe':'Search a group',
+'Communauté':'Community','Ta note':'Your note','Ajouter une photo':'Add a photo','Publier':'Post',
+'Choisis ton pack':'Choose your pack','Ta commande':'Your order','Comptes à vendre':'Accounts for sale',
+'Booyah Pass et abonnements':'Booyah Pass and subscriptions','Moyen de paiement':'Payment method',
+'Confirmer la commande':'Confirm order','Commander ce compte':'Order this account','En savoir plus':'Learn more','Masquer':'Hide',
+'Copier':'Copy','Total à payer':'Total to pay','Aucun article choisi':'No item selected','Commander':'Order',
+'Pourquoi Hacken Store':'Why Hacken Store','Ils nous font confiance':'They trust us','Questions fréquentes':'FAQ',
+'Se connecter':'Log in','Connexion':'Log in','Inscription':'Sign up','Créer mon compte':'Create my account',
+'Se déconnecter':'Log out','Mot de passe':'Password','Pseudo':'Username','Langue':'Language','Français ou English.':'French or English.',
+'Paramètres':'Settings','Thème d\'affichage':'Display theme','Clair':'Light','Sombre':'Dark',
+'Messagerie':'Messaging','Messages':'Messages','Notifications':'Notifications','Activité':'Activity',
+'Mon compte':'My account','Compte':'Account','Profil':'Profile','Mes amis':'My friends','Trouver un joueur':'Find a player',
+'Chercher':'Search','Valider':'Confirm','Parrainage':'Referral','Ajouter en ami':'Add friend','Message':'Message','Retirer':'Remove',
+'Demandes d\'amis':'Friend requests','Tout lu':'Mark all read','Trouver des amis':'Find friends','Chargement...':'Loading...',
+'Dis bonjour':'Say hello','Partager':'Share','Supprimer':'Delete','Publications':'Posts','Membres':'Members','Textes':'Texts','Stats':'Stats',
+'Aucune notification pour le moment.':'No notifications yet.',
+'Pas encore de conversation. Ajoute des amis pour discuter.':'No conversations yet. Add friends to chat.',
+'Aucun message. Dis bonjour 👋':'No messages. Say hello 👋','Aucun message. Dis bonjour':'No messages. Say hello',
+'Aucune publication pour le moment. Sois le premier !':'No posts yet. Be the first!',
+'Aucun participant pour le moment. Sois le premier !':'No participants yet. Be the first!',
+'Ton nom ou pseudo':'Your name or username','Numéro WhatsApp':'WhatsApp number','ID joueur Free Fire':'Free Fire player ID',
+'M\'inscrire au tournoi':'Join the tournament','Participants':'Participants','Nom du bénéficiaire':'Beneficiary name',
+'Numéro':'Number','Opérateur':'Operator','Montant à envoyer':'Amount to send','Conditions de vente':'Terms of sale',
+'Envoyer sur WhatsApp':'Send on WhatsApp','Contacter le support':'Contact support','J\'ai compris':'Got it',
+'Bienvenue sur Hacken Store':'Welcome to Hacken Store','Crée ton compte':'Create your account','Ajoute des amis':'Add friends',
+'Discute et publie':'Chat and post','Boutique':'Shop','Tournois':'Tournaments','Rejoindre la guilde':'Join the guild',
+'Enregistrer la bio':'Save bio','Tourner la roue':'Spin the wheel','Roue HK':'HK Wheel','Roue HK de 20h':'HK Wheel at 8 PM',
+'Nom du groupe':'Group name','Description (facultatif)':'Description (optional)','Type de groupe':'Group type','Public':'Public',
+'Privé (code)':'Private (code)','Nombre max de membres':'Max members','Créer le groupe':'Create group',
+'Code parrain (facultatif)':'Referral code (optional)',
+'Garde bien ton mot de passe : il ne peut pas être récupéré par e-mail.':'Keep your password safe: it cannot be recovered by email.',
+'3 à 20 caractères : lettres, chiffres, point, tiret, underscore.':'3 to 20 characters: letters, digits, dot, dash, underscore.',
+'6 caractères minimum':'6 characters minimum','Écris un message...':'Write a message...','Écris un commentaire...':'Write a comment...',
+'Pas d\'insultes, pas de pub, pas de numéros personnels.':'No insults, no ads, no personal numbers.',
+'Raconte ta victoire, pose une question, partage un conseil...':'Share your win, ask a question, give a tip...',
+'Pseudo exact':'Exact username','Chercher une conversation':'Search a conversation','Impossible de charger les publications.':'Could not load posts.',
+'Chaque publication est vérifiée et disparaît après 48h.':'Each post is reviewed and disappears after 48h.',
+'Inscription gratuite. Ton nom reste dans la liste pendant 30 jours.':'Free sign-up. Your name stays in the list for 30 days.',
+'Déconnecté':'Logged out','Choisis d\'abord un article.':'Choose an item first.','Numéro copié':'Number copied','Montant copié':'Amount copied',
+'Inscription enregistrée !':'Registration saved!','Cet ID est déjà inscrit.':'This ID is already registered.',
+'Inscription impossible, réessaie.':'Could not register, try again.','Action impossible.':'Action not possible.',
+'Connecte-toi pour publier.':'Log in to post.','Connecte-toi pour aimer une publication.':'Log in to like a post.',
+'Connecte-toi pour commenter.':'Log in to comment.','Connecte-toi pour voir les profils.':'Log in to see profiles.',
+'Connecte-toi pour voir tes messages.':'Log in to see your messages.','Message non envoyé.':'Message not sent.',
+'Pseudo ou mot de passe incorrect.':'Wrong username or password.','Ce pseudo est déjà pris.':'This username is already taken.',
+'Connexion impossible.':'Could not log in.','Envoyé ! Visible après validation.':'Sent! Visible after review.'
+};
+const tr = s => (LANG === 'en' && typeof s === 'string') ? (D[s.trim()] || s) : s;
+const SKIPTR = 'script,style,textarea,input,.post p,.bub>span,.cm span,.prof-bio,.conv:not(.notif) .conv-mid>span';
+function trNode(n){
+  if(LANG !== 'en' || !n.nodeValue || !n.nodeValue.trim()) return;
+  const p = n.parentElement; if(p && p.closest(SKIPTR)) return;
+  const t = n.nodeValue.trim(); if(D[t]) n.nodeValue = n.nodeValue.replace(t, D[t]);
+}
+function trAttr(e){
+  ['placeholder','title','aria-label'].forEach(a => { const v = e.getAttribute && e.getAttribute(a); if(v && D[v.trim()]) e.setAttribute(a, D[v.trim()]); });
+}
+function trTree(r){
+  if(LANG !== 'en') return;
+  if(r.nodeType === 3) return trNode(r);
+  if(r.nodeType !== 1) return;
+  const w = document.createTreeWalker(r, NodeFilter.SHOW_TEXT), l = [];
+  while(w.nextNode()) l.push(w.currentNode);
+  l.forEach(trNode); trAttr(r); r.querySelectorAll('[placeholder],[title],[aria-label]').forEach(trAttr);
+}
+if(LANG === 'en'){
+  trTree(document.body);
+  new MutationObserver(ms => ms.forEach(m => { if(m.type === 'characterData') trNode(m.target); else m.addedNodes.forEach(trTree); })).observe(document.body, { childList:true, subtree:true, characterData:true });
+}
+HK.tr = tr; HK.lang = () => LANG;
+$$('[data-lang]').forEach(b => {
+  b.classList.toggle('sel', b.dataset.lang === LANG);
+  b.addEventListener('click', () => { if(b.dataset.lang === LANG) return; try{ localStorage.setItem('hkstore-lang', b.dataset.lang); }catch(e){} location.reload(); });
+});
+
 let toastT;
 function toast(msg, err){
-  const t = $('#toast'); t.textContent = msg; t.className = 'toast on' + (err ? ' err' : '');
+  const t = $('#toast'); t.textContent = tr(msg); t.className = 'toast on' + (err ? ' err' : '');
   clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 2800);
 }
 const open = id => $(id).classList.add('open');
@@ -1042,6 +1104,15 @@ const copyText = (txt, msg) => {
   else toast(txt);
 };
 $('#supportBtn').href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent('Bonjour Hacken Store, j\'ai une question.');
+
+/* ===== BOUTIQUE MASQUÉE ===== */
+const openShop = () => { document.body.classList.add('shop-open'); $('#shopWrap').scrollIntoView({ behavior:'smooth' }); };
+const closeShop = () => { document.body.classList.remove('shop-open'); scrollTo({ top:0, behavior:'smooth' }); };
+document.addEventListener('click', e => {
+  if(e.target.closest('[data-shop]')) return openShop();
+  if(e.target.closest('#shopExit')) return closeShop();
+  if(e.target.closest('a[href="#packs"],a[href="#order"],a[href="#comptes"],a[href="#faq"]')) document.body.classList.add('shop-open');
+}, true);
 
 /* THÈME */
 function setTheme(m){
@@ -1063,7 +1134,7 @@ $('#themeLight').addEventListener('click', () => setTheme('light'));
 $('#themeDark').addEventListener('click', () => setTheme('dark'));
 $('#guideBtn').addEventListener('click', () => open('#guideOverlay'));
 $('#settingsBtn').addEventListener('click', () => open('#settingsOverlay'));
-open('#guideOverlay');
+try{ if(!localStorage.getItem('hk-guide-seen')){ open('#guideOverlay'); localStorage.setItem('hk-guide-seen', '1'); } }catch(e){}
 
 /* =====================================================
    CARROUSEL FLUIDE
@@ -1116,7 +1187,6 @@ function Carousel(root, opts){
   go(0); restart();
   return { go, get index(){ return i; }, get moved(){ return moved; } };
 }
-
 (function(){
   const track = $('#carBonus .car-track');
   JSON.parse(track.dataset.slides).forEach(([src0, alt], bi) => {
@@ -1133,15 +1203,15 @@ function Carousel(root, opts){
    ===================================================== */
 const sel = { label:'', price:0, compte:false };
 let promo = null;
-
 function card(opts){
   const b = document.createElement('button');
   b.type = 'button'; b.className = 'card';
   const pic = document.createElement('div'); pic.className = 'pic';
   picHTML(opts.img, opts.alt).forEach(el => pic.appendChild(el));
-  if(opts.best){ const t = document.createElement('span'); t.className = 'tag best'; t.textContent = '🔥 Meilleur prix'; pic.appendChild(t); }
-  if(opts.bonus){ const t = document.createElement('span'); t.className = 'tag best'; t.textContent = opts.bonus; pic.appendChild(t); }
-  if(opts.off){ const t = document.createElement('span'); t.className = 'tag off'; t.textContent = '-' + opts.off + '%'; pic.appendChild(t); }
+  const tag = (cls, txt) => { const t = document.createElement('span'); t.className = 'tag ' + cls; t.textContent = txt; pic.appendChild(t); };
+  if(opts.best) tag('best', '🔥 Meilleur prix');
+  if(opts.bonus) tag('best', opts.bonus);
+  if(opts.off) tag('off', '-' + opts.off + '%');
   const tick = document.createElement('span'); tick.className = 'tick'; tick.textContent = '✓'; pic.appendChild(tick);
   const info = document.createElement('div'); info.className = 'info';
   info.innerHTML = '<div class="qty"></div><div class="price' + (opts.gold ? ' gold' : '') + '"></div>' + (opts.rate ? '<div class="rate"></div>' : '');
@@ -1174,7 +1244,6 @@ function card(opts){
   const s = $('#gridSubs');
   SUBS.forEach(([title, p, img, label]) => s.appendChild(card({ title, alt: label, img, price: p, gold: true, label })));
 })();
-
 function discounted(){
   if(!promo || sel.compte || !sel.price) return sel.price;
   return Math.round(sel.price * (1 - promo.pct / 100) / 50) * 50;
@@ -1185,9 +1254,7 @@ function choose(label, price, compte){
   refresh();
 }
 function refresh(){
-  const has = !!sel.label;
-  const tot = discounted();
-  const withPromo = promo && !sel.compte && has;
+  const has = !!sel.label, tot = discounted(), withPromo = promo && !sel.compte && has;
   $('#chosenLabel').innerHTML = has ? 'Article choisi : <b></b>' : 'Aucun article choisi';
   if(has) $('#chosenLabel b').textContent = sel.label;
   $('#totalVal').textContent = has ? fmt(tot) : '—';
@@ -1200,31 +1267,27 @@ function refresh(){
   $('#bar').classList.toggle('on', has);
 }
 $('#barBtn').addEventListener('click', () => $('#order').scrollIntoView({ behavior:'smooth' }));
-
 function calc(){
-  const b = parseInt($('#budget').value, 10);
-  const box = $('#calcRes');
-  if(!b || b < 0){ box.textContent = 'Entre ton budget pour voir le meilleur pack.'; return; }
+  const b = parseInt($('#budget').value, 10), box = $('#calcRes');
+  if(!b || b < 0){ box.textContent = LANG === 'en' ? 'Enter your budget to see the best pack.' : 'Entre ton budget pour voir le meilleur pack.'; return; }
   const ok = DIAMONDS.filter(d => d[1] <= b).sort((x, y) => y[0] - x[0])[0];
-  if(!ok){ box.textContent = 'Le plus petit pack coûte ' + fmt(DIAMONDS[0][1]) + '.'; return; }
+  if(!ok){ box.textContent = (LANG === 'en' ? 'The smallest pack costs ' : 'Le plus petit pack coûte ') + fmt(DIAMONDS[0][1]) + '.'; return; }
   const left = b - ok[1];
-  box.innerHTML = 'Avec ton budget : <strong></strong>' + (left > 0 ? ' (il te reste ' + fmt(left) + ')' : '');
-  $('strong', box).textContent = ok[0] + ' 💎 à ' + fmt(ok[1]);
+  box.innerHTML = (LANG === 'en' ? 'With your budget: ' : 'Avec ton budget : ') + '<strong></strong>' + (left > 0 ? (LANG === 'en' ? ' (you keep ' : ' (il te reste ') + fmt(left) + ')' : '');
+  $('strong', box).textContent = ok[0] + ' 💎 — ' + fmt(ok[1]);
 }
 $('#budgetBtn').addEventListener('click', calc);
 $('#budget').addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); calc(); } });
 
 /* =====================================================
-   PAIEMENT
+   PAIEMENT + COMMANDE
    ===================================================== */
 let payKey = '';
 $$('#payOptions .pay[data-pay]').forEach(b => b.addEventListener('click', () => {
   $$('#payOptions .pay').forEach(x => x.classList.remove('sel'));
   b.classList.add('sel'); payKey = b.dataset.pay;
   const a = PAYS[payKey];
-  $('#pdOperator').textContent = a.operator;
-  $('#pdNumber').textContent = a.number;
-  $('#pdName').textContent = a.name;
+  $('#pdOperator').textContent = a.operator; $('#pdNumber').textContent = a.number; $('#pdName').textContent = a.name;
   $('#payDetails').classList.add('on');
 }));
 $('#copyNum').addEventListener('click', () => copyText($('#pdNumber').textContent, 'Numéro copié'));
@@ -1232,41 +1295,26 @@ $('#copyAmt').addEventListener('click', () => {
   if(!sel.label) return toast('Choisis d\'abord un article.', true);
   copyText(String(discounted()), 'Montant copié');
 });
-
-/* =====================================================
-   ENVOI DE LA COMMANDE
-   ===================================================== */
 const digits = s => s.replace(/\D/g, '');
 function bad(el, msg){ el.classList.add('bad'); el.focus(); toast(msg, true); }
 $$('#orderForm input, #tForm input').forEach(i => i.addEventListener('input', () => i.classList.remove('bad')));
-
 $('#orderForm').addEventListener('submit', e => {
   e.preventDefault();
   const idEl = $('#playerId'), phEl = $('#senderPhone'), txEl = $('#txId');
   const id = digits(idEl.value), phone = phEl.value.trim(), tx = txEl.value.trim();
   if(!sel.label){ toast('Choisis d\'abord un article.', true); $('#packs').scrollIntoView({ behavior:'smooth' }); return; }
-  if(!sel.compte && (id.length < 6 || id.length > 14)){ return bad(idEl, 'ID joueur invalide : 6 à 14 chiffres.'); }
+  if(!sel.compte && (id.length < 6 || id.length > 14)) return bad(idEl, 'ID joueur invalide : 6 à 14 chiffres.');
   if(!payKey){ toast('Choisis un moyen de paiement.', true); return; }
-  if(digits(phone).length < 9){ return bad(phEl, 'Numéro de téléphone invalide.'); }
-  if(tx.length < 6){ return bad(txEl, 'Numéro de transaction trop court.'); }
+  if(digits(phone).length < 9) return bad(phEl, 'Numéro de téléphone invalide.');
+  if(tx.length < 6) return bad(txEl, 'Numéro de transaction trop court.');
   if(!$('#acceptCond').checked){ toast('Coche la case après avoir envoyé l\'argent.', true); return; }
-
-  const ref = 'HK' + Date.now().toString().slice(-6);
-  const tot = discounted();
-  const withPromo = promo && !sel.compte;
-  const msg = '🧊 *NOUVELLE COMMANDE — HACKEN STORE* 🧊\n'
-    + 'Référence : ' + ref + '\n'
-    + '━━━━━━━━━━━━━━━━━━━\n'
-    + '🎮 Article : ' + sel.label + '\n'
-    + (sel.compte ? '' : '🆔 ID joueur : ' + id + '\n')
-    + '💳 Paiement : ' + PAYS[payKey].operator + '\n'
-    + '💰 Montant envoyé : ' + fmt(tot) + '\n'
+  const ref = 'HK' + Date.now().toString().slice(-6), tot = discounted(), withPromo = promo && !sel.compte;
+  const msg = '🧊 *NOUVELLE COMMANDE — HACKEN STORE* 🧊\nRéférence : ' + ref + '\n━━━━━━━━━━━━━━━━━━━\n'
+    + '🎮 Article : ' + sel.label + '\n' + (sel.compte ? '' : '🆔 ID joueur : ' + id + '\n')
+    + '💳 Paiement : ' + PAYS[payKey].operator + '\n💰 Montant envoyé : ' + fmt(tot) + '\n'
     + (withPromo ? '🎁 Code Roue HK : ' + promo.code + ' (-' + promo.pct + '%)\n' : '')
-    + '📱 Numéro qui a envoyé l\'argent : ' + phone + '\n'
-    + '🔢 Numéro de transaction : ' + tx + '\n'
-    + '━━━━━━━━━━━━━━━━━━━\n'
-    + '✅ Je confirme avoir déjà envoyé l\'argent.\n'
-    + 'Merci de vérifier et confirmer la recharge.';
+    + '📱 Numéro qui a envoyé l\'argent : ' + phone + '\n🔢 Numéro de transaction : ' + tx + '\n'
+    + '━━━━━━━━━━━━━━━━━━━\n✅ Je confirme avoir déjà envoyé l\'argent.\nMerci de vérifier et confirmer la recharge.';
   $('#waLink').href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
   $('#confirm').classList.add('on');
   $('#confirm').scrollIntoView({ behavior:'smooth', block:'center' });
@@ -1288,24 +1336,22 @@ $('#orderForm').addEventListener('submit', e => {
   });
   function show(i){
     const a = ACCOUNTS[i];
-    $('#accName').textContent = a.name;
-    $('#accPrice').textContent = fmt(a.price);
-    $('#accOld').textContent = a.old ? fmt(a.old) : '';
-    $('#compteDetails').textContent = a.details;
+    $('#accName').textContent = a.name; $('#accPrice').textContent = fmt(a.price);
+    $('#accOld').textContent = a.old ? fmt(a.old) : ''; $('#compteDetails').textContent = a.details;
     $$('.thumb').forEach((t, j) => t.classList.toggle('on', j === i));
   }
   const car = Carousel($('#carComptes'), { onChange: show });
   $('#carComptes').addEventListener('click', e => {
     if(e.target.closest('.car-arrow') || car.moved) return;
-    const a = ACCOUNTS[car.index];
-    const lb = $('#lbImg'); lb.style.display = 'block'; imgSrc(a.img).then(d => { lb.src = d; });
+    const a = ACCOUNTS[car.index], lb = $('#lbImg');
+    lb.style.display = 'block'; imgSrc(a.img).then(d => { lb.src = d; });
     lb.onerror = () => { lb.style.display = 'none'; };
     $('#lbTitle').textContent = a.name; $('#lbCap').textContent = fmt(a.price);
     open('#lightboxOverlay');
   });
   $('#compteDetailsBtn').addEventListener('click', function(){
     const on = $('#compteDetails').classList.toggle('on');
-    this.textContent = on ? 'Masquer' : 'En savoir plus';
+    this.textContent = tr(on ? 'Masquer' : 'En savoir plus');
   });
   $('#compteOrderBtn').addEventListener('click', () => {
     const a = ACCOUNTS[car.index];
@@ -1322,25 +1368,16 @@ $('#orderForm').addEventListener('submit', e => {
 (function(){
   const KEY = 'hkstore-tournoi', TTL = TOURNOI.jours * 864e5, DAY = 864e5;
   const api = TOURNOI.api ? TOURNOI.api.replace(/\/$/, '') + '/participants.json' : '';
-  $('#tTitle').textContent = TOURNOI.titre;
-  $('#tInfos').textContent = TOURNOI.infos;
+  $('#tTitle').textContent = TOURNOI.titre; $('#tInfos').textContent = TOURNOI.infos;
   const alive = l => l.filter(p => p && p.t && Date.now() - p.t < TTL);
   const intl = ph => { const d = digits(ph); return d.charAt(0) === '0' ? '243' + d.slice(1) : d; };
-
   async function getAll(){
-    if(api){
-      try{ const r = await fetch(api); const o = await r.json(); return alive(Object.values(o || {})); }catch(e){}
-    }
+    if(api){ try{ const r = await fetch(api); const o = await r.json(); return alive(Object.values(o || {})); }catch(e){} }
     try{ return alive(JSON.parse(localStorage.getItem(KEY) || '[]')); }catch(e){ return []; }
   }
   async function add(p){
-    if(api){
-      const r = await fetch(api, { method:'POST', body: JSON.stringify(p) });
-      if(!r.ok) throw new Error('api');
-      return;
-    }
-    const l = await getAll(); l.push(p);
-    localStorage.setItem(KEY, JSON.stringify(l));
+    if(api){ const r = await fetch(api, { method:'POST', body: JSON.stringify(p) }); if(!r.ok) throw new Error('api'); return; }
+    const l = await getAll(); l.push(p); localStorage.setItem(KEY, JSON.stringify(l));
   }
   function render(l){
     const box = $('#tList'); box.innerHTML = '';
@@ -1350,18 +1387,15 @@ $('#orderForm').addEventListener('submit', e => {
       const d = document.createElement('div'); d.className = 'trow';
       d.innerHTML = '<i></i><div class="tm"><b></b><span></span></div><a class="tw" target="_blank" rel="noopener"></a>';
       const left = Math.max(1, Math.ceil((p.t + TTL - Date.now()) / DAY));
-      $('i', d).textContent = l.length - i;
-      $('b', d).textContent = p.name;
+      $('i', d).textContent = l.length - i; $('b', d).textContent = p.name;
       if(p.uid && HK.badgeEl){ const bd = HK.badgeEl(p.uid); if(bd) $('b', d).appendChild(bd); }
-      $('span', d).textContent = 'ID ' + p.id + ' · encore ' + left + ' j';
+      $('span', d).textContent = 'ID ' + p.id + ' · ' + (LANG === 'en' ? left + ' d left' : 'encore ' + left + ' j');
       const a = $('a', d); a.textContent = '📱 ' + p.phone; a.href = 'https://wa.me/' + intl(p.phone);
       box.appendChild(d);
     });
   }
   const reload = () => getAll().then(render);
-  HK.tReload = reload;
-  reload();
-
+  HK.tReload = reload; reload();
   $('#tForm').addEventListener('submit', async e => {
     e.preventDefault();
     const nEl = $('#tName'), pEl = $('#tPhone'), iEl = $('#tId');
@@ -1372,13 +1406,9 @@ $('#orderForm').addEventListener('submit', e => {
     if(!$('#tOk').checked) return toast('Coche la case pour accepter l\'affichage public.', true);
     const list = await getAll();
     if(list.some(p => p.id === id)) return toast('Cet ID est déjà inscrit.', true);
-    try{
-      const mu = HK.me && HK.me();
-      await add({ name, phone, id, t: Date.now(), uid: mu ? mu.uid : '' });
-    }catch(err){ return toast('Inscription impossible, réessaie.', true); }
-    $('#tForm').reset();
-    toast('🏆 Inscription enregistrée !');
-    reload();
+    try{ const mu = HK.me && HK.me(); await add({ name, phone, id, t: Date.now(), uid: mu ? mu.uid : '' }); }
+    catch(err){ return toast('Inscription impossible, réessaie.', true); }
+    $('#tForm').reset(); toast('🏆 Inscription enregistrée !'); reload();
   });
 })();
 
@@ -1398,92 +1428,71 @@ $('#orderForm').addEventListener('submit', e => {
       ctx.strokeStyle = '#0B1426'; ctx.lineWidth = 4; ctx.stroke();
       ctx.save(); ctx.translate(R, R); ctx.rotate(a0 + step / 2);
       ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
-      ctx.fillStyle = p ? '#04202A' : '#90A4C8';
-      ctx.font = '900 44px Orbitron, sans-serif';
+      ctx.fillStyle = p ? '#04202A' : '#90A4C8'; ctx.font = '900 44px Orbitron, sans-serif';
       ctx.fillText(p ? '-' + p + '%' : '✕', R - 34, 0);
       ctx.restore();
     });
   }
   draw();
   if(document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
-
   const today = () => new Date().toDateString();
-  function load(){
-    try{
-      const s = JSON.parse(localStorage.getItem('hkstore-wheel') || 'null');
-      if(s && s.date === today()) return s;
-    }catch(e){}
-    return null;
-  }
+  function load(){ try{ const s = JSON.parse(localStorage.getItem('hkstore-wheel') || 'null'); if(s && s.date === today()) return s; }catch(e){} return null; }
   function save(s){ try{ localStorage.setItem('hkstore-wheel', JSON.stringify(s)); }catch(e){} }
   function showResult(s){
     const r = $('#wheelRes');
     if(s.pct){
-      r.innerHTML = '<strong></strong>Ton code (valable aujourd\'hui) :<br><span class="code"></span>';
-      $('strong', r).textContent = '-' + s.pct + ' % !';
-      $('.code', r).textContent = s.code;
-    } else {
-      r.textContent = 'Pas de réduction cette fois. Reviens demain à 20h pour retenter ta chance.';
-    }
+      r.innerHTML = '<strong></strong>' + (LANG === 'en' ? 'Your code (valid today):' : 'Ton code (valable aujourd\'hui) :') + '<br><span class="code"></span>';
+      $('strong', r).textContent = '-' + s.pct + ' % !'; $('.code', r).textContent = s.code;
+    } else r.textContent = LANG === 'en' ? 'No discount this time. Come back tomorrow at 8 PM.' : 'Pas de réduction cette fois. Reviens demain à 20h pour retenter ta chance.';
   }
   function applyPromo(s){ promo = s.pct ? s : null; refresh(); }
-
-  let spun = load();
-  let rot = 0, busy = false;
+  let spun = load(), rot = 0, busy = false;
   if(spun){ applyPromo(spun); showResult(spun); }
-
   const pad = n => String(n).padStart(2, '0');
   const isOpen = () => { const h = new Date().getHours(); return h >= WHEEL_OPEN_H && h < WHEEL_CLOSE_H; };
+  const en = LANG === 'en';
   function tick(){
     if(busy) return;
     const btn = $('#spinBtn'), fab = $('.fab'), res = $('#wheelRes');
-    if(spun){ btn.disabled = true; btn.textContent = 'Reviens demain à ' + WHEEL_OPEN_H + 'h'; fab.textContent = '🎡 Roue HK'; fab.classList.remove('live'); return; }
+    if(spun){ btn.disabled = true; btn.textContent = (en ? 'Come back tomorrow at ' : 'Reviens demain à ') + WHEEL_OPEN_H + 'h'; fab.textContent = '🎡 Roue HK'; fab.classList.remove('live'); return; }
     if(isOpen()){
-      btn.disabled = false; btn.textContent = 'Tourner la roue';
-      fab.textContent = '🎡 Roue ouverte !'; fab.classList.add('live');
-      res.textContent = 'La roue est ouverte. Lance-la !';
-      return;
+      btn.disabled = false; btn.textContent = tr('Tourner la roue');
+      fab.textContent = en ? '🎡 Wheel open!' : '🎡 Roue ouverte !'; fab.classList.add('live');
+      res.textContent = en ? 'The wheel is open. Spin it!' : 'La roue est ouverte. Lance-la !'; return;
     }
     const d = new Date(); d.setHours(WHEEL_OPEN_H, 0, 0, 0);
     if(d <= new Date()) d.setDate(d.getDate() + 1);
     const s = Math.max(0, Math.floor((d - new Date()) / 1000));
     const t = pad(Math.floor(s / 3600)) + ':' + pad(Math.floor(s % 3600 / 60)) + ':' + pad(s % 60);
-    btn.disabled = true; btn.textContent = 'Ouverture à ' + WHEEL_OPEN_H + 'h';
-    fab.textContent = '🎡 Roue · ' + t; fab.classList.remove('live');
-    res.innerHTML = 'La roue s\'ouvre chaque soir à <strong>' + WHEEL_OPEN_H + 'h</strong>Ouverture dans ' + t;
+    btn.disabled = true; btn.textContent = (en ? 'Opens at ' : 'Ouverture à ') + WHEEL_OPEN_H + 'h';
+    fab.textContent = (en ? '🎡 Wheel · ' : '🎡 Roue · ') + t; fab.classList.remove('live');
+    res.innerHTML = (en ? 'The wheel opens every evening at ' : 'La roue s\'ouvre chaque soir à ') + '<strong>' + WHEEL_OPEN_H + 'h</strong>' + (en ? 'Opens in ' : 'Ouverture dans ') + t;
   }
   tick(); setInterval(tick, 1000);
-
   $$('[data-open-wheel]').forEach(b => b.addEventListener('click', () => open('#wheelOverlay')));
   $('#spinBtn').addEventListener('click', () => {
     if(busy || spun || !isOpen()) return;
-    busy = true; $('#spinBtn').disabled = true; $('#wheelRes').textContent = 'La roue tourne...';
-    const k = Math.floor(Math.random() * N);
-    const center = (k + 0.5) * (360 / N);
-    const jitter = (Math.random() - 0.5) * (360 / N) * 0.6;
+    busy = true; $('#spinBtn').disabled = true; $('#wheelRes').textContent = en ? 'Spinning...' : 'La roue tourne...';
+    const k = Math.floor(Math.random() * N), center = (k + 0.5) * (360 / N), jitter = (Math.random() - 0.5) * (360 / N) * 0.6;
     rot = Math.ceil(rot / 360) * 360 + 360 * 5 + (360 - center) + jitter;
     cv.style.transform = 'rotate(' + rot + 'deg)';
     setTimeout(() => {
-      const pct = WHEEL[k];
-      const code = pct ? 'HK' + pct + '-' + Math.random().toString(36).slice(2, 6).toUpperCase() : '';
+      const pct = WHEEL[k], code = pct ? 'HK' + pct + '-' + Math.random().toString(36).slice(2, 6).toUpperCase() : '';
       spun = { date: today(), pct, code };
-      save(spun); applyPromo(spun); showResult(spun);
-      busy = false; tick();
+      save(spun); applyPromo(spun); showResult(spun); busy = false; tick();
       if(pct) toast('🎉 -' + pct + ' % appliqué à ta commande');
     }, 5200);
   });
 })();
 
 /* =====================================================
-   COMMUNAUTÉ — publications validées par l'admin
+   COMMUNAUTÉ, COMPTES, ADMIN  (la suite est dans la partie 5b)
    ===================================================== */
 (function(){
   const DB = TOURNOI.api ? TOURNOI.api.replace(/\/$/, '') : '';
   const feed = $('#feed');
   let token = '', imgData = '', lastCm = 0;
-  const dev = (() => { try{ let d = localStorage.getItem('hkstore-dev'); if(!d){ d = Math.random().toString(36).slice(2, 12); localStorage.setItem('hkstore-dev', d); } return d; }catch(e){ return 'x' + Math.random().toString(36).slice(2, 10); } })();
-  /* ===== Comptes membres (pseudo + mot de passe) et badges ===== */
-  let me = null, utok = '', uexp = 0, rtok = '', BADGES = {}, mode = 'in';
+  let me = null, utok = '', uexp = 0, rtok = '', BADGES = {}, BANNED = {}, mode = 'in';
   const BADGE_INFO = {
     verified:{ c:'#1D9BF0', label:'Compte vérifié' },
     officiel:{ c:'#F2B84B', label:'Officiel Hacken Store' },
@@ -1497,12 +1506,18 @@ $('#orderForm').addEventListener('submit', e => {
     const e = document.createElement('span'); e.className = 'bdg'; e.title = BADGE_INFO[b].label; e.style.color = BADGE_INFO[b].c; e.innerHTML = BADGE_SVG;
     return e;
   }
+  /* Message de parrainage modifiable par l'admin : {code} et {link} */
+  const REF_DEF = {
+    fr:'Rejoins Hacken Store 🌍 discussions, amis, groupes, publications, tournois et recharge Free Fire. Inscris-toi avec mon code {code} : {link}',
+    en:'Join Hacken Store 🌍 chat, friends, groups, posts, tournaments and Free Fire top-ups. Sign up with my code {code}: {link}'
+  };
+  HK.refMsg = (code, link) => ((CFG.refMsg && CFG.refMsg[LANG]) || REF_DEF[LANG]).replace(/\{code\}/g, code).replace(/\{link\}/g, link);
   try{ const sv = JSON.parse(localStorage.getItem('hkstore-session') || 'null'); if(sv && sv.uid && sv.rt){ me = { uid: sv.uid, name: sv.name }; rtok = sv.rt; } }catch(e){}
   function saveSession(){ try{ localStorage.setItem('hkstore-session', JSON.stringify({ uid: me.uid, name: me.name, rt: rtok })); }catch(e){} }
   function logout(silent){
     me = null; utok = ''; rtok = '';
     try{ localStorage.removeItem('hkstore-session'); }catch(e){}
-    authUI();
+    authUI(); if(HK.sug) HK.sug();
     if(!silent){ closeAll(); loadFeed(); toast('Déconnecté'); }
   }
   async function userToken(){
@@ -1516,34 +1531,33 @@ $('#orderForm').addEventListener('submit', e => {
     }catch(e){ logout(true); return ''; }
   }
   const uurl = async path => DB + '/' + path + '.json?auth=' + await userToken();
-  function openAuth(msg){ $('#auMsg').textContent = msg || ''; authUI(); open('#authOverlay'); }
+  function openAuth(msg){ $('#auMsg').textContent = tr(msg || ''); authUI(); open('#authOverlay'); }
   function authUI(){
     $('#auForm').style.display = me ? 'none' : 'flex';
     $('#auMe').style.display = me ? 'block' : 'none';
-    $('#auTitle').textContent = me ? '👤 Mon compte' : '👤 Compte';
+    $('#auTitle').textContent = me ? '👤 ' + tr('Mon compte') : '👤 ' + tr('Compte');
     if(me){
       $('#auWho').textContent = me.name;
       const b = BADGES[me.uid];
-      $('#auBadge').textContent = b && BADGE_INFO[b] ? 'Badge : ' + BADGE_INFO[b].label : 'Pas encore de badge. Les badges sont donnés par Hacken Store.';
+      $('#auBadge').textContent = b && BADGE_INFO[b] ? (LANG === 'en' ? 'Badge: ' : 'Badge : ') + BADGE_INFO[b].label : (LANG === 'en' ? 'No badge yet. Badges are given by Hacken Store.' : 'Pas encore de badge. Les badges sont donnés par Hacken Store.');
     }
     const w = $('#pWho'); w.innerHTML = '';
     if(me){
-      w.append('Publier en tant que ');
+      w.append(LANG === 'en' ? 'Post as ' : 'Publier en tant que ');
       const b = document.createElement('b'); b.textContent = me.name; w.appendChild(b);
       const bd = badgeEl(me.uid); if(bd) w.appendChild(bd);
     }else{
       const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'btn btn-ghost';
-      btn.textContent = '🔒 Se connecter pour publier'; btn.addEventListener('click', () => openAuth(''));
+      btn.textContent = '🔒 ' + (LANG === 'en' ? 'Log in to post' : 'Se connecter pour publier'); btn.addEventListener('click', () => openAuth(''));
       w.appendChild(btn);
     }
-    loadSug();
   }
   $('#userBtn').addEventListener('click', () => me ? openProfile(me.uid, me.name) : openAuth(''));
   $('#auOut').addEventListener('click', () => logout());
   $$('#auForm [data-mode]').forEach(b => b.addEventListener('click', () => {
     mode = b.dataset.mode;
     $$('#auForm [data-mode]').forEach(x => x.classList.toggle('sel', x === b));
-    $('#auGo').textContent = mode === 'in' ? 'Se connecter' : 'Créer mon compte';
+    $('#auGo').textContent = tr(mode === 'in' ? 'Se connecter' : 'Créer mon compte');
     $('#auPass').autocomplete = mode === 'in' ? 'current-password' : 'new-password'; $('#auRefBox').style.display = mode === 'up' ? 'block' : 'none';
   }));
   const AUTH_ERR = { EMAIL_EXISTS:'Ce pseudo est déjà pris.', INVALID_LOGIN_CREDENTIALS:'Pseudo ou mot de passe incorrect.', INVALID_PASSWORD:'Pseudo ou mot de passe incorrect.', EMAIL_NOT_FOUND:'Pseudo ou mot de passe incorrect.', WEAK_PASSWORD:'Mot de passe trop court (6 caractères minimum).', TOO_MANY_ATTEMPTS_TRY_LATER:'Trop d\'essais, réessaie plus tard.' };
@@ -1562,40 +1576,43 @@ $('#orderForm').addEventListener('submit', e => {
       const d = await r.json();
       if(!r.ok){ const k = ((d.error && d.error.message) || '').split(' ')[0]; throw new Error(AUTH_ERR[k] || 'Connexion impossible.'); }
       utok = d.idToken; uexp = Date.now() + (+d.expiresIn) * 1000; rtok = d.refreshToken;
-      let pname = name;
+      try{ const bn = await (await fetch(DB + '/banned/' + d.localId + '.json?auth=' + utok)).json(); if(bn === true) throw new Error('Compte suspendu par Hacken Store.'); }catch(x){ if(x.message.indexOf('suspendu') > -1) throw x; }
+      let pname = name, ulang = '';
       if(mode === 'up'){
-        const w = await fetch(DB + '/users/' + d.localId + '.json?auth=' + utok, { method:'PUT', body: JSON.stringify({ name, t: Date.now() }) });
+        const w = await fetch(DB + '/users/' + d.localId + '.json?auth=' + utok, { method:'PUT', body: JSON.stringify({ name, t: Date.now(), lang: LANG }) });
         if(!w.ok) throw new Error('Compte créé, mais profil impossible (règles Firebase).');
       }else{
-        try{ const pr = await (await fetch(DB + '/users/' + d.localId + '.json?auth=' + utok)).json(); if(pr && pr.name) pname = pr.name; }catch(x){}
+        try{ const pr = await (await fetch(DB + '/users/' + d.localId + '.json?auth=' + utok)).json(); if(pr && pr.name) pname = pr.name; if(pr && pr.lang) ulang = pr.lang; }catch(x){}
       }
-      me = { uid: d.localId, name: pname }; saveSession(); syncLang(); if(mode === 'up'){ const rc = ($('#auRef').value || '').trim(); if(rc) await useRef(rc); }
-      $('#auPass').value = ''; closeAll(); authUI(); loadFeed(); toast('👋 Bienvenue ' + pname);
+      me = { uid: d.localId, name: pname }; saveSession();
+      if(mode === 'up'){ const rc = ($('#auRef').value || '').trim(); if(rc) await useRef(rc); }
+      $('#auPass').value = '';
+      if(ulang && ulang !== LANG){ try{ localStorage.setItem('hkstore-lang', ulang); }catch(x){} return location.reload(); }
+      closeAll(); authUI(); loadFeed(); if(HK.sug) HK.sug(); toast((LANG === 'en' ? '👋 Welcome ' : '👋 Bienvenue ') + pname);
     }catch(err){ toast(err.message || 'Connexion impossible.', true); }
     btn.disabled = false;
   });
-  authUI();
 
   const url = (p, auth) => DB + '/' + p + '.json' + (auth && token ? '?auth=' + token : '');
   const okImg = s => typeof s === 'string' && s.indexOf('data:image/jpeg;base64,') === 0;
-  const when = t => new Date(t).toLocaleDateString('fr-FR', { day:'numeric', month:'short' }) + ' · ' + new Date(t).toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+  const loc = LANG === 'en' ? 'en-GB' : 'fr-FR';
+  const when = t => new Date(t).toLocaleDateString(loc, { day:'numeric', month:'short' }) + ' · ' + new Date(t).toLocaleTimeString(loc, { hour:'2-digit', minute:'2-digit' });
   $$('#pForm input, #pForm textarea').forEach(i => i.addEventListener('input', () => i.classList.remove('bad')));
 
-  function compress(file, max){
+  function compress(file, max, lim){
+    lim = lim || 200000;
     return new Promise((res, rej) => {
-      const r = new FileReader();
-      r.onerror = rej;
+      const r = new FileReader(); r.onerror = rej;
       r.onload = () => {
-        const im = new Image();
-        im.onerror = rej;
+        const im = new Image(); im.onerror = rej;
         im.onload = () => {
           const k = Math.min(1, (max || 900) / Math.max(im.width, im.height));
           const c = document.createElement('canvas');
           c.width = Math.round(im.width * k); c.height = Math.round(im.height * k);
           c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
           let q = .72, d = c.toDataURL('image/jpeg', q);
-          while(d.length > 200000 && q > .3){ q -= .1; d = c.toDataURL('image/jpeg', q); }
-          d.length > 240000 ? rej(new Error('big')) : res(d);
+          while(d.length > lim && q > .3){ q -= .1; d = c.toDataURL('image/jpeg', q); }
+          d.length > lim * 1.2 ? rej(new Error('big')) : res(d);
         };
         im.src = r.result;
       };
@@ -1603,9 +1620,9 @@ $('#orderForm').addEventListener('submit', e => {
     });
   }
 
-  function postEl(id, p, mode){
+  function postEl(id, p, pm){
     const d = document.createElement('article'); d.className = 'post';
-    d.innerHTML = '<div class="po-head"><i></i><div><b></b><span></span></div></div>' + (okImg(p.img) ? '<img alt="Publication" loading="lazy" decoding="async">' : '') + '<p></p><div class="post-act"></div>';
+    d.innerHTML = '<div class="po-head"><i></i><div><b></b><span></span></div></div>' + (okImg(p.img) ? '<img alt="Publication">' : '') + '<p></p><div class="post-act"></div>';
     $('i', d).textContent = (p.name || '?').charAt(0).toUpperCase(); setAv($('i', d), p.uid);
     $('.po-head b', d).textContent = p.name; { const bd = badgeEl(p.uid); if(bd) $('.po-head b', d).appendChild(bd); }
     if(p.uid){ const hb = $('.po-head b', d); hb.style.cursor = 'pointer'; hb.addEventListener('click', () => openProfile(p.uid, p.name)); }
@@ -1614,16 +1631,17 @@ $('#orderForm').addEventListener('submit', e => {
     $('p', d).textContent = p.text || '';
     const act = $('.post-act', d);
     const mk = (txt, cls, fn) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn ' + cls; b.textContent = txt; b.addEventListener('click', fn); act.appendChild(b); return b; };
-    if(mode === 'pending'){
-      mk('✅ Approuver', 'btn-primary', () => approve(id, p));
-      mk('🗑 Refuser', 'btn-ghost', () => { remove('pub_attente', id, loadPending).then(() => { if(p.uid) api('DELETE', 'my_pending/' + p.uid + '/' + id).catch(() => {}); }); });
+    if(pm === 'pending'){
+      mk('✅ ' + (LANG === 'en' ? 'Approve' : 'Approuver'), 'btn-primary', () => approve(id, p));
+      mk('🗑 ' + (LANG === 'en' ? 'Reject' : 'Refuser'), 'btn-ghost', () => remove('pub_attente', id, loadPending));
     } else {
       let liked = !!(me && p.likes && p.likes[me.uid]), nl = p.likes ? Object.keys(p.likes).length : 0;
       const lb = mk('', 'btn-ghost', async () => {
         if(!me) return openAuth('Connecte-toi pour aimer une publication.');
         liked = !liked; nl += liked ? 1 : -1; paint();
         try{
-          const r = await fetch(await uurl('publications/' + id + '/likes/' + me.uid), liked ? { method:'PUT', body:'true' } : { method:'DELETE' }); if(r.ok && liked && p.uid && p.uid !== me.uid) pushNotif(p.uid, 'like', 'a aimé ta publication', 'like_' + id + '_' + me.uid);
+          const r = await fetch(await uurl('publications/' + id + '/likes/' + me.uid), liked ? { method:'PUT', body:'true' } : { method:'DELETE' });
+          if(r.ok && liked && p.uid && p.uid !== me.uid) pushNotif(p.uid, 'like', 'a aimé ta publication', 'like_' + id + '_' + me.uid);
           if(!r.ok) throw 0;
         }catch(e){ liked = !liked; nl += liked ? 1 : -1; paint(); toast('Action impossible.', true); }
       });
@@ -1635,7 +1653,8 @@ $('#orderForm').addEventListener('submit', e => {
       const list = document.createElement('div');
       const addCm = (cid, c) => {
         const e = document.createElement('div'); e.className = 'cm'; e.innerHTML = '<b></b> <span></span>';
-        $('b', e).textContent = c.name; if(c.uid){ $('b', e).style.cursor = 'pointer'; $('b', e).addEventListener('click', () => openProfile(c.uid, c.name)); } $('span', e).textContent = c.text; { const bd = badgeEl(c.uid); if(bd) $('b', e).after(bd); }
+        $('b', e).textContent = c.name; if(c.uid){ $('b', e).style.cursor = 'pointer'; $('b', e).addEventListener('click', () => openProfile(c.uid, c.name)); }
+        $('span', e).textContent = c.text; { const bd = badgeEl(c.uid); if(bd) $('b', e).appendChild(bd); }
         if(token && cid){
           const x = document.createElement('button'); x.type = 'button'; x.className = 'x'; x.textContent = '🗑';
           x.addEventListener('click', async () => { try{ await api('DELETE', 'publications/' + id + '/comments/' + cid); e.remove(); }catch(err){ toast('Action impossible.', true); } });
@@ -1645,13 +1664,13 @@ $('#orderForm').addEventListener('submit', e => {
       };
       cmts.forEach(([cid, c]) => addCm(cid, c));
       const row = document.createElement('div'); row.className = 'cm-row';
-      row.innerHTML = me ? '<input type="text" maxlength="200" placeholder="Écris un commentaire..."><button type="button" class="btn btn-primary">Envoyer</button>' : '<button type="button" class="btn btn-ghost">🔒 Se connecter pour commenter</button>';
+      row.innerHTML = me ? '<input type="text" maxlength="200" placeholder="Écris un commentaire..."><button type="button" class="btn btn-primary">' + (LANG === 'en' ? 'Send' : 'Envoyer') + '</button>' : '<button type="button" class="btn btn-ghost">🔒 Se connecter pour commenter</button>';
       const ti = $('input', row), sb = $('button', row);
       sb.addEventListener('click', async () => {
         if(!me) return openAuth('Connecte-toi pour commenter.');
         const text = ti.value.trim();
-        if(!text) return toast('Écris un commentaire.', true);
-        if(Date.now() - lastCm < 15000) return toast('Attends quelques secondes.', true);
+        if(!text) return toast(LANG === 'en' ? 'Write a comment.' : 'Écris un commentaire.', true);
+        if(Date.now() - lastCm < 15000) return toast(LANG === 'en' ? 'Wait a few seconds.' : 'Attends quelques secondes.', true);
         const c = { name: me.name, uid: me.uid, text, t: Date.now() };
         try{
           const r = await fetch(await uurl('publications/' + id + '/comments'), { method:'POST', body: JSON.stringify(c) });
@@ -1661,27 +1680,25 @@ $('#orderForm').addEventListener('submit', e => {
         }catch(err){ toast('Commentaire impossible.', true); }
       });
       box.append(list, row); d.appendChild(box);
-      mk('📤 Partager', 'btn-ghost', () => window.open('https://wa.me/?text=' + encodeURIComponent('📰 ' + p.name + ' sur Hacken Store :\n' + (p.text || '') + '\n' + location.href.split('#')[0]), '_blank'));
-      if(token) mk('🗑 Supprimer', 'btn-ghost', () => remove('publications', id, loadFeed));
+      mk('📤 ' + tr('Partager'), 'btn-ghost', () => window.open('https://wa.me/?text=' + encodeURIComponent('📰 ' + p.name + ' — Hacken Store :\n' + (p.text || '') + '\n' + location.href.split('#')[0]), '_blank'));
+      if(token) mk('🗑 ' + tr('Supprimer'), 'btn-ghost', () => remove('publications', id, loadFeed));
     }
     return d;
   }
-
   async function api(method, path, body){
     const r = await fetch(url(path, true), { method, body: body ? JSON.stringify(body) : undefined });
     if(!r.ok){ if(r.status === 401) token = ''; throw new Error(r.status); }
     return r.json();
   }
   async function approve(id, p){
-    try{ await api('PUT', 'publications/' + id, Object.assign({}, p, { ta: Date.now() })); await api('DELETE', 'pub_attente/' + id); if(p.uid) await api('DELETE', 'my_pending/' + p.uid + '/' + id).catch(() => {}); toast('Publication approuvée ✅'); loadPending(); loadFeed(); }
+    try{ await api('PUT', 'publications/' + id, Object.assign({}, p, { ta: Date.now() })); await api('DELETE', 'pub_attente/' + id); toast('Publication approuvée ✅'); loadPending(); loadFeed(); }
     catch(e){ toast('Action impossible (reconnecte-toi).', true); }
   }
   async function remove(node, id, after){
-    if(!confirm('Supprimer cette publication ?')) return;
+    if(!confirm(LANG === 'en' ? 'Delete this post?' : 'Supprimer cette publication ?')) return;
     try{ await api('DELETE', node + '/' + id); toast('Supprimée'); after(); }
     catch(e){ toast('Action impossible (reconnecte-toi).', true); }
   }
-
   async function purge(){
     try{
       const r = await fetch(url('publications', true) + '&orderBy=%22ta%22&endAt=' + (Date.now() - 172800000));
@@ -1699,12 +1716,11 @@ $('#orderForm').addEventListener('submit', e => {
       authUI();
       const o = await r.json() || {};
       const list = Object.entries(o).filter(([k, v]) => v.ta && Date.now() - v.ta < 172800000).sort((a, b) => b[1].ta - a[1].ta);
-      feed.innerHTML = ''; await showMine();
-      if(!list.length && !feed.children.length){ feed.innerHTML = '<div class="t-empty">Aucune publication pour le moment. Sois le premier !</div>'; return; }
+      feed.innerHTML = '';
+      if(!list.length){ feed.innerHTML = '<div class="t-empty">Aucune publication pour le moment. Sois le premier !</div>'; return; }
       list.forEach(([id, p]) => feed.appendChild(postEl(id, p, 'feed')));
     }catch(e){ feed.innerHTML = '<div class="t-empty">Impossible de charger les publications.</div>'; }
   }
-
   $('#pFile').addEventListener('change', async e => {
     const f = e.target.files[0]; if(!f) return;
     if(!/^image\//.test(f.type)) return toast('Choisis une image.', true);
@@ -1712,11 +1728,9 @@ $('#orderForm').addEventListener('submit', e => {
     catch(err){ imgData = ''; $('#pFile').value = ''; toast('Image trop lourde ou illisible.', true); }
   });
   $('#pRm').addEventListener('click', () => { imgData = ''; $('#pFile').value = ''; $('#pPrevBox').style.display = 'none'; });
-
   $('#pForm').addEventListener('submit', async e => {
     e.preventDefault();
-    const tEl = $('#pText');
-    const text = tEl.value.trim();
+    const tEl = $('#pText'), text = tEl.value.trim();
     if(!me) return openAuth('Connecte-toi pour publier.');
     if(!DB) return toast('Communauté indisponible.', true);
     if(text.length < 3 && !imgData) return bad(tEl, 'Écris une note ou ajoute une photo.');
@@ -1725,14 +1739,14 @@ $('#orderForm').addEventListener('submit', e => {
     const post = { name: me.name, uid: me.uid, text, t: Date.now() }; if(imgData) post.img = imgData;
     try{
       const r = await fetch(await uurl('pub_attente'), { method:'POST', body: JSON.stringify(post) });
-      if(!r.ok) throw 0; try{ const pid = (await r.json()).name; await fb('PUT', 'my_pending/' + me.uid + '/' + pid, { text: post.text, t: post.t, hasImg: !!post.img }); }catch(e){}
+      if(!r.ok) throw 0;
       try{ localStorage.setItem('hkstore-lastpost', String(Date.now())); }catch(x){}
       $('#pForm').reset(); imgData = ''; $('#pPrevBox').style.display = 'none';
-      toast('📨 Envoyé ! Visible après validation.'); loadFeed();
+      toast('📨 Envoyé ! Visible après validation.');
     }catch(err){ toast('Envoi impossible, réessaie.', true); }
   });
 
-  /* Admin */
+  /* ===== ADMIN ===== */
   function showAdmin(){
     $('#adLogin').style.display = token ? 'none' : 'flex';
     $('#adPanel').style.display = token ? 'block' : 'none';
@@ -1780,8 +1794,7 @@ $('#orderForm').addEventListener('submit', e => {
     const l = document.createElement('label'); l.className = 'ed-f';
     const t = document.createElement('span'); t.textContent = label;
     const i = document.createElement('input'); i.type = 'text'; if(num) i.inputMode = 'numeric';
-    i.value = val == null ? '' : val; F[key] = i;
-    l.append(t, i); parent.appendChild(l);
+    i.value = val == null ? '' : val; F[key] = i; l.append(t, i); parent.appendChild(l);
   }
   function mkImg(parent, key, label){
     const l = document.createElement('label'); l.className = 'photo-btn';
@@ -1819,32 +1832,33 @@ $('#orderForm').addEventListener('submit', e => {
       tournoi: { titre: g('t_titre'), infos: g('t_infos') },
       notice: g('notice')
     };
+    if(CFG.refMsg) cfg.refMsg = CFG.refMsg;
     $('#edSave').disabled = true; $('#edSave').textContent = 'Enregistrement...';
     try{
       for(const k of Object.keys(staged)){ await api('PUT', 'images/' + k, staged[k]); IM[k] = 1; delete staged[k]; }
-      cfg.imgs = IM;
-      await api('PUT', 'config', cfg);
+      cfg.imgs = IM; await api('PUT', 'config', cfg);
       toast('✅ Site mis à jour. Recharge la page pour voir.');
     }catch(err){ toast('Échec : reconnecte-toi ou vérifie les règles.', true); }
     $('#edSave').disabled = false; $('#edSave').textContent = '💾 Enregistrer les changements';
   }
+  $('#edSave').addEventListener('click', saveCfg);
   $$('#adTabs button').forEach(b => b.addEventListener('click', () => {
     $$('#adTabs button').forEach(x => x.classList.toggle('sel', x === b));
-    $('#adPosts').style.display = b.dataset.tab === 'posts' ? 'block' : 'none';
-    $('#adEdit').style.display = b.dataset.tab === 'edit' ? 'block' : 'none';
-    $('#adMembers').style.display = b.dataset.tab === 'members' ? 'block' : 'none';
+    ['posts', 'members', 'groups', 'texts', 'edit', 'stats'].forEach(k => { $('#ad' + k[0].toUpperCase() + k.slice(1)).style.display = b.dataset.tab === k ? 'block' : 'none'; });
     if(b.dataset.tab === 'edit' && !$('#edList').children.length) buildEditor();
     if(b.dataset.tab === 'members') loadMembers();
+    if(b.dataset.tab === 'groups') loadAdGroups();
+    if(b.dataset.tab === 'texts') buildTexts();
+    if(b.dataset.tab === 'stats') loadStats();
   }));
-  $('#edSave').addEventListener('click', saveCfg);
 
-  /* Admin : membres et badges */
+  /* Admin : membres, badges, bannissement */
   let MB = [], RF = {};
   async function loadMembers(){
     const box = $('#mbList'); box.innerHTML = '<div class="t-empty">Chargement...</div>';
     try{
-      const [u, bg, rf] = await Promise.all([api('GET', 'users'), api('GET', 'badges'), api('GET', 'referrals').catch(() => ({}))]); RF = rf || {};
-      BADGES = bg || {};
+      const [u, bg, rf, bn] = await Promise.all([api('GET', 'users'), api('GET', 'badges'), api('GET', 'referrals').catch(() => ({})), api('GET', 'banned').catch(() => ({}))]);
+      RF = rf || {}; BADGES = bg || {}; BANNED = bn || {};
       MB = Object.entries(u || {}).map(([id, v]) => ({ id, name: v.name || '?', t: v.t || 0 })).sort((x, y) => y.t - x.t);
       renderMembers();
     }catch(e){ box.innerHTML = '<div class="t-empty">Erreur de lecture (règles ou connexion).</div>'; }
@@ -1854,10 +1868,10 @@ $('#orderForm').addEventListener('submit', e => {
     const l = MB.filter(m => !q || m.name.toLowerCase().indexOf(q) > -1).slice(0, 60);
     if(!l.length){ box.innerHTML = '<div class="t-empty">Aucun membre.</div>'; return; }
     l.forEach(m => {
-      const r = document.createElement('div'); r.className = 'trow';
-      r.innerHTML = '<div class="tm"><b></b><span></span></div><select></select>';
+      const r = document.createElement('div'); r.className = 'trow'; r.style.flexWrap = 'wrap';
+      r.innerHTML = '<div class="tm"><b></b><span></span></div><select></select><button type="button" class="btn btn-ghost"></button>';
       $('b', r).textContent = m.name; { const bd = badgeEl(m.id); if(bd) $('b', r).appendChild(bd); }
-      $('span', r).textContent = (m.t ? 'Inscrit le ' + new Date(m.t).toLocaleDateString('fr-FR') : '') + (RF[m.id] ? ' · 🎁 ' + Object.keys(RF[m.id]).length * 2 + ' pts' : '');
+      $('span', r).textContent = (m.t ? new Date(m.t).toLocaleDateString('fr-FR') : '') + (RF[m.id] ? ' · 🎁 ' + Object.keys(RF[m.id]).length * 2 + ' pts' : '') + (BANNED[m.id] ? ' · 🚫' : '');
       const sel = $('select', r);
       [['', 'Aucun badge'], ['verified', '✔ Vérifié (bleu)'], ['officiel', '✔ Officiel (or)'], ['vip', '✔ VIP (violet)'], ['champion', '✔ Champion (orange)']].forEach(([v, t]) => { const o = document.createElement('option'); o.value = v; o.textContent = t; sel.appendChild(o); });
       sel.value = BADGES[m.id] || '';
@@ -1865,7 +1879,16 @@ $('#orderForm').addEventListener('submit', e => {
         try{
           if(sel.value){ await api('PUT', 'badges/' + m.id, sel.value); BADGES[m.id] = sel.value; }
           else{ await api('DELETE', 'badges/' + m.id); delete BADGES[m.id]; }
-          if(sel.value) api('POST', 'notifs/' + m.id, { type:'badge', from:'admin', name:'Hacken Store', text:'t\'a donné le badge ' + BADGE_INFO[sel.value].label, t: Date.now() }).catch(() => {}); toast('Badge mis à jour ✅');
+          if(sel.value) api('POST', 'notifs/' + m.id, { type:'badge', from:'admin', name:'Hacken Store', text:'t\'a donné le badge ' + BADGE_INFO[sel.value].label, t: Date.now() }).catch(() => {});
+          toast('Badge mis à jour ✅');
+        }catch(e){ toast('Action impossible (reconnecte-toi).', true); }
+      });
+      const bb = $('button', r); const paintB = () => { bb.textContent = BANNED[m.id] ? '✔ Débannir' : '🚫 Bannir'; }; paintB();
+      bb.addEventListener('click', async () => {
+        try{
+          if(BANNED[m.id]){ await api('DELETE', 'banned/' + m.id); delete BANNED[m.id]; }
+          else{ if(!confirm('Bannir ' + m.name + ' ?')) return; await api('PUT', 'banned/' + m.id, true); BANNED[m.id] = true; }
+          paintB(); renderMembers();
         }catch(e){ toast('Action impossible (reconnecte-toi).', true); }
       });
       box.appendChild(r);
@@ -1873,7 +1896,57 @@ $('#orderForm').addEventListener('submit', e => {
   }
   $('#mbSearch').addEventListener('input', renderMembers);
 
-  /* ===== Profil, amis, messages ===== */
+  /* Admin : groupes */
+  async function loadAdGroups(){
+    const box = $('#gpList'); box.innerHTML = '<div class="t-empty">Chargement...</div>';
+    try{
+      const o = Object.entries(await api('GET', 'groups') || {}).sort((a, b) => b[1].t - a[1].t);
+      box.innerHTML = ''; if(!o.length){ box.innerHTML = '<div class="t-empty">Aucun groupe.</div>'; return; }
+      o.forEach(([id, g]) => {
+        const r = document.createElement('div'); r.className = 'trow';
+        r.innerHTML = '<div class="tm"><b></b><span></span></div><button type="button" class="btn btn-ghost">🗑</button>';
+        $('b', r).textContent = g.name; $('span', r).textContent = (g.pub ? '🌍 ' : '🔒 ') + (g.desc || '');
+        $('button', r).addEventListener('click', async () => {
+          if(!confirm('Supprimer le groupe « ' + g.name + ' » ?')) return;
+          try{ await api('DELETE', 'groups/' + id); await api('DELETE', 'gmembers/' + id); await api('DELETE', 'gmsgs/' + id); r.remove(); toast('Groupe supprimé'); }
+          catch(e){ toast('Action impossible (reconnecte-toi).', true); }
+        });
+        box.appendChild(r);
+      });
+    }catch(e){ box.innerHTML = '<div class="t-empty">Erreur de lecture (règles ou connexion).</div>'; }
+  }
+
+  /* Admin : textes modifiables (message de parrainage) */
+  function buildTexts(){
+    const box = $('#adTexts'); box.innerHTML = '';
+    box.innerHTML = '<p class="note" style="text-align:left;margin-bottom:12px;">Message envoyé quand un membre partage son lien de parrainage. Utilise <b>{code}</b> pour le code et <b>{link}</b> pour le lien.</p>';
+    const mk = (lbl, key) => {
+      const w = document.createElement('div'); w.className = 'ed-item';
+      const l = document.createElement('label'); l.className = 'ed-f'; const s = document.createElement('span'); s.textContent = lbl;
+      const t = document.createElement('textarea'); t.value = (CFG.refMsg && CFG.refMsg[key]) || REF_DEF[key]; t.maxLength = 300; l.append(s, t); w.appendChild(l); box.appendChild(w); return t;
+    };
+    const tf = mk('Message (français)', 'fr'), te = mk('Message (English)', 'en');
+    const sv = document.createElement('button'); sv.type = 'button'; sv.className = 'btn btn-gold btn-block'; sv.textContent = '💾 Enregistrer les textes';
+    sv.addEventListener('click', async () => {
+      try{ const v = { fr: tf.value.trim() || REF_DEF.fr, en: te.value.trim() || REF_DEF.en }; await api('PUT', 'config/refMsg', v); CFG.refMsg = v; toast('Textes enregistrés ✅'); }
+      catch(e){ toast('Action impossible (reconnecte-toi).', true); }
+    });
+    box.appendChild(sv);
+  }
+
+  /* Admin : statistiques */
+  async function loadStats(){
+    const box = $('#adStats'); box.innerHTML = '<div class="t-empty">Chargement...</div>';
+    const cnt = async p => { try{ const r = await fetch(url(p, true) + '&shallow=true'); const o = r.ok ? await r.json() : null; return o ? Object.keys(o).length : 0; }catch(e){ return 0; } };
+    const [u, g, w, p, b] = await Promise.all([cnt('users'), cnt('groups'), cnt('pub_attente'), cnt('participants'), cnt('badges')]);
+    box.innerHTML = '';
+    [['👥 Membres', u], ['🗂 Groupes', g], ['⏳ Publications en attente', w], ['🏆 Inscrits au tournoi', p], ['✔ Badges donnés', b]].forEach(([t, n]) => {
+      const r = document.createElement('div'); r.className = 'trow'; r.innerHTML = '<div class="tm"><b></b></div><b></b>'; $('b', r).textContent = t; r.lastChild.textContent = n; box.appendChild(r);
+    });
+  }
+
+  /* ===== Profil, amis ===== */
+  const L = (a, b) => LANG === 'en' ? b : a;
   const el = (t, c, x) => { const e = document.createElement(t); if(c) e.className = c; if(x != null) e.textContent = x; return e; };
   const cid = (a, b) => a < b ? a + '_' + b : b + '_' + a;
   let chatT = 0;
@@ -1887,7 +1960,6 @@ $('#orderForm').addEventListener('submit', e => {
     if(Object.keys(BADGES).length) return;
     try{ BADGES = (await (await fetch(url('badges'))).json()) || {}; }catch(e){}
   }
-  const profBox = () => $('#profBody');
   function frow(uid, name){
     const r = el('div', 'frow'); { const a = el('span', 'av', (name || '?').charAt(0).toUpperCase()); setAv(a, uid); r.appendChild(a); }
     const n = el('span', 'fn'); n.appendChild(nameB(uid, name)); n.addEventListener('click', () => openProfile(uid, name));
@@ -1905,7 +1977,7 @@ $('#orderForm').addEventListener('submit', e => {
     clearInterval(chatT);
     if(!me) return openAuth('Connecte-toi pour voir les profils.');
     closeAll(); ST.open = ''; open('#profOverlay');
-    const box = profBox(); box.innerHTML = '<div class="t-empty">Chargement...</div>';
+    const box = $('#profBody'); box.innerHTML = '<div class="t-empty">Chargement...</div>';
     const mine = uid === me.uid;
     try{
       await ensureBadges();
@@ -1923,21 +1995,20 @@ $('#orderForm').addEventListener('submit', e => {
       head.appendChild(nameB(uid, nm));
       const bg = BADGES[uid];
       if(bg && BADGE_INFO[bg]){ const c = el('div', 'bchip', '✔ ' + BADGE_INFO[bg].label); c.style.color = BADGE_INFO[bg].c; head.appendChild(c); }
-      const meta = (user.t ? 'Membre depuis le ' + new Date(user.t).toLocaleDateString('fr-FR') : '') + (mine ? ' · ' + Object.keys(friends).length + ' ami(s)' : '');
-      if(meta) head.appendChild(el('div', 'prof-meta', meta)); if(!mine && refs && Object.keys(refs).length) head.appendChild(el('div', 'prof-meta', '🎁 ' + Object.keys(refs).length * 2 + ' points de parrainage'));
+      const meta = (user.t ? L('Membre depuis le ', 'Member since ') + new Date(user.t).toLocaleDateString(loc) : '') + (mine ? ' · ' + Object.keys(friends).length + L(' ami(s)', ' friend(s)') : '');
+      if(meta) head.appendChild(el('div', 'prof-meta', meta));
+      if(!mine && refs && Object.keys(refs).length) head.appendChild(el('div', 'prof-meta', '🎁 ' + Object.keys(refs).length * 2 + L(' points de parrainage', ' referral points')));
       if(!mine && user.bio) head.appendChild(el('div', 'prof-bio', user.bio));
       box.appendChild(head); presence(uid).then(t => { if(t) head.appendChild(el('div', 'prof-meta', t)); });
-
       if(mine){
         const s = el('div', 'prof-sec');
-        const ta = el('textarea'); ta.maxLength = 160; ta.placeholder = 'Ta bio (160 caractères max)'; ta.value = user.bio || '';
+        const ta = el('textarea'); ta.maxLength = 160; ta.placeholder = L('Ta bio (160 caractères max)', 'Your bio (160 characters max)'); ta.value = user.bio || '';
         const sv = el('button', 'btn btn-ghost btn-block', '💾 Enregistrer la bio'); sv.type = 'button'; sv.style.marginTop = '8px';
         sv.addEventListener('click', async () => { try{ await fb('PUT', 'users/' + me.uid + '/bio', ta.value.trim()); toast('Bio enregistrée ✅'); }catch(e){ toast('Action impossible.', true); } });
         s.append(ta, sv); box.appendChild(s); renderRef(box, refs || {}, myRef);
-
         const rs = Object.entries(rq || {});
         if(rs.length){
-          const s2 = el('div', 'prof-sec'); s2.appendChild(el('div', 'subhead', '🔔 Demandes d\'amis (' + rs.length + ')'));
+          const s2 = el('div', 'prof-sec'); s2.appendChild(el('div', 'subhead', '🔔 ' + L('Demandes d\'amis', 'Friend requests') + ' (' + rs.length + ')'));
           rs.forEach(([fid, v]) => {
             const r = frow(fid, v.name);
             const ok = el('button', 'btn btn-primary', '✔'); ok.type = 'button';
@@ -1948,60 +2019,52 @@ $('#orderForm').addEventListener('submit', e => {
           });
           box.appendChild(s2);
         }
-
         const fs = Object.entries(friends);
-        const s3 = el('div', 'prof-sec'); s3.appendChild(el('div', 'subhead', '👥 Mes amis (' + fs.length + ')'));
-        if(!fs.length) s3.appendChild(el('div', 't-empty', 'Pas encore d\'amis. Cherche un pseudo ci-dessous ou touche un nom dans la communauté.'));
+        const s3 = el('div', 'prof-sec'); s3.appendChild(el('div', 'subhead', '👥 ' + L('Mes amis', 'My friends') + ' (' + fs.length + ')'));
+        if(!fs.length) s3.appendChild(el('div', 't-empty', L('Pas encore d\'amis. Regarde les suggestions ou cherche un pseudo.', 'No friends yet. Check suggestions or search a username.')));
         fs.forEach(([fid, v]) => {
           const r = frow(fid, v.name); const m = el('button', 'btn btn-primary', '💬'); m.type = 'button';
           m.addEventListener('click', () => openChat(fid, v.name)); r.appendChild(m); s3.appendChild(r);
         });
         box.appendChild(s3);
-
-        const s4 = el('div', 'prof-sec'); s4.appendChild(el('div', 'subhead', '🔎 Trouver un joueur'));
-        const row = el('div', 'chat-row'); const qi = el('input'); qi.type = 'text'; qi.placeholder = 'Pseudo exact';
-        const qb = el('button', 'btn btn-ghost', 'Chercher'); qb.type = 'button';
+        const s4 = el('div', 'prof-sec'); s4.appendChild(el('div', 'subhead', '🔎 ' + L('Trouver un joueur', 'Find a player')));
+        const row = el('div', 'chat-row'); const qi = el('input'); qi.type = 'text'; qi.placeholder = L('Pseudo exact', 'Exact username');
+        const qb = el('button', 'btn btn-ghost', L('Chercher', 'Search')); qb.type = 'button';
         qb.addEventListener('click', async () => {
           const q = qi.value.trim(); if(!q) return;
           try{
             const r = await fetch(await uurl('users') + '&orderBy=%22name%22&equalTo=' + encodeURIComponent('"' + q + '"'));
             if(!r.ok) throw 0;
             const o = Object.entries(await r.json() || {})[0];
-            if(!o) return toast('Aucun joueur avec ce pseudo.', true);
+            if(!o) return toast(L('Aucun joueur avec ce pseudo.', 'No player with this username.'), true);
             openProfile(o[0], o[1].name);
           }catch(e){ toast('Recherche impossible.', true); }
         });
         row.append(qi, qb); s4.appendChild(row); box.appendChild(s4);
-
-        const lo = el('button', 'btn btn-ghost btn-block', 'Se déconnecter'); lo.type = 'button'; lo.style.marginTop = '16px';
+        const lo = el('button', 'btn btn-ghost btn-block', L('Se déconnecter', 'Log out')); lo.type = 'button'; lo.style.marginTop = '16px';
         lo.addEventListener('click', () => logout()); box.appendChild(lo);
       } else {
         const a = el('div', 'prof-acts');
         const mk = (t, c, f) => { const b = el('button', 'btn ' + c, t); b.type = 'button'; b.addEventListener('click', f); a.appendChild(b); };
         if(friends[uid]){
           mk('💬 Message', 'btn-primary', () => openChat(uid, nm));
-          mk('Retirer', 'btn-ghost', async () => {
-            if(!confirm('Retirer cet ami ?')) return;
+          mk(L('Retirer', 'Remove'), 'btn-ghost', async () => {
+            if(!confirm(L('Retirer cet ami ?', 'Remove this friend?'))) return;
             try{ await fb('DELETE', 'friends/' + me.uid + '/' + uid); await fb('DELETE', 'friends/' + uid + '/' + me.uid); openProfile(uid, nm); }
             catch(e){ toast('Action impossible.', true); }
           });
-        } else if(got){
-          mk('✔ Accepter sa demande', 'btn-primary', () => acceptFr(uid, nm));
-        } else if(sent){
-          mk('⏳ Demande envoyée', 'btn-ghost', () => {});
-        } else {
-          mk('➕ Ajouter en ami', 'btn-primary', async () => {
-            try{ await fb('PUT', 'friend_req/' + uid + '/' + me.uid, { name: me.name, t: Date.now() }); toast('Demande envoyée 🤝'); openProfile(uid, nm); }
-            catch(e){ toast('Action impossible.', true); }
-          });
-        }
+        } else if(got) mk('✔ ' + L('Accepter sa demande', 'Accept request'), 'btn-primary', () => acceptFr(uid, nm));
+        else if(sent) mk('⏳ ' + L('Demande envoyée', 'Request sent'), 'btn-ghost', () => {});
+        else mk('➕ ' + L('Ajouter en ami', 'Add friend'), 'btn-primary', async () => {
+          try{ await fb('PUT', 'friend_req/' + uid + '/' + me.uid, { name: me.name, t: Date.now() }); toast('Demande envoyée 🤝'); openProfile(uid, nm); }
+          catch(e){ toast('Action impossible.', true); }
+        });
         box.appendChild(a);
       }
     }catch(e){ box.innerHTML = '<div class="t-empty">Profil indisponible (règles Firebase ou connexion).</div>'; }
   }
   /* ===== Parrainage ===== */
-  const GOAL = 100;
-  const refCode = () => me.uid.slice(0, 8);
+  const GOAL = 100, refCode = () => me.uid.slice(0, 8);
   async function useRef(code){
     code = (code || '').trim();
     if(code.length < 8){ toast('Code invalide (8 caractères).', true); return false; }
@@ -2019,48 +2082,43 @@ $('#orderForm').addEventListener('submit', e => {
   }
   function renderRef(box, refs, myRef){
     const list = Object.values(refs || {}).sort((a, b) => b.t - a.t), pts = list.length * 2;
-    const s = el('div', 'prof-sec'); s.appendChild(el('div', 'subhead', '🎁 Parrainage'));
+    const s = el('div', 'prof-sec'); s.appendChild(el('div', 'subhead', '🎁 ' + L('Parrainage', 'Referral')));
     const c = el('div', 'ref'); s.appendChild(c);
-    const top = el('div', 'ref-top'); top.append(el('b', '', pts + ' pts'), el('span', '', list.length + ' filleul(s) · 2 pts par ami invité'));
+    const top = el('div', 'ref-top'); top.append(el('b', '', pts + ' pts'), el('span', '', list.length + L(' filleul(s) · 2 pts par ami invité', ' referral(s) · 2 pts per friend')));
     const bar = el('div', 'ref-bar'); const fill = el('i'); fill.style.width = Math.min(100, pts / GOAL * 100) + '%'; bar.appendChild(fill);
-    c.append(top, bar, el('div', 'prof-meta', pts >= GOAL ? '🎉 Objectif atteint : contacte-nous pour ton badge !' : 'Encore ' + (GOAL - pts) + ' pts pour pouvoir demander un badge'));
+    c.append(top, bar, el('div', 'prof-meta', pts >= GOAL ? L('🎉 Objectif atteint : contacte-nous pour ton badge !', '🎉 Goal reached: contact us for your badge!') : L('Encore ', '') + (GOAL - pts) + L(' pts pour pouvoir demander un badge', ' pts left to request a badge')));
     const link = location.href.split('#')[0].split('?')[0] + '?ref=' + refCode();
     const row = el('div', 'ref-code'); row.appendChild(el('code', '', refCode()));
-    const cp = el('button', 'btn btn-ghost', '📋 Lien'); cp.type = 'button'; cp.addEventListener('click', () => copyText(link, 'Lien de parrainage copié'));
-    const sh = el('button', 'btn btn-wa', 'Partager'); sh.type = 'button';
-    sh.addEventListener('click', () => window.open('https://wa.me/?text=' + encodeURIComponent('Rejoins Hacken Store 💎 recharge Free Fire en RDC. Inscris-toi avec mon code ' + refCode() + ' : ' + link), '_blank'));
+    const cp = el('button', 'btn btn-ghost', '📋 ' + L('Lien', 'Link')); cp.type = 'button'; cp.addEventListener('click', () => copyText(link, L('Lien de parrainage copié', 'Referral link copied')));
+    const sh = el('button', 'btn btn-wa', L('Partager', 'Share')); sh.type = 'button';
+    sh.addEventListener('click', () => window.open('https://wa.me/?text=' + encodeURIComponent(HK.refMsg(refCode(), link)), '_blank'));
     row.append(cp, sh); c.appendChild(row);
     if(pts >= GOAL){
-      const g = el('button', 'btn btn-gold btn-block', '🏅 Demander mon badge sur WhatsApp'); g.type = 'button'; g.style.marginTop = '12px';
+      const g = el('button', 'btn btn-gold btn-block', '🏅 ' + L('Demander mon badge sur WhatsApp', 'Request my badge on WhatsApp')); g.type = 'button'; g.style.marginTop = '12px';
       g.addEventListener('click', () => window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent('Bonjour Hacken Store, je suis ' + me.name + ' (code ' + refCode() + '). J\'ai ' + pts + ' points de parrainage, je demande mon badge.'), '_blank'));
       c.appendChild(g);
     }
-    if(list.length) c.appendChild(el('div', 'ref-list', 'Filleuls : ' + list.slice(0, 12).map(x => x.name).join(', ') + (list.length > 12 ? '…' : '')));
+    if(list.length) c.appendChild(el('div', 'ref-list', L('Filleuls : ', 'Referrals: ') + list.slice(0, 12).map(x => x.name).join(', ') + (list.length > 12 ? '…' : '')));
     if(!myRef){
-      const r2 = el('div', 'chat-row'); const qi = el('input'); qi.type = 'text'; qi.maxLength = 12; qi.placeholder = 'Tu as un code parrain ?';
-      const qb = el('button', 'btn btn-ghost', 'Valider'); qb.type = 'button';
+      const r2 = el('div', 'chat-row'); const qi = el('input'); qi.type = 'text'; qi.maxLength = 12; qi.placeholder = L('Tu as un code parrain ?', 'Got a referral code?');
+      const qb = el('button', 'btn btn-ghost', L('Valider', 'Confirm')); qb.type = 'button';
       qb.addEventListener('click', async () => { if(await useRef(qi.value)) openProfile(me.uid, me.name); });
       r2.append(qi, qb); c.appendChild(r2);
-    } else c.appendChild(el('div', 'prof-meta', '✔ Tu as été parrainé'));
+    } else c.appendChild(el('div', 'prof-meta', '✔ ' + L('Tu as été parrainé', 'You were referred')));
     box.appendChild(s);
   }
-  /* ===== Avatars, présence, notifications, messagerie ===== */
+  /* ===== Avatars, présence, notifications ===== */
   const TITLE0 = document.title;
   const ST = { req:{}, inbox:{}, notifs:{}, tick:0, sg:'', open:'', uid:'', init:false, seen:new Set() };
   const AV = {};
   const avData = uid => AV[uid] || (AV[uid] = fetch(DB + '/avatars/' + uid + '.json').then(r => r.ok ? r.json() : null).then(d => okImg(d) ? d : '').catch(() => ''));
-  function setAv(node, uid){
-    if(!uid) return;
-    avData(uid).then(d => { if(d){ node.style.backgroundImage = 'url(' + d + ')'; node.classList.add('img'); } });
-  }
+  function setAv(node, uid){ if(!uid) return; avData(uid).then(d => { if(d){ node.style.backgroundImage = 'url(' + d + ')'; node.classList.add('img'); } }); }
   function squareImg(file, S){
     return new Promise((res, rej) => {
       const r = new FileReader(); r.onerror = rej;
       r.onload = () => { const im = new Image(); im.onerror = rej; im.onload = () => {
-        const c = document.createElement('canvas'); c.width = c.height = S;
-        const m = Math.min(im.width, im.height);
-        c.getContext('2d').drawImage(im, (im.width - m) / 2, (im.height - m) / 2, m, m, 0, 0, S, S);
-        res(c.toDataURL('image/jpeg', .8));
+        const c = document.createElement('canvas'); c.width = c.height = S; const m = Math.min(im.width, im.height);
+        c.getContext('2d').drawImage(im, (im.width - m) / 2, (im.height - m) / 2, m, m, 0, 0, S, S); res(c.toDataURL('image/jpeg', .8));
       }; im.src = r.result; };
       r.readAsDataURL(file);
     });
@@ -2069,21 +2127,17 @@ $('#orderForm').addEventListener('submit', e => {
     const f = document.createElement('input'); f.type = 'file'; f.accept = 'image/*';
     f.addEventListener('change', async () => {
       if(!f.files[0]) return;
-      try{
-        const d = await squareImg(f.files[0], 160);
-        await fb('PUT', 'avatars/' + me.uid, d);
-        AV[me.uid] = Promise.resolve(d);
-        toast('Photo mise à jour ✅'); openProfile(me.uid, me.name); loadFeed();
-      }catch(e){ toast('Photo impossible.', true); }
+      try{ const d = await squareImg(f.files[0], 160); await fb('PUT', 'avatars/' + me.uid, d); AV[me.uid] = Promise.resolve(d); toast('Photo mise à jour ✅'); openProfile(me.uid, me.name); loadFeed(); }
+      catch(e){ toast('Photo impossible.', true); }
     });
     f.click();
   }
-  const hm = t => new Date(t).toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
-  const dayLbl = t => { const d = new Date(t), n = new Date(), y = new Date(); y.setDate(n.getDate() - 1); return d.toDateString() === n.toDateString() ? 'Aujourd\'hui' : d.toDateString() === y.toDateString() ? 'Hier' : d.toLocaleDateString('fr-FR', { day:'numeric', month:'long' }); };
+  const hm = t => new Date(t).toLocaleTimeString(loc, { hour:'2-digit', minute:'2-digit' });
+  const dayLbl = t => { const d = new Date(t), n = new Date(), y = new Date(); y.setDate(n.getDate() - 1); return d.toDateString() === n.toDateString() ? L('Aujourd\'hui', 'Today') : d.toDateString() === y.toDateString() ? L('Hier', 'Yesterday') : d.toLocaleDateString(loc, { day:'numeric', month:'long' }); };
   const short = (t, n) => (t || '').length > n ? t.slice(0, n) + '…' : (t || '');
-  const fmtAgo = t => { const m = Math.round((Date.now() - t) / 60000); return m < 1 ? 'à l\'instant' : m < 60 ? 'il y a ' + m + ' min' : m < 1440 ? 'il y a ' + Math.round(m / 60) + ' h' : 'il y a ' + Math.round(m / 1440) + ' j'; };
+  const fmtAgo = t => { const m = Math.round((Date.now() - t) / 60000); return m < 1 ? L('à l\'instant', 'just now') : m < 60 ? L('il y a ' + m + ' min', m + ' min ago') : m < 1440 ? L('il y a ' + Math.round(m / 60) + ' h', Math.round(m / 60) + ' h ago') : L('il y a ' + Math.round(m / 1440) + ' j', Math.round(m / 1440) + ' d ago'); };
   async function presence(uid){
-    try{ const t = await fb('GET', 'presence/' + uid); if(!t) return ''; return Date.now() - t < 120000 ? '🟢 En ligne' : 'Vu ' + fmtAgo(t); }catch(e){ return ''; }
+    try{ const t = await fb('GET', 'presence/' + uid); if(!t) return ''; return Date.now() - t < 120000 ? '🟢 ' + L('En ligne', 'Online') : L('Vu ', 'Seen ') + fmtAgo(t); }catch(e){ return ''; }
   }
   async function pushNotif(to, type, text, id){
     if(!me || !to || to === me.uid) return;
@@ -2096,14 +2150,11 @@ $('#orderForm').addEventListener('submit', e => {
   function ping(){
     if(navigator.vibrate) navigator.vibrate([80, 40, 80]);
     if(!SND || !AC) return;
-    try{
-      [[880, 0], [1320, .13]].forEach(([f, d]) => {
-        const o = AC.createOscillator(), g = AC.createGain(); o.connect(g); g.connect(AC.destination); o.frequency.value = f;
-        const t0 = AC.currentTime + d;
-        g.gain.setValueAtTime(.001, t0); g.gain.exponentialRampToValueAtTime(.12, t0 + .02); g.gain.exponentialRampToValueAtTime(.001, t0 + .22);
-        o.start(t0); o.stop(t0 + .25);
-      });
-    }catch(e){}
+    try{ [[880, 0], [1320, .13]].forEach(([f, d]) => {
+      const o = AC.createOscillator(), g = AC.createGain(); o.connect(g); g.connect(AC.destination); o.frequency.value = f;
+      const t0 = AC.currentTime + d; g.gain.setValueAtTime(.001, t0); g.gain.exponentialRampToValueAtTime(.12, t0 + .02); g.gain.exponentialRampToValueAtTime(.001, t0 + .22);
+      o.start(t0); o.stop(t0 + .25);
+    }); }catch(e){}
   }
   function ring(){ ['#msgBtn', '#bellBtn'].forEach(id => { const b = $(id); b.classList.remove('ring'); void b.offsetWidth; b.classList.add('ring'); }); }
   function banner(o){
@@ -2120,15 +2171,13 @@ $('#orderForm').addEventListener('submit', e => {
   let flashT = 0;
   function flashTitle(txt){
     clearInterval(flashT); if(!document.hidden) return;
-    let on = true;
-    flashT = setInterval(() => { if(!document.hidden){ clearInterval(flashT); return; } document.title = on ? txt : TITLE0; on = !on; }, 1000);
+    let on = true; flashT = setInterval(() => { if(!document.hidden){ clearInterval(flashT); return; } document.title = on ? txt : TITLE0; on = !on; }, 1000);
   }
   function setCounts(m, b){
     const set = (id, n) => { const e = $(id); e.textContent = n > 9 ? '9+' : n; e.style.display = n ? 'grid' : 'none'; };
-    set('#msgCnt', m); set('#bellCnt', b);
-    document.title = (m + b ? '(' + (m + b) + ') ' : '') + TITLE0;
+    set('#msgCnt', m); set('#bellCnt', b); document.title = (m + b ? '(' + (m + b) + ') ' : '') + TITLE0;
   }
-  const ICONS = { like:'❤️', comment:'💬', accept:'🤝', badge:'✔', ref:'🎁' };
+  const ICONS = { like:'❤️', comment:'💬', accept:'🤝', badge:'✔', ref:'🎁', group:'👥', admin:'🔔' };
   async function poll(){
     if(!me){ setCounts(0, 0); return; }
     if(ST.uid !== me.uid){ ST.uid = me.uid; ST.init = false; ST.seen = new Set(); }
@@ -2140,16 +2189,16 @@ $('#orderForm').addEventListener('submit', e => {
       setCounts(inc.length, Object.keys(ST.req).length + nn);
       const items = [];
       inc.forEach(([k, x]) => { if(k !== ST.open) items.push({ key:'m:' + k + ':' + x.t, kind:'msg', icon:'💬', uid:k, title:'💬 ' + x.name, text:x.text, onClick:() => openChat(k, x.name) }); });
-      Object.entries(ST.req).forEach(([k, v]) => items.push({ key:'r:' + k, kind:'req', icon:'🤝', uid:k, title:'🤝 ' + v.name, text:'veut devenir ton ami', onClick:() => openHub('notif') }));
+      Object.entries(ST.req).forEach(([k, v]) => items.push({ key:'r:' + k, kind:'req', icon:'🤝', uid:k, title:'🤝 ' + v.name, text:L('veut devenir ton ami', 'wants to be your friend'), onClick:() => openHub('notif') }));
       Object.entries(ST.notifs).forEach(([k, x]) => { if(!x.r) items.push({ key:'n:' + k, kind:'ntf', icon:ICONS[x.type] || '🔔', uid:x.from !== 'admin' ? x.from : '', title:x.name, text:x.text, onClick:() => openHub('notif') }); });
       const fresh = items.filter(i => !ST.seen.has(i.key));
       fresh.forEach(i => ST.seen.add(i.key));
       if(!ST.init){
         ST.init = true;
-        if(items.length) banner({ icon:'🔔', kind:'ntf', title:'Tu as ' + items.length + ' nouveauté' + (items.length > 1 ? 's' : ''), text:inc.length + ' message(s) non lu(s) · ' + (items.length - inc.length) + ' notification(s)', onClick:() => openHub(inc.length ? 'msg' : 'notif'), ms:8000 });
+        if(items.length) banner({ icon:'🔔', kind:'ntf', title:L('Tu as ' + items.length + ' nouveauté' + (items.length > 1 ? 's' : ''), 'You have ' + items.length + ' new item' + (items.length > 1 ? 's' : '')), text:inc.length + L(' message(s) non lu(s) · ', ' unread message(s) · ') + (items.length - inc.length) + ' notification(s)', onClick:() => openHub(inc.length ? 'msg' : 'notif'), ms:8000 });
       } else if(fresh.length){
         ping(); ring();
-        if(fresh.length > 3) banner({ icon:'🔔', kind:'ntf', title:fresh.length + ' nouvelles notifications', text:'Touche pour les voir', onClick:() => openHub('msg') });
+        if(fresh.length > 3) banner({ icon:'🔔', kind:'ntf', title:fresh.length + L(' nouvelles notifications', ' new notifications'), text:L('Touche pour les voir', 'Tap to view'), onClick:() => openHub('msg') });
         else fresh.forEach(banner);
         const f = fresh[0]; flashTitle(noEmoji(f.title) + ' : ' + f.text);
         if(document.hidden && window.Notification && Notification.permission === 'granted'){ try{ new Notification('Hacken Store — ' + noEmoji(f.title), { body:f.text }); }catch(e){} }
@@ -2170,13 +2219,12 @@ $('#orderForm').addEventListener('submit', e => {
   function renderHub(){
     $$('#hubTabs button').forEach(b => b.classList.toggle('sel', b.dataset.hub === hubTab));
     const box = $('#hubBody'); box.innerHTML = '';
-    if(hubTab === 'msg') renderConvs(box); else if(hubTab === 'grp') renderGroups(box); else renderNotifs(box);
+    if(hubTab === 'msg') renderConvs(box); else renderNotifs(box);
   }
   async function renderConvs(box){
-    const sr = el('input', 'hub-search'); sr.type = 'text'; sr.placeholder = '🔎 Chercher une conversation'; box.appendChild(sr);
+    const sr = el('input', 'hub-search'); sr.type = 'text'; sr.placeholder = '🔎 ' + L('Chercher une conversation', 'Search a conversation'); box.appendChild(sr);
     const list = el('div'); box.appendChild(list);
-    let fr = {};
-    try{ fr = await fb('GET', 'friends/' + me.uid) || {}; }catch(e){}
+    let fr = {}; try{ fr = await fb('GET', 'friends/' + me.uid) || {}; }catch(e){}
     const ib = ST.inbox || {};
     const ids = Array.from(new Set([...Object.keys(fr), ...Object.keys(ib)]));
     const rows = ids.map(k => ({ id: k, name: (fr[k] && fr[k].name) || (ib[k] && ib[k].name) || '?', e: ib[k] })).sort((a, b) => ((b.e && b.e.t) || 0) - ((a.e && a.e.t) || 0));
@@ -2184,7 +2232,7 @@ $('#orderForm').addEventListener('submit', e => {
       list.innerHTML = ''; const q = sr.value.trim().toLowerCase();
       const l = rows.filter(r => !q || r.name.toLowerCase().includes(q));
       if(!l.length){
-        list.appendChild(el('div', 't-empty', rows.length ? 'Aucun résultat.' : 'Pas encore de conversation. Ajoute des amis pour discuter.'));
+        list.appendChild(el('div', 't-empty', rows.length ? L('Aucun résultat.', 'No results.') : 'Pas encore de conversation. Ajoute des amis pour discuter.'));
         if(!rows.length){ const b = el('button', 'btn btn-primary btn-block', '🔎 Trouver des amis'); b.type = 'button'; b.style.marginTop = '10px'; b.addEventListener('click', () => openProfile(me.uid, me.name)); list.appendChild(b); }
         return;
       }
@@ -2193,9 +2241,9 @@ $('#orderForm').addEventListener('submit', e => {
         const row = el('div', 'conv' + (unread ? ' unread' : ''));
         const av = el('div', 'av-lg', r.name.charAt(0).toUpperCase()); setAv(av, r.id);
         const mid = el('div', 'conv-mid'); mid.appendChild(nameB(r.id, r.name));
-        mid.appendChild(el('span', '', r.e ? (r.e.from === me.uid ? 'Toi : ' : '') + r.e.text : 'Dis bonjour'));
+        mid.appendChild(el('span', '', r.e ? (r.e.from === me.uid ? L('Toi : ', 'You: ') : '') + r.e.text : 'Dis bonjour'));
         const right = el('div', 'conv-r');
-        if(r.e) right.appendChild(el('small', '', dayLbl(r.e.t) === 'Aujourd\'hui' ? hm(r.e.t) : dayLbl(r.e.t)));
+        if(r.e) right.appendChild(el('small', '', dayLbl(r.e.t) === L('Aujourd\'hui', 'Today') ? hm(r.e.t) : dayLbl(r.e.t)));
         if(unread) right.appendChild(el('i', 'dotb'));
         row.append(av, mid, right); row.addEventListener('click', () => openChat(r.id, r.name)); list.appendChild(row);
       });
@@ -2207,14 +2255,14 @@ $('#orderForm').addEventListener('submit', e => {
     const mkb = (t, f) => { const b = el('button', 'btn btn-ghost', t); b.type = 'button'; b.addEventListener('click', f); tools.appendChild(b); };
     mkb('✔ Tout lu', async () => {
       await Promise.all(Object.entries(ST.notifs).filter(([k, n]) => !n.r).map(([k]) => fb('PUT', 'notifs/' + me.uid + '/' + k + '/r', true).catch(() => {})));
-      toast('Tout est lu'); poll();
+      toast(L('Tout est lu', 'All read')); poll();
     });
-    mkb(SND ? '🔊 Son : oui' : '🔇 Son : non', () => { SND = !SND; try{ localStorage.setItem('hkstore-snd', SND ? '1' : '0'); }catch(e){} renderHub(); });
-    if('Notification' in window && Notification.permission === 'default') mkb('🔔 Alertes navigateur', () => Notification.requestPermission().then(renderHub));
+    mkb(SND ? '🔊 ' + L('Son : oui', 'Sound: on') : '🔇 ' + L('Son : non', 'Sound: off'), () => { SND = !SND; try{ localStorage.setItem('hkstore-snd', SND ? '1' : '0'); }catch(e){} renderHub(); });
+    if('Notification' in window && Notification.permission === 'default') mkb('🔔 ' + L('Alertes navigateur', 'Browser alerts'), () => Notification.requestPermission().then(renderHub));
     box.appendChild(tools);
     const rq = Object.entries(ST.req || {});
     if(rq.length){
-      box.appendChild(el('div', 'subhead', '🤝 Demandes d\'amis'));
+      box.appendChild(el('div', 'subhead', '🤝 ' + L('Demandes d\'amis', 'Friend requests')));
       rq.forEach(([fid, v]) => {
         const r = frow(fid, v.name);
         const ok = el('button', 'btn btn-primary', '✔'); ok.type = 'button'; ok.addEventListener('click', () => acceptFr(fid, v.name));
@@ -2223,24 +2271,24 @@ $('#orderForm').addEventListener('submit', e => {
         r.append(ok, no); box.appendChild(r);
       });
     }
-    box.appendChild(el('div', 'subhead', 'Activité'));
+    box.appendChild(el('div', 'subhead', L('Activité', 'Activity')));
     const nf = Object.entries(ST.notifs || {}).sort((a, b) => b[1].t - a[1].t).slice(0, 40);
     if(!nf.length) box.appendChild(el('div', 't-empty', 'Aucune notification pour le moment.'));
-    const ic = { like:'❤️', comment:'💬', accept:'🤝', badge:'✔', ref:'🎁' };
     nf.forEach(([k, n]) => {
       const row = el('div', 'conv notif' + (n.r ? '' : ' unread'));
-      const av = el('div', 'av-lg', ic[n.type] || '🔔'); if(n.from && n.from !== 'admin') setAv(av, n.from);
+      const av = el('div', 'av-lg', ICONS[n.type] || '🔔'); if(n.from && n.from !== 'admin') setAv(av, n.from);
       const mid = el('div', 'conv-mid'); mid.append(el('b', '', n.name || ''), el('span', '', ' ' + n.text));
       const right = el('div', 'conv-r'); right.appendChild(el('small', '', fmtAgo(n.t)));
       row.append(av, mid, right);
       row.addEventListener('click', () => {
         if(!n.r) fb('PUT', 'notifs/' + me.uid + '/' + k + '/r', true).then(poll).catch(() => {});
-        if(n.type === 'badge') openProfile(me.uid, me.name); else if(n.from) openProfile(n.from, n.name);
+        if(n.type === 'badge') openProfile(me.uid, me.name); else if(n.from && n.from !== 'admin') openProfile(n.from, n.name);
       });
       box.appendChild(row);
     });
   }
-  /* ===== CONVERSATION (corrigée) ===== */
+  /* ===== CONVERSATION PRIVÉE (messages gardés 48h) ===== */
+  const H48 = 172800000;
   function openChat(fid, fname){
     closeAll(); clearInterval(chatT); ST.open = fid; open('#chatOverlay');
     const id = cid(me.uid, fid), box = $('#chatBody'); box.innerHTML = '';
@@ -2255,13 +2303,13 @@ $('#orderForm').addEventListener('submit', e => {
     presence(fid).then(t => { st.textContent = t; });
     const list = el('div', 'chat-msgs'); box.appendChild(list);
     const bar = el('div', 'chat-bar'), inp = el('textarea'), sb = el('button', 'chat-send', '➤');
-    inp.rows = 1; inp.maxLength = 500; inp.placeholder = 'Écris un message...'; sb.type = 'button';
+    inp.rows = 1; inp.maxLength = 500; inp.placeholder = L('Écris un message...', 'Write a message...'); sb.type = 'button';
     inp.addEventListener('input', () => { inp.style.height = 'auto'; inp.style.height = Math.min(inp.scrollHeight, 110) + 'px'; });
     bar.append(inp, sb); box.append(bar);
-    let sig = '', peerRead = 0, first = true, lastKey = '';
+    let sig = '', peerRead = 0, first = true, lastKey = '', purged = false;
     function render(msgs, near){
       list.innerHTML = '';
-      if(!msgs.length){ list.appendChild(el('div', 'chat-empty', 'Aucun message. Dis bonjour 👋')); return; }
+      if(!msgs.length){ list.appendChild(el('div', 'chat-empty', L('Aucun message. Dis bonjour 👋', 'No messages. Say hello 👋'))); return; }
       let lastDay = '', lastFrom = '', lastMine = null;
       msgs.forEach(([k, m]) => {
         const dl = dayLbl(m.t);
@@ -2271,37 +2319,35 @@ $('#orderForm').addEventListener('submit', e => {
         b.append(el('span', '', m.text), el('small', '', hm(m.t)));
         if(mine){
           b.addEventListener('click', () => b.classList.toggle('act'));
-          const del = el('button', 'del', '🗑 Supprimer'); del.type = 'button';
+          const del = el('button', 'del', '🗑 ' + L('Supprimer', 'Delete')); del.type = 'button';
           del.addEventListener('click', async e => { e.stopPropagation(); try{ await fb('DELETE', 'chats/' + id + '/' + k); sig = ''; pull(); }catch(x){ toast('Suppression impossible.', true); } });
           b.appendChild(del); lastMine = [b, m.t];
         }
         list.appendChild(b); lastFrom = m.from;
       });
-      if(lastMine) lastMine[0].appendChild(el('em', '', peerRead >= lastMine[1] ? '✓✓ Vu' : '✓ Envoyé'));
+      if(lastMine) lastMine[0].appendChild(el('em', '', peerRead >= lastMine[1] ? '✓✓ ' + L('Vu', 'Seen') : '✓ ' + L('Envoyé', 'Sent')));
       if(near) list.scrollTop = list.scrollHeight;
     }
     async function pull(){
       if(!$('#chatOverlay').classList.contains('open') || !document.body.contains(list)){ stop(); return; }
+      const cut = Date.now() - H48;
       try{
         const [o, pe, mi] = await Promise.all([
-          fb('GET', 'chats/' + id, undefined, '&orderBy=%22%24key%22&limitToLast=80'),
+          fb('GET', 'chats/' + id, undefined, '&orderBy=%22t%22&startAt=' + cut + '&limitToLast=80'),
           fb('GET', 'inbox/' + fid + '/' + me.uid).catch(() => null),
           fb('GET', 'inbox/' + me.uid + '/' + fid).catch(() => null)
         ]);
+        if(!purged){ purged = true; fb('GET', 'chats/' + id, undefined, '&orderBy=%22t%22&endAt=' + cut + '&limitToFirst=30').then(old => Object.keys(old || {}).forEach(k => fb('DELETE', 'chats/' + id + '/' + k).catch(() => {}))).catch(() => {}); }
         if(mi && mi.from !== me.uid && !mi.r){ fb('PUT', 'inbox/' + me.uid + '/' + fid + '/r', true).then(poll).catch(() => {}); }
         peerRead = pe ? (pe.from !== me.uid ? Infinity : (pe.r ? pe.t : 0)) : 0;
-        const all = Object.entries(o || {});
-        all.filter(([k, m]) => Date.now() - m.t > 172800000).slice(0, 10).forEach(([k]) => fb('DELETE', 'chats/' + id + '/' + k).catch(() => {}));
-        const msgs = all.filter(([k, m]) => Date.now() - m.t <= 172800000).sort((a, b) => a[1].t - b[1].t);
+        const msgs = Object.entries(o || {}).sort((a, b) => a[1].t - b[1].t);
         const s = msgs.map(([k]) => k).join() + peerRead;
         if(s === sig) return; sig = s;
         const near = first || list.scrollHeight - list.scrollTop - list.clientHeight < 120;
         const lm = msgs[msgs.length - 1];
         if(!first && lm && lm[1].from !== me.uid && lm[0] !== lastKey) ping();
         lastKey = lm ? lm[0] : ''; first = false; render(msgs, near);
-      }catch(e){
-        if(first){ first = false; list.innerHTML = ''; list.appendChild(el('div', 'chat-empty', 'Impossible de charger les messages.')); }
-      }
+      }catch(e){ if(first){ first = false; list.innerHTML = ''; list.appendChild(el('div', 'chat-empty', 'Impossible de charger les messages.')); } }
     }
     async function send(){
       const text = inp.value.trim(); if(!text) return;
@@ -2317,8 +2363,189 @@ $('#orderForm').addEventListener('submit', e => {
     }
     sb.addEventListener('click', send);
     inp.addEventListener('keydown', e => { if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); send(); } });
-    pull(); chatT = setInterval(() => { if(!document.hidden) pull(); }, 4000); setTimeout(() => inp.focus(), 150);
+    pull(); chatT = setInterval(pull, 3000); setTimeout(() => inp.focus(), 150);
   }
+
+  /* ===== GROUPES (photos, messages 48h) ===== */
+  let GR = [];
+  async function loadGroups(){
+    const box = $('#grpList');
+    if(!me){ box.innerHTML = ''; box.appendChild(el('div', 't-empty', L('Connecte-toi pour voir et créer des groupes.', 'Log in to see and create groups.'))); return; }
+    box.innerHTML = '<div class="t-empty">' + L('Chargement...', 'Loading...') + '</div>';
+    try{
+      const o = Object.entries(await fb('GET', 'groups', undefined, '&orderBy=%22t%22&limitToLast=30') || {}).sort((a, b) => b[1].t - a[1].t);
+      const mem = await Promise.all(o.map(([id]) => fb('GET', 'gmembers/' + id + '/' + me.uid).catch(() => null)));
+      GR = o.map(([id, g], i) => ({ id, g, mine: !!mem[i] })).filter(x => x.g.pub || x.mine);
+      drawGroups();
+    }catch(e){ box.innerHTML = '<div class="t-empty">Groupes indisponibles (règles Firebase ou connexion).</div>'; }
+  }
+  function drawGroups(){
+    const box = $('#grpList'), q = $('#grpSearch').value.trim().toLowerCase(); box.innerHTML = '';
+    const l = GR.filter(x => !q || x.g.name.toLowerCase().includes(q)).sort((a, b) => (b.mine - a.mine));
+    if(!l.length){ box.appendChild(el('div', 't-empty', L('Aucun groupe. Crée le premier !', 'No groups yet. Create the first one!'))); return; }
+    l.forEach(({ id, g, mine }) => {
+      const r = el('div', 'grp'); r.appendChild(el('div', 'av-lg', g.name.charAt(0).toUpperCase()));
+      const mid = el('div', 'conv-mid'); const nb = el('b', '', g.name); if(!g.pub) nb.appendChild(el('span', 'lock-tag', ' 🔒')); mid.appendChild(nb);
+      mid.appendChild(el('span', 'grp-meta', g.desc || (g.pub ? L('Groupe public', 'Public group') : L('Groupe privé', 'Private group')))); r.appendChild(mid);
+      const b = el('button', 'btn ' + (mine ? 'btn-primary' : 'btn-ghost'), mine ? L('Ouvrir', 'Open') : L('Rejoindre', 'Join')); b.type = 'button';
+      b.addEventListener('click', e => { e.stopPropagation(); mine ? openGroup(id, g) : joinGroup(id, g); });
+      r.appendChild(b); r.addEventListener('click', () => mine ? openGroup(id, g) : joinGroup(id, g)); box.appendChild(r);
+    });
+  }
+  $('#grpSearch').addEventListener('input', drawGroups);
+  async function joinGroup(id, g, code){
+    if(!me) return openAuth('Connecte-toi pour voir tes messages.');
+    try{
+      const ms = await fb('GET', 'gmembers/' + id, undefined, '&shallow=true');
+      if(Object.keys(ms || {}).length >= (g.max || 50)) return toast(L('Groupe complet.', 'Group is full.'), true);
+      const rec = { name: me.name, t: Date.now() }; if(!g.pub && code) rec.code = code;
+      await fb('PUT', 'gmembers/' + id + '/' + me.uid, rec);
+      toast(L('Groupe rejoint ✅', 'Group joined ✅')); loadGroups(); openGroup(id, g);
+    }catch(e){ toast(L('Impossible de rejoindre (groupe privé ou complet).', 'Could not join (private or full).'), true); }
+  }
+  $('#grpJoinCode').addEventListener('click', async () => {
+    if(!me) return openAuth('Connecte-toi pour voir tes messages.');
+    const code = (prompt(L('Code du groupe :', 'Group code:')) || '').trim().toLowerCase(); if(code.length < 4) return;
+    try{
+      const r = await fetch(await uurl('groups') + '&orderBy=%22%24key%22&startAt=' + encodeURIComponent('"g' + code + '"') + '&endAt=' + encodeURIComponent('"g' + code + '\uf8ff"') + '&limitToFirst=1');
+      const o = Object.entries(await r.json() || {})[0];
+      if(!o) return toast(L('Code introuvable.', 'Code not found.'), true);
+      joinGroup(o[0], o[1], o[1].code);
+    }catch(e){ toast(L('Code introuvable.', 'Code not found.'), true); }
+  });
+  $$('#gType .pay').forEach(b => b.addEventListener('click', () => { $$('#gType .pay').forEach(x => x.classList.toggle('sel', x === b)); }));
+  $('#grpNew').addEventListener('click', () => { if(!me) return openAuth('Connecte-toi pour publier.'); open('#grpNewOverlay'); });
+  $('#grpForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const name = $('#gName').value.trim(), desc = $('#gDesc').value.trim(), pub = $('#gType .sel').dataset.pub === '1';
+    const max = Math.max(2, Math.min(200, +$('#gMax').value || 50));
+    if(name.length < 3) return bad($('#gName'), L('Nom : 3 caractères minimum.', 'Name: 3 characters minimum.'));
+    const code = Math.random().toString(36).slice(2, 8), id = 'g' + code + Date.now().toString(36);
+    try{
+      await fb('PUT', 'groups/' + id, { name, desc, owner: me.uid, pub, code, max, t: Date.now() });
+      await fb('PUT', 'gmembers/' + id + '/' + me.uid, { name: me.name, t: Date.now() });
+      $('#grpForm').reset(); closeAll(); toast(L('Groupe créé ✅', 'Group created ✅')); loadGroups();
+      openGroup(id, { name, desc, owner: me.uid, pub, code, max });
+    }catch(err){ toast(L('Création impossible (règles Firebase).', 'Could not create (Firebase rules).'), true); }
+  });
+  async function openGroup(gid, g){
+    closeAll(); clearInterval(chatT); ST.open = ''; open('#chatOverlay');
+    const box = $('#chatBody'); box.innerHTML = '';
+    const stop = () => clearInterval(chatT), owner = g.owner === me.uid;
+    const head = el('div', 'chat-head');
+    const back = el('button', 'chat-ic', '‹'); back.type = 'button'; back.addEventListener('click', () => { stop(); closeAll(); document.getElementById('groupes').scrollIntoView(); });
+    const who = el('div', 'chat-who'); const gb = el('b', '', g.name); who.append(gb, el('small', '', g.pub ? L('Groupe public', 'Public group') : L('Groupe privé', 'Private group')));
+    const inf = el('button', 'chat-ic', 'ⓘ'); inf.type = 'button';
+    const x = el('button', 'chat-ic', '✕'); x.type = 'button'; x.addEventListener('click', () => { stop(); closeAll(); });
+    head.append(back, who, inf, x); box.appendChild(head);
+    const list = el('div', 'chat-msgs'); box.appendChild(list);
+    const bar = el('div', 'chat-bar'), inp = el('textarea'), sb = el('button', 'chat-send', '➤');
+    const ph = el('label', 'chat-photo'); ph.innerHTML = '📷'; const pf = document.createElement('input'); pf.type = 'file'; pf.accept = 'image/*'; ph.appendChild(pf);
+    inp.rows = 1; inp.maxLength = 500; inp.placeholder = L('Écris un message...', 'Write a message...'); sb.type = 'button';
+    inp.addEventListener('input', () => { inp.style.height = 'auto'; inp.style.height = Math.min(inp.scrollHeight, 110) + 'px'; });
+    bar.append(ph, inp, sb); box.appendChild(bar);
+    let sig = '', first = true, purged = false, lastKey = '';
+    inf.addEventListener('click', async () => {
+      stop(); list.innerHTML = '';
+      const p = el('div', 'prof-sec');
+      p.appendChild(el('div', 'subhead', g.name)); if(g.desc) p.appendChild(el('div', 'prof-bio', g.desc));
+      const link = location.href.split('#')[0].split('?')[0];
+      const cr = el('div', 'ref-code'); cr.appendChild(el('code', '', g.code || '—'));
+      const cc = el('button', 'btn btn-ghost', '📋'); cc.type = 'button'; cc.addEventListener('click', () => copyText(L('Rejoins mon groupe « ', 'Join my group "') + g.name + L(' » sur Hacken Store. Code : ', '" on Hacken Store. Code: ') + g.code + ' ' + link, L('Invitation copiée', 'Invitation copied')));
+      cr.appendChild(cc); p.appendChild(cr);
+      p.appendChild(el('div', 'subhead', '👥 ' + L('Membres', 'Members')));
+      try{ Object.entries(await fb('GET', 'gmembers/' + gid) || {}).forEach(([uid, m]) => {
+        const r = frow(uid, m.name);
+        if(owner && uid !== me.uid){ const k = el('button', 'btn btn-ghost', '✕'); k.type = 'button'; k.addEventListener('click', async () => { try{ await fb('DELETE', 'gmembers/' + gid + '/' + uid); r.remove(); }catch(e){ toast('Action impossible.', true); } }); r.appendChild(k); }
+        p.appendChild(r);
+      }); }catch(e){}
+      const lv = el('button', 'btn btn-ghost btn-block', owner ? '🗑 ' + L('Supprimer le groupe', 'Delete group') : L('Quitter le groupe', 'Leave group')); lv.type = 'button'; lv.style.marginTop = '12px';
+      lv.addEventListener('click', async () => {
+        if(!confirm(L('Confirmer ?', 'Confirm?'))) return;
+        try{
+          if(owner){ await fb('DELETE', 'groups/' + gid); await fb('DELETE', 'gmsgs/' + gid).catch(() => {}); await fb('DELETE', 'gmembers/' + gid); }
+          else await fb('DELETE', 'gmembers/' + gid + '/' + me.uid);
+          closeAll(); loadGroups();
+        }catch(e){ toast('Action impossible.', true); }
+      });
+      p.appendChild(lv); const bk = el('button', 'btn btn-primary btn-block', L('Retour au chat', 'Back to chat')); bk.type = 'button'; bk.style.marginTop = '8px';
+      bk.addEventListener('click', () => { sig = ''; chatT = setInterval(pull, 3000); pull(); }); p.appendChild(bk); list.appendChild(p);
+    });
+    function render(msgs){
+      list.innerHTML = '';
+      if(!msgs.length){ list.appendChild(el('div', 'chat-empty', L('Aucun message. Dis bonjour 👋', 'No messages. Say hello 👋'))); return; }
+      let lastDay = '', lastFrom = '';
+      msgs.forEach(([k, m]) => {
+        const dl = dayLbl(m.t); if(dl !== lastDay){ list.appendChild(el('div', 'day', dl)); lastDay = dl; lastFrom = ''; }
+        const mine = m.from === me.uid, b = el('div', 'bub' + (mine ? ' me' : '') + (lastFrom === m.from ? ' cont' : ''));
+        if(!mine && lastFrom !== m.from){ const n = el('div', 'gn'); n.appendChild(nameB(m.from, m.name)); n.firstChild.style.cursor = 'pointer'; n.firstChild.addEventListener('click', e => { e.stopPropagation(); stop(); openProfile(m.from, m.name); }); b.appendChild(n); }
+        if(okImg(m.img)){ const im = el('img', 'gi'); im.src = m.img; im.alt = ''; im.addEventListener('click', e => { e.stopPropagation(); $('#lbImg').src = m.img; $('#lbTitle').textContent = g.name; $('#lbCap').textContent = m.name; open('#lightboxOverlay'); }); b.appendChild(im); }
+        if(m.text) b.appendChild(el('span', '', m.text));
+        b.appendChild(el('small', '', hm(m.t)));
+        if(mine || owner){
+          b.addEventListener('click', () => b.classList.toggle('act'));
+          const del = el('button', 'del', '🗑 ' + L('Supprimer', 'Delete')); del.type = 'button';
+          del.addEventListener('click', async e => { e.stopPropagation(); try{ await fb('DELETE', 'gmsgs/' + gid + '/' + k); sig = ''; pull(); }catch(x){ toast('Suppression impossible.', true); } });
+          b.appendChild(del);
+        }
+        list.appendChild(b); lastFrom = m.from;
+      });
+      list.scrollTop = list.scrollHeight;
+    }
+    async function pull(){
+      if(!$('#chatOverlay').classList.contains('open') || !document.body.contains(list)){ stop(); return; }
+      const cut = Date.now() - H48;
+      try{
+        const o = await fb('GET', 'gmsgs/' + gid, undefined, '&orderBy=%22t%22&startAt=' + cut + '&limitToLast=80');
+        if(!purged){ purged = true; fb('GET', 'gmsgs/' + gid, undefined, '&orderBy=%22t%22&endAt=' + cut + '&limitToFirst=30').then(old => Object.keys(old || {}).forEach(k => fb('DELETE', 'gmsgs/' + gid + '/' + k).catch(() => {}))).catch(() => {}); }
+        const msgs = Object.entries(o || {}).sort((a, b) => a[1].t - b[1].t), s = msgs.map(([k]) => k).join();
+        if(s === sig) return; sig = s;
+        const lm = msgs[msgs.length - 1]; if(!first && lm && lm[1].from !== me.uid && lm[0] !== lastKey) ping();
+        lastKey = lm ? lm[0] : ''; first = false; render(msgs);
+      }catch(e){ if(first){ first = false; list.innerHTML = ''; list.appendChild(el('div', 'chat-empty', L('Impossible de charger les messages (tu n\'es peut-être plus membre).', 'Could not load messages (you may no longer be a member).'))); } }
+    }
+    async function send(img){
+      const text = img ? '' : inp.value.trim(); if(!text && !img) return;
+      if(!img){ inp.value = ''; inp.style.height = 'auto'; }
+      const m = { from: me.uid, name: me.name, t: Date.now() }; if(text) m.text = text; if(img) m.img = img;
+      try{ await fb('POST', 'gmsgs/' + gid, m); pull(); }catch(err){ if(text) inp.value = text; toast('Message non envoyé.', true); }
+    }
+    pf.addEventListener('change', async () => {
+      const f = pf.files[0]; if(!f) return; pf.value = '';
+      if(!/^image\//.test(f.type)) return toast('Choisis une image.', true);
+      try{ send(await compress(f, 640, 100000)); }catch(e){ toast('Image trop lourde ou illisible.', true); }
+    });
+    sb.addEventListener('click', () => send());
+    inp.addEventListener('keydown', e => { if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); send(); } });
+    pull(); chatT = setInterval(pull, 3000);
+  }
+
+  /* ===== SUGGESTIONS : nouveaux inscrits ===== */
+  HK.sug = async function(){
+    const sec = $('#suggest'), row = $('#sugRow');
+    if(!me){ sec.style.display = 'none'; loadGroups(); return; }
+    loadGroups();
+    try{
+      const [u, fr, sent] = await Promise.all([fb('GET', 'users', undefined, '&orderBy=%22t%22&limitToLast=30'), fb('GET', 'friends/' + me.uid).catch(() => ({})), Promise.resolve({})]);
+      const list = Object.entries(u || {}).filter(([id]) => id !== me.uid && !(fr || {})[id]).sort((a, b) => b[1].t - a[1].t).slice(0, 12);
+      row.innerHTML = '';
+      if(!list.length){ sec.style.display = 'none'; return; }
+      sec.style.display = 'block'; await ensureBadges();
+      list.forEach(([id, v]) => {
+        const c = el('div', 'sug'); const av = el('div', 'av-lg', (v.name || '?').charAt(0).toUpperCase()); setAv(av, id); c.appendChild(av);
+        const nb = nameB(id, v.name); nb.style.cursor = 'pointer'; nb.addEventListener('click', () => openProfile(id, v.name)); c.appendChild(nb);
+        const b = el('button', 'btn btn-primary', '➕ ' + L('Ajouter', 'Add')); b.type = 'button';
+        b.addEventListener('click', async () => {
+          try{ await fb('PUT', 'friend_req/' + id + '/' + me.uid, { name: me.name, t: Date.now() }); b.textContent = '⏳'; b.disabled = true; toast('Demande envoyée 🤝'); }
+          catch(e){ toast('Action impossible.', true); }
+        });
+        c.appendChild(b); row.appendChild(c);
+      });
+    }catch(e){ sec.style.display = 'none'; }
+  };
+
+  /* ===== DÉMARRAGE ===== */
+  $('#lightboxOverlay').style.zIndex = 70;
   document.addEventListener('visibilitychange', () => { if(!document.hidden){ clearInterval(flashT); poll(); } });
   addEventListener('focus', () => poll());
   try{
@@ -2326,303 +2553,10 @@ $('#orderForm').addEventListener('submit', e => {
     if(q && q.length >= 8) localStorage.setItem('hkstore-ref', q);
     const sr = localStorage.getItem('hkstore-ref') || '';
     $('#auRef').value = sr;
-    if(sr && !me){ setTimeout(() => { $('#auForm [data-mode="up"]').click(); openAuth('🎁 Tu as été invité ! Crée ton compte : le code parrain est déjà rempli.'); }, 1200); }
+    if(sr && !me){ setTimeout(() => { $('#auForm [data-mode="up"]').click(); openAuth(L('🎁 Tu as été invité ! Crée ton compte : le code parrain est déjà rempli.', '🎁 You were invited! Create your account: the referral code is pre-filled.')); }, 1200); }
   }catch(e){}
-  poll(); setInterval(() => { if(!document.hidden) poll(); }, 8000);
-
-  /* ===== BOUTIQUE ===== */
-$$('[data-open-shop]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); $('#shop').classList.add('open'); setTimeout(() => $('#packs').scrollIntoView({ behavior:'smooth' }), 60); }));
-
-/* ===== LANGUE ===== */
-const I18N = { en:{ lang:'Language', sug_title:'👋 New players', tab_msg:'💬 Messages', tab_grp:'👥 Groups', tab_notif:'🔔 Alerts', grp_new:'New group', grp_photo:'📷 Group photo', grp_name:'Group name', grp_desc:'Description', grp_members:'Members (your friends)', grp_create:'Create group' } };
-let LANG = ''; try{ LANG = localStorage.getItem('hkstore-lang') || ''; }catch(e){}
-const FIRST = !LANG; if(!LANG) LANG = 'fr';
-$$('[data-i18n]').forEach(n => { n.dataset.fr = n.textContent; });
-const tr = (k, fr) => (LANG === 'en' && I18N.en[k]) ? I18N.en[k] : fr;
-function applyLang(){
-  document.documentElement.lang = LANG;
-  $$('[data-i18n]').forEach(n => { n.textContent = tr(n.dataset.i18n, n.dataset.fr); });
-  $$('[data-lang]').forEach(b => b.classList.toggle('sel', b.dataset.lang === LANG));
-}
-function syncLang(){ if(me) fb('PUT', 'users/' + me.uid + '/lang', LANG).catch(() => {}); }
-$$('[data-lang]').forEach(b => b.addEventListener('click', () => {
-  LANG = b.dataset.lang; try{ localStorage.setItem('hkstore-lang', LANG); }catch(e){}
-  applyLang(); syncLang(); $('#langOverlay').classList.remove('open');
-}));
-applyLang(); if(FIRST) open('#langOverlay');
-
-/* ===== SUGGESTIONS ===== */
-async function loadSug(){
-  try{
-    tryJoin();
-    const box = $('#sugBox'); if(!me){ box.style.display = 'none'; return; }
-    const fr = await fb('GET', 'friends/' + me.uid) || {};
-    const o = await fb('GET', 'users', undefined, '&orderBy=%22t%22&limitToLast=24');
-    await ensureBadges();
-    const list = Object.entries(o || {}).filter(([k]) => k !== me.uid && !fr[k]).sort((a, b) => b[1].t - a[1].t).slice(0, 12);
-    const L = $('#sugList'); L.innerHTML = ''; box.style.display = list.length ? 'block' : 'none';
-    list.forEach(([uid, u]) => {
-      const c = el('div', 'sug-card'), av = el('div', 'avatar', u.name.charAt(0).toUpperCase()); setAv(av, uid);
-      av.addEventListener('click', () => openProfile(uid, u.name));
-      const b = el('button', 'btn btn-primary', '➕'); b.type = 'button';
-      b.addEventListener('click', async () => { try{ await fb('PUT', 'friend_req/' + uid + '/' + me.uid, { name: me.name, t: Date.now() }); b.textContent = '⏳'; b.disabled = true; }catch(e){ toast('Action impossible.', true); } });
-      c.append(av, nameB(uid, u.name), b); L.appendChild(c);
-    });
-  }catch(e){}
-}
-
-/* ===== GROUPES ===== */
-const DAY2 = 172800000, GP = {};
-const rid = () => Array.from(crypto.getRandomValues(new Uint8Array(12)), b => (b % 36).toString(36)).join('');
-const sys = (gid, text) => fb('POST', 'group_msgs/' + gid, { from: me.uid, name: me.name, text, sys: true, t: Date.now() }).catch(() => {});
-function setGAv(node, id){
-  (GP[id] = GP[id] || fb('GET', 'groups/' + id + '/photo').catch(() => '')).then(d => { if(d){ node.style.backgroundImage = 'url(' + d + ')'; node.classList.add('img'); } });
-}
-async function renderGroups(box){
-  const nb = el('button', 'btn btn-primary btn-block', '➕ ' + tr('grp_new', 'Nouveau groupe')); nb.type = 'button'; nb.addEventListener('click', openGrpForm); box.appendChild(nb);
-  const L = el('div'); L.style.marginTop = '10px'; box.appendChild(L);
-  try{
-    const rows = Object.entries(await fb('GET', 'user_groups/' + me.uid) || {}).sort((a, b) => b[1].t - a[1].t);
-    if(!rows.length) L.appendChild(el('div', 't-empty', 'Aucun groupe pour le moment.'));
-    rows.forEach(([id, v]) => {
-      const r = el('div', 'conv'), a = el('div', 'av-lg', v.name.charAt(0).toUpperCase()); setGAv(a, id);
-      const m = el('div', 'conv-mid'); m.append(el('b', '', v.name), el('span', '', '👥 Groupe'));
-      r.append(a, m); r.addEventListener('click', () => openGroup(id, v.name)); L.appendChild(r);
-    });
-  }catch(e){ L.appendChild(el('div', 't-empty', 'Groupes indisponibles.')); }
-}
-let gPhoto = '';
-async function openGrpForm(){
-  closeAll(); open('#grpOverlay'); gPhoto = '';
-  $('#grpForm').style.display = ''; $('#grpInfo').style.display = 'none'; $('#grpTitle').textContent = tr('grp_new', 'Nouveau groupe');
-  $('#grpForm').reset(); $('#grpPhotoLbl').textContent = tr('grp_photo', '📷 Photo du groupe');
-  const P = $('#grpPick'); P.innerHTML = '';
-  let fr = {}; try{ fr = await fb('GET', 'friends/' + me.uid) || {}; }catch(e){}
-  Object.entries(fr).forEach(([id, v]) => { const l = el('label', 'pick'), c = el('input'); c.type = 'checkbox'; c.value = id; c.dataset.n = v.name; l.append(c, el('span', '', v.name)); P.appendChild(l); });
-  if(!Object.keys(fr).length) P.appendChild(el('div', 'hint', 'Ajoute des amis pour les inviter. Tu pourras aussi partager le lien du groupe.'));
-}
-$('#grpPhoto').addEventListener('change', async e => {
-  const f = e.target.files[0]; if(!f) return;
-  try{ gPhoto = await squareImg(f, 160); $('#grpPhotoLbl').textContent = '📷 ✓'; }catch(x){ toast('Photo impossible.', true); }
-});
-$('#grpForm').addEventListener('submit', async e => {
-  e.preventDefault();
-  const nm = $('#grpName').value.trim(); if(!nm) return bad($('#grpName'), 'Donne un nom au groupe.');
-  const t = Date.now(), picks = $$('#grpPick input:checked'), g = { name: nm, createdBy: me.uid, t, invite: rid() };
-  const d = $('#grpDesc').value.trim(); if(d) g.desc = d; if(gPhoto) g.photo = gPhoto;
-  try{
-    const id = (await fb('POST', 'groups', g)).name;
-    await fb('PUT', 'group_members/' + id + '/' + me.uid, { name: me.name, role: 'admin', t });
-    await fb('PUT', 'user_groups/' + me.uid + '/' + id, { name: nm, t });
-    for(const c of picks){
-      await fb('PUT', 'group_members/' + id + '/' + c.value, { name: c.dataset.n, role: 'member', t });
-      await fb('PUT', 'user_groups/' + c.value + '/' + id, { name: nm, t });
-      pushNotif(c.value, 'group', 't\'a ajouté au groupe ' + nm);
-    }
-    toast('Groupe créé ✅'); openGroup(id, nm);
-  }catch(err){ toast('Création impossible.', true); }
-});
-
-async function openGroup(gid, gname){
-  closeAll(); clearInterval(chatT); ST.open = 'g' + gid; open('#chatOverlay');
-  const box = $('#chatBody'); box.innerHTML = '';
-  const stop = () => { ST.open = ''; clearInterval(chatT); };
-  const head = el('div', 'chat-head');
-  const back = el('button', 'chat-ic', '‹'); back.type = 'button'; back.addEventListener('click', () => { stop(); openHub('grp'); });
-  const av = el('div', 'av-lg', gname.charAt(0).toUpperCase()); setGAv(av, gid);
-  const who = el('div', 'chat-who'), nb = el('b', '', gname); nb.addEventListener('click', () => { stop(); grpInfo(gid, gname); });
-  who.append(nb, el('small', '', 'Touche le nom pour les infos'));
-  const x = el('button', 'chat-ic', '✕'); x.type = 'button'; x.addEventListener('click', () => { stop(); closeAll(); });
-  head.append(back, av, who, x); box.appendChild(head);
-  const list = el('div', 'chat-msgs'); box.appendChild(list);
-  const bar = el('div', 'chat-bar'), inp = el('textarea'), sb = el('button', 'chat-send', '➤');
-  const ph = el('label', 'chat-photo', '🖼'); ph.style.cssText = 'display:grid;place-items:center;cursor:pointer;';
-  const fi = el('input'); fi.type = 'file'; fi.accept = 'image/*'; fi.hidden = true; ph.appendChild(fi);
-  inp.rows = 1; inp.maxLength = 500; inp.placeholder = 'Écris un message...'; sb.type = 'button';
-  inp.addEventListener('input', () => { inp.style.height = 'auto'; inp.style.height = Math.min(inp.scrollHeight, 110) + 'px'; });
-  bar.append(ph, inp, sb); box.appendChild(bar);
-  let sig = '', first = true, lastK = '', isAdmin = false;
-  fb('GET', 'group_members/' + gid + '/' + me.uid + '/role').then(r => { isAdmin = r === 'admin'; }).catch(() => {});
-  const send = (text, img) => { const m = { from: me.uid, name: me.name, t: Date.now() }; if(text) m.text = text; if(img) m.img = img; return fb('POST', 'group_msgs/' + gid, m); };
-  async function pull(){
-    if(!$('#chatOverlay').classList.contains('open') || !document.body.contains(list)){ stop(); return; }
-    try{
-      const o = await fb('GET', 'group_msgs/' + gid, undefined, '&orderBy=%22%24key%22&limitToLast=60') || {}, now = Date.now(), all = Object.entries(o);
-      all.filter(([k, m]) => now - m.t > DAY2).slice(0, 10).forEach(([k]) => fb('DELETE', 'group_msgs/' + gid + '/' + k).catch(() => {}));
-      const msgs = all.filter(([k, m]) => now - m.t <= DAY2).sort((a, b) => a[1].t - b[1].t);
-      const s = msgs.map(m => m[0]).join(); if(s === sig) return; sig = s;
-      const near = first || list.scrollHeight - list.scrollTop - list.clientHeight < 120, lm = msgs[msgs.length - 1];
-      if(!first && lm && lm[1].from !== me.uid && lm[0] !== lastK) ping();
-      lastK = lm ? lm[0] : ''; first = false; list.innerHTML = '';
-      if(!msgs.length) list.appendChild(el('div', 'chat-empty', 'Aucun message. Dis bonjour 👋'));
-      let lastDay = '';
-      msgs.forEach(([k, m]) => {
-        const dl = dayLbl(m.t); if(dl !== lastDay){ list.appendChild(el('div', 'day', dl)); lastDay = dl; }
-        if(m.sys){ list.appendChild(el('div', 'bub sys', m.text)); return; }
-        const mine = m.from === me.uid, b = el('div', 'bub' + (mine ? ' me' : ''));
-        if(!mine){ const w = el('span', 'who-n'); w.appendChild(nameB(m.from, m.name)); b.appendChild(w); }
-        if(m.img){ const im = el('img', 'pic'); im.src = m.img; im.loading = 'lazy'; im.addEventListener('click', e => { e.stopPropagation(); im.style.maxHeight = im.style.maxHeight === 'none' ? '260px' : 'none'; }); b.appendChild(im); }
-        if(m.text) b.appendChild(el('span', '', m.text));
-        b.appendChild(el('small', '', hm(m.t)));
-        if(mine || isAdmin){
-          b.addEventListener('click', () => b.classList.toggle('act'));
-          const d = el('button', 'del', '🗑 Supprimer'); d.type = 'button';
-          d.addEventListener('click', async e => { e.stopPropagation(); try{ await fb('DELETE', 'group_msgs/' + gid + '/' + k); sig = ''; pull(); }catch(z){ toast('Suppression impossible.', true); } });
-          b.appendChild(d);
-        }
-        list.appendChild(b);
-      });
-      if(near) list.scrollTop = list.scrollHeight;
-    }catch(e){ if(first){ first = false; list.innerHTML = ''; list.appendChild(el('div', 'chat-empty', 'Impossible de charger les messages.')); } }
-  }
-  async function go(){
-    const t = inp.value.trim(); if(!t) return; inp.value = ''; inp.style.height = 'auto';
-    try{ await send(t); sig = ''; pull(); }catch(e){ inp.value = t; toast('Message non envoyé (réservé aux admins ?).', true); }
-  }
-  fi.addEventListener('change', async () => {
-    const f = fi.files[0]; fi.value = ''; if(!f) return;
-    try{ const d = await compress(f, 640); if(d.length >= 150000) throw 0; await send('', d); sig = ''; pull(); }
-    catch(e){ toast('Photo trop lourde ou envoi refusé.', true); }
-  });
-  sb.addEventListener('click', go);
-  inp.addEventListener('keydown', e => { if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); go(); } });
-  pull(); chatT = setInterval(() => { if(!document.hidden) pull(); }, 4000);
-}
-
-async function grpInfo(gid, gname){
-  closeAll(); open('#grpOverlay'); $('#grpForm').style.display = 'none'; $('#grpTitle').textContent = gname;
-  const B = $('#grpInfo'); B.style.display = 'block'; B.innerHTML = '<div class="t-empty">Chargement...</div>';
-  try{
-    await ensureBadges();
-    const [g, mb] = await Promise.all([fb('GET', 'groups/' + gid), fb('GET', 'group_members/' + gid)]);
-    const adm = (mb[me.uid] || {}).role === 'admin'; B.innerHTML = '';
-    const h = el('div', 'prof-head'), a = el('div', 'avatar grp-av', g.name.charAt(0).toUpperCase());
-    if(g.photo){ a.style.backgroundImage = 'url(' + g.photo + ')'; a.classList.add('img'); }
-    h.append(a, el('b', '', g.name)); if(g.desc) h.appendChild(el('div', 'prof-bio', g.desc));
-    h.appendChild(el('div', 'prof-meta', Object.keys(mb).length + ' membre(s)')); B.appendChild(h);
-    const link = location.href.split('#')[0].split('?')[0] + '?g=' + gid + '&c=' + g.invite;
-    const lb = el('button', 'btn btn-wa btn-block', '🔗 Inviter par lien'); lb.type = 'button'; lb.addEventListener('click', () => copyText(link, 'Lien du groupe copié')); B.appendChild(lb);
-    if(adm){
-      const sw = el('div', 'sw'), cb = el('input'); cb.type = 'checkbox'; cb.checked = g.onlyAdminsWrite === true;
-      cb.addEventListener('change', async () => { try{ await fb('PUT', 'groups/' + gid + '/onlyAdminsWrite', cb.checked); toast('Réglage enregistré ✅'); }catch(e){ cb.checked = !cb.checked; toast('Action impossible.', true); } });
-      sw.append(el('span', '', 'Seuls les admins peuvent écrire'), cb); B.appendChild(sw);
-    }
-    B.appendChild(el('div', 'subhead', '👥 Membres'));
-    Object.entries(mb).sort((x, y) => (y[1].role === 'admin') - (x[1].role === 'admin')).forEach(([id, v]) => {
-      const r = frow(id, v.name); if(v.role === 'admin') r.appendChild(el('small', '', 'admin'));
-      if(adm && id !== g.createdBy && id !== me.uid){
-        if(v.role !== 'admin'){ const u = el('button', 'btn btn-ghost', '⬆'); u.type = 'button'; u.title = 'Nommer admin'; u.addEventListener('click', async () => { try{ await fb('PUT', 'group_members/' + gid + '/' + id + '/role', 'admin'); grpInfo(gid, gname); }catch(e){ toast('Action impossible.', true); } }); r.appendChild(u); }
-        const rm = el('button', 'btn btn-ghost', '✕'); rm.type = 'button';
-        rm.addEventListener('click', async () => { if(!confirm('Retirer ce membre ?')) return; try{ await fb('DELETE', 'group_members/' + gid + '/' + id); await fb('DELETE', 'user_groups/' + id + '/' + gid); sys(gid, v.name + ' a été retiré'); grpInfo(gid, gname); }catch(e){ toast('Action impossible.', true); } });
-        r.appendChild(rm);
-      }
-      B.appendChild(r);
-    });
-    if(adm){
-      const fr = await fb('GET', 'friends/' + me.uid) || {}, cand = Object.entries(fr).filter(([id]) => !mb[id]);
-      if(cand.length){
-        B.appendChild(el('div', 'subhead', '➕ Ajouter un ami'));
-        cand.forEach(([id, v]) => {
-          const r = frow(id, v.name), ad = el('button', 'btn btn-primary', '➕'); ad.type = 'button';
-          ad.addEventListener('click', async () => { try{ const t = Date.now(); await fb('PUT', 'group_members/' + gid + '/' + id, { name: v.name, role: 'member', t }); await fb('PUT', 'user_groups/' + id + '/' + gid, { name: g.name, t }); pushNotif(id, 'group', 't\'a ajouté au groupe ' + g.name); sys(gid, v.name + ' a été ajouté'); grpInfo(gid, gname); }catch(e){ toast('Action impossible.', true); } });
-          r.appendChild(ad); B.appendChild(r);
-        });
-      }
-    }
-    const op = el('button', 'btn btn-primary btn-block', '💬 Ouvrir la discussion'); op.type = 'button'; op.style.marginTop = '12px'; op.addEventListener('click', () => openGroup(gid, gname));
-    const lv = el('button', 'btn btn-ghost btn-block', 'Quitter le groupe'); lv.type = 'button'; lv.style.marginTop = '8px';
-    lv.addEventListener('click', async () => { if(!confirm('Quitter ce groupe ?')) return; try{ await sys(gid, me.name + ' a quitté le groupe'); await fb('DELETE', 'group_members/' + gid + '/' + me.uid); await fb('DELETE', 'user_groups/' + me.uid + '/' + gid); toast('Tu as quitté le groupe'); openHub('grp'); }catch(e){ toast('Action impossible.', true); } });
-    B.append(op, lv);
-  }catch(e){ B.innerHTML = '<div class="t-empty">Infos du groupe indisponibles.</div>'; }
-}
-
-async function tryJoin(){
-  try{
-    const p = new URLSearchParams(location.search);
-    if(p.get('g') && p.get('c')) localStorage.setItem('hkstore-join', p.get('g') + '|' + p.get('c'));
-    const j = (localStorage.getItem('hkstore-join') || '').split('|'); if(!j[1]) return;
-    if(!me){ setTimeout(() => { if(!me) openAuth('👥 Connecte-toi pour rejoindre le groupe.'); }, 1500); return; }
-    localStorage.removeItem('hkstore-join'); history.replaceState(null, '', location.pathname);
-    let g2 = null; try{ g2 = await fb('GET', 'groups/' + j[0]); }catch(e){}
-    if(!g2){
-      const t = Date.now();
-      await fb('PUT', 'group_members/' + j[0] + '/' + me.uid, { name: me.name, role: 'member', t, code: j[1] });
-      g2 = await fb('GET', 'groups/' + j[0]);
-      await fb('PUT', 'user_groups/' + me.uid + '/' + j[0], { name: g2.name, t });
-      sys(j[0], me.name + ' a rejoint le groupe'); toast('Groupe rejoint ✅');
-    }
-    openGroup(j[0], g2.name);
-  }catch(e){ toast('Lien du groupe invalide.', true); }
-}
-
-/* ===== PUBLICATIONS EN ATTENTE (vues par l'auteur, en transparent) ===== */
-async function showMine(){
-  if(!me) return;
-  try{
-    const o = await fb('GET', 'my_pending/' + me.uid) || {};
-    Object.entries(o).sort((a, b) => b[1].t - a[1].t).forEach(([id, p]) => {
-      const d = el('article', 'post pend'), h = el('div', 'po-head'), i = el('i', '', me.name.charAt(0).toUpperCase()); setAv(i, me.uid);
-      const w = el('div'); w.append(nameB(me.uid, me.name), el('span', '', '⏳ En attente de validation'));
-      h.append(i, w); d.appendChild(h);
-      if(p.text) d.appendChild(el('p', '', p.text));
-      if(p.hasImg) d.appendChild(el('p', '', '📷 Photo jointe'));
-      feed.appendChild(d);
-    });
-  }catch(e){}
-}
-
-/* ===== ADMIN : stats, participants, groupes ===== */
-const adGet = async p => { const r = await fetch(DB + '/' + p + '.json?auth=' + token); if(!r.ok) throw 0; return r.json(); };
-const adCount = async p => { try{ const r = await fetch(DB + '/' + p + '.json?shallow=true&auth=' + token); return r.ok ? Object.keys(await r.json() || {}).length : '?'; }catch(e){ return '?'; } };
-$$('#adTabs button').forEach(b => b.addEventListener('click', () => {
-  const t = b.dataset.tab, m = { stats:'#adStats', parts:'#adParts', groups:'#adGroups' };
-  Object.keys(m).forEach(k => { $(m[k]).style.display = t === k ? 'block' : 'none'; });
-  if(t === 'stats') loadStats(); if(t === 'parts') loadParts(); if(t === 'groups') loadGroups();
-}));
-async function loadStats(){
-  const B = $('#adStats'); B.innerHTML = '<div class="t-empty">Chargement...</div>';
-  const v = await Promise.all(['users', 'publications', 'pub_attente', 'participants', 'groups'].map(adCount));
-  B.innerHTML = ''; const g = el('div', 'badges');
-  [['Membres', v[0]], ['Publications', v[1]], ['En attente', v[2]], ['Inscrits tournoi', v[3]], ['Groupes', v[4]]].forEach(([n, x]) => { const c = el('div', 'badge'); c.append(el('b', '', String(x)), el('div', '', n)); g.appendChild(c); });
-  B.appendChild(g);
-}
-async function loadParts(){
-  const B = $('#adParts'); B.innerHTML = '<div class="t-empty">Chargement...</div>';
-  try{
-    const l = Object.entries(await adGet('participants') || {}).sort((a, b) => b[1].t - a[1].t); B.innerHTML = '';
-    if(!l.length){ B.innerHTML = '<div class="t-empty">Aucun inscrit.</div>'; return; }
-    l.forEach(([id, p]) => {
-      const r = el('div', 'trow'), m = el('div', 'tm'); m.append(el('b', '', p.name), el('span', '', 'ID ' + p.id + ' · ' + p.phone));
-      const x = el('button', 'btn btn-ghost', '🗑'); x.type = 'button';
-      x.addEventListener('click', async () => { if(!confirm('Supprimer ce participant ?')) return; try{ await api('DELETE', 'participants/' + id); r.remove(); HK.tReload && HK.tReload(); }catch(e){ toast('Action impossible.', true); } });
-      r.append(m, x); B.appendChild(r);
-    });
-  }catch(e){ B.innerHTML = '<div class="t-empty">Erreur de lecture (règles ou connexion).</div>'; }
-}
-async function loadGroups(){
-  const B = $('#adGroups'); B.innerHTML = '<div class="t-empty">Chargement...</div>';
-  try{
-    const l = Object.entries(await adGet('groups') || {}).sort((a, b) => b[1].t - a[1].t); B.innerHTML = '';
-    if(!l.length){ B.innerHTML = '<div class="t-empty">Aucun groupe.</div>'; return; }
-    l.forEach(([id, g]) => {
-      const r = el('div', 'trow'), m = el('div', 'tm'); m.append(el('b', '', g.name), el('span', '', 'Créé le ' + new Date(g.t).toLocaleDateString('fr-FR')));
-      const x = el('button', 'btn btn-ghost', '🗑'); x.type = 'button';
-      x.addEventListener('click', async () => {
-        if(!confirm('Supprimer le groupe « ' + g.name + ' » ?')) return;
-        try{
-          const mb = await api('GET', 'group_members/' + id) || {};
-          for(const u of Object.keys(mb)) await api('DELETE', 'user_groups/' + u + '/' + id);
-          await api('DELETE', 'group_msgs/' + id); await api('DELETE', 'group_members/' + id); await api('DELETE', 'groups/' + id);
-          r.remove(); toast('Groupe supprimé');
-        }catch(e){ toast('Action impossible.', true); }
-      });
-      r.append(m, x); B.appendChild(r);
-    });
-  }catch(e){ B.innerHTML = '<div class="t-empty">Erreur de lecture (règles ou connexion).</div>'; }
-}
-
-
-  loadFeed();
+  authUI(); poll(); setInterval(poll, 5000);
+  loadFeed(); HK.sug();
 })();
 
 /* =====================================================
@@ -2635,12 +2569,8 @@ async function loadGroups(){
   function size(){ W = cv.width = innerWidth; H = cv.height = innerHeight; }
   size(); addEventListener('resize', size);
   const count = innerWidth < 600 ? 14 : 26;
-  for(let i = 0; i < count; i++) items.push({
-    x: Math.random(), y: Math.random(), s: 5 + Math.random() * 12,
-    v: .02 + Math.random() * .05, a: .08 + Math.random() * .18, g: Math.random() > .75
-  });
+  for(let i = 0; i < count; i++) items.push({ x: Math.random(), y: Math.random(), s: 5 + Math.random() * 12, v: .02 + Math.random() * .05, a: .08 + Math.random() * .18, g: Math.random() > .75 });
   function frame(){
-    if(document.hidden){ requestAnimationFrame(frame); return; }
     c.clearRect(0, 0, W, H);
     items.forEach(p => {
       p.y -= p.v / 60; if(p.y < -.05){ p.y = 1.05; p.x = Math.random(); }
@@ -2660,51 +2590,50 @@ async function loadGroups(){
   const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .08 });
   els.forEach(e => io.observe(e));
 })();
-  /* =====================================================
-     ICÔNES : remplace automatiquement les emoji par des icônes SVG
-     ===================================================== */
-  const ICON_MAP = {
-    '💎':'dia','🎡':'wheel','🏆':'trophy','📰':'news','🎮':'game','❓':'help','🧮':'calc','💳':'card','📜':'doc','⚡':'bolt',
-    '🔒':'lock','🤝':'friend','💬':'chat','🔔':'bell','👤':'user','⚙':'gear','👥':'users','📷':'camera','📨':'send','➤':'send',
-    '❤':'heartf','🤍':'heart','📤':'share','🗑':'trash','⏳':'hourglass','🎁':'gift','🏅':'medal','💾':'save','🔎':'search',
-    '🖼':'image','🎟':'ticket','🔊':'vol','🔇':'mute','🟢':'online','➕':'plus','🎉':'party','👋':'wave','✅':'checkc','👌':'checkc',
-    '📱':'phone','📲':'phone','🔥':'fire','🇨🇩':'flagcd','✔':'check','✓✓':'check2','✓':'check','📋':'clip','☀':'sun','🌙':'moon','★':'star','☆':'staro'
-  };
-  const EMO_SRC = '(' + Object.keys(ICON_MAP).sort((a, b) => b.length - a.length).join('|') + ')\uFE0F?';
-  const EMO_RE = new RegExp(EMO_SRC, 'g'), EMO_T = new RegExp(EMO_SRC);
-  const EMO_SKIP = 'script,style,textarea,input,option,svg,.post p,.bub > span,.cm span,.prof-bio,.conv:not(.notif) .conv-mid span,.nb.msg .t span';
-  function noEmoji(s){ return String(s).replace(EMO_RE, '').replace(/\s{2,}/g, ' ').trim(); }
-  function icoEl(n){
-    const NS = 'http://www.w3.org/2000/svg', s = document.createElementNS(NS, 'svg'), u = document.createElementNS(NS, 'use');
-    s.setAttribute('class', 'ico i-' + n); s.setAttribute('viewBox', n === 'dia' ? '0 0 64 64' : '0 0 24 24'); s.setAttribute('aria-hidden', 'true');
-    u.setAttribute('href', n === 'dia' ? '#dia' : '#i-' + n); s.appendChild(u); return s;
-  }
-  function emoTxt(n){
-    if(!EMO_T.test(n.nodeValue)) return;
-    const p = n.parentElement; if(!p || p.closest(EMO_SKIP)) return;
-    const f = document.createDocumentFragment();
-    n.nodeValue.split(EMO_RE).forEach((part, i) => { if(i % 2) f.appendChild(icoEl(ICON_MAP[part])); else if(part) f.appendChild(document.createTextNode(part)); });
-    n.replaceWith(f);
-  }
-  function emoAttrs(e){
-    ['placeholder', 'title', 'aria-label'].forEach(a => { const v = e.getAttribute && e.getAttribute(a); if(v && EMO_T.test(v)) e.setAttribute(a, noEmoji(v)); });
-    if(e.tagName === 'OPTION' && EMO_T.test(e.textContent)) e.textContent = noEmoji(e.textContent);
-  }
-  function emojify(root){
-    if(root.nodeType === 3){ emoTxt(root); return; }
-    if(root.nodeType !== 1) return;
-    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), list = [];
-    while(w.nextNode()) list.push(w.currentNode);
-    list.forEach(emoTxt);
-    emoAttrs(root); root.querySelectorAll('[placeholder],[title],[aria-label],option').forEach(emoAttrs);
-  }
-  const EMO_MO = new MutationObserver(ms => {
-    EMO_MO.disconnect();
-    ms.forEach(m => { if(m.type === 'characterData') emojify(m.target); else m.addedNodes.forEach(emojify); });
-    EMO_MO.observe(document.body, { childList:true, subtree:true, characterData:true });
-  });
-  emojify(document.body);
+
+/* ICÔNES : remplace automatiquement les emoji par des icônes SVG */
+const ICON_MAP = {
+  '💎':'dia','🎡':'wheel','🏆':'trophy','📰':'news','🎮':'game','❓':'help','🧮':'calc','💳':'card','📜':'doc','⚡':'bolt',
+  '🔒':'lock','🤝':'friend','💬':'chat','🔔':'bell','👤':'user','⚙':'gear','👥':'users','📷':'camera','📨':'send','➤':'send',
+  '❤':'heartf','🤍':'heart','📤':'share','🗑':'trash','⏳':'hourglass','🎁':'gift','🏅':'medal','💾':'save','🔎':'search',
+  '🖼':'image','🎟':'ticket','🔊':'vol','🔇':'mute','🟢':'online','➕':'plus','🎉':'party','👋':'wave','✅':'checkc','👌':'checkc',
+  '📱':'phone','📲':'phone','🔥':'fire','🌍':'globe','🛒':'shop','✔':'check','✓✓':'check2','✓':'check','📋':'clip','☀':'sun','🌙':'moon','★':'star','☆':'staro'
+};
+const EMO_SRC = '(' + Object.keys(ICON_MAP).sort((a, b) => b.length - a.length).join('|') + ')\uFE0F?';
+const EMO_RE = new RegExp(EMO_SRC, 'g'), EMO_T = new RegExp(EMO_SRC);
+const EMO_SKIP = 'script,style,textarea,input,option,svg,.post p,.bub > span,.cm span,.prof-bio,.conv:not(.notif) .conv-mid > span,.nb.msg .t span';
+function noEmoji(s){ return String(s).replace(EMO_RE, '').replace(/\s{2,}/g, ' ').trim(); }
+function icoEl(n){
+  const NS = 'http://www.w3.org/2000/svg', s = document.createElementNS(NS, 'svg'), u = document.createElementNS(NS, 'use');
+  s.setAttribute('class', 'ico i-' + n); s.setAttribute('viewBox', n === 'dia' ? '0 0 64 64' : '0 0 24 24'); s.setAttribute('aria-hidden', 'true');
+  u.setAttribute('href', n === 'dia' ? '#dia' : '#i-' + n); s.appendChild(u); return s;
+}
+function emoTxt(n){
+  if(!EMO_T.test(n.nodeValue)) return;
+  const p = n.parentElement; if(!p || p.closest(EMO_SKIP)) return;
+  const f = document.createDocumentFragment();
+  n.nodeValue.split(EMO_RE).forEach((part, i) => { if(i % 2) f.appendChild(icoEl(ICON_MAP[part])); else if(part) f.appendChild(document.createTextNode(part)); });
+  n.replaceWith(f);
+}
+function emoAttrs(e){
+  ['placeholder', 'title', 'aria-label'].forEach(a => { const v = e.getAttribute && e.getAttribute(a); if(v && EMO_T.test(v)) e.setAttribute(a, noEmoji(v)); });
+  if(e.tagName === 'OPTION' && EMO_T.test(e.textContent)) e.textContent = noEmoji(e.textContent);
+}
+function emojify(root){
+  if(root.nodeType === 3){ emoTxt(root); return; }
+  if(root.nodeType !== 1) return;
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), list = [];
+  while(w.nextNode()) list.push(w.currentNode);
+  list.forEach(emoTxt);
+  emoAttrs(root); root.querySelectorAll('[placeholder],[title],[aria-label],option').forEach(emoAttrs);
+}
+const EMO_MO = new MutationObserver(ms => {
+  EMO_MO.disconnect();
+  ms.forEach(m => { if(m.type === 'characterData') emojify(m.target); else m.addedNodes.forEach(emojify); });
   EMO_MO.observe(document.body, { childList:true, subtree:true, characterData:true });
+});
+emojify(document.body);
+EMO_MO.observe(document.body, { childList:true, subtree:true, characterData:true });
 })();
 </script>
 
@@ -2715,4 +2644,5 @@ if('serviceWorker' in navigator){
 }
 </script>
 </body>
-  </html>
+</html>
+
