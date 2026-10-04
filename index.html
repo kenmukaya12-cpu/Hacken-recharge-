@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Hacken Store : recharge de diamants Free Fire en RDC, Booyah Pass, abonnements, comptes et tournois. Paiement Airtel Money et Orange Money.">
+<meta name="description" content="Hacken Store : recharge de diamants Free Fire dans la région MENA, Booyah Pass, abonnements, comptes et tournois. Paiement Airtel Money et Orange Money.">
 <meta name="theme-color" content="#070D1A">
-<meta property="og:title" content="Hacken Store — Recharge Diamants Free Fire RDC">
+<meta property="og:title" content="Hacken Store — Recharge Diamants Free Fire MENA">
 <meta property="og:description" content="Recharge directe sur ton ID, tournois et comptes Free Fire.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M20 10h24l14 14-26 34L6 24Z' fill='%2349D8F0' stroke='%23F2B84B' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E">
-<title>Hacken Store — Recharge Diamants Free Fire RDC</title>
+<title>Hacken Store — Recharge Diamants Free Fire MENA</title>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="mobile-web-app-capable" content="yes">
@@ -414,6 +414,31 @@
   .badge .ic{color:var(--cyan);font-size:26px;}
   .ico.i-star{fill:currentColor;stroke:none;}
   .stars .ico{width:1em;height:1em;}
+/* Badge toujours collé au nom, partout */
+.bdg{display:inline-flex;vertical-align:middle;margin-left:4px;flex:none;}
+.bdg svg{width:18px;height:18px;flex:none;}
+.conv-mid b,.po-head b,.chat-who b,.fn b,.tm b,.cm b,.prof-head b{display:inline-flex;align-items:center;gap:2px;max-width:100%;white-space:nowrap;}
+.conv-mid>b,.chat-who>b,.po-head>div>b{display:flex;}
+/* Boutique masquée */
+.shop-wrap{display:none;}
+.shop-wrap.open{display:block;}
+/* Suggestions */
+.sug{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory;}
+.sug-card{flex:0 0 130px;scroll-snap-align:start;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 8px;text-align:center;}
+.sug-card .avatar{width:56px;height:56px;font-size:26px;}
+.sug-card b{display:flex;justify-content:center;font-family:var(--f-head);font-size:16px;}
+.sug-card .btn{padding:7px 10px;font-size:14px;margin-top:8px;width:100%;}
+/* Groupes */
+.grp-photo{margin-bottom:12px;}
+.grp-av{width:80px;height:80px;border-radius:50%;margin:0 auto 10px;}
+.pick{display:flex;align-items:center;gap:10px;padding:8px 4px;}
+.pick input{width:19px;height:19px;accent-color:var(--cyan);}
+.sw{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-top:1px dashed var(--line);font-size:14px;}
+.bub .who-n{display:block;font-family:var(--f-head);font-size:13px;color:var(--cyan-d);}
+.bub.sys{align-self:center;background:transparent;border:0;font-size:12px;color:var(--muted);}
+.bub img.pic{display:block;max-width:100%;max-height:260px;border-radius:12px;margin-bottom:4px;cursor:zoom-in;}
+.chat-photo{flex:0 0 44px;height:44px;border:0;border-radius:50%;cursor:pointer;background:var(--panel2);}
+.post.pend{opacity:.55;border-style:dashed;}
 </style>
 </head>
 <body>
@@ -507,19 +532,19 @@
   <div class="store">HACKEN STORE</div>
   <p class="claim">Recharge tes diamants Free Fire directement sur ton ID, en quelques minutes.</p>
   <div class="hero-cta">
-    <a class="btn btn-primary" href="#packs">💎 Recharger maintenant</a>
+    <button class="btn btn-primary" type="button" data-open-shop>💎 Entrer dans la boutique</button>
     <button class="btn btn-gold" type="button" data-open-wheel>🎡 Roue HK de 20h</button>
   </div>
   <div class="chips">
     <span class="chip gold">✔ Vendeur vérifié</span>
-    <span class="chip">🇨🇩 RDC uniquement</span>
+    <span class="chip">🌍 Serveur MENA</span>
     <span class="chip">📲 Airtel · Orange</span>
   </div>
   <div class="chips">
-    <a class="chip" href="#packs">💎 Packs</a>
+    <a class="chip" href="#shopBtn" data-open-shop>💎 Packs</a>
     <a class="chip" href="#tournoi">🏆 Tournois</a>
     <a class="chip" href="#communaute">📰 Actus</a>
-    <a class="chip" href="#comptes">🎮 Comptes</a>
+    <a class="chip" href="#shopBtn" data-open-shop>🎮 Comptes</a>
     <a class="chip" href="#faq">❓ FAQ</a>
   </div>
   <div class="stats">
@@ -540,6 +565,10 @@
   </div>
 </section>
 
+<section class="rv">
+  <button class="btn btn-gold btn-block" type="button" id="shopBtn" data-open-shop>🛒 Boutique</button>
+</section>
+<div id="shop" class="shop-wrap">
 <section id="packs" class="rv">
   <h2 class="sec-title">Choisis ton pack</h2>
   <p class="sec-sub">Les prix sont en Francs Congolais (FC). Touche un pack pour le choisir.</p>
@@ -642,6 +671,7 @@
   <a class="btn btn-wa btn-block" style="margin-top:14px;" href="https://chat.whatsapp.com/Jgo3WcNSCP9GeD6JmUSGiF" target="_blank" rel="noopener">👥 Rejoindre la guilde</a>
 </section>
 
+</div>
 <!-- ============ TOURNOIS ============ -->
 <section id="tournoi" class="rv">
   <h2 class="sec-title">🏆 Tournois</h2>
@@ -666,6 +696,10 @@
 <section id="communaute" class="rv">
   <h2 class="sec-title">📰 Communauté</h2>
   <p class="sec-sub">Partage une photo, une victoire ou une note. Crée un compte gratuit pour publier, aimer et commenter. Chaque publication est vérifiée et disparaît après 48h.</p>
+  <div id="sugBox" style="display:none;margin-bottom:16px;">
+  <div class="subhead" style="margin-top:0;" data-i18n="sug_title">👋 Nouveaux joueurs</div>
+  <div class="sug" id="sugList"></div>
+</div>
   <form id="pForm" class="t-card" novalidate>
     <div id="pWho" class="who"></div>
     <div><label class="lbl" for="pText">Ta note</label>
@@ -713,7 +747,7 @@
 
 <footer>
   <span class="hk">HK · HACKEN STORE</span>
-  Recharge Diamants Free Fire. Service disponible uniquement en RDC 🇨🇩.<br>Indépendant, non affilié à Garena.<br>
+  Recharge Diamants Free Fire. Service disponible dans la région MENA 🌍.<br>Indépendant, non affilié à Garena.<br>
   <a class="btn btn-wa" id="supportBtn" href="#" target="_blank" rel="noopener">💬 Contacter le support</a><br>
   <small>© 2026 Hacken Store · <a href="#" id="adminLink" style="color:inherit;opacity:.5;">Admin</a></small>
 </footer>
@@ -751,6 +785,13 @@
         <button type="button" class="pay" id="themeDark">🌙 Sombre</button>
       </div>
     </div>
+    <div class="step" style="display:block;">
+  <b data-i18n="lang">Langue</b>
+  <div class="pay-options" style="margin-top:10px;">
+    <button type="button" class="pay" data-lang="fr">Français</button>
+    <button type="button" class="pay" data-lang="en">English</button>
+  </div>
+</div>
   </div>
 </div>
 
@@ -775,6 +816,9 @@
         <button type="button" class="pay sel" data-tab="posts">📰 Publications</button>
         <button type="button" class="pay" data-tab="edit">⚙️ Prix &amp; images</button>
         <button type="button" class="pay" data-tab="members">👥 Membres</button>
+        <button type="button" class="pay" data-tab="stats">📊 Stats</button>
+        <button type="button" class="pay" data-tab="parts">🏆 Participants</button>
+        <button type="button" class="pay" data-tab="groups">👥 Groupes</button>
       </div>
       <div id="adPosts">
         <div class="subhead" style="margin-top:0;">En attente (<span id="adCount">0</span>)</div>
@@ -789,6 +833,9 @@
         <div id="edList"></div>
         <button class="btn btn-gold btn-block" type="button" id="edSave">💾 Enregistrer les changements</button>
       </div>
+      <div id="adStats" style="display:none;"></div>
+      <div id="adParts" style="display:none;"></div>
+      <div id="adGroups" style="display:none;"></div>
       <button class="btn btn-ghost btn-block" type="button" id="adLogout" style="margin-top:12px;">Se déconnecter</button>
     </div>
   </div>
@@ -808,6 +855,19 @@
         <div class="hint">3 à 20 caractères : lettres, chiffres, point, tiret, underscore.</div></div>
       <div><label class="lbl" for="auPass">Mot de passe</label>
         <input type="password" id="auPass" autocomplete="current-password" placeholder="6 caractères minimum"></div>
+      <div class="overlay" id="grpOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Groupe">
+    <div class="modal-head"><h3 id="grpTitle" data-i18n="grp_new">Nouveau groupe</h3><button class="x" type="button" data-close>✕</button></div>
+    <form id="grpForm" novalidate>
+      <label class="photo-btn grp-photo"><span id="grpPhotoLbl" data-i18n="grp_photo">📷 Photo du groupe</span><input type="file" id="grpPhoto" accept="image/*"></label>
+      <div><label class="lbl" for="grpName" data-i18n="grp_name">Nom du groupe</label><input type="text" id="grpName" maxlength="30"></div>
+      <div><label class="lbl" for="grpDesc" data-i18n="grp_desc">Description</label><textarea id="grpDesc" maxlength="200"></textarea></div>
+      <div><span class="lbl" data-i18n="grp_members">Membres (tes amis)</span><div id="grpPick"></div></div>
+      <button class="btn btn-primary btn-block" type="submit" data-i18n="grp_create">Créer le groupe</button>
+    </form>
+    <div id="grpInfo" style="display:none;"></div>
+  </div>
+</div>
       <div id="auRefBox" style="display:none;"><label class="lbl" for="auRef">Code parrain (facultatif)</label>
         <input type="text" id="auRef" maxlength="12" autocomplete="off" placeholder="Ex : kCF9zuZF">
         <div class="hint">Si un ami t'a invité, entre son code : il gagne 2 points.</div></div>
@@ -833,15 +893,40 @@
   <div class="modal" role="dialog" aria-modal="true" aria-label="Messagerie">
     <div class="modal-head"><h3>💬 Messagerie</h3><button class="x" type="button" data-close>✕</button></div>
     <div class="hub-tabs" id="hubTabs">
-      <button type="button" class="pay sel" data-hub="msg">💬 Messages</button>
-      <button type="button" class="pay" data-hub="notif">🔔 Notifications</button>
-    </div>
+  <button type="button" class="pay sel" data-hub="msg" data-i18n="tab_msg">💬 Messages</button>
+  <button type="button" class="pay" data-hub="grp" data-i18n="tab_grp">👥 Groupes</button>
+  <button type="button" class="pay" data-hub="notif" data-i18n="tab_notif">🔔 Alertes</button>
+</div>
     <div id="hubBody"></div>
   </div>
 </div>
 
 <div class="overlay" id="chatOverlay">
   <div class="modal chatm" role="dialog" aria-modal="true" aria-label="Conversation"><div id="chatBody"></div></div>
+</div>
+
+<div class="overlay" id="grpOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Groupe">
+    <div class="modal-head"><h3 id="grpTitle" data-i18n="grp_new">Nouveau groupe</h3><button class="x" type="button" data-close>✕</button></div>
+    <form id="grpForm" novalidate>
+      <label class="photo-btn grp-photo"><span id="grpPhotoLbl" data-i18n="grp_photo">📷 Photo du groupe</span><input type="file" id="grpPhoto" accept="image/*"></label>
+      <div><label class="lbl" for="grpName" data-i18n="grp_name">Nom du groupe</label><input type="text" id="grpName" maxlength="30"></div>
+      <div><label class="lbl" for="grpDesc" data-i18n="grp_desc">Description</label><textarea id="grpDesc" maxlength="200"></textarea></div>
+      <div><span class="lbl" data-i18n="grp_members">Membres (tes amis)</span><div id="grpPick"></div></div>
+      <button class="btn btn-primary btn-block" type="submit" data-i18n="grp_create">Créer le groupe</button>
+    </form>
+    <div id="grpInfo" style="display:none;"></div>
+  </div>
+</div>
+
+<div class="overlay" id="langOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Language">
+    <div class="modal-head"><h3>🌍 Langue / Language</h3></div>
+    <div class="pay-options">
+      <button type="button" class="pay" data-lang="fr">Français</button>
+      <button type="button" class="pay" data-lang="en">English</button>
+    </div>
+  </div>
 </div>
 
 <div class="overlay" id="wheelOverlay">
@@ -856,8 +941,8 @@
     <div class="wheel-res" id="wheelRes"></div>
     <button class="btn btn-gold btn-block" type="button" id="spinBtn">Tourner la roue</button>
   </div>
- </div>
-  <script>
+</div>
+<script>
 (async function(){
 const HK_DB = 'https://kenmukaya-f3f46-default-rtdb.europe-west1.firebasedatabase.app';
 const CFG = await (async () => {
@@ -1451,6 +1536,7 @@ $('#orderForm').addEventListener('submit', e => {
       btn.textContent = '🔒 Se connecter pour publier'; btn.addEventListener('click', () => openAuth(''));
       w.appendChild(btn);
     }
+    loadSug();
   }
   $('#userBtn').addEventListener('click', () => me ? openProfile(me.uid, me.name) : openAuth(''));
   $('#auOut').addEventListener('click', () => logout());
@@ -1483,7 +1569,7 @@ $('#orderForm').addEventListener('submit', e => {
       }else{
         try{ const pr = await (await fetch(DB + '/users/' + d.localId + '.json?auth=' + utok)).json(); if(pr && pr.name) pname = pr.name; }catch(x){}
       }
-      me = { uid: d.localId, name: pname }; saveSession(); if(mode === 'up'){ const rc = ($('#auRef').value || '').trim(); if(rc) await useRef(rc); }
+      me = { uid: d.localId, name: pname }; saveSession(); syncLang(); if(mode === 'up'){ const rc = ($('#auRef').value || '').trim(); if(rc) await useRef(rc); }
       $('#auPass').value = ''; closeAll(); authUI(); loadFeed(); toast('👋 Bienvenue ' + pname);
     }catch(err){ toast(err.message || 'Connexion impossible.', true); }
     btn.disabled = false;
@@ -1519,7 +1605,7 @@ $('#orderForm').addEventListener('submit', e => {
 
   function postEl(id, p, mode){
     const d = document.createElement('article'); d.className = 'post';
-    d.innerHTML = '<div class="po-head"><i></i><div><b></b><span></span></div></div>' + (okImg(p.img) ? '<img alt="Publication">' : '') + '<p></p><div class="post-act"></div>';
+    d.innerHTML = '<div class="po-head"><i></i><div><b></b><span></span></div></div>' + (okImg(p.img) ? '<img alt="Publication" loading="lazy" decoding="async">' : '') + '<p></p><div class="post-act"></div>';
     $('i', d).textContent = (p.name || '?').charAt(0).toUpperCase(); setAv($('i', d), p.uid);
     $('.po-head b', d).textContent = p.name; { const bd = badgeEl(p.uid); if(bd) $('.po-head b', d).appendChild(bd); }
     if(p.uid){ const hb = $('.po-head b', d); hb.style.cursor = 'pointer'; hb.addEventListener('click', () => openProfile(p.uid, p.name)); }
@@ -1530,7 +1616,7 @@ $('#orderForm').addEventListener('submit', e => {
     const mk = (txt, cls, fn) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn ' + cls; b.textContent = txt; b.addEventListener('click', fn); act.appendChild(b); return b; };
     if(mode === 'pending'){
       mk('✅ Approuver', 'btn-primary', () => approve(id, p));
-      mk('🗑 Refuser', 'btn-ghost', () => remove('pub_attente', id, loadPending));
+      mk('🗑 Refuser', 'btn-ghost', () => { remove('pub_attente', id, loadPending).then(() => { if(p.uid) api('DELETE', 'my_pending/' + p.uid + '/' + id).catch(() => {}); }); });
     } else {
       let liked = !!(me && p.likes && p.likes[me.uid]), nl = p.likes ? Object.keys(p.likes).length : 0;
       const lb = mk('', 'btn-ghost', async () => {
@@ -1587,7 +1673,7 @@ $('#orderForm').addEventListener('submit', e => {
     return r.json();
   }
   async function approve(id, p){
-    try{ await api('PUT', 'publications/' + id, Object.assign({}, p, { ta: Date.now() })); await api('DELETE', 'pub_attente/' + id); toast('Publication approuvée ✅'); loadPending(); loadFeed(); }
+    try{ await api('PUT', 'publications/' + id, Object.assign({}, p, { ta: Date.now() })); await api('DELETE', 'pub_attente/' + id); if(p.uid) await api('DELETE', 'my_pending/' + p.uid + '/' + id).catch(() => {}); toast('Publication approuvée ✅'); loadPending(); loadFeed(); }
     catch(e){ toast('Action impossible (reconnecte-toi).', true); }
   }
   async function remove(node, id, after){
@@ -1613,8 +1699,8 @@ $('#orderForm').addEventListener('submit', e => {
       authUI();
       const o = await r.json() || {};
       const list = Object.entries(o).filter(([k, v]) => v.ta && Date.now() - v.ta < 172800000).sort((a, b) => b[1].ta - a[1].ta);
-      feed.innerHTML = '';
-      if(!list.length){ feed.innerHTML = '<div class="t-empty">Aucune publication pour le moment. Sois le premier !</div>'; return; }
+      feed.innerHTML = ''; await showMine();
+      if(!list.length && !feed.children.length){ feed.innerHTML = '<div class="t-empty">Aucune publication pour le moment. Sois le premier !</div>'; return; }
       list.forEach(([id, p]) => feed.appendChild(postEl(id, p, 'feed')));
     }catch(e){ feed.innerHTML = '<div class="t-empty">Impossible de charger les publications.</div>'; }
   }
@@ -1639,10 +1725,10 @@ $('#orderForm').addEventListener('submit', e => {
     const post = { name: me.name, uid: me.uid, text, t: Date.now() }; if(imgData) post.img = imgData;
     try{
       const r = await fetch(await uurl('pub_attente'), { method:'POST', body: JSON.stringify(post) });
-      if(!r.ok) throw 0;
+      if(!r.ok) throw 0; try{ const pid = (await r.json()).name; await fb('PUT', 'my_pending/' + me.uid + '/' + pid, { text: post.text, t: post.t, hasImg: !!post.img }); }catch(e){}
       try{ localStorage.setItem('hkstore-lastpost', String(Date.now())); }catch(x){}
       $('#pForm').reset(); imgData = ''; $('#pPrevBox').style.display = 'none';
-      toast('📨 Envoyé ! Visible après validation.');
+      toast('📨 Envoyé ! Visible après validation.'); loadFeed();
     }catch(err){ toast('Envoi impossible, réessaie.', true); }
   });
 
@@ -2084,7 +2170,7 @@ $('#orderForm').addEventListener('submit', e => {
   function renderHub(){
     $$('#hubTabs button').forEach(b => b.classList.toggle('sel', b.dataset.hub === hubTab));
     const box = $('#hubBody'); box.innerHTML = '';
-    if(hubTab === 'msg') renderConvs(box); else renderNotifs(box);
+    if(hubTab === 'msg') renderConvs(box); else if(hubTab === 'grp') renderGroups(box); else renderNotifs(box);
   }
   async function renderConvs(box){
     const sr = el('input', 'hub-search'); sr.type = 'text'; sr.placeholder = '🔎 Chercher une conversation'; box.appendChild(sr);
@@ -2204,7 +2290,9 @@ $('#orderForm').addEventListener('submit', e => {
         ]);
         if(mi && mi.from !== me.uid && !mi.r){ fb('PUT', 'inbox/' + me.uid + '/' + fid + '/r', true).then(poll).catch(() => {}); }
         peerRead = pe ? (pe.from !== me.uid ? Infinity : (pe.r ? pe.t : 0)) : 0;
-        const msgs = Object.entries(o || {}).sort((a, b) => a[1].t - b[1].t);
+        const all = Object.entries(o || {});
+        all.filter(([k, m]) => Date.now() - m.t > 172800000).slice(0, 10).forEach(([k]) => fb('DELETE', 'chats/' + id + '/' + k).catch(() => {}));
+        const msgs = all.filter(([k, m]) => Date.now() - m.t <= 172800000).sort((a, b) => a[1].t - b[1].t);
         const s = msgs.map(([k]) => k).join() + peerRead;
         if(s === sig) return; sig = s;
         const near = first || list.scrollHeight - list.scrollTop - list.clientHeight < 120;
@@ -2229,7 +2317,7 @@ $('#orderForm').addEventListener('submit', e => {
     }
     sb.addEventListener('click', send);
     inp.addEventListener('keydown', e => { if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); send(); } });
-    pull(); chatT = setInterval(pull, 3000); setTimeout(() => inp.focus(), 150);
+    pull(); chatT = setInterval(() => { if(!document.hidden) pull(); }, 4000); setTimeout(() => inp.focus(), 150);
   }
   document.addEventListener('visibilitychange', () => { if(!document.hidden){ clearInterval(flashT); poll(); } });
   addEventListener('focus', () => poll());
@@ -2240,7 +2328,299 @@ $('#orderForm').addEventListener('submit', e => {
     $('#auRef').value = sr;
     if(sr && !me){ setTimeout(() => { $('#auForm [data-mode="up"]').click(); openAuth('🎁 Tu as été invité ! Crée ton compte : le code parrain est déjà rempli.'); }, 1200); }
   }catch(e){}
-  poll(); setInterval(poll, 5000);
+  poll(); setInterval(() => { if(!document.hidden) poll(); }, 8000);
+
+  /* ===== BOUTIQUE ===== */
+$$('[data-open-shop]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); $('#shop').classList.add('open'); setTimeout(() => $('#packs').scrollIntoView({ behavior:'smooth' }), 60); }));
+
+/* ===== LANGUE ===== */
+const I18N = { en:{ lang:'Language', sug_title:'👋 New players', tab_msg:'💬 Messages', tab_grp:'👥 Groups', tab_notif:'🔔 Alerts', grp_new:'New group', grp_photo:'📷 Group photo', grp_name:'Group name', grp_desc:'Description', grp_members:'Members (your friends)', grp_create:'Create group' } };
+let LANG = ''; try{ LANG = localStorage.getItem('hkstore-lang') || ''; }catch(e){}
+const FIRST = !LANG; if(!LANG) LANG = 'fr';
+$$('[data-i18n]').forEach(n => { n.dataset.fr = n.textContent; });
+const tr = (k, fr) => (LANG === 'en' && I18N.en[k]) ? I18N.en[k] : fr;
+function applyLang(){
+  document.documentElement.lang = LANG;
+  $$('[data-i18n]').forEach(n => { n.textContent = tr(n.dataset.i18n, n.dataset.fr); });
+  $$('[data-lang]').forEach(b => b.classList.toggle('sel', b.dataset.lang === LANG));
+}
+function syncLang(){ if(me) fb('PUT', 'users/' + me.uid + '/lang', LANG).catch(() => {}); }
+$$('[data-lang]').forEach(b => b.addEventListener('click', () => {
+  LANG = b.dataset.lang; try{ localStorage.setItem('hkstore-lang', LANG); }catch(e){}
+  applyLang(); syncLang(); $('#langOverlay').classList.remove('open');
+}));
+applyLang(); if(FIRST) open('#langOverlay');
+
+/* ===== SUGGESTIONS ===== */
+async function loadSug(){
+  try{
+    tryJoin();
+    const box = $('#sugBox'); if(!me){ box.style.display = 'none'; return; }
+    const fr = await fb('GET', 'friends/' + me.uid) || {};
+    const o = await fb('GET', 'users', undefined, '&orderBy=%22t%22&limitToLast=24');
+    await ensureBadges();
+    const list = Object.entries(o || {}).filter(([k]) => k !== me.uid && !fr[k]).sort((a, b) => b[1].t - a[1].t).slice(0, 12);
+    const L = $('#sugList'); L.innerHTML = ''; box.style.display = list.length ? 'block' : 'none';
+    list.forEach(([uid, u]) => {
+      const c = el('div', 'sug-card'), av = el('div', 'avatar', u.name.charAt(0).toUpperCase()); setAv(av, uid);
+      av.addEventListener('click', () => openProfile(uid, u.name));
+      const b = el('button', 'btn btn-primary', '➕'); b.type = 'button';
+      b.addEventListener('click', async () => { try{ await fb('PUT', 'friend_req/' + uid + '/' + me.uid, { name: me.name, t: Date.now() }); b.textContent = '⏳'; b.disabled = true; }catch(e){ toast('Action impossible.', true); } });
+      c.append(av, nameB(uid, u.name), b); L.appendChild(c);
+    });
+  }catch(e){}
+}
+
+/* ===== GROUPES ===== */
+const DAY2 = 172800000, GP = {};
+const rid = () => Array.from(crypto.getRandomValues(new Uint8Array(12)), b => (b % 36).toString(36)).join('');
+const sys = (gid, text) => fb('POST', 'group_msgs/' + gid, { from: me.uid, name: me.name, text, sys: true, t: Date.now() }).catch(() => {});
+function setGAv(node, id){
+  (GP[id] = GP[id] || fb('GET', 'groups/' + id + '/photo').catch(() => '')).then(d => { if(d){ node.style.backgroundImage = 'url(' + d + ')'; node.classList.add('img'); } });
+}
+async function renderGroups(box){
+  const nb = el('button', 'btn btn-primary btn-block', '➕ ' + tr('grp_new', 'Nouveau groupe')); nb.type = 'button'; nb.addEventListener('click', openGrpForm); box.appendChild(nb);
+  const L = el('div'); L.style.marginTop = '10px'; box.appendChild(L);
+  try{
+    const rows = Object.entries(await fb('GET', 'user_groups/' + me.uid) || {}).sort((a, b) => b[1].t - a[1].t);
+    if(!rows.length) L.appendChild(el('div', 't-empty', 'Aucun groupe pour le moment.'));
+    rows.forEach(([id, v]) => {
+      const r = el('div', 'conv'), a = el('div', 'av-lg', v.name.charAt(0).toUpperCase()); setGAv(a, id);
+      const m = el('div', 'conv-mid'); m.append(el('b', '', v.name), el('span', '', '👥 Groupe'));
+      r.append(a, m); r.addEventListener('click', () => openGroup(id, v.name)); L.appendChild(r);
+    });
+  }catch(e){ L.appendChild(el('div', 't-empty', 'Groupes indisponibles.')); }
+}
+let gPhoto = '';
+async function openGrpForm(){
+  closeAll(); open('#grpOverlay'); gPhoto = '';
+  $('#grpForm').style.display = ''; $('#grpInfo').style.display = 'none'; $('#grpTitle').textContent = tr('grp_new', 'Nouveau groupe');
+  $('#grpForm').reset(); $('#grpPhotoLbl').textContent = tr('grp_photo', '📷 Photo du groupe');
+  const P = $('#grpPick'); P.innerHTML = '';
+  let fr = {}; try{ fr = await fb('GET', 'friends/' + me.uid) || {}; }catch(e){}
+  Object.entries(fr).forEach(([id, v]) => { const l = el('label', 'pick'), c = el('input'); c.type = 'checkbox'; c.value = id; c.dataset.n = v.name; l.append(c, el('span', '', v.name)); P.appendChild(l); });
+  if(!Object.keys(fr).length) P.appendChild(el('div', 'hint', 'Ajoute des amis pour les inviter. Tu pourras aussi partager le lien du groupe.'));
+}
+$('#grpPhoto').addEventListener('change', async e => {
+  const f = e.target.files[0]; if(!f) return;
+  try{ gPhoto = await squareImg(f, 160); $('#grpPhotoLbl').textContent = '📷 ✓'; }catch(x){ toast('Photo impossible.', true); }
+});
+$('#grpForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const nm = $('#grpName').value.trim(); if(!nm) return bad($('#grpName'), 'Donne un nom au groupe.');
+  const t = Date.now(), picks = $$('#grpPick input:checked'), g = { name: nm, createdBy: me.uid, t, invite: rid() };
+  const d = $('#grpDesc').value.trim(); if(d) g.desc = d; if(gPhoto) g.photo = gPhoto;
+  try{
+    const id = (await fb('POST', 'groups', g)).name;
+    await fb('PUT', 'group_members/' + id + '/' + me.uid, { name: me.name, role: 'admin', t });
+    await fb('PUT', 'user_groups/' + me.uid + '/' + id, { name: nm, t });
+    for(const c of picks){
+      await fb('PUT', 'group_members/' + id + '/' + c.value, { name: c.dataset.n, role: 'member', t });
+      await fb('PUT', 'user_groups/' + c.value + '/' + id, { name: nm, t });
+      pushNotif(c.value, 'group', 't\'a ajouté au groupe ' + nm);
+    }
+    toast('Groupe créé ✅'); openGroup(id, nm);
+  }catch(err){ toast('Création impossible.', true); }
+});
+
+async function openGroup(gid, gname){
+  closeAll(); clearInterval(chatT); ST.open = 'g' + gid; open('#chatOverlay');
+  const box = $('#chatBody'); box.innerHTML = '';
+  const stop = () => { ST.open = ''; clearInterval(chatT); };
+  const head = el('div', 'chat-head');
+  const back = el('button', 'chat-ic', '‹'); back.type = 'button'; back.addEventListener('click', () => { stop(); openHub('grp'); });
+  const av = el('div', 'av-lg', gname.charAt(0).toUpperCase()); setGAv(av, gid);
+  const who = el('div', 'chat-who'), nb = el('b', '', gname); nb.addEventListener('click', () => { stop(); grpInfo(gid, gname); });
+  who.append(nb, el('small', '', 'Touche le nom pour les infos'));
+  const x = el('button', 'chat-ic', '✕'); x.type = 'button'; x.addEventListener('click', () => { stop(); closeAll(); });
+  head.append(back, av, who, x); box.appendChild(head);
+  const list = el('div', 'chat-msgs'); box.appendChild(list);
+  const bar = el('div', 'chat-bar'), inp = el('textarea'), sb = el('button', 'chat-send', '➤');
+  const ph = el('label', 'chat-photo', '🖼'); ph.style.cssText = 'display:grid;place-items:center;cursor:pointer;';
+  const fi = el('input'); fi.type = 'file'; fi.accept = 'image/*'; fi.hidden = true; ph.appendChild(fi);
+  inp.rows = 1; inp.maxLength = 500; inp.placeholder = 'Écris un message...'; sb.type = 'button';
+  inp.addEventListener('input', () => { inp.style.height = 'auto'; inp.style.height = Math.min(inp.scrollHeight, 110) + 'px'; });
+  bar.append(ph, inp, sb); box.appendChild(bar);
+  let sig = '', first = true, lastK = '', isAdmin = false;
+  fb('GET', 'group_members/' + gid + '/' + me.uid + '/role').then(r => { isAdmin = r === 'admin'; }).catch(() => {});
+  const send = (text, img) => { const m = { from: me.uid, name: me.name, t: Date.now() }; if(text) m.text = text; if(img) m.img = img; return fb('POST', 'group_msgs/' + gid, m); };
+  async function pull(){
+    if(!$('#chatOverlay').classList.contains('open') || !document.body.contains(list)){ stop(); return; }
+    try{
+      const o = await fb('GET', 'group_msgs/' + gid, undefined, '&orderBy=%22%24key%22&limitToLast=60') || {}, now = Date.now(), all = Object.entries(o);
+      all.filter(([k, m]) => now - m.t > DAY2).slice(0, 10).forEach(([k]) => fb('DELETE', 'group_msgs/' + gid + '/' + k).catch(() => {}));
+      const msgs = all.filter(([k, m]) => now - m.t <= DAY2).sort((a, b) => a[1].t - b[1].t);
+      const s = msgs.map(m => m[0]).join(); if(s === sig) return; sig = s;
+      const near = first || list.scrollHeight - list.scrollTop - list.clientHeight < 120, lm = msgs[msgs.length - 1];
+      if(!first && lm && lm[1].from !== me.uid && lm[0] !== lastK) ping();
+      lastK = lm ? lm[0] : ''; first = false; list.innerHTML = '';
+      if(!msgs.length) list.appendChild(el('div', 'chat-empty', 'Aucun message. Dis bonjour 👋'));
+      let lastDay = '';
+      msgs.forEach(([k, m]) => {
+        const dl = dayLbl(m.t); if(dl !== lastDay){ list.appendChild(el('div', 'day', dl)); lastDay = dl; }
+        if(m.sys){ list.appendChild(el('div', 'bub sys', m.text)); return; }
+        const mine = m.from === me.uid, b = el('div', 'bub' + (mine ? ' me' : ''));
+        if(!mine){ const w = el('span', 'who-n'); w.appendChild(nameB(m.from, m.name)); b.appendChild(w); }
+        if(m.img){ const im = el('img', 'pic'); im.src = m.img; im.loading = 'lazy'; im.addEventListener('click', e => { e.stopPropagation(); im.style.maxHeight = im.style.maxHeight === 'none' ? '260px' : 'none'; }); b.appendChild(im); }
+        if(m.text) b.appendChild(el('span', '', m.text));
+        b.appendChild(el('small', '', hm(m.t)));
+        if(mine || isAdmin){
+          b.addEventListener('click', () => b.classList.toggle('act'));
+          const d = el('button', 'del', '🗑 Supprimer'); d.type = 'button';
+          d.addEventListener('click', async e => { e.stopPropagation(); try{ await fb('DELETE', 'group_msgs/' + gid + '/' + k); sig = ''; pull(); }catch(z){ toast('Suppression impossible.', true); } });
+          b.appendChild(d);
+        }
+        list.appendChild(b);
+      });
+      if(near) list.scrollTop = list.scrollHeight;
+    }catch(e){ if(first){ first = false; list.innerHTML = ''; list.appendChild(el('div', 'chat-empty', 'Impossible de charger les messages.')); } }
+  }
+  async function go(){
+    const t = inp.value.trim(); if(!t) return; inp.value = ''; inp.style.height = 'auto';
+    try{ await send(t); sig = ''; pull(); }catch(e){ inp.value = t; toast('Message non envoyé (réservé aux admins ?).', true); }
+  }
+  fi.addEventListener('change', async () => {
+    const f = fi.files[0]; fi.value = ''; if(!f) return;
+    try{ const d = await compress(f, 640); if(d.length >= 150000) throw 0; await send('', d); sig = ''; pull(); }
+    catch(e){ toast('Photo trop lourde ou envoi refusé.', true); }
+  });
+  sb.addEventListener('click', go);
+  inp.addEventListener('keydown', e => { if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); go(); } });
+  pull(); chatT = setInterval(() => { if(!document.hidden) pull(); }, 4000);
+}
+
+async function grpInfo(gid, gname){
+  closeAll(); open('#grpOverlay'); $('#grpForm').style.display = 'none'; $('#grpTitle').textContent = gname;
+  const B = $('#grpInfo'); B.style.display = 'block'; B.innerHTML = '<div class="t-empty">Chargement...</div>';
+  try{
+    await ensureBadges();
+    const [g, mb] = await Promise.all([fb('GET', 'groups/' + gid), fb('GET', 'group_members/' + gid)]);
+    const adm = (mb[me.uid] || {}).role === 'admin'; B.innerHTML = '';
+    const h = el('div', 'prof-head'), a = el('div', 'avatar grp-av', g.name.charAt(0).toUpperCase());
+    if(g.photo){ a.style.backgroundImage = 'url(' + g.photo + ')'; a.classList.add('img'); }
+    h.append(a, el('b', '', g.name)); if(g.desc) h.appendChild(el('div', 'prof-bio', g.desc));
+    h.appendChild(el('div', 'prof-meta', Object.keys(mb).length + ' membre(s)')); B.appendChild(h);
+    const link = location.href.split('#')[0].split('?')[0] + '?g=' + gid + '&c=' + g.invite;
+    const lb = el('button', 'btn btn-wa btn-block', '🔗 Inviter par lien'); lb.type = 'button'; lb.addEventListener('click', () => copyText(link, 'Lien du groupe copié')); B.appendChild(lb);
+    if(adm){
+      const sw = el('div', 'sw'), cb = el('input'); cb.type = 'checkbox'; cb.checked = g.onlyAdminsWrite === true;
+      cb.addEventListener('change', async () => { try{ await fb('PUT', 'groups/' + gid + '/onlyAdminsWrite', cb.checked); toast('Réglage enregistré ✅'); }catch(e){ cb.checked = !cb.checked; toast('Action impossible.', true); } });
+      sw.append(el('span', '', 'Seuls les admins peuvent écrire'), cb); B.appendChild(sw);
+    }
+    B.appendChild(el('div', 'subhead', '👥 Membres'));
+    Object.entries(mb).sort((x, y) => (y[1].role === 'admin') - (x[1].role === 'admin')).forEach(([id, v]) => {
+      const r = frow(id, v.name); if(v.role === 'admin') r.appendChild(el('small', '', 'admin'));
+      if(adm && id !== g.createdBy && id !== me.uid){
+        if(v.role !== 'admin'){ const u = el('button', 'btn btn-ghost', '⬆'); u.type = 'button'; u.title = 'Nommer admin'; u.addEventListener('click', async () => { try{ await fb('PUT', 'group_members/' + gid + '/' + id + '/role', 'admin'); grpInfo(gid, gname); }catch(e){ toast('Action impossible.', true); } }); r.appendChild(u); }
+        const rm = el('button', 'btn btn-ghost', '✕'); rm.type = 'button';
+        rm.addEventListener('click', async () => { if(!confirm('Retirer ce membre ?')) return; try{ await fb('DELETE', 'group_members/' + gid + '/' + id); await fb('DELETE', 'user_groups/' + id + '/' + gid); sys(gid, v.name + ' a été retiré'); grpInfo(gid, gname); }catch(e){ toast('Action impossible.', true); } });
+        r.appendChild(rm);
+      }
+      B.appendChild(r);
+    });
+    if(adm){
+      const fr = await fb('GET', 'friends/' + me.uid) || {}, cand = Object.entries(fr).filter(([id]) => !mb[id]);
+      if(cand.length){
+        B.appendChild(el('div', 'subhead', '➕ Ajouter un ami'));
+        cand.forEach(([id, v]) => {
+          const r = frow(id, v.name), ad = el('button', 'btn btn-primary', '➕'); ad.type = 'button';
+          ad.addEventListener('click', async () => { try{ const t = Date.now(); await fb('PUT', 'group_members/' + gid + '/' + id, { name: v.name, role: 'member', t }); await fb('PUT', 'user_groups/' + id + '/' + gid, { name: g.name, t }); pushNotif(id, 'group', 't\'a ajouté au groupe ' + g.name); sys(gid, v.name + ' a été ajouté'); grpInfo(gid, gname); }catch(e){ toast('Action impossible.', true); } });
+          r.appendChild(ad); B.appendChild(r);
+        });
+      }
+    }
+    const op = el('button', 'btn btn-primary btn-block', '💬 Ouvrir la discussion'); op.type = 'button'; op.style.marginTop = '12px'; op.addEventListener('click', () => openGroup(gid, gname));
+    const lv = el('button', 'btn btn-ghost btn-block', 'Quitter le groupe'); lv.type = 'button'; lv.style.marginTop = '8px';
+    lv.addEventListener('click', async () => { if(!confirm('Quitter ce groupe ?')) return; try{ await sys(gid, me.name + ' a quitté le groupe'); await fb('DELETE', 'group_members/' + gid + '/' + me.uid); await fb('DELETE', 'user_groups/' + me.uid + '/' + gid); toast('Tu as quitté le groupe'); openHub('grp'); }catch(e){ toast('Action impossible.', true); } });
+    B.append(op, lv);
+  }catch(e){ B.innerHTML = '<div class="t-empty">Infos du groupe indisponibles.</div>'; }
+}
+
+async function tryJoin(){
+  try{
+    const p = new URLSearchParams(location.search);
+    if(p.get('g') && p.get('c')) localStorage.setItem('hkstore-join', p.get('g') + '|' + p.get('c'));
+    const j = (localStorage.getItem('hkstore-join') || '').split('|'); if(!j[1]) return;
+    if(!me){ setTimeout(() => { if(!me) openAuth('👥 Connecte-toi pour rejoindre le groupe.'); }, 1500); return; }
+    localStorage.removeItem('hkstore-join'); history.replaceState(null, '', location.pathname);
+    let g2 = null; try{ g2 = await fb('GET', 'groups/' + j[0]); }catch(e){}
+    if(!g2){
+      const t = Date.now();
+      await fb('PUT', 'group_members/' + j[0] + '/' + me.uid, { name: me.name, role: 'member', t, code: j[1] });
+      g2 = await fb('GET', 'groups/' + j[0]);
+      await fb('PUT', 'user_groups/' + me.uid + '/' + j[0], { name: g2.name, t });
+      sys(j[0], me.name + ' a rejoint le groupe'); toast('Groupe rejoint ✅');
+    }
+    openGroup(j[0], g2.name);
+  }catch(e){ toast('Lien du groupe invalide.', true); }
+}
+
+/* ===== PUBLICATIONS EN ATTENTE (vues par l'auteur, en transparent) ===== */
+async function showMine(){
+  if(!me) return;
+  try{
+    const o = await fb('GET', 'my_pending/' + me.uid) || {};
+    Object.entries(o).sort((a, b) => b[1].t - a[1].t).forEach(([id, p]) => {
+      const d = el('article', 'post pend'), h = el('div', 'po-head'), i = el('i', '', me.name.charAt(0).toUpperCase()); setAv(i, me.uid);
+      const w = el('div'); w.append(nameB(me.uid, me.name), el('span', '', '⏳ En attente de validation'));
+      h.append(i, w); d.appendChild(h);
+      if(p.text) d.appendChild(el('p', '', p.text));
+      if(p.hasImg) d.appendChild(el('p', '', '📷 Photo jointe'));
+      feed.appendChild(d);
+    });
+  }catch(e){}
+}
+
+/* ===== ADMIN : stats, participants, groupes ===== */
+const adGet = async p => { const r = await fetch(DB + '/' + p + '.json?auth=' + token); if(!r.ok) throw 0; return r.json(); };
+const adCount = async p => { try{ const r = await fetch(DB + '/' + p + '.json?shallow=true&auth=' + token); return r.ok ? Object.keys(await r.json() || {}).length : '?'; }catch(e){ return '?'; } };
+$$('#adTabs button').forEach(b => b.addEventListener('click', () => {
+  const t = b.dataset.tab, m = { stats:'#adStats', parts:'#adParts', groups:'#adGroups' };
+  Object.keys(m).forEach(k => { $(m[k]).style.display = t === k ? 'block' : 'none'; });
+  if(t === 'stats') loadStats(); if(t === 'parts') loadParts(); if(t === 'groups') loadGroups();
+}));
+async function loadStats(){
+  const B = $('#adStats'); B.innerHTML = '<div class="t-empty">Chargement...</div>';
+  const v = await Promise.all(['users', 'publications', 'pub_attente', 'participants', 'groups'].map(adCount));
+  B.innerHTML = ''; const g = el('div', 'badges');
+  [['Membres', v[0]], ['Publications', v[1]], ['En attente', v[2]], ['Inscrits tournoi', v[3]], ['Groupes', v[4]]].forEach(([n, x]) => { const c = el('div', 'badge'); c.append(el('b', '', String(x)), el('div', '', n)); g.appendChild(c); });
+  B.appendChild(g);
+}
+async function loadParts(){
+  const B = $('#adParts'); B.innerHTML = '<div class="t-empty">Chargement...</div>';
+  try{
+    const l = Object.entries(await adGet('participants') || {}).sort((a, b) => b[1].t - a[1].t); B.innerHTML = '';
+    if(!l.length){ B.innerHTML = '<div class="t-empty">Aucun inscrit.</div>'; return; }
+    l.forEach(([id, p]) => {
+      const r = el('div', 'trow'), m = el('div', 'tm'); m.append(el('b', '', p.name), el('span', '', 'ID ' + p.id + ' · ' + p.phone));
+      const x = el('button', 'btn btn-ghost', '🗑'); x.type = 'button';
+      x.addEventListener('click', async () => { if(!confirm('Supprimer ce participant ?')) return; try{ await api('DELETE', 'participants/' + id); r.remove(); HK.tReload && HK.tReload(); }catch(e){ toast('Action impossible.', true); } });
+      r.append(m, x); B.appendChild(r);
+    });
+  }catch(e){ B.innerHTML = '<div class="t-empty">Erreur de lecture (règles ou connexion).</div>'; }
+}
+async function loadGroups(){
+  const B = $('#adGroups'); B.innerHTML = '<div class="t-empty">Chargement...</div>';
+  try{
+    const l = Object.entries(await adGet('groups') || {}).sort((a, b) => b[1].t - a[1].t); B.innerHTML = '';
+    if(!l.length){ B.innerHTML = '<div class="t-empty">Aucun groupe.</div>'; return; }
+    l.forEach(([id, g]) => {
+      const r = el('div', 'trow'), m = el('div', 'tm'); m.append(el('b', '', g.name), el('span', '', 'Créé le ' + new Date(g.t).toLocaleDateString('fr-FR')));
+      const x = el('button', 'btn btn-ghost', '🗑'); x.type = 'button';
+      x.addEventListener('click', async () => {
+        if(!confirm('Supprimer le groupe « ' + g.name + ' » ?')) return;
+        try{
+          const mb = await api('GET', 'group_members/' + id) || {};
+          for(const u of Object.keys(mb)) await api('DELETE', 'user_groups/' + u + '/' + id);
+          await api('DELETE', 'group_msgs/' + id); await api('DELETE', 'group_members/' + id); await api('DELETE', 'groups/' + id);
+          r.remove(); toast('Groupe supprimé');
+        }catch(e){ toast('Action impossible.', true); }
+      });
+      r.append(m, x); B.appendChild(r);
+    });
+  }catch(e){ B.innerHTML = '<div class="t-empty">Erreur de lecture (règles ou connexion).</div>'; }
+}
+
 
   loadFeed();
 })();
@@ -2260,6 +2640,7 @@ $('#orderForm').addEventListener('submit', e => {
     v: .02 + Math.random() * .05, a: .08 + Math.random() * .18, g: Math.random() > .75
   });
   function frame(){
+    if(document.hidden){ requestAnimationFrame(frame); return; }
     c.clearRect(0, 0, W, H);
     items.forEach(p => {
       p.y -= p.v / 60; if(p.y < -.05){ p.y = 1.05; p.x = Math.random(); }
@@ -2334,5 +2715,4 @@ if('serviceWorker' in navigator){
 }
 </script>
 </body>
-  </html>
-                                          
+      </html>
