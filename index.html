@@ -588,7 +588,7 @@ body:has(.overlay.open){overflow:hidden;}
   <p class="sec-sub">Inscription gratuite. Ton nom reste dans la liste pendant 30 jours.</p>
   <div class="t-card">
     <div class="t-info"><b id="tTitle"></b><span id="tInfos"></span></div>
-    <<form id="tForm" novalidate>
+    <form id="tForm" novalidate>
       <div><label class="lbl" for="tId">ID joueur Free Fire</label>
         <input type="text" id="tId" inputmode="numeric" autocomplete="off" placeholder="Ex : 123456789"></div>
       <label class="accept"><input type="checkbox" id="tOk"><span>J'accepte que mon pseudo et mon ID soient visibles par les membres pendant 30 jours. Les organisateurs me contactent uniquement sur le site.</span></label>
@@ -1581,7 +1581,6 @@ function liveAll(){
   listen('g_friend_req', 'friend_req/' + me.uid, '', poll);
   listen('g_notifs', 'notifs/' + me.uid, '&orderBy=%22t%22&limitToLast=1', poll);
   listen('g_ann', 'announces', '&orderBy=%22t%22&limitToLast=1', poll);
-}
 }
 /* --- Badges --- */
 const BADGE_INFO = {
