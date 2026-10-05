@@ -17,8 +17,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<div id="adStats" style="display:none;"></div>
-<div id="adTournoi" style="display:none;"><div class="feed" id="trList" style="margin-top:0;"></div></div>
 <style>
   :root{
     box-sizing:border-box;
@@ -413,6 +411,21 @@
   .who{font-size:14px;color:var(--muted);}
   .who b{color:var(--text);font-family:var(--f-head);font-size:17px;}
   .trow select{background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px;font-size:14px;max-width:150px;}
+  .av-lg{width:46px;min-width:46px;}
+.frow .av{width:34px;min-width:34px;}
+.po-head i{width:36px;min-width:36px;}
+.avatar{width:72px;height:72px;flex-shrink:0;}
+.avatar,.av-lg,.frow .av,.po-head i{border-radius:50%!important;overflow:hidden;background-repeat:no-repeat;}
+.grp .av-lg{border-radius:14px!important;}
+.chat-row{display:flex;gap:8px;margin-top:10px;}
+.chat-row input{flex:1;min-width:0;}
+.overlay{overscroll-behavior:contain;}
+body:has(.overlay.open){overflow:hidden;}
+@media (max-width:380px){
+  .nav-actions{gap:4px;}
+  .icon-btn{width:34px;height:34px;}
+  .logo .full{display:none;}
+}
 </style>
 </head>
 <body>
@@ -696,16 +709,6 @@
   </div>
 </section>
 
-<section class="rv">
-  <h2 class="sec-title">Ils nous font confiance</h2>
-  <p class="sec-sub"></p>
-  <div class="reviews">
-    <div class="review"><div class="stars">★★★★★</div>Recharge reçue en 10 minutes, super rapide.<div class="nm">— Client Kinshasa</div></div>
-    <div class="review"><div class="stars">★★★★★</div>Prix corrects et vendeur sérieux, je recommande.<div class="nm">— Client Lubumbashi</div></div>
-    <div class="review"><div class="stars">★★★★☆</div>Paiement Orange Money accepté sans souci.<div class="nm">— Client Goma</div></div>
-  </div>
-</section>
-
 <section id="faq" class="rv">
   <h2 class="sec-title">Questions fréquentes</h2>
   <p class="sec-sub"></p>
@@ -788,8 +791,6 @@
         <button type="button" class="pay" data-tab="texts">✏️ Textes</button>
         <button type="button" class="pay" data-tab="edit">⚙️ Prix &amp; images</button>
         <button type="button" class="pay" data-tab="stats">📊 Stats</button>
-<button type="button" class="pay" data-tab="tournoi">🏆 Tournoi</button>
-<button type="button" class="pay" data-tab="tournoi">🏆 Tournoi</button>
 <button type="button" class="pay" data-tab="tournoi">🏆 Tournoi</button>
       </div>
       <div id="adPosts">
@@ -914,7 +915,7 @@ const ADMIN_UID = 'kCF9zuZFHVfCBTrLRtDF5UpGrOn1';
 
 let CFG = {};
 try{
-  const c = new AbortController(); setTimeout(() => c.abort(), 1500);
+  const c = new AbortController(); setTimeout(() => c.abort(), 4000);
   const r = await fetch(HK_DB + '/config.json', { signal: c.signal });
   CFG = (await r.json()) || {};
 }catch(e){ console.warn('[HK] Config Firebase indisponible, valeurs locales utilisées.'); }
@@ -1345,7 +1346,7 @@ if($('#orderForm')) $('#orderForm').addEventListener('submit', e => {
   if(tTitle) tTitle.textContent = TOURNOI.titre;
   if(tInfos) tInfos.textContent = TOURNOI.infos;
   const alive = l => l.filter(p => p && p.t && Date.now() - p.t < TTL);
-  const intl = ph => { const d = digits(ph); return d.charAt(0) === '0' ? '243' + d.slice(1) : d; };
+  const intl = ph => { let d = digits(ph); if(d.indexOf('00') === 0) d = d.slice(2); return d.charAt(0) === '0' ? '243' + d.slice(1) : d; };
   async function getAll(){
     if(api){ try{ const r = await fetch(api); const o = await r.json(); return alive(Object.values(o || {})); }catch(e){} }
     try{ return alive(JSON.parse(localStorage.getItem(KEY) || '[]')); }catch(e){ return []; }
@@ -1434,6 +1435,7 @@ if($('#orderForm')) $('#orderForm').addEventListener('submit', e => {
     if(busy) return;
     const btn = $('#spinBtn'), fab = $('.fab'), res = $('#wheelRes');
     if(!btn) return;
+    if(spun && spun.date !== today()){ spun = null; promo = null; refresh(); if(res) res.textContent = ''; }
     if(spun){
       btn.disabled = true; btn.textContent = L('Reviens demain à ' + WHEEL_OPEN_H + 'h', 'Come back tomorrow at ' + WHEEL_OPEN_H + ':00');
       if(fab){ fab.textContent = '🎡 Roue HK'; fab.classList.remove('live'); }
@@ -1657,39 +1659,58 @@ $$('#auForm [data-mode]').forEach(b => b.addEventListener('click', () => {
 const AUTH_ERR = {
   EMAIL_EXISTS:'Ce pseudo est déjà pris.', INVALID_LOGIN_CREDENTIALS:'Pseudo ou mot de passe incorrect.',
   INVALID_PASSWORD:'Pseudo ou mot de passe incorrect.', EMAIL_NOT_FOUND:'Pseudo ou mot de passe incorrect.',
-  WEAK_PASSWORD:'Mot de passe trop court (6 caractères minimum).', TOO_MANY_ATTEMPTS_TRY_LATER:'Trop d\'essais, réessaie plus tard.'
+  WEAK_PASSWORD:'Mot de passe trop court (6 caractères minimum).', TOO_MANY_ATTEMPTS_TRY_LATER:'Trop d\'essais, réessaie plus tard.',
+  OPERATION_NOT_ALLOWED:'Inscription désactivée dans Firebase (méthode E-mail/Mot de passe).',
+  ADMIN_ONLY_OPERATION:'La création de comptes est désactivée dans Firebase.',
+  Requests:'Clé API bloquée pour ce site (restrictions de la clé dans Google Cloud).'
 };
+function authErr(msg){
+  const m = $('#auMsg'); if(m){ m.textContent = '⚠ ' + msg; m.style.color = 'var(--red)'; }
+  toast(msg, true);
+}
 $('#auForm').addEventListener('submit', async e => {
   e.preventDefault();
+  const am = $('#auMsg'); if(am){ am.textContent = ''; am.style.color = 'var(--gold)'; }
   const name = $('#auName').value.trim(), pw = $('#auPass').value;
-  if(!ADMIN.apiKey) return toast('Clé API manquante.', true);
-  if(!/^(?!\.)(?!.*\.\.)(?!.*\.$)[A-Za-z0-9._-]{3,20}$/.test(name)) return bad($('#auName'), 'Pseudo : 3 à 20 caractères (lettres, chiffres, . _ -).');
-  if(pw.length < 6) return bad($('#auPass'), 'Mot de passe : 6 caractères minimum.');
-  const btn = $('#auGo'); btn.disabled = true;
+  if(!ADMIN.apiKey){ authErr('Clé API manquante.'); return; }
+  if(!/^(?!\.)(?!.*\.\.)(?!.*\.$)[A-Za-z0-9._-]{3,20}$/.test(name)){ authErr('Pseudo : 3 à 20 caractères (lettres, chiffres, . _ -).'); $('#auName').focus(); return; }
+  if(pw.length < 6){ authErr('Mot de passe : 6 caractères minimum.'); $('#auPass').focus(); return; }
+  const btn = $('#auGo'), label = btn.textContent;
+  btn.disabled = true; btn.textContent = '...';
+  if(document.activeElement && document.activeElement.blur) document.activeElement.blur();
   try{
     const r = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:' + (mode === 'up' ? 'signUp' : 'signInWithPassword') + '?key=' + ADMIN.apiKey, {
       method:'POST', headers:{ 'Content-Type':'application/json' },
       body: JSON.stringify({ email: name.toLowerCase() + '@hackenstore.app', password: pw, returnSecureToken: true })
     });
     const d = await r.json();
-    if(!r.ok){ const k = ((d.error && d.error.message) || '').split(' ')[0]; throw new Error(AUTH_ERR[k] || 'Connexion impossible.'); }
+    if(!r.ok){
+      const raw = (d.error && d.error.message) || '';
+      console.error('[HK AUTH]', raw);
+      throw new Error(AUTH_ERR[raw.split(' ')[0]] || ('Connexion impossible (' + (raw || r.status) + ').'));
+    }
     utok = d.idToken; uexp = Date.now() + (+d.expiresIn) * 1000; rtok = d.refreshToken;
     try{
       const bn = await (await fetch(DB + '/banned/' + d.localId + '.json?auth=' + utok)).json();
       if(bn === true) throw new Error('Compte suspendu par Hacken Store.');
     }catch(x){ if(String(x.message).indexOf('suspendu') > -1) throw x; }
+    const putProfile = () => fetch(DB + '/users/' + d.localId + '.json?auth=' + utok, {
+      method:'PUT', body: JSON.stringify({ name, t: Date.now(), lang: LANG })
+    });
     let pname = name, ulang = '';
     if(mode === 'up'){
-      const w = await fetch(DB + '/users/' + d.localId + '.json?auth=' + utok, {
-        method:'PUT', body: JSON.stringify({ name, t: Date.now(), lang: LANG })
-      });
-      if(!w.ok) throw new Error('Compte créé, mais profil impossible (règles Firebase).');
+      const w = await putProfile();
+      if(!w.ok){
+        try{ await fetch('https://identitytoolkit.googleapis.com/v1/accounts:delete?key=' + ADMIN.apiKey, {
+          method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ idToken: d.idToken }) }); }catch(x){}
+        throw new Error('Inscription refusée par la base de données (règles Firebase, erreur ' + w.status + ').');
+      }
     }else{
-      try{
-        const pr = await (await fetch(DB + '/users/' + d.localId + '.json?auth=' + utok)).json();
-        if(pr && pr.name) pname = pr.name;
-        if(pr && pr.lang) ulang = pr.lang;
-      }catch(x){}
+      let pr = null;
+      try{ pr = await (await fetch(DB + '/users/' + d.localId + '.json?auth=' + utok)).json(); }catch(x){}
+      if(pr && pr.name) pname = pr.name;
+      if(pr && pr.lang) ulang = pr.lang;
+      if(!pr){ try{ await putProfile(); }catch(x){} }
     }
     me = { uid: d.localId, name: pname }; saveSession();
     if(mode === 'up'){
@@ -1700,8 +1721,8 @@ $('#auForm').addEventListener('submit', async e => {
     if(ulang && ulang !== LANG){ try{ localStorage.setItem('hkstore-lang', ulang); }catch(x){} return location.reload(); }
     closeAll(); authUI(); loadFeed(); if(HK.sug) HK.sug();
     toast(L('👋 Bienvenue ', '👋 Welcome ') + pname);
-  }catch(err){ toast(err.message || 'Connexion impossible.', true); }
-  btn.disabled = false;
+  }catch(err){ authErr(err.message || 'Connexion impossible.'); console.error('[HK AUTH]', err); }
+  btn.disabled = false; btn.textContent = label;
 });
 
 /* =========================================================
@@ -1837,6 +1858,15 @@ async function purge(){
     const r = await fetch(url('publications', true) + '&orderBy=%22ta%22&endAt=' + (Date.now() - 172800000));
     const o = r.ok ? await r.json() : null;
     for(const id of Object.keys(o || {})) await api('DELETE', 'publications/' + id);
+  }catch(e){}
+}
+
+async function purgeTournoi(){
+  try{
+    const o = await api('GET', 'participants') || {};
+    const old = Object.entries(o).filter(([k, p]) => !p || !p.t || Date.now() - p.t > TOURNOI.jours * 864e5);
+    for(const [k] of old) await api('DELETE', 'participants/' + k);
+    if(old.length && HK.tReload) HK.tReload();
   }catch(e){}
 }
 
@@ -2443,7 +2473,7 @@ if($('#grpForm')) $('#grpForm').addEventListener('submit', async e => {
   const pub = $('#gType .sel').dataset.pub === '1';
   const max = Math.max(2, Math.min(200, +$('#gMax').value || 50));
   if(name.length < 3) return bad($('#gName'), L('Nom : 3 caractères minimum.', 'Name: 3 characters minimum.'));
-  const code = Math.random().toString(36).slice(2, 8);
+  const code = (Math.random().toString(36) + '000000').slice(2, 8);
   const id = 'g' + code + Date.now().toString(36);
   try{
     await fb('PUT', 'groups/' + id, { name, desc, owner: me.uid, pub, code, max, t: Date.now() });
@@ -2659,7 +2689,7 @@ $('#adLogin').addEventListener('submit', async e => {
     const d = await r.json(); if(!r.ok) throw 0;
     if(d.localId !== ADMIN.uid) throw 0;
     token = d.idToken; setTimeout(() => { token = ''; }, 3300000);
-    $('#adPass').value = ''; showAdmin(); purge().then(loadFeed);
+    $('#adPass').value = ''; showAdmin(); purge().then(loadFeed); purgeTournoi();
   }catch(err){ toast('Connexion refusée.', true); }
 });
 
