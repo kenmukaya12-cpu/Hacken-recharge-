@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Hacken Store : discussions, amis, publications, tournois et recharge Free Fire sur le serveur MENA.">
+<meta name="description" content="HK Espace Gaming : discussions, amis, groupes, publications et tournois. Serveur MENA.">
 <meta name="theme-color" content="#070D1A">
-<meta property="og:title" content="Hacken Store — Discussions, amis, tournois et recharge">
+<meta property="og:title" content="HK Espace Gaming — Discussions, amis et tournois">
 <meta property="og:description" content="Discute, ajoute des amis, publie, rejoins des groupes et participe aux tournois.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M20 10h24l14 14-26 34L6 24Z' fill='%2349D8F0' stroke='%23F2B84B' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E">
-<title>Hacken Store — Discussions, amis, tournois et recharge</title>
+<title>HK Espace Gaming — Discussions, amis et tournois</title>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Hacken Store">
+<meta name="apple-mobile-web-app-title" content="HK Gaming">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -98,6 +98,7 @@ body.locked #authOverlay .x{display:none;}
   .btn-ghost:hover{border-color:var(--cyan);}
   .btn-wa{color:#05250F;background:linear-gradient(135deg,var(--green),#1E9E5C);}
   .btn-block{width:100%;}
+  .btn-sm{padding:8px 18px;font-size:14px;border-radius:10px;}
 
   .sec-title{font-size:27px;font-weight:700;padding-left:14px;position:relative;line-height:1.1;}
   .sec-title::before{content:'';position:absolute;left:0;top:3px;bottom:3px;width:4px;border-radius:3px;background:linear-gradient(var(--gold),var(--cyan));}
@@ -510,9 +511,9 @@ body:has(.overlay.open){overflow:hidden;}
 <canvas id="fx" aria-hidden="true"></canvas>
 
 <nav class="navbar">
-  <a class="logo" href="#top" aria-label="Hacken Store">
+  <a class="logo" href="#top" aria-label="HK Espace Gaming">
     <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#dia"/></svg>
-    <div><span class="hk">HK</span><span class="full">HACKEN STORE</span></div>
+    <div><span class="hk">HK</span><span class="full">ESPACE GAMING</span></div>
   </a>
   <div class="nav-actions">
     <button class="icon-btn" id="msgBtn" type="button" aria-label="Messages">💬<b class="cnt" id="msgCnt"></b></button>
@@ -527,15 +528,10 @@ body:has(.overlay.open){overflow:hidden;}
 
 <header class="hero wrap">
   <h1>HK</h1>
-  <div class="store">HACKEN STORE</div>
+  <div class="store">ESPACE GAMING</div>
   <p class="claim">Discute, ajoute des amis, publie et participe aux tournois.</p>
-  <div class="hero-cta">
-    <button class="btn btn-primary" type="button" data-shop>🛒 Entrer dans la boutique</button>
-  </div>
   <div class="chips">
-    <span class="chip gold">✔ Vendeur vérifié</span>
     <span class="chip">🌍 Serveur MENA</span>
-    <span class="chip">📲 Airtel · Orange</span>
   </div>
   <div class="chips">
     <a class="chip" href="#communaute">📰 Actus</a>
@@ -551,8 +547,8 @@ body:has(.overlay.open){overflow:hidden;}
   <div id="gSearchRes" style="margin-top:8px;"></div>
 </section>
 
-<section id="shopEntry" class="shop-enter rv">
-  <button class="btn btn-primary btn-block" type="button" data-shop>🛒 Entrer dans la boutique</button>
+<section id="shopEntry" class="shop-enter rv" style="padding:6px 0;">
+  <button class="btn btn-ghost btn-sm" type="button" data-shop>🛒 Boutique</button>
 </section>
 
 <section id="suggest" class="rv" style="display:none;">
@@ -734,10 +730,10 @@ body:has(.overlay.open){overflow:hidden;}
 </main>
 
 <footer>
-  <span class="hk">HK · HACKEN STORE</span>
-  Discussions, amis, groupes, tournois et recharge Free Fire. Disponible sur le serveur MENA 🌍.<br>Indépendant, non affilié à Garena.<br>
+  <span class="hk">HK · ESPACE GAMING</span>
+  Discussions, amis, groupes et tournois. Disponible sur le serveur MENA 🌍.<br>Indépendant, non affilié à Garena.<br>
   <a class="btn btn-wa" id="supportBtn" href="#" target="_blank" rel="noopener">💬 Contacter le support</a><br>
-  <small>© 2026 Hacken Store · <a href="#" id="adminLink" style="color:inherit;opacity:.5;">Admin</a></small>
+  <small>© 2026 HK Espace Gaming · <a href="#" id="adminLink" style="color:inherit;opacity:.5;">Admin</a></small>
 </footer>
 
 <button class="fab" type="button" data-open-wheel>🎡 Roue HK</button>
@@ -750,12 +746,18 @@ body:has(.overlay.open){overflow:hidden;}
 
 <div class="overlay" id="guideOverlay">
   <div class="modal" role="dialog" aria-modal="true" aria-label="Aide">
-    <div class="modal-head"><h3>❓ Bienvenue sur Hacken Store</h3><button class="x" type="button" data-close>✕</button></div>
+    <div class="modal-head"><h3>❓ Bienvenue sur HK Espace Gaming</h3><button class="x" type="button" data-close>✕</button></div>
     <div class="step"><i>1</i><div><b>Crée ton compte</b><span>Choisis ta langue, un pseudo et un mot de passe.</span></div></div>
+    <div class="step"><i>🔑</i><div><b>Mot de passe</b><span>Garde-le bien : il ne peut pas être récupéré par e-mail.</span></div></div>
     <div class="step"><i>2</i><div><b>Ajoute des amis</b><span>Regarde les suggestions ou cherche un pseudo.</span></div></div>
     <div class="step"><i>3</i><div><b>Discute et publie</b><span>Messages privés, groupes avec photos, publications.</span></div></div>
+    <div class="step"><i>👥</i><div><b>Groupes</b><span>Public ou privé avec un code. Écris @pseudo pour mentionner quelqu'un : il reçoit une notification.</span></div></div>
+    <div class="step"><i>⏳</i><div><b>48 heures</b><span>Les messages, photos et publications disparaissent après 48h. Chaque publication est vérifiée avant d'apparaître.</span></div></div>
+    <div class="step"><i>🎁</i><div><b>Parrainage</b><span>Invite un ami avec ton code : 2 points par ami. À 100 points, tu peux demander ton badge ✔.</span></div></div>
+    <div class="step"><i>🚫</i><div><b>Règles</b><span>Pas d'insultes, pas de pub, pas de numéros personnels. Un compte peut être suspendu en cas d'abus.</span></div></div>
     <div class="step"><i>🏆</i><div><b>Tournois</b><span>Inscris-toi gratuitement dans la section Tournois.</span></div></div>
-    <div class="step"><i>🛒</i><div><b>Boutique</b><span>Touche « Entrer dans la boutique » pour recharger. L'argent doit être envoyé AVANT la confirmation.</span></div></div>
+    <div class="step"><i>🎡</i><div><b>Roue HK</b><span>Un tour gratuit par jour à partir de 20h.</span></div></div>
+    <div class="step"><i>🛒</i><div><b>Boutique</b><span>Touche « Boutique » pour recharger. L'argent doit être envoyé AVANT la confirmation.</span></div></div>
     <button class="btn btn-primary btn-block" type="button" data-close style="margin-top:12px;">J'ai compris</button>
   </div>
 </div>
@@ -802,6 +804,7 @@ body:has(.overlay.open){overflow:hidden;}
         <button type="button" class="pay" data-tab="edit">⚙️ Prix &amp; images</button>
         <button type="button" class="pay" data-tab="stats">📊 Stats</button>
 <button type="button" class="pay" data-tab="tournoi">🏆 Tournoi</button>
+        <button type="button" class="pay" data-tab="annonces">📢 Annonces</button>
       </div>
       <div id="adPosts">
         <div class="subhead" style="margin-top:0;">En attente (<span id="adCount">0</span>)</div>
@@ -815,6 +818,13 @@ body:has(.overlay.open){overflow:hidden;}
       <div id="adTexts" style="display:none;"></div>
       <div id="adStats" style="display:none;"></div>
 <div id="adTournoi" style="display:none;"><div class="feed" id="trList" style="margin-top:0;"></div></div>
+      <div id="adAnnonces" style="display:none;">
+        <p class="note" style="text-align:left;margin-bottom:10px;">Ton message arrive dans les notifications de tout le monde, au nom de « Support HK  ».</p>
+        <textarea id="anText" maxlength="500" placeholder="Écris ton annonce..."></textarea>
+        <button class="btn btn-gold btn-block" type="button" id="anSend" style="margin-top:10px;">📢 Envoyer à tout le monde</button>
+        <div class="subhead">Dernières annonces</div>
+        <div class="feed" id="anList" style="margin-top:0;"></div>
+      </div>
       <div id="adEdit" style="display:none;">
         <p class="note" style="text-align:left;margin-bottom:12px;">Modifie, puis appuie sur Enregistrer.</p>
         <div id="edList"></div>
@@ -924,11 +934,14 @@ const ADMIN_API_KEY = 'AIzaSyCdXkvGy90NDqYvOjYjmDwpuRSCTi3C95Q';
 const ADMIN_UID = 'kCF9zuZFHVfCBTrLRtDF5UpGrOn1';
 
 let CFG = {};
-try{
-  const c = new AbortController(); setTimeout(() => c.abort(), 4000);
-  const r = await fetch(HK_DB + '/config.json', { signal: c.signal });
-  CFG = (await r.json()) || {};
-}catch(e){ console.warn('[HK] Config Firebase indisponible, valeurs locales utilisées.'); }
+try{ CFG = JSON.parse(localStorage.getItem('hk-cfg') || '{}') || {}; }catch(e){}
+const cfgReq = fetch(HK_DB + '/config.json').then(r => r.json()).then(c => {
+  c = c || {}; try{ localStorage.setItem('hk-cfg', JSON.stringify(c)); }catch(e){} return c;
+}).catch(() => null);
+if(!Object.keys(CFG).length){
+  const c = await Promise.race([cfgReq, new Promise(r => setTimeout(() => r(null), 2500))]);
+  if(c) CFG = c;
+}
 
 const WA_NUMBER = '243971160692';
 const PAYS = {
@@ -1003,6 +1016,11 @@ function imgSrc(src){
     .then(d => (typeof d === 'string' && d.indexOf('data:image/jpeg;base64,') === 0) ? d : '')
     .catch(() => ''));
 }
+function whenVisible(node, fn){
+  if(!('IntersectionObserver' in window)) return fn();
+  const io = new IntersectionObserver(es => { if(es.some(e => e.isIntersecting)){ io.disconnect(); fn(); } }, { rootMargin:'200px' });
+  io.observe(node);
+}
 function picHTML(src, alt){
   const i = document.createElement('img');
   i.alt = alt || ''; i.loading = 'lazy';
@@ -1011,7 +1029,7 @@ function picHTML(src, alt){
   ph.innerHTML = PH_SVG + '<span>Ajoute l\'image<br>' + (src && src.indexOf('db:') === 0 ? '' : (src || '')) + '</span>';
   const fail = () => { i.style.display = 'none'; ph.style.display = 'flex'; };
   i.addEventListener('error', fail);
-  imgSrc(src).then(d => { if(d) i.src = d; else fail(); }).catch(fail);
+  whenVisible(i, () => imgSrc(src).then(d => { if(d) i.src = d; else fail(); }).catch(fail));
   return [i, ph];
 }
 
@@ -1051,7 +1069,7 @@ const copyText = (txt, msg) => {
     navigator.clipboard.writeText(txt).then(() => toast(msg || 'Copié'), () => toast(txt));
   } else toast(txt);
 };
-$('#supportBtn').href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent('Bonjour Hacken Store, j\'ai une question.');
+$('#supportBtn').href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent('Bonjour HK Espace Gaming, j\'ai une question.');
 
 /* =========================================================
    BOUTIQUE MASQUÉE
@@ -1315,7 +1333,7 @@ if($('#orderForm')) $('#orderForm').addEventListener('submit', e => {
     track.appendChild(s);
     const t = document.createElement('button'); t.type = 'button'; t.className = 'thumb'; t.setAttribute('aria-label', a.name);
     const im = document.createElement('img'); im.alt = ''; im.loading = 'lazy';
-    imgSrc(a.img).then(d => { if(d) im.src = d; else im.style.visibility = 'hidden'; }).catch(() => im.style.visibility = 'hidden');
+    whenVisible(t, () => imgSrc(a.img).then(d => { if(d) im.src = d; else im.style.visibility = 'hidden'; }).catch(() => im.style.visibility = 'hidden'));
     im.addEventListener('error', () => { im.style.visibility = 'hidden'; });
     t.appendChild(im); t.addEventListener('click', () => car.go(k, true)); thumbs.appendChild(t);
   });
@@ -1359,7 +1377,7 @@ if($('#orderForm')) $('#orderForm').addEventListener('submit', e => {
   const alive = l => l.filter(([k, p]) => p && p.t && Date.now() - p.t < TTL);
   async function getAll(){
     if(!HK.fb || !HK.me()) return [];
-    try{ return alive(Object.entries(await HK.fb('GET', 'participants') || {})); }catch(e){ return []; }
+    try{ return alive(Object.entries(await HK.fb('GET', 'participants', undefined, '&orderBy=%22t%22&limitToLast=100') || {})); }catch(e){ return []; }
   }
   function render(l){
     const box = $('#tList'); if(!box) return;
@@ -1559,7 +1577,11 @@ function listen(key, path, q, cb){
   start();
 }
 function liveAll(){
-  ['inbox', 'notifs', 'friend_req'].forEach(p => listen('g_' + p, p + '/' + me.uid, '', poll));
+  listen('g_inbox', 'inbox/' + me.uid, '', poll);
+  listen('g_friend_req', 'friend_req/' + me.uid, '', poll);
+  listen('g_notifs', 'notifs/' + me.uid, '&orderBy=%22t%22&limitToLast=1', poll);
+  listen('g_ann', 'announces', '&orderBy=%22t%22&limitToLast=1', poll);
+}
 }
 /* --- Badges --- */
 const BADGE_INFO = {
@@ -1582,8 +1604,8 @@ HK.badgeEl = uid => badgeEl(uid);
 
 /* --- Bio / ref message --- */
 const REF_DEF = {
-  fr:'Rejoins Hacken Store 🌍 discussions, amis, groupes, publications, tournois et recharge Free Fire. Inscris-toi avec mon code {code} : {link}',
-  en:'Join Hacken Store 🌍 chat, friends, groups, posts, tournaments and Free Fire top-ups. Sign up with my code {code}: {link}'
+  fr:'Rejoins HK Espace Gaming 🌍 discussions, amis, groupes, publications, tournois et recharge Free Fire. Inscris-toi avec mon code {code} : {link}',
+  en:'Join HK Gaming Space 🌍 chat, friends, groups, posts, tournaments and Free Fire top-ups. Sign up with my code {code}: {link}'
 };
 HK.refMsg = (code, link) => ((CFG.refMsg && CFG.refMsg[LANG]) || REF_DEF[LANG]).replace(/\{code\}/g, code).replace(/\{link\}/g, link);
 
@@ -1806,9 +1828,10 @@ function postEl(id, p, pm){
   $('i', d).textContent = (p.name || '?').charAt(0).toUpperCase();
   setAv($('i', d), p.uid);
   $('.po-head b', d).textContent = p.name;
-  { const bd = badgeEl(p.uid); if(bd) $('.po-head b', d).appendChild(bd); }
   if(p.uid){ const hb = $('.po-head b', d); hb.style.cursor = 'pointer'; hb.addEventListener('click', () => openProfile(p.uid, p.name)); }
   $('.po-head span', d).textContent = when(p.t) + (p.ta ? ' · ⏳ ' + Math.max(1, Math.ceil((p.ta + 172800000 - Date.now()) / 3600000)) + 'h' : '');
+  { const bg = BADGES[p.uid], bc = bg && BADGE_INFO[bg] ? BADGE_INFO[bg].c : '';
+    if(bc){ const sp = $('.po-head span', d); sp.style.color = bc; sp.style.fontWeight = '700'; } }
   if(okImg(p.img)) $('img', d).src = p.img;
   $('p', d).textContent = p.text || '';
   const act = $('.post-act', d);
@@ -2168,7 +2191,10 @@ function renderRef(box, refs, myRef){
    NOTIFICATIONS / BANNIÈRES / PRÉSENCE
    ========================================================= */
 const TITLE0 = document.title;
-const ICONS = { like:'❤️', comment:'💬', accept:'🤝', badge:'✔', ref:'🎁', group:'👥', admin:'🔔' };
+const ICONS = { like:'❤️', comment:'💬', accept:'🤝', badge:'✔', ref:'🎁', group:'👥', mention:'📣', admin:'🔔' };
+const SUPPORT = 'Support HK ';
+const annSeen = () => { try{ let s = localStorage.getItem('hk-ann-seen'); if(s === null){ s = String(Date.now()); localStorage.setItem('hk-ann-seen', s); } return +s; }catch(e){ return 0; } };
+const annMark = () => { try{ localStorage.setItem('hk-ann-seen', String(Date.now())); }catch(e){} };
 const ST = { req:{}, inbox:{}, notifs:{}, tick:0, sg:'', open:'', uid:'', init:false, seen:new Set() };
 
 async function pushNotif(to, type, text, id){
@@ -2225,18 +2251,22 @@ async function poll(){
   if(!me){ setCounts(0, 0); return; }
   if(ST.uid !== me.uid){ ST.uid = me.uid; ST.init = false; ST.seen = new Set(); liveAll(); }
   try{
-    const [rq, ib, nf] = await Promise.all([
+    const [rq, ib, nf, an] = await Promise.all([
       fb('GET', 'friend_req/' + me.uid).catch(() => ({})),
       fb('GET', 'inbox/' + me.uid).catch(() => ({})),
-      fb('GET', 'notifs/' + me.uid).catch(() => ({}))
+      fb('GET', 'notifs/' + me.uid, undefined, '&orderBy=%22t%22&limitToLast=40').catch(() => ({})),
+      fb('GET', 'announces', undefined, '&orderBy=%22t%22&limitToLast=5').catch(() => ({}))
     ]);
     ST.req = rq || {}; ST.inbox = ib || {}; ST.notifs = nf || {};
+    const seenA = annSeen();
+    ST.ann = Object.entries(an || {}).map(([k, a]) => [k, { type:'admin', from:'admin', name:SUPPORT, text:a.text, t:a.t, ann:true, r: a.t <= seenA }]);
     const inc = Object.entries(ST.inbox).filter(([k, x]) => x.from !== me.uid && !x.r);
-    const nn = Object.values(ST.notifs).filter(x => !x.r).length;
-    setCounts(inc.length, Object.keys(ST.req).length + nn);
+    const nn = Object.values(ST.notifs).filter(x => !x.r).length + ST.ann.filter(([k, a]) => !a.r).length;
+    setCounts(inc.length + Object.keys(GUNREAD).length, Object.keys(ST.req).length + nn);
     const items = [];
     inc.forEach(([k, x]) => { if(k !== ST.open) items.push({ key:'m:' + k + ':' + x.t, kind:'msg', icon:'💬', uid:k, title:'💬 ' + x.name, text:x.text, onClick:() => openChat(k, x.name) }); });
     Object.entries(ST.req).forEach(([k, v]) => items.push({ key:'r:' + k, kind:'req', icon:'🤝', uid:k, title:'🤝 ' + v.name, text:L('veut devenir ton ami', 'wants to be your friend'), onClick:() => openHub('notif') }));
+    ST.ann.forEach(([k, a]) => { if(!a.r) items.push({ key:'a:' + k, kind:'ntf', icon:'📢', title:SUPPORT, text:short(a.text, 80), onClick:() => openHub('notif') }); });
     Object.entries(ST.notifs).forEach(([k, x]) => { if(!x.r) items.push({ key:'n:' + k, kind:'ntf', icon:ICONS[x.type] || '🔔', uid:x.from !== 'admin' ? x.from : '', title:x.name, text:x.text, onClick:() => openHub('notif') }); });
     const fresh = items.filter(i => !ST.seen.has(i.key));
     fresh.forEach(i => ST.seen.add(i.key));
@@ -2249,12 +2279,12 @@ async function poll(){
       else fresh.forEach(banner);
       const f = fresh[0]; flashTitle(f.title + ' : ' + f.text);
       if(document.hidden && window.Notification && Notification.permission === 'granted'){
-        try{ new Notification('Hacken Store — ' + f.title, { body:f.text }); }catch(e){}
+        try{ new Notification('HK Gaming — ' + f.title, { body:f.text }); }catch(e){}
       }
     }
-    const sg = JSON.stringify([ST.req, ST.inbox, ST.notifs]);
+    const sg = JSON.stringify([ST.req, ST.inbox, ST.notifs, ST.ann]);
     if(sg !== ST.sg){ ST.sg = sg; if($('#hubOverlay').classList.contains('open')) renderHub(); }
-    if(ST.tick++ % 6 === 0) fb('PUT', 'presence/' + me.uid, Date.now()).catch(() => {});
+    if(ST.tick++ % 3 === 0) fb('PUT', 'presence/' + me.uid, Date.now()).catch(() => {});
   }catch(e){}
 }
 
@@ -2319,7 +2349,7 @@ function renderNotifs(box){
   const mkb = (t, f) => { const b = el('button', 'btn btn-ghost', t); b.type = 'button'; b.addEventListener('click', f); tools.appendChild(b); };
   mkb('✔ ' + L('Tout lu', 'Mark all read'), async () => {
     await Promise.all(Object.entries(ST.notifs).filter(([k, n]) => !n.r).map(([k]) => fb('PUT', 'notifs/' + me.uid + '/' + k + '/r', true).catch(() => {})));
-    toast(L('Tout est lu', 'All read')); poll();
+    annMark(); toast(L('Tout est lu', 'All read')); poll();
   });
   mkb(SND ? '🔊 ' + L('Son : oui', 'Sound: on') : '🔇 ' + L('Son : non', 'Sound: off'), () => { SND = !SND; try{ localStorage.setItem('hkstore-snd', SND ? '1' : '0'); }catch(e){} renderHub(); });
   if('Notification' in window && Notification.permission === 'default') mkb('🔔 ' + L('Alertes navigateur', 'Browser alerts'), () => Notification.requestPermission().then(renderHub));
@@ -2336,16 +2366,18 @@ function renderNotifs(box){
     });
   }
   box.appendChild(el('div', 'subhead', L('Activité', 'Activity')));
-  const nf = Object.entries(ST.notifs || {}).sort((a, b) => b[1].t - a[1].t).slice(0, 40);
+  const nf = Object.entries(ST.notifs || {}).concat(ST.ann || []).sort((a, b) => b[1].t - a[1].t).slice(0, 40);
   if(!nf.length) box.appendChild(el('div', 't-empty', L('Aucune notification pour le moment.', 'No notifications yet.')));
   nf.forEach(([k, n]) => {
     const row = el('div', 'conv notif' + (n.r ? '' : ' unread'));
-    const av = el('div', 'av-lg', ICONS[n.type] || '🔔');
+    const av = el('div', 'av-lg', n.ann ? '📢' : (ICONS[n.type] || '🔔'));
     if(n.from && n.from !== 'admin') setAv(av, n.from);
     const mid = el('div', 'conv-mid'); mid.append(el('b', '', n.name || ''), el('span', '', ' ' + n.text));
+    if(n.ann) mid.lastChild.style.whiteSpace = 'normal';
     const right = el('div', 'conv-r'); right.appendChild(el('small', '', fmtAgo(n.t)));
     row.append(av, mid, right);
     row.addEventListener('click', () => {
+      if(n.ann){ annMark(); poll(); return; }
       if(!n.r) fb('PUT', 'notifs/' + me.uid + '/' + k + '/r', true).then(poll).catch(() => {});
       if(n.type === 'badge') openProfile(me.uid, me.name);
       else if(n.from && n.from !== 'admin') openProfile(n.from, n.name);
@@ -2452,7 +2484,31 @@ function openChat(fid, fname){
 /* =========================================================
    GROUPES
    ========================================================= */
-let GR = [];
+let GR = [], OPENG = '', GUNREAD = {};
+const gSeen = id => { try{ return +localStorage.getItem('hk-g-' + id) || 0; }catch(e){ return 0; } };
+const gMark = id => { try{ localStorage.setItem('hk-g-' + id, String(Date.now())); }catch(e){} delete GUNREAD[id]; };
+async function checkG(x, quiet){
+  try{
+    const l = await fb('GET', 'glast/' + x.id);
+    if(!l || l.from === me.uid) return;
+    if(x.id === OPENG && $('#chatOverlay').classList.contains('open')) return;
+    if(l.t > gSeen(x.id)){
+      const isNew = GUNREAD[x.id] !== l.t;
+      GUNREAD[x.id] = l.t;
+      if(isNew && !quiet){
+        ping(); ring();
+        banner({ icon:'👥', kind:'msg', title:'👥 ' + short(x.g.name, 24), text:l.name + ' : ' + l.text, onClick:() => openGroup(x.id, x.g) });
+      }
+      poll();
+    }
+  }catch(e){}
+}
+function watchGroups(){
+  GR.filter(x => x.mine).slice(0, 5).forEach(x => {
+    listen('gl_' + x.id, 'glast/' + x.id, '', () => checkG(x));
+    checkG(x, true);
+  });
+}
 async function loadGroups(){
   const box = $('#grpList'); if(!box) return;
   if(!me){ box.innerHTML = ''; box.appendChild(el('div', 't-empty', L('Connecte-toi pour voir les groupes.', 'Log in to see groups.'))); return; }
@@ -2461,7 +2517,7 @@ async function loadGroups(){
     const o = Object.entries(await fb('GET', 'groups', undefined, '&orderBy=%22t%22&limitToLast=30') || {}).sort((a, b) => b[1].t - a[1].t);
     const mem = await Promise.all(o.map(([id]) => fb('GET', 'gmembers/' + id + '/' + me.uid).catch(() => null)));
     GR = o.map(([id, g], i) => ({ id, g, mine: !!mem[i] })).filter(x => x.g.pub || x.mine);
-    drawGroups();
+    drawGroups(); watchGroups();
   }catch(e){ box.innerHTML = '<div class="t-empty">Groupes indisponibles.</div>'; }
 }
 function drawGroups(){
@@ -2495,6 +2551,8 @@ async function joinGroup(id, g, code){
     const rec = { name: me.name, t: Date.now() };
     if(!g.pub && code) rec.code = code;
     await fb('PUT', 'gmembers/' + id + '/' + me.uid, rec);
+    gMark(id);
+    if(g.owner && g.owner !== me.uid) pushNotif(g.owner, 'group', 'a rejoint ton groupe « ' + short(g.name, 30) + ' »', 'gj_' + id + '_' + me.uid);
     toast(L('Groupe rejoint ✅', 'Group joined ✅'));
     loadGroups(); openGroup(id, g);
   }catch(e){ toast(L('Impossible de rejoindre.', 'Could not join.'), true); }
@@ -2532,8 +2590,10 @@ if($('#grpForm')) $('#grpForm').addEventListener('submit', async e => {
 
 async function openGroup(gid, g){
   closeAll(); clearInterval(chatT); ST.open = ''; open('#chatOverlay');
+  OPENG = gid; gMark(gid);
   const box = $('#chatBody'); box.innerHTML = '';
-  const stop = () => { clearInterval(chatT); stopListen('chat'); }, owner = g.owner === me.uid;
+  const stop = () => { OPENG = ''; clearInterval(chatT); stopListen('chat'); }, owner = g.owner === me.uid;
+  let MEM = {}; fb('GET', 'gmembers/' + gid).then(o => { MEM = o || {}; }).catch(() => {});
   const live = () => listen('chat', 'gmsgs/' + gid, '&orderBy=%22t%22&limitToLast=1', pull);
   const head = el('div', 'chat-head');
   const back = el('button', 'chat-ic', '‹'); back.type = 'button';
@@ -2612,7 +2672,7 @@ async function openGroup(gid, g){
     lv.addEventListener('click', async () => {
       if(!confirm(L('Confirmer ?', 'Confirm?'))) return;
       try{
-        if(owner){ await fb('DELETE', 'gmsgs/' + gid).catch(() => {}); await fb('DELETE', 'gmembers/' + gid); await fb('DELETE', 'groups/' + gid); }
+        if(owner){ await fb('DELETE', 'glast/' + gid).catch(() => {}); await fb('DELETE', 'gmsgs/' + gid).catch(() => {}); await fb('DELETE', 'gmembers/' + gid); await fb('DELETE', 'groups/' + gid); }
         else await fb('DELETE', 'gmembers/' + gid + '/' + me.uid);
         closeAll(); loadGroups();
       }catch(e){ toast('Action impossible.', true); }
@@ -2620,7 +2680,7 @@ async function openGroup(gid, g){
     p.appendChild(lv);
     const bk = el('button', 'btn btn-primary btn-block', L('Retour au chat', 'Back to chat'));
     bk.type = 'button'; bk.style.marginTop = '8px';
-    bk.addEventListener('click', () => { sig = ''; chatT = setInterval(pull, 10000); live(); pull(); });
+    bk.addEventListener('click', () => { sig = ''; OPENG = gid; chatT = setInterval(pull, 10000); live(); pull(); });
     p.appendChild(bk); list.appendChild(p);
   });
 
@@ -2684,7 +2744,7 @@ async function openGroup(gid, g){
       sig = s;
       const lm = msgs[msgs.length - 1];
       if(!first && lm && lm[1].from !== me.uid && lm[0] !== lastKey) ping();
-      lastKey = lm ? lm[0] : ''; first = false; render(msgs);
+      lastKey = lm ? lm[0] : ''; first = false; render(msgs); gMark(gid);
     }catch(e){
       if(first){ first = false; list.innerHTML = ''; list.appendChild(el('div', 'chat-empty', L('Impossible de charger les messages.', 'Could not load messages.'))); }
     }
@@ -2696,7 +2756,16 @@ async function openGroup(gid, g){
     if(text) m.text = text;
     if(img) m.img = img;
     if(replyTo){ m.re = replyTo; clearReply(); }
-    try{ await fb('POST', 'gmsgs/' + gid, m); pull(); }
+    try{
+      await fb('POST', 'gmsgs/' + gid, m);
+      fb('PUT', 'glast/' + gid, { t: m.t, from: me.uid, name: me.name, text: short(text || '📷 Photo', 60) }).catch(() => {});
+      if(text) (text.match(/@[A-Za-z0-9._-]{3,20}/g) || []).forEach(tag => {
+        const nm = tag.slice(1).toLowerCase();
+        const hit = Object.entries(MEM).find(([u, v]) => u !== me.uid && (v.name || '').toLowerCase() === nm);
+        if(hit) pushNotif(hit[0], 'mention', 't\'a mentionné dans « ' + short(g.name, 25) + ' »');
+      });
+      pull();
+    }
     catch(err){ if(text) inp.value = text; toast('Message non envoyé.', true); }
   }
   pf.addEventListener('change', async () => {
@@ -2718,29 +2787,45 @@ HK.sug = async function(){
   if(!me){ sec.style.display = 'none'; loadGroups(); return; }
   loadGroups();
   try{
-    const [u, fr] = await Promise.all([
-      fb('GET', 'users').catch(() => ({})),
-      fb('GET', 'friends/' + me.uid).catch(() => ({}))
+    const [u, fr, rf] = await Promise.all([
+      fb('GET', 'users', undefined, '&orderBy=%22t%22&limitToLast=60').catch(() => ({})),
+      fb('GET', 'friends/' + me.uid).catch(() => ({})),
+      fb('GET', 'referrals/' + me.uid).catch(() => ({}))
     ]);
-    const list = Object.entries(u || {})
-      .filter(([id]) => id !== me.uid && !(fr || {})[id])
-      .sort((a, b) => b[1].t - a[1].t);
+    const friends = fr || {}, refs = rf || {}, all = {};
+    Object.entries(u || {}).forEach(([id, v]) => { all[id] = v; });
+    Object.entries(refs).forEach(([id, v]) => { if(!all[id]) all[id] = { name: v.name, t: v.t }; });
+    const list = Object.entries(all)
+      .filter(([id, v]) => id !== me.uid && !friends[id] && v && v.name)
+      .sort((a, b) => (refs[b[0]] ? 1 : 0) - (refs[a[0]] ? 1 : 0) || (b[1].t || 0) - (a[1].t || 0));
     row.innerHTML = '';
+    const oldMore = $('#sugMore'); if(oldMore) oldMore.remove();
     if(!list.length){ sec.style.display = 'none'; return; }
     sec.style.display = 'block';
     await ensureBadges();
-    list.forEach(([id, v]) => {
+    const mkCard = ([id, v]) => {
       const c = el('div', 'sug');
       const av = el('div', 'av-lg', (v.name || '?').charAt(0).toUpperCase()); setAv(av, id); c.appendChild(av);
       const nb = nameB(id, v.name); nb.style.cursor = 'pointer';
       nb.addEventListener('click', () => openProfile(id, v.name)); c.appendChild(nb);
+      if(refs[id]) c.appendChild(el('div', 'grp-meta', '🎁 ' + L('Ton filleul', 'Your referral')));
       const b = el('button', 'btn btn-primary', '➕ ' + L('Ajouter', 'Add')); b.type = 'button';
       b.addEventListener('click', async () => {
         try{ await fb('PUT', 'friend_req/' + id + '/' + me.uid, { name: me.name, t: Date.now() }); b.textContent = '⏳'; b.disabled = true; toast('Demande envoyée 🤝'); }
         catch(e){ toast('Action impossible.', true); }
       });
-      c.appendChild(b); row.appendChild(c);
-    });
+      c.appendChild(b); return c;
+    };
+    let shown = 0;
+    const more = el('button', 'btn btn-ghost btn-block'); more.id = 'sugMore'; more.type = 'button'; more.style.marginTop = '6px';
+    const add = () => {
+      list.slice(shown, shown + 10).forEach(x => row.appendChild(mkCard(x)));
+      shown = Math.min(list.length, shown + 10);
+      more.style.display = shown < list.length ? 'block' : 'none';
+      more.textContent = L('Voir plus', 'See more') + ' (' + (list.length - shown) + ')';
+    };
+    more.addEventListener('click', add);
+    row.after(more); add();
   }catch(e){ sec.style.display = 'none'; }
 };
 /* Recherche en haut de page : joueurs + groupes */
@@ -2749,7 +2834,7 @@ HK.sug = async function(){
   let tm = 0, seq = 0, UC = null, UCt = 0;
   async function allUsers(){
     if(UC && Date.now() - UCt < 60000) return UC;
-    try{ UC = await fb('GET', 'users') || {}; UCt = Date.now(); }catch(e){ UC = UC || {}; }
+    try{ UC = await fb('GET', 'users', undefined, '&orderBy=%22t%22&limitToLast=300') || {}; UCt = Date.now(); }catch(e){ UC = UC || {}; }
     return UC;
   }
   async function run(){
@@ -2911,7 +2996,7 @@ async function saveCfg(){
 $('#edSave').addEventListener('click', saveCfg);
 $$('#adTabs button').forEach(b => b.addEventListener('click', () => {
   $$('#adTabs button').forEach(x => x.classList.toggle('sel', x === b));
-  ['posts', 'members', 'groups', 'texts', 'edit', 'stats', 'tournoi'].forEach(k => {
+  ['posts', 'members', 'groups', 'texts', 'edit', 'stats', 'tournoi', 'annonces'].forEach(k => {
     const t = $('#ad' + k[0].toUpperCase() + k.slice(1)); if(t) t.style.display = b.dataset.tab === k ? 'block' : 'none';
   });
   if(b.dataset.tab === 'edit' && !$('#edList').children.length) buildEditor();
@@ -2920,6 +3005,7 @@ $$('#adTabs button').forEach(b => b.addEventListener('click', () => {
   if(b.dataset.tab === 'texts') buildTexts();
   if(b.dataset.tab === 'stats') loadStats();
 if(b.dataset.tab === 'tournoi') loadAdTournoi();
+  if(b.dataset.tab === 'annonces') loadAnnonces();
 }));
 
 /* Admin : membres */
@@ -2957,7 +3043,7 @@ function renderMembers(){
       try{
         if(sel.value){ await api('PUT', 'badges/' + m.id, sel.value); BADGES[m.id] = sel.value; }
         else{ await api('DELETE', 'badges/' + m.id); delete BADGES[m.id]; }
-        if(sel.value) api('POST', 'notifs/' + m.id, { type:'badge', from:'admin', name:'Hacken Store', text:'t\'a donné un badge ✔', t: Date.now() }).catch(() => {});
+        if(sel.value) api('POST', 'notifs/' + m.id, { type:'badge', from:'admin', name:SUPPORT, text:'vous a certifié ✔ Félicitations ' + m.name + ' !', t: Date.now() }).catch(() => {});
         toast('Badge mis à jour ✅');
       }catch(e){ toast('Action impossible.', true); }
     });
@@ -3021,6 +3107,33 @@ async function loadAdTournoi(){
     });
   }catch(e){ box.innerHTML = '<div class="t-empty">Erreur de lecture.</div>'; }
 }
+async function loadAnnonces(){
+  const box = $('#anList'); box.innerHTML = '<div class="t-empty">Chargement...</div>';
+  try{
+    const o = Object.entries(await api('GET', 'announces') || {}).sort((a, b) => b[1].t - a[1].t).slice(0, 20);
+    box.innerHTML = '';
+    if(!o.length){ box.innerHTML = '<div class="t-empty">Aucune annonce.</div>'; return; }
+    o.forEach(([id, a]) => {
+      const r = document.createElement('div'); r.className = 'trow';
+      r.innerHTML = '<div class="tm"><b></b><span></span></div><button type="button" class="btn btn-ghost">🗑</button>';
+      $('b', r).textContent = short(a.text, 40);
+      $('span', r).textContent = when(a.t);
+      $('button', r).addEventListener('click', async () => {
+        if(!confirm('Supprimer cette annonce ?')) return;
+        try{ await api('DELETE', 'announces/' + id); r.remove(); toast('Annonce supprimée'); }
+        catch(e){ toast('Action impossible.', true); }
+      });
+      box.appendChild(r);
+    });
+  }catch(e){ box.innerHTML = '<div class="t-empty">Erreur de lecture.</div>'; }
+}
+$('#anSend').addEventListener('click', async () => {
+  const ta = $('#anText'), text = ta.value.trim();
+  if(text.length < 3) return toast('Écris ton annonce.', true);
+  if(!confirm('Envoyer cette annonce à tout le monde ?')) return;
+  try{ await api('POST', 'announces', { text, t: Date.now() }); ta.value = ''; toast('📢 Annonce envoyée ✅'); loadAnnonces(); }
+  catch(e){ toast('Action impossible (reconnecte-toi).', true); }
+});
 function buildTexts(){
   const box = $('#adTexts'); box.innerHTML = '';
   box.innerHTML = '<p class="note" style="text-align:left;margin-bottom:12px;">Message envoyé quand un membre partage son lien de parrainage. Utilise <b>{code}</b> et <b>{link}</b>.</p>';
@@ -3091,7 +3204,7 @@ $$('[data-lang]').forEach(b => {
     location.reload();
   });
 });
-authUI(); poll(); setInterval(poll, 5000);
+setInterval(poll, 5000); setInterval(poll, 5000);
 loadFeed(); HK.sug();
 
 })(); /* fin IIFE */
@@ -3106,7 +3219,7 @@ loadFeed(); HK.sug();
   let W, H, items = [];
   function size(){ W = cv.width = innerWidth; H = cv.height = innerHeight; }
   size(); addEventListener('resize', size);
-  const count = innerWidth < 600 ? 14 : 26;
+  const count = innerWidth < 600 ? 8 : 16;
   for(let i = 0; i < count; i++) items.push({ x: Math.random(), y: Math.random(), s: 5 + Math.random() * 12, v: .02 + Math.random() * .05, a: .08 + Math.random() * .18, g: Math.random() > .75 });
   function frame(){
     c.clearRect(0, 0, W, H);
@@ -3137,4 +3250,4 @@ if('serviceWorker' in navigator){
 }
 </script>
 </body>
-      </html>
+    </html>
