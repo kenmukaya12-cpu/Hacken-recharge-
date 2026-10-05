@@ -516,6 +516,7 @@ body:has(.overlay.open){overflow:hidden;}
 <main id="top">
 
 <header class="hero wrap">
+  <svg class="hero-mark" viewBox="0 0 64 64" aria-hidden="true"><use href="#dia"/></svg>
   <h1>HK</h1>
   <div class="store">HACKEN STORE</div>
   <p class="claim">Discute, ajoute des amis, publie et participe aux tournois.</p>
@@ -1490,7 +1491,6 @@ try{
 }catch(e){}
 function saveSession(){ try{ localStorage.setItem('hkstore-session', JSON.stringify({ uid: me.uid, name: me.name, rt: rtok })); }catch(e){} }
 function logout(silent){
-  Object.keys(STREAMS).forEach(stopListen);
   me = null; utok = ''; rtok = '';
   try{ localStorage.removeItem('hkstore-session'); }catch(e){}
   authUI(); if(HK.sug) HK.sug();
@@ -1529,33 +1529,7 @@ async function api(method, path, body){
   if(!r.ok) throw new Error(r.status);
   return r.json();
 }
-/* --- Temps réel (streaming Firebase) --- */
-const STREAMS = {};
-function stopListen(key){
-  const s = STREAMS[key]; if(!s) return;
-  s.dead = true; if(s.es) s.es.close(); delete STREAMS[key];
-}
-function listen(key, path, q, cb){
-  stopListen(key);
-  if(!window.EventSource || !me) return;
-  const s = STREAMS[key] = { es:null, dead:false };
-  const start = async () => {
-    if(s.dead) return;
-    const tk = await userToken(); if(!tk || s.dead) return;
-    const es = s.es = new EventSource(DB + '/' + path + '.json?auth=' + tk + (q || ''));
-    let init = true;
-    const ev = () => { if(init){ init = false; return; } cb(); };
-    es.addEventListener('put', ev);
-    es.addEventListener('patch', ev);
-    const retry = () => { es.close(); if(!s.dead) setTimeout(start, 3000); };
-    es.addEventListener('auth_revoked', retry);
-    es.onerror = retry;
-  };
-  start();
-}
-function liveAll(){
-  ['inbox', 'notifs', 'friend_req'].forEach(p => listen('g_' + p, p + '/' + me.uid, '', poll));
-}
+
 /* --- Badges --- */
 const BADGE_INFO = {
   verified:{ c:'#1D9BF0', label:'Compte vérifié' },
@@ -1629,14 +1603,10 @@ function avData(uid){
     .then(r => r.ok ? r.json() : null)
     .then(d => okImg(d) ? d : '')
     .catch(() => '');
-const GAV = {};
-function setGav(node, gid){
-  if(!gid || !node) return;
-  (GAV[gid] = GAV[gid] || fetch(DB + '/gavatars/' + gid + '.json')
-    .then(r => r.ok ? r.json() : null)
-    .then(d => okImg(d) ? d : '')
-    .catch(() => ''))
-  .then(d => { if(d){ node.style.backgroundImage = 'url(' + d + ')'; node.classList.add('img'); } });
+}
+function setAv(node, uid){
+  if(!uid || !node) return;
+  avData(uid).then(d => { if(d){ node.style.backgroundImage = 'url(' + d + ')'; node.classList.add('img'); } });
 }
 
 /* =========================================================
@@ -2210,7 +2180,7 @@ function setCounts(m, b){
 
 async function poll(){
   if(!me){ setCounts(0, 0); return; }
-  if(ST.uid !== me.uid){ ST.uid = me.uid; ST.init = false; ST.seen = new Set(); liveAll(); }
+  if(ST.uid !== me.uid){ ST.uid = me.uid; ST.init = false; ST.seen = new Set(); }
   try{
     const [rq, ib, nf] = await Promise.all([
       fb('GET', 'friend_req/' + me.uid).catch(() => ({})),
@@ -2348,7 +2318,7 @@ const H48 = 172800000;
 function openChat(fid, fname){
   closeAll(); clearInterval(chatT); ST.open = fid; open('#chatOverlay');
   const id = cid(me.uid, fid), box = $('#chatBody'); box.innerHTML = '';
-  const stop = () => { ST.open = ''; clearInterval(chatT); stopListen('chat'); stopListen('chat2'); };
+  const stop = () => { ST.open = ''; clearInterval(chatT); };
   const head = el('div', 'chat-head');
   const back = el('button', 'chat-ic', '‹'); back.type = 'button';
   back.addEventListener('click', () => { stop(); openHub('msg'); });
@@ -2430,9 +2400,7 @@ function openChat(fid, fname){
   }
   sb.addEventListener('click', send);
   inp.addEventListener('keydown', e => { if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); send(); } });
-  pull(); chatT = setInterval(pull, 10000);
-  listen('chat', 'chats/' + id, '&orderBy=%22t%22&limitToLast=1', pull);
-  listen('chat2', 'inbox/' + fid + '/' + me.uid, '', pull);
+  pull(); chatT = setInterval(pull, 3000);
   setTimeout(() => inp.focus(), 150);
 }
 
@@ -2458,7 +2426,7 @@ function drawGroups(){
   if(!l.length){ box.appendChild(el('div', 't-empty', L('Aucun groupe. Crée le premier !', 'No groups yet. Create the first!'))); return; }
   l.forEach(({ id, g, mine }) => {
     const r = el('div', 'grp');
-    const gav = el('div', 'av-lg', g.name.charAt(0).toUpperCase()); setGav(gav, id); r.appendChild(gav);
+    r.appendChild(el('div', 'av-lg', g.name.charAt(0).toUpperCase()));
     const mid = el('div', 'conv-mid');
     const nb = el('b', '', g.name);
     if(!g.pub) nb.appendChild(el('span', 'lock-tag', ' 🔒'));
@@ -2520,8 +2488,7 @@ if($('#grpForm')) $('#grpForm').addEventListener('submit', async e => {
 async function openGroup(gid, g){
   closeAll(); clearInterval(chatT); ST.open = ''; open('#chatOverlay');
   const box = $('#chatBody'); box.innerHTML = '';
-  const stop = () => { clearInterval(chatT); stopListen('chat'); }, owner = g.owner === me.uid;
-  const live = () => listen('chat', 'gmsgs/' + gid, '&orderBy=%22t%22&limitToLast=1', pull);
+  const stop = () => clearInterval(chatT), owner = g.owner === me.uid;
   const head = el('div', 'chat-head');
   const back = el('button', 'chat-ic', '‹'); back.type = 'button';
   back.addEventListener('click', () => { stop(); closeAll(); document.getElementById('groupes').scrollIntoView(); });
@@ -2531,8 +2498,7 @@ async function openGroup(gid, g){
   const inf = el('button', 'chat-ic', 'ⓘ'); inf.type = 'button';
   const x = el('button', 'chat-ic', '✕'); x.type = 'button';
   x.addEventListener('click', () => { stop(); closeAll(); });
-  const gav = el('div', 'av-lg', g.name.charAt(0).toUpperCase()); setGav(gav, gid);
-  head.append(back, gav, who, inf, x); box.appendChild(head);
+  head.append(back, who, inf, x); box.appendChild(head);
   const list = el('div', 'chat-msgs'); box.appendChild(list);
   const bar = el('div', 'chat-bar'), inp = el('textarea'), sb = el('button', 'chat-send', '➤');
   const ph = el('label', 'chat-photo'); ph.innerHTML = '📷';
@@ -2545,26 +2511,6 @@ async function openGroup(gid, g){
   inf.addEventListener('click', async () => {
     stop(); list.innerHTML = '';
     const p = el('div', 'prof-sec');
-    const big = el('div', 'avatar', g.name.charAt(0).toUpperCase()); setGav(big, gid);
-    if(owner){
-      big.classList.add('edit'); big.title = L('Changer la photo du groupe', 'Change group photo');
-      big.addEventListener('click', () => {
-        const f = document.createElement('input'); f.type = 'file'; f.accept = 'image/*';
-        f.addEventListener('change', async () => {
-          if(!f.files[0]) return;
-          try{
-            const d = await squareImg(f.files[0], 160);
-            await fb('PUT', 'gavatars/' + gid, d);
-            GAV[gid] = Promise.resolve(d);
-            [big, gav].forEach(n => { n.style.backgroundImage = 'url(' + d + ')'; n.classList.add('img'); });
-            loadGroups();
-            toast(L('Photo du groupe mise à jour ✅', 'Group photo updated ✅'));
-          }catch(e){ toast(L('Photo impossible.', 'Could not update photo.'), true); }
-        });
-        f.click();
-      });
-    }
-    p.appendChild(big);
     p.appendChild(el('div', 'subhead', g.name));
     if(g.desc) p.appendChild(el('div', 'prof-bio', g.desc));
     const link = location.href.split('#')[0].split('?')[0];
@@ -2597,7 +2543,7 @@ async function openGroup(gid, g){
     p.appendChild(lv);
     const bk = el('button', 'btn btn-primary btn-block', L('Retour au chat', 'Back to chat'));
     bk.type = 'button'; bk.style.marginTop = '8px';
-    bk.addEventListener('click', () => { sig = ''; chatT = setInterval(pull, 10000); live(); pull(); });
+    bk.addEventListener('click', () => { sig = ''; chatT = setInterval(pull, 3000); pull(); });
     p.appendChild(bk); list.appendChild(p);
   });
 
@@ -2671,9 +2617,9 @@ async function openGroup(gid, g){
   });
   sb.addEventListener('click', () => send());
   inp.addEventListener('keydown', e => { if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); send(); } });
-  pull(); chatT = setInterval(pull, 10000);
-  live();
+  pull(); chatT = setInterval(pull, 3000);
 }
+
 /* =========================================================
    SUGGESTIONS
    ========================================================= */
@@ -2684,12 +2630,13 @@ HK.sug = async function(){
   loadGroups();
   try{
     const [u, fr] = await Promise.all([
-      fb('GET', 'users').catch(() => ({})),
+      fb('GET', 'users', undefined, '&orderBy=%22t%22&limitToLast=30').catch(() => ({})),
       fb('GET', 'friends/' + me.uid).catch(() => ({}))
     ]);
     const list = Object.entries(u || {})
       .filter(([id]) => id !== me.uid && !(fr || {})[id])
-      .sort((a, b) => b[1].t - a[1].t);
+      .sort((a, b) => b[1].t - a[1].t)
+      .slice(0, 12);
     row.innerHTML = '';
     if(!list.length){ sec.style.display = 'none'; return; }
     sec.style.display = 'block';
@@ -3072,4 +3019,4 @@ if('serviceWorker' in navigator){
 }
 </script>
 </body>
-  </html>
+    </html>
