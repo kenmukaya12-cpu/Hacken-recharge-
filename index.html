@@ -17,6 +17,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<div id="adStats" style="display:none;"></div>
+<div id="adTournoi" style="display:none;"><div class="feed" id="trList" style="margin-top:0;"></div></div>
 <style>
   :root{
     box-sizing:border-box;
@@ -786,6 +788,9 @@
         <button type="button" class="pay" data-tab="texts">✏️ Textes</button>
         <button type="button" class="pay" data-tab="edit">⚙️ Prix &amp; images</button>
         <button type="button" class="pay" data-tab="stats">📊 Stats</button>
+<button type="button" class="pay" data-tab="tournoi">🏆 Tournoi</button>
+<button type="button" class="pay" data-tab="tournoi">🏆 Tournoi</button>
+<button type="button" class="pay" data-tab="tournoi">🏆 Tournoi</button>
       </div>
       <div id="adPosts">
         <div class="subhead" style="margin-top:0;">En attente (<span id="adCount">0</span>)</div>
@@ -798,6 +803,7 @@
       <div id="adGroups" style="display:none;"><div class="feed" id="gpList" style="margin-top:0;"></div></div>
       <div id="adTexts" style="display:none;"></div>
       <div id="adStats" style="display:none;"></div>
+<div id="adTournoi" style="display:none;"><div class="feed" id="trList" style="margin-top:0;"></div></div>
       <div id="adEdit" style="display:none;">
         <p class="note" style="text-align:left;margin-bottom:12px;">Modifie, puis appuie sur Enregistrer.</p>
         <div id="edList"></div>
@@ -908,7 +914,7 @@ const ADMIN_UID = 'kCF9zuZFHVfCBTrLRtDF5UpGrOn1';
 
 let CFG = {};
 try{
-  const c = new AbortController(); setTimeout(() => c.abort(), 3500);
+  const c = new AbortController(); setTimeout(() => c.abort(), 1500);
   const r = await fetch(HK_DB + '/config.json', { signal: c.signal });
   CFG = (await r.json()) || {};
 }catch(e){ console.warn('[HK] Config Firebase indisponible, valeurs locales utilisées.'); }
@@ -934,7 +940,7 @@ const SUBS = [
 ];
 const ACCOUNTS = [1,2,3,4,5].map(n => ({
   name:'Compte '+n, price:30000, old:35000, img:'compte'+n+'.jpg',
-  details:'Détails à compléter : rang, niveau, skins, armes, nombre de diamants restants...'
+  details:'Contacte-nous sur WhatsApp pour les détails de ce compte (rang, niveau, skins).'
 }));
 const WHEEL = [3, 0, 5, 2, 10, 0, 5, 3];
 const WHEEL_OPEN_H = 20, WHEEL_CLOSE_H = 24;
@@ -1021,7 +1027,10 @@ function toast(msg, err){
 const open = id => { const n = typeof id === 'string' ? $(id) : id; if(n) n.classList.add('open'); };
 const closeAll = () => $$('.overlay').forEach(o => o.classList.remove('open'));
 $$('.overlay').forEach(o => o.addEventListener('click', e => { if(e.target === o) o.classList.remove('open'); }));
-$$('[data-close]').forEach(b => b.addEventListener('click', closeAll));
+$$('[data-close]').forEach(b => b.addEventListener('click', () => {
+  const o = b.closest('.overlay');
+  if(o && o.id === 'lightboxOverlay') o.classList.remove('open'); else closeAll();
+}));
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeAll(); });
 
 const copyText = (txt, msg) => {
@@ -1143,8 +1152,8 @@ const sel = { label:'', price:0, compte:false };
 let promo = null;
 
 function card(opts){
-  const b = document.createElement('button');
-  b.type = 'button'; b.className = 'card';
+  const b = document.createElement('div'); b.className = 'card'; b.setAttribute('role','button'); b.tabIndex = 0;
+b.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); b.click(); } });
   const pic = document.createElement('div'); pic.className = 'pic';
   picHTML(opts.img, opts.alt).forEach(elm => pic.appendChild(elm));
   const tag = (cls, txt) => { const t = document.createElement('span'); t.className = 'tag ' + cls; t.textContent = txt; pic.appendChild(t); };
@@ -1494,10 +1503,15 @@ async function userToken(){
       method:'POST', headers:{ 'Content-Type':'application/x-www-form-urlencoded' },
       body:'grant_type=refresh_token&refresh_token=' + encodeURIComponent(rtok)
     });
-    const d = await r.json(); if(!r.ok) throw 0;
+    const d = await r.json();
+    if(!r.ok){
+      const m = (d.error && d.error.message) || '';
+      if(/TOKEN_EXPIRED|INVALID_REFRESH_TOKEN|USER_NOT_FOUND|USER_DISABLED/.test(m)){ logout(true); return ''; }
+      return utok || '';
+    }
     utok = d.id_token; uexp = Date.now() + (+d.expires_in) * 1000; rtok = d.refresh_token || rtok; saveSession();
     return utok;
-  }catch(e){ logout(true); return ''; }
+  }catch(e){ return utok || ''; }
 }
 
 const url = (p, auth) => DB + '/' + p + '.json' + (auth && token ? '?auth=' + token : '');
@@ -1505,12 +1519,12 @@ const uurl = async path => DB + '/' + path + '.json?auth=' + await userToken();
 
 async function fb(method, path, body, q){
   const r = await fetch(await uurl(path) + (q || ''), { method, body: body === undefined ? undefined : JSON.stringify(body) });
-  if(!r.ok){ if(r.status === 401) logout(true); throw new Error(r.status); }
+  if(!r.ok) throw new Error(r.status);
   return r.json();
 }
 async function api(method, path, body){
   const r = await fetch(url(path, true), { method, body: body === undefined ? undefined : JSON.stringify(body) });
-  if(!r.ok){ if(r.status === 401) token = ''; throw new Error(r.status); }
+  if(!r.ok) throw new Error(r.status);
   return r.json();
 }
 
@@ -1649,7 +1663,7 @@ $('#auForm').addEventListener('submit', async e => {
   e.preventDefault();
   const name = $('#auName').value.trim(), pw = $('#auPass').value;
   if(!ADMIN.apiKey) return toast('Clé API manquante.', true);
-  if(!/^[A-Za-z0-9._-]{3,20}$/.test(name)) return bad($('#auName'), 'Pseudo : 3 à 20 caractères (lettres, chiffres, . _ -).');
+  if(!/^(?!\.)(?!.*\.\.)(?!.*\.$)[A-Za-z0-9._-]{3,20}$/.test(name)) return bad($('#auName'), 'Pseudo : 3 à 20 caractères (lettres, chiffres, . _ -).');
   if(pw.length < 6) return bad($('#auPass'), 'Mot de passe : 6 caractères minimum.');
   const btn = $('#auGo'); btn.disabled = true;
   try{
@@ -2491,7 +2505,7 @@ async function openGroup(gid, g){
     lv.addEventListener('click', async () => {
       if(!confirm(L('Confirmer ?', 'Confirm?'))) return;
       try{
-        if(owner){ await fb('DELETE', 'groups/' + gid); await fb('DELETE', 'gmsgs/' + gid).catch(() => {}); await fb('DELETE', 'gmembers/' + gid); }
+        if(owner){ await fb('DELETE', 'gmsgs/' + gid).catch(() => {}); await fb('DELETE', 'gmembers/' + gid); await fb('DELETE', 'groups/' + gid); }
         else await fb('DELETE', 'gmembers/' + gid + '/' + me.uid);
         closeAll(); loadGroups();
       }catch(e){ toast('Action impossible.', true); }
@@ -2749,7 +2763,7 @@ async function saveCfg(){
 $('#edSave').addEventListener('click', saveCfg);
 $$('#adTabs button').forEach(b => b.addEventListener('click', () => {
   $$('#adTabs button').forEach(x => x.classList.toggle('sel', x === b));
-  ['posts', 'members', 'groups', 'texts', 'edit', 'stats'].forEach(k => {
+  ['posts', 'members', 'groups', 'texts', 'edit', 'stats', 'tournoi'].forEach(k => {
     const t = $('#ad' + k[0].toUpperCase() + k.slice(1)); if(t) t.style.display = b.dataset.tab === k ? 'block' : 'none';
   });
   if(b.dataset.tab === 'edit' && !$('#edList').children.length) buildEditor();
@@ -2757,6 +2771,7 @@ $$('#adTabs button').forEach(b => b.addEventListener('click', () => {
   if(b.dataset.tab === 'groups') loadAdGroups();
   if(b.dataset.tab === 'texts') buildTexts();
   if(b.dataset.tab === 'stats') loadStats();
+if(b.dataset.tab === 'tournoi') loadAdTournoi();
 }));
 
 /* Admin : membres */
@@ -2837,7 +2852,27 @@ async function loadAdGroups(){
     });
   }catch(e){ box.innerHTML = '<div class="t-empty">Erreur de lecture.</div>'; }
 }
-
+async function loadAdTournoi(){
+  const box = $('#trList'); box.innerHTML = '<div class="t-empty">Chargement...</div>';
+  try{
+    const o = await api('GET', 'participants') || {};
+    const l = Object.entries(o).filter(([k, p]) => p).sort((a, b) => (b[1].t || 0) - (a[1].t || 0));
+    box.innerHTML = '';
+    if(!l.length){ box.innerHTML = '<div class="t-empty">Aucun participant.</div>'; return; }
+    l.forEach(([id, p]) => {
+      const r = document.createElement('div'); r.className = 'trow';
+      r.innerHTML = '<div class="tm"><b></b><span></span></div><button type="button" class="btn btn-ghost">🗑</button>';
+      $('b', r).textContent = p.name || '?';
+      $('span', r).textContent = 'ID ' + (p.id || '') + ' · ' + (p.phone || '');
+      $('button', r).addEventListener('click', async () => {
+        if(!confirm('Supprimer « ' + (p.name || '?') + ' » du tournoi ?')) return;
+        try{ await api('DELETE', 'participants/' + id); r.remove(); toast('Participant supprimé'); if(HK.tReload) HK.tReload(); }
+        catch(e){ toast('Action impossible (règles Firebase ou reconnecte-toi).', true); }
+      });
+      box.appendChild(r);
+    });
+  }catch(e){ box.innerHTML = '<div class="t-empty">Erreur de lecture.</div>'; }
+}
 function buildTexts(){
   const box = $('#adTexts'); box.innerHTML = '';
   box.innerHTML = '<p class="note" style="text-align:left;margin-bottom:12px;">Message envoyé quand un membre partage son lien de parrainage. Utilise <b>{code}</b> et <b>{link}</b>.</p>';
@@ -2900,6 +2935,14 @@ try{
   }
 }catch(e){}
 
+$$('[data-lang]').forEach(b => {
+  b.classList.toggle('sel', b.dataset.lang === LANG);
+  b.addEventListener('click', () => {
+    try{ localStorage.setItem('hkstore-lang', b.dataset.lang); }catch(e){}
+    if(me) fb('PUT', 'users/' + me.uid + '/lang', b.dataset.lang).catch(() => {});
+    location.reload();
+  });
+});
 authUI(); poll(); setInterval(poll, 5000);
 loadFeed(); HK.sug();
 
