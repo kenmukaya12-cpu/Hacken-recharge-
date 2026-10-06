@@ -9,7 +9,7 @@
 <meta property="og:description" content="Discute, ajoute des amis, publie, rejoins des groupes et participe aux tournois.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M20 10h24l14 14-26 34L6 24Z' fill='%2349D8F0' stroke='%23F2B84B' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E">
 <title>HK Espace Gaming — Discussions, amis et tournois</title>
-<link rel="manifest" href="manifest.webmanifest">
+<link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -1503,51 +1503,8 @@ const DB = TOURNOI.api ? TOURNOI.api.replace(/\/$/, '') : '';
 const ADMIN = { apiKey: ADMIN_API_KEY, uid: ADMIN_UID };
 
 let me = null, utok = '', uexp = 0, rtok = '', token = '';
-let atok = '', aexp = 0, artok = '';
 let BADGES = {}, BANNED = {};
 const AV = {};
-
-/* --- Session admin persistante + renouvellement automatique --- */
-try{
-  const sa = JSON.parse(localStorage.getItem('hkstore-admin-session') || 'null');
-  if(sa && sa.rt){
-    artok = sa.rt;
-    atok = sa.token || '';
-    aexp = +sa.exp || 0;
-    token = atok;
-  }
-}catch(e){}
-function saveAdminSession(){
-  try{
-    localStorage.setItem('hkstore-admin-session', JSON.stringify({ token: atok, exp: aexp, rt: artok }));
-  }catch(e){}
-}
-function clearAdminSession(){
-  atok = ''; aexp = 0; artok = ''; token = '';
-  try{ localStorage.removeItem('hkstore-admin-session'); }catch(e){}
-}
-async function adminToken(){
-  if(atok && Date.now() < aexp - 60000){ token = atok; return atok; }
-  if(!artok) return '';
-  try{
-    const r = await fetch('https://securetoken.googleapis.com/v1/token?key=' + ADMIN.apiKey, {
-      method:'POST', headers:{ 'Content-Type':'application/x-www-form-urlencoded' },
-      body:'grant_type=refresh_token&refresh_token=' + encodeURIComponent(artok)
-    });
-    const d = await r.json();
-    if(!r.ok){ clearAdminSession(); return ''; }
-    atok = d.id_token || '';
-    aexp = Date.now() + (+d.expires_in || 3600) * 1000;
-    artok = d.refresh_token || artok;
-    token = atok;
-    saveAdminSession();
-    return atok;
-  }catch(e){ return atok || ''; }
-}
-const adminUrl = async (p, q) => {
-  const tk = await adminToken();
-  return DB + '/' + p + '.json' + (tk ? '?auth=' + encodeURIComponent(tk) : '') + (q || '');
-}
 
 /* --- Session utilisateur --- */
 try{
@@ -1586,16 +1543,17 @@ const url = (p, auth) => DB + '/' + p + '.json' + (auth && token ? '?auth=' + to
 const uurl = async path => DB + '/' + path + '.json?auth=' + await userToken();
 
 async function fb(method, path, body, q){
-  const r = await fetch(await uurl(path) + (q || ''), { method, body: body === undefined ? undefined : JSON.stringify(body) });
-  if(!r.ok) throw new Error(r.status);
-  return r.json();
+  const c = new AbortController(), tm = setTimeout(() => c.abort(), 12000);
+  try{
+    const r = await fetch(await uurl(path) + (q || ''), { method, signal: c.signal, body: body === undefined ? undefined : JSON.stringify(body) });
+    if(!r.ok) throw new Error(r.status);
+    return await r.json();
+  } finally { clearTimeout(tm); }
 }
 async function api(method, path, body){
-  const u = await adminUrl(path);
-  if(!u.includes('?auth=')) throw new Error('ADMIN_AUTH');
-  const r = await fetch(u, { method, body: body === undefined ? undefined : JSON.stringify(body) });
+  const r = await fetch(url(path, true), { method, body: body === undefined ? undefined : JSON.stringify(body) });
   if(!r.ok) throw new Error(r.status);
-  return r.status === 204 ? null : r.json();
+  return r.json();
 }
 /* --- Temps réel (streaming Firebase) --- */
 const STREAMS = {};
@@ -1623,9 +1581,6 @@ function listen(key, path, q, cb){
 }
 function liveAll(){
   listen('g_inbox', 'inbox/' + me.uid, '', poll);
-  listen('g_friend_req', 'friend_req/' + me.uid, '', poll);
-  listen('g_notifs', 'notifs/' + me.uid, '&orderBy=%22t%22&limitToLast=1', poll);
-  listen('g_ann', 'announces', '&orderBy=%22t%22&limitToLast=1', poll);
 }
 /* --- Badges --- */
 const BADGE_INFO = {
@@ -2548,10 +2503,7 @@ async function checkG(x, quiet){
   }catch(e){}
 }
 function watchGroups(){
-  GR.filter(x => x.mine).slice(0, 5).forEach(x => {
-    listen('gl_' + x.id, 'glast/' + x.id, '', () => checkG(x));
-    checkG(x, true);
-  });
+  GR.filter(x => x.mine).slice(0, 5).forEach(x => checkG(x, true));
 }
 async function loadGroups(){
   const box = $('#grpList'); if(!box) return;
@@ -2906,12 +2858,11 @@ HK.sug = async function(){
 /* =========================================================
    ADMIN
    ========================================================= */
-async function showAdmin(){
-  const tk = await adminToken();
+function showAdmin(){
   const l = $('#adLogin'), p = $('#adPanel');
-  if(l) l.style.display = tk ? 'none' : 'flex';
-  if(p) p.style.display = tk ? 'block' : 'none';
-  if(tk) loadPending();
+  if(l) l.style.display = token ? 'none' : 'flex';
+  if(p) p.style.display = token ? 'block' : 'none';
+  if(token) loadPending();
 }
 async function loadPending(){
   const box = $('#adList'); if(!box) return;
@@ -2926,7 +2877,7 @@ async function loadPending(){
   }catch(e){ box.innerHTML = '<div class="t-empty">Erreur de lecture.</div>'; }
 }
 $('#adminLink').addEventListener('click', e => { e.preventDefault(); open('#adminOverlay'); showAdmin(); });
-$('#adLogout').addEventListener('click', () => { clearAdminSession(); showAdmin(); loadFeed(); });
+$('#adLogout').addEventListener('click', () => { token = ''; showAdmin(); loadFeed(); });
 $('#adLogin').addEventListener('submit', async e => {
   e.preventDefault();
   try{
@@ -2936,8 +2887,7 @@ $('#adLogin').addEventListener('submit', async e => {
     });
     const d = await r.json(); if(!r.ok) throw 0;
     if(d.localId !== ADMIN.uid) throw 0;
-    atok = d.idToken || ''; aexp = Date.now() + (+d.expiresIn || 3600) * 1000; artok = d.refreshToken || '';
-    token = atok; saveAdminSession();
+    token = d.idToken; setTimeout(() => { token = ''; }, 3300000);
     $('#adPass').value = ''; showAdmin(); purge().then(loadFeed); purgeTournoi();
   }catch(err){ toast('Connexion refusée.', true); }
 });
@@ -3205,7 +3155,7 @@ async function loadStats(){
   const box = $('#adStats'); box.innerHTML = '<div class="t-empty">Chargement...</div>';
   const cnt = async p => {
     try{
-      const r = await fetch(await adminUrl(p, '&shallow=true'));
+      const r = await fetch(url(p, true) + '&shallow=true');
       const o = r.ok ? await r.json() : null;
       return o ? Object.keys(o).length : 0;
     }catch(e){ return 0; }
@@ -3250,7 +3200,8 @@ $$('[data-lang]').forEach(b => {
     location.reload();
   });
 });
-setInterval(poll, 5000);
+authUI(); poll(); setInterval(poll, 15000);
+setInterval(() => { if(me && !document.hidden) GR.filter(x => x.mine).slice(0, 5).forEach(x => checkG(x)); }, 20000);
 loadFeed(); HK.sug();
 
 })(); /* fin IIFE */
@@ -3296,4 +3247,4 @@ if('serviceWorker' in navigator){
 }
 </script>
 </body>
-      </html>
+                                                                            </html>
