@@ -1,0 +1,20 @@
+{
+  "name": "Hacken Store",
+  "short_name": "Hacken Store",
+  "description": "Hacken Store — communauté, tournois, profils, messages et services Free Fire.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#07111f",
+  "theme_color": "#07111f",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
