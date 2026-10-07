@@ -489,6 +489,11 @@ body:has(.overlay.open){overflow:hidden;}
 /* icône qui tremble */
 @keyframes shk{0%,50%,100%{transform:rotate(0)}5%{transform:rotate(-16deg)}15%{transform:rotate(16deg)}25%{transform:rotate(-12deg)}35%{transform:rotate(12deg)}45%{transform:rotate(-6deg)}}
 .icon-btn.shake{animation:shk 1.8s ease-in-out infinite;}
+.top-list{display:flex;flex-direction:column;gap:6px;}
+.top-row{display:flex;align-items:center;gap:10px;padding:7px 12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;}
+.top-row i{font-style:normal;font-size:16px;}
+.top-row .tn{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--f-head);font-size:16px;}
+.top-row em{font-style:normal;font-weight:700;color:var(--gold);font-size:13px;}
 </style>
 </head>
 <body>
@@ -1582,6 +1587,7 @@ try{
 function saveSession(){ try{ localStorage.setItem('hkstore-session', JSON.stringify({ uid: me.uid, name: me.name, rt: rtok })); }catch(e){} }
 function logout(silent){
   Object.keys(STREAMS).forEach(stopListen);
+  if(sb) sb.auth.signOut().catch(() => {});
   me = null; utok = ''; rtok = '';
   try{ localStorage.removeItem('hkstore-session'); }catch(e){}
   authUI(); if(HK.sug) HK.sug();
@@ -1795,6 +1801,19 @@ const AUTH_ERR = {
   ADMIN_ONLY_OPERATION:'La création de comptes est désactivée dans Firebase.',
   Requests:'Clé API bloquée pour ce site (restrictions de la clé dans Google Cloud).'
 };
+async function bridgeSB(name, pw){
+  if(!sb) return;
+  try{
+    const email = name.toLowerCase() + '@hackenstore.app';
+    let r = await sb.auth.signInWithPassword({ email, password: pw });
+    if(r.error){
+      const f = await sb.functions.invoke('hk-login', { body: { name, password: pw } });
+      if(f.error) throw f.error;
+      r = await sb.auth.signInWithPassword({ email, password: pw });
+    }
+    if(r.error) console.warn('[HK SB]', r.error.message);
+  }catch(e){ console.warn('[HK SB]', e); }
+}
 function authErr(msg){
   const m = $('#auMsg'); if(m){ m.textContent = '⚠ ' + msg; m.style.color = 'var(--red)'; }
   toast(msg, true);
@@ -1844,6 +1863,7 @@ $('#auForm').addEventListener('submit', async e => {
       if(!pr){ try{ await putProfile(); }catch(x){} }
     }
     me = { uid: d.localId, name: pname }; saveSession();
+    bridgeSB(name, pw);
     if(mode === 'up'){
       const rc = ($('#auRef').value || '').trim();
       if(rc) await useRef(rc);
@@ -2938,6 +2958,21 @@ HK.sug = async function(){
     row.after(more); add();
   }catch(e){ sec.style.display = 'none'; }
 };
+HK.top3 = async function(){
+  const sec = $('#top3'), box = $('#top3List');
+  if(!sec || !box || !HK.sb) return;
+  try{
+    const { data, error } = await HK.sb.rpc('top_referrers', { n: 3 });
+    if(error || !data || !data.length){ sec.style.display = 'none'; return; }
+    box.innerHTML = '';
+    data.forEach((r, i) => {
+      const row = el('div', 'top-row');
+      row.append(el('i', '', ['🥇','🥈','🥉'][i]), el('span', 'tn', r.name), el('em', '', r.points + ' pts'));
+      box.appendChild(row);
+    });
+    sec.style.display = 'block';
+  }catch(e){ sec.style.display = 'none'; }
+};
 /* Recherche en haut de page : joueurs + groupes */
 (function(){
   const inp = $('#gSearchTop'), box = $('#gSearchRes'); if(!inp || !box) return;
@@ -3344,7 +3379,7 @@ $$('[data-lang]').forEach(b => {
 });
 authUI(); poll(); setInterval(poll, 15000);
 setInterval(() => { if(me && !document.hidden) GR.filter(x => x.mine).slice(0, 5).forEach(x => checkG(x)); }, 20000);
-loadFeed(); HK.sug();
+loadFeed(); HK.sug(); HK.top3();
 
 })(); /* fin IIFE */
 
@@ -3389,4 +3424,4 @@ if('serviceWorker' in navigator){
 }
 </script>
 </body>
-    </html>
+        </html>
