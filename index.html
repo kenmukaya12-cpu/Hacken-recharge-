@@ -609,6 +609,11 @@ body:has(.overlay.open){overflow:hidden;}
   <div class="sug-row" id="sugRow"></div>
 </section>
 
+<section id="top3" class="rv" style="display:none;padding:14px 0 0;">
+  <div class="subhead" style="margin:0 0 8px;font-size:16px;">🏆 Top parrains</div>
+  <div class="top-list" id="top3List"></div>
+</section>
+
 <section id="groupes" class="rv">
   <h2 class="sec-title">👥 Groupes</h2>
   <p class="sec-sub">Discute à plusieurs, envoie des photos. Les messages disparaissent après 48h.</p>
@@ -968,6 +973,7 @@ body:has(.overlay.open){overflow:hidden;}
     <button class="btn btn-gold btn-block" type="button" id="spinBtn">Tourner la roue</button>
   </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 /* =========================================================
    HACKEN STORE — JS PRINCIPAL (corrigé)
@@ -1555,6 +1561,14 @@ if($('#orderForm')) $('#orderForm').addEventListener('submit', e => {
    ========================================================= */
 const DB = TOURNOI.api ? TOURNOI.api.replace(/\/$/, '') : '';
 const ADMIN = { apiKey: ADMIN_API_KEY, uid: ADMIN_UID };
+
+/* --- Supabase (migration en parallèle) --- */
+const SB_URL = 'https://fqxfmwivaxatqnbdwswd.supabase.co';
+const SB_KEY = 'sb_publishable_3QTS_Dw6OZfwEJ5YYGEyVg_E9qcrG5S';
+const sb = window.supabase
+  ? window.supabase.createClient(SB_URL, SB_KEY, { auth: { persistSession: true, autoRefreshToken: true } })
+  : null;
+HK.sb = sb;
 
 let me = null, utok = '', uexp = 0, rtok = '', token = '';
 let BADGES = {}, BANNED = {};
@@ -3375,4 +3389,4 @@ if('serviceWorker' in navigator){
 }
 </script>
 </body>
-                                </html>
+    </html>
