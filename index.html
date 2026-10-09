@@ -1034,7 +1034,6 @@ function setGav(node, gid){
    ========================================================= */
 function authUI(){
   document.body.classList.toggle('locked', !me);
-  
   const f = $('#auForm'), m = $('#auMe');
   if(f) f.style.display = me ? 'none' : 'flex';
   if(m) m.style.display = me ? 'block' : 'none';
@@ -1303,11 +1302,28 @@ async function loadFeed(){
     const { data, error } = await supabase.from('publications')
       .select('*').eq('status','approved')
       .order('approved_at', { ascending:false, nullsFirst:false }).limit(20);
-    if(error) throw error;
+    if(error){
+      feed.innerHTML = '<div class="t-empty">Erreur SQL: ' + error.message + '</div>';
+      console.error('[HK loadFeed]', error);
+      return;
+    }
     feed.innerHTML = '';
-    if(!data?.length){ feed.innerHTML = '<div class="t-empty">Aucune publication pour le moment.</div>'; return; }
-    data.forEach(p => feed.appendChild(postEl(p.id, p, 'feed')));
-  }catch(e){ console.warn(e); feed.innerHTML = '<div class="t-empty">Impossible de charger.</div>'; }
+    if(!data || !data.length){
+      feed.innerHTML = '<div class="t-empty">Aucune publication (data reçu: ' + (data ? data.length : 'null') + ')</div>';
+      return;
+    }
+    data.forEach(p => {
+      try{
+        feed.appendChild(postEl(p.id, p, 'feed'));
+      }catch(err){
+        console.error('[HK postEl]', p.id, err);
+        feed.appendChild(el('div','t-empty', 'Erreur sur post ' + p.id + ' : ' + err.message));
+      }
+    });
+  }catch(e){
+    feed.innerHTML = '<div class="t-empty">Erreur JS: ' + (e.message || e) + '</div>';
+    console.error('[HK loadFeed catch]', e);
+  }
 }
 
 /* =========================================================
@@ -2639,4 +2655,4 @@ if('serviceWorker' in navigator){
 }
 </script>
 </body>
-  </html>
+                                                                                                                                                        </html>
