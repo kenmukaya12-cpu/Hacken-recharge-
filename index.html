@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#070D1A">
 <meta property="og:title" content="HK Espace Gaming — Discussions, amis et tournois">
 <meta property="og:description" content="Discute, ajoute des amis, publie, rejoins des groupes et participe aux tournois.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M20 10h24l14 14-26 34L6 24Z' fill='%2349D8F0' stroke='%23F2B84B' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='6' y='22' width='52' height='24' rx='12' fill='%230E7E96' stroke='%23F2B84B' stroke-width='3'/%3E%3Ccircle cx='20' cy='34' r='5' fill='%2304202A'/%3E%3Ccircle cx='44' cy='34' r='5' fill='%2304202A'/%3E%3C/svg%3E">
 <title>HK Espace Gaming — Discussions, amis et tournois</title>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -19,7 +19,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-    .reply-bar{display:flex;align-items:center;gap:10px;padding:8px 12px;border-top:1px solid var(--line);background:var(--panel);}
+.reply-bar{display:flex;align-items:center;gap:10px;padding:8px 12px;border-top:1px solid var(--line);background:var(--panel);}
 .reply-bar .rq{flex:1;min-width:0;border-left:4px solid var(--cyan);padding-left:8px;}
 .reply-bar .rq b{display:block;font-family:var(--f-head);font-size:14px;color:var(--cyan);}
 .reply-bar .rq span{display:block;font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -27,7 +27,7 @@
 .bub .quote b{display:block;font-family:var(--f-head);font-size:13px;}
 .bub .quote span{display:block;font-size:12.5px;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
 body.locked main,body.locked footer,body.locked .fab,body.locked .bar,body.locked .nstack,body.locked .nav-actions{display:none!important;}
-body.locked #authOverlay .x{display:none;}    
+body.locked #authOverlay .x{display:none;}
   :root{
     box-sizing:border-box;
     --bg:#070D1A; --bg2:#0B1426; --panel:#101A30; --panel2:#16233F;
@@ -77,12 +77,9 @@ body.locked #authOverlay .x{display:none;}
   .icon-btn:active{transform:scale(.94);}
 
   .hero{padding:34px 18px 26px;text-align:center;position:relative;}
-  .hero-mark{width:124px;height:124px;margin:0 auto 6px;filter:drop-shadow(0 0 24px var(--glow));animation:float 5s ease-in-out infinite;}
-  @keyframes float{50%{transform:translateY(-8px);}}
   .hero h1{font-family:var(--f-logo);font-weight:900;font-size:clamp(40px,13vw,68px);letter-spacing:.08em;line-height:1;background:linear-gradient(100deg,var(--cyan) 10%,#fff 40%,var(--gold) 70%);-webkit-background-clip:text;background-clip:text;color:transparent;}
   .hero .store{font-family:var(--f-head);font-weight:700;letter-spacing:.5em;font-size:14px;color:var(--muted);margin-top:8px;padding-left:.5em;}
   .hero .claim{font-family:var(--f-head);font-weight:600;font-size:clamp(19px,5.2vw,25px);margin:20px auto 0;max-width:520px;line-height:1.25;}
-  .hero-cta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px;}
   .chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:18px;}
   .chip{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:999px;background:var(--panel);border:1px solid var(--line);color:var(--muted);}
   .chip.gold{border-color:var(--gold);color:var(--gold);}
@@ -104,6 +101,20 @@ body.locked #authOverlay .x{display:none;}
   .sec-title::before{content:'';position:absolute;left:0;top:3px;bottom:3px;width:4px;border-radius:3px;background:linear-gradient(var(--gold),var(--cyan));}
   .sec-sub{color:var(--muted);font-size:14px;margin:6px 0 18px 14px;}
   .subhead{font-family:var(--f-head);font-weight:700;font-size:18px;color:var(--gold);margin:26px 0 10px;}
+
+  /* ✅ NOUVEAU : Section top parrains */
+  .top-ref-wrap{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--gold);border-radius:16px;padding:14px;margin-top:14px;}
+  .top-ref-title{font-family:var(--f-head);font-weight:700;font-size:17px;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .top-ref-title small{font-size:11px;color:var(--muted);font-weight:500;margin-left:auto;}
+  .top-ref-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px dashed var(--line);}
+  .top-ref-row:first-of-type{border-top:0;}
+  .top-ref-row .rank{flex:0 0 32px;height:32px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-logo);font-weight:900;font-size:14px;color:#04202A;background:linear-gradient(135deg,var(--cyan),var(--gold));}
+  .top-ref-row .rank.g1{background:linear-gradient(135deg,#FFD47A,#F2B84B);color:#2A1A00;}
+  .top-ref-row .rank.g2{background:linear-gradient(135deg,#E8ECEF,#B5C1CE);color:#2A1A00;}
+  .top-ref-row .rank.g3{background:linear-gradient(135deg,#FF9F6B,#D16A2A);color:#fff;}
+  .top-ref-row .av{flex:0 0 32px;width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--gold));color:#04202A;display:grid;place-items:center;font:700 14px var(--f-head);overflow:hidden;}
+  .top-ref-row .nm{flex:1;min-width:0;font-family:var(--f-head);font-size:15px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer;}
+  .top-ref-row .pts{font-family:var(--f-logo);font-weight:700;font-size:13px;color:var(--gold);white-space:nowrap;}
 
   .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
   @media (min-width:560px){.grid{grid-template-columns:repeat(3,1fr);}}
@@ -218,18 +229,26 @@ body.locked #authOverlay .x{display:none;}
   footer .hk{font-family:var(--f-logo);font-weight:900;color:var(--cyan);letter-spacing:.08em;font-size:15px;display:block;margin-bottom:6px;}
   footer .btn{margin-top:14px;font-size:15px;}
 
-  .overlay{display:none;position:fixed;inset:0;background:rgba(2,6,14,.72);backdrop-filter:blur(4px);z-index:60;padding:16px;overflow-y:auto;}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(2,6,14,.72);backdrop-filter:blur(4px);z-index:60;padding:16px;overflow-y:auto;overscroll-behavior:contain;}
   .overlay.open{display:block;}
   .modal{max-width:480px;margin:20px auto;background:var(--bg2);border:1px solid var(--gold);border-radius:18px;padding:20px;animation:pop .3s ease;}
-  .modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+  .modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:8px;}
   .modal-head h3{font-size:22px;}
   .x{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:6px 11px;cursor:pointer;}
+  .chat-ic{background:var(--panel2);border:1px solid var(--line);border-radius:10px;width:36px;height:36px;cursor:pointer;font-size:18px;flex-shrink:0;display:grid;place-items:center;}
   .step{display:flex;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px;font-size:13px;}
   .step i{flex:0 0 26px;height:26px;border-radius:50%;background:var(--cyan);color:var(--on-cyan);font-style:normal;font-weight:800;display:grid;place-items:center;font-size:13px;}
   .step b{display:block;font-size:14px;}
   .step span{color:var(--muted);}
   .lightbox img{width:100%;border-radius:12px;display:block;}
   .lightbox .cap{color:var(--muted);font-size:13px;margin-top:10px;text-align:center;}
+
+  /* ✅ NOUVEAU : profil plein écran */
+  .prof-full{max-width:720px;width:100%;min-height:calc(100dvh - 32px);margin:0 auto;}
+  @media (max-width:600px){
+    #profOverlay{padding:0;}
+    #profOverlay .modal{border-radius:0;border-width:0;min-height:100dvh;padding-top:calc(env(safe-area-inset-top,0px) + 16px);}
+  }
 
   .wheel-box{position:relative;width:min(300px,78vw);margin:6px auto 14px;aspect-ratio:1;}
   .wheel-box canvas{width:100%;height:100%;border-radius:50%;transition:transform 5s cubic-bezier(.12,.7,.1,1);box-shadow:0 0 0 6px var(--gold),0 0 40px var(--glow);}
@@ -262,7 +281,7 @@ body.locked #authOverlay .x{display:none;}
     html{scroll-behavior:auto;}
   }
 
-  .avatar{width:72px;height:72px;border-radius:50%;margin:0 auto 8px;background:linear-gradient(135deg,var(--cyan),var(--gold));color:#04202A;display:grid;place-items:center;font-family:var(--f-head);font-weight:700;font-size:34px;}
+  .avatar{width:72px;height:72px;border-radius:50%;margin:0 auto 8px;background:linear-gradient(135deg,var(--cyan),var(--gold));color:#04202A;display:grid;place-items:center;font-family:var(--f-head);font-weight:700;font-size:34px;cursor:zoom-in;}
   .prof-head{text-align:center;margin-bottom:14px;}
   .prof-head b{font-family:var(--f-head);font-size:24px;}
   .bchip{display:inline-block;margin-top:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;border:1px solid currentColor;}
@@ -298,7 +317,6 @@ body.locked #authOverlay .x{display:none;}
   .chatm{display:flex;flex-direction:column;height:calc(100dvh - 32px);max-height:720px;padding:0;overflow:hidden;margin:0 auto;}
   #chatBody{display:flex;flex-direction:column;flex:1;min-height:0;}
   .chat-head{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--panel);}
-  .chat-ic{background:var(--panel2);border:1px solid var(--line);border-radius:10px;width:36px;height:36px;cursor:pointer;font-size:18px;flex-shrink:0;}
   .chat-who{flex:1;min-width:0;}
   .chat-who b{font-family:var(--f-head);font-size:18px;cursor:pointer;}
   .chat-who small{display:block;color:var(--muted);font-size:12px;}
@@ -399,7 +417,7 @@ body.locked #authOverlay .x{display:none;}
   .post{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
   .po-head{display:flex;align-items:center;gap:10px;padding:12px 14px;}
   .po-head i{flex:0 0 36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--gold));color:#04202A;font-style:normal;font-weight:900;display:grid;place-items:center;font-family:var(--f-head);font-size:18px;}
-  .po-head b{display:block;font-family:var(--f-head);font-size:17px;line-height:1.1;}
+  .po-head b{display:flex;align-items:center;gap:4px;font-family:var(--f-head);font-size:17px;line-height:1.1;}
   .po-head span{font-size:12px;color:var(--muted);}
   .post img{width:100%;max-height:420px;object-fit:cover;display:block;}
   .post p{margin:0;padding:12px 14px;font-size:14.5px;white-space:pre-wrap;word-break:break-word;}
@@ -493,18 +511,16 @@ body:has(.overlay.open){overflow:hidden;}
 </head>
 <body>
 <script>document.body.classList.add('js-on');</script>
-<!-- Logo diamant (réutilisé partout) -->
+<!-- Logo manette (✅ remplace le diamant) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="dia" viewBox="0 0 64 64">
-    <path d="M20 10h24l14 14-26 34L6 24Z" fill="#0E7E96"/>
-    <path d="M20 10h24l-6 14H26Z" fill="#D5FAFF"/>
-    <path d="M20 10 26 24H6Z" fill="#7BEBFF"/>
-    <path d="M44 10l-6 14h20Z" fill="#49D8F0"/>
-    <path d="M6 24h20l6 34Z" fill="#2FC0DA"/>
-    <path d="M26 24h12L32 58Z" fill="#1AA9C4"/>
-    <path d="M38 24h20L32 58Z" fill="#0E8CA6"/>
-    <path d="M6 24h52M26 24l6 34 6-34" stroke="#fff" stroke-opacity=".3" stroke-width="1" fill="none"/>
-    <path d="M20 10h24l14 14-26 34L6 24Z" fill="none" stroke="#F2B84B" stroke-width="2.4" stroke-linejoin="round"/>
+    <rect x="6" y="22" width="52" height="24" rx="12" fill="#0E7E96" stroke="#F2B84B" stroke-width="3"/>
+    <circle cx="20" cy="34" r="6" fill="#04202A" stroke="#49D8F0" stroke-width="2"/>
+    <circle cx="44" cy="34" r="6" fill="#04202A" stroke="#49D8F0" stroke-width="2"/>
+    <rect x="12" y="32" width="6" height="4" fill="#49D8F0"/>
+    <rect x="14" y="30" width="2" height="8" fill="#49D8F0"/>
+    <circle cx="42" cy="32" r="1.5" fill="#F2B84B"/>
+    <circle cx="46" cy="36" r="1.5" fill="#F2B84B"/>
     <path d="M50 3v9M45.5 7.5h9" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
   </symbol>
 </svg>
@@ -558,6 +574,8 @@ body:has(.overlay.open){overflow:hidden;}
   <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></symbol>
   <symbol id="i-shop" viewBox="0 0 24 24"><path d="M4 9l1.5-5h13L20 9M4 9h16v11H4zM4 9a3 3 0 0 0 5.3 1.9A3 3 0 0 0 14.7 10.9 3 3 0 0 0 20 9M10 20v-5h4v5"/></symbol>
   <symbol id="i-group" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><circle cx="5.5" cy="10" r="2.2"/><circle cx="18.5" cy="10" r="2.2"/><path d="M7 20a5 5 0 0 1 10 0M2 19a3.5 3.5 0 0 1 4-3.4M22 19a3.5 3.5 0 0 0-4-3.4"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M20 12l-8 8-9-9V3h8z"/><circle cx="8" cy="8" r="1.5"/></symbol>
+  <symbol id="i-at" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.9 7.9"/></symbol>
 </svg>
 
 <canvas id="fx" aria-hidden="true"></canvas>
@@ -582,9 +600,7 @@ body:has(.overlay.open){overflow:hidden;}
   <h1>HK</h1>
   <div class="store">ESPACE GAMING</div>
   <p class="claim">Discute, ajoute des amis, publie et participe aux tournois.</p>
-  <div class="chips">
-    <span class="chip">🌍 Serveur MENA</span>
-  </div>
+  <div class="chips"><span class="chip">🌍 Serveur MENA</span></div>
   <div class="chips">
     <a class="chip" href="#communaute">📰 Actus</a>
     <a class="chip" href="#groupes">👥 Groupes</a>
@@ -593,6 +609,14 @@ body:has(.overlay.open){overflow:hidden;}
 </header>
 
 <div class="wrap">
+
+<!-- ✅ NOUVEAU : Top 3 parrains (visible 20h-22h) -->
+<section id="topRefSection" class="rv" style="display:none;padding:6px 0 20px;">
+  <div class="top-ref-wrap">
+    <div class="top-ref-title">🏆 Top 3 parrains du soir <small id="topRefTimer"></small></div>
+    <div id="topRefList"></div>
+  </div>
+</section>
 
 <section id="topSearch" style="padding:14px 0 0;">
   <input type="text" id="gSearchTop" placeholder="🔎 Chercher un joueur ou un groupe" autocomplete="off">
@@ -626,7 +650,7 @@ body:has(.overlay.open){overflow:hidden;}
   <form id="pForm" class="t-card" novalidate>
     <div id="pWho" class="who"></div>
     <div><label class="lbl" for="pText">Ta note (facultative si tu ajoutes une photo)</label>
-      <textarea id="pText" maxlength="400" placeholder="Raconte ta victoire, pose une question, partage un conseil..."></textarea></div>
+      <textarea id="pText" maxlength="400" placeholder="Raconte ta victoire... Utilise @pseudo pour taguer un ami."></textarea></div>
     <label class="photo-btn">📷 Ajouter une photo<input type="file" id="pFile" accept="image/*"></label>
     <div id="pPrevBox"><img id="pPrev" alt="Aperçu"><button type="button" class="x" id="pRm" aria-label="Retirer la photo">✕</button></div>
     <p class="note">Pas d'insultes, pas de pub, pas de numéros personnels.</p>
@@ -643,7 +667,7 @@ body:has(.overlay.open){overflow:hidden;}
     <form id="tForm" novalidate>
       <div><label class="lbl" for="tId">ID joueur Free Fire</label>
         <input type="text" id="tId" inputmode="numeric" autocomplete="off" placeholder="Ex : 123456789"></div>
-      <label class="accept"><input type="checkbox" id="tOk"><span>J'accepte que mon pseudo et mon ID soient visibles par les membres pendant 30 jours. Les organisateurs me contactent uniquement sur le site.</span></label>
+      <label class="accept"><input type="checkbox" id="tOk"><span>J'accepte que mon pseudo et mon ID soient visibles par les membres pendant 30 jours.</span></label>
       <button type="submit" class="btn btn-gold btn-block">🏆 M'inscrire au tournoi</button>
     </form>
   </div>
@@ -672,7 +696,7 @@ body:has(.overlay.open){overflow:hidden;}
   <div class="calc">
     <b>🧮 Quel pack pour mon budget ?</b>
     <div class="calc-row">
-      <input type="number" id="budget" inputmode="numeric" min="0" placeholder="Mon budget en FC (ex : 20000)" aria-label="Budget en FC">
+      <input type="number" id="budget" inputmode="numeric" min="0" placeholder="Mon budget en FC (ex : 20000)">
       <button class="btn btn-ghost" type="button" id="budgetBtn" style="padding:0 18px;">Voir</button>
     </div>
     <div class="calc-res" id="calcRes"></div>
@@ -703,22 +727,17 @@ body:has(.overlay.open){overflow:hidden;}
       <div class="pd-line"><span>Nom du bénéficiaire</span><b id="pdName">—</b></div>
       <div class="pd-line"><span>Montant à envoyer</span><span><b id="pdAmount">—</b><button type="button" class="copy" id="copyAmt">Copier</button></span></div>
     </div>
-    <div>
-      <label class="lbl" for="senderPhone">Numéro qui a envoyé l'argent</label>
-      <input type="tel" id="senderPhone" inputmode="tel" placeholder="Ex : 099 000 0000">
-    </div>
-    <div>
-      <label class="lbl" for="txId">Numéro de transaction (reçu après le transfert)</label>
-      <input type="text" id="txId" autocomplete="off" placeholder="Ex : MP240918.1922.A12345">
-    </div>
+    <div><label class="lbl" for="senderPhone">Numéro qui a envoyé l'argent</label>
+      <input type="tel" id="senderPhone" inputmode="tel" placeholder="Ex : 099 000 0000"></div>
+    <div><label class="lbl" for="txId">Numéro de transaction</label>
+      <input type="text" id="txId" autocomplete="off" placeholder="Ex : MP240918.1922.A12345"></div>
     <div class="conditions">
       <div class="ct">📜 Conditions de vente</div>
       <ol>
-        <li><b>Envoie d'abord l'argent</b>, puis seulement ensuite la confirmation sur WhatsApp.</li>
-        <li>Une confirmation sans paiement réellement effectué ne sera <b>pas traitée</b>.</li>
-        <li>Envoie le <b>montant exact</b> au numéro et au nom indiqués.</li>
-        <li>Vérifie ton ID joueur avant de payer : aucune annulation après l'envoi.</li>
-        <li>Comptes à vendre : les accès sont remis sur WhatsApp après validation du paiement.</li>
+        <li><b>Envoie d'abord l'argent</b>, puis la confirmation sur WhatsApp.</li>
+        <li>Sans paiement réel : <b>non traité</b>.</li>
+        <li>Montant <b>exact</b> au numéro indiqué.</li>
+        <li>Vérifie ton ID avant paiement.</li>
       </ol>
     </div>
     <label class="accept"><input type="checkbox" id="acceptCond"><span>J'ai lu les conditions et j'ai déjà envoyé l'argent.</span></label>
@@ -729,10 +748,9 @@ body:has(.overlay.open){overflow:hidden;}
       <span class="val"><span class="was" id="totalWas"></span><span id="totalVal">—</span></span>
     </div>
     <button type="submit" class="btn btn-primary btn-block">Confirmer la commande</button>
-    <p class="note">Envoie d'abord l'argent au numéro affiché ci-dessus, puis confirme ta commande.</p>
     <div id="confirm">
       <h3>Commande prête ✔</h3>
-      <p>Envoie-la sur WhatsApp : Hacken Store vérifie ton paiement et valide ta recharge.</p>
+      <p>Envoie-la sur WhatsApp : Hacken Store vérifie et valide.</p>
       <a id="waLink" class="btn btn-wa btn-block" href="#" target="_blank" rel="noopener">Envoyer sur WhatsApp</a>
     </div>
   </form>
@@ -743,8 +761,7 @@ body:has(.overlay.open){overflow:hidden;}
   <p class="sec-sub">Glisse pour voir les comptes. Touche l'image pour l'agrandir.</p>
   <div class="car tall" id="carComptes" style="cursor:zoom-in;">
     <div class="car-track" id="trackComptes"></div>
-    <button class="car-arrow prev" type="button" aria-label="Compte précédent">‹</button>
-    <button class="car-arrow next" type="button" aria-label="Compte suivant">›</button>
+    <button class="car-arrow prev" type="button">‹</button><button class="car-arrow next" type="button">›</button>
     <div class="dots"></div>
   </div>
   <div class="thumbs" id="thumbs"></div>
@@ -759,7 +776,6 @@ body:has(.overlay.open){overflow:hidden;}
 
 <section class="rv">
   <h2 class="sec-title">Pourquoi Hacken Store</h2>
-  <p class="sec-sub"></p>
   <div class="badges">
     <div class="badge"><span class="ic">⚡</span>Recharge en moins de 15 min</div>
     <div class="badge"><span class="ic">🔒</span>Paiement vérifié avant livraison</div>
@@ -769,12 +785,11 @@ body:has(.overlay.open){overflow:hidden;}
 
 <section id="faq" class="rv">
   <h2 class="sec-title">Questions fréquentes</h2>
-  <p class="sec-sub"></p>
-  <details class="faq"><summary>Combien de temps prend la recharge ?</summary><p>En général entre 5 et 15 minutes après confirmation du paiement, selon l'affluence.</p></details>
-  <details class="faq"><summary>Que faire si je me trompe d'ID joueur ?</summary><p>Contacte-nous tout de suite sur WhatsApp, avant que la recharge soit envoyée, pour corriger l'ID.</p></details>
-  <details class="faq"><summary>Le paiement est-il remboursable en cas d'erreur ?</summary><p>Si l'ID fourni était incorrect, la recharge ne peut pas être annulée une fois envoyée. Vérifie bien ton ID avant de payer.</p></details>
-  <details class="faq"><summary>Comment marche la Roue HK ?</summary><p>La roue s'ouvre chaque soir à 20h. Tu peux la tourner une fois par jour sur cet appareil. Si tu gagnes une réduction, un code s'affiche et le total se met à jour.</p></details>
-  <details class="faq"><summary>Comment participer à un tournoi ?</summary><p>Remplis ton nom, ton numéro WhatsApp et ton ID Free Fire dans la section Tournois. Tu apparais ensuite dans la liste des participants pendant 30 jours.</p></details>
+  <details class="faq"><summary>Combien de temps prend la recharge ?</summary><p>En général entre 5 et 15 minutes après confirmation du paiement.</p></details>
+  <details class="faq"><summary>Que faire si je me trompe d'ID joueur ?</summary><p>Contacte-nous tout de suite sur WhatsApp, avant que la recharge soit envoyée.</p></details>
+  <details class="faq"><summary>Le paiement est-il remboursable ?</summary><p>Si l'ID fourni était incorrect, la recharge ne peut pas être annulée.</p></details>
+  <details class="faq"><summary>Comment marche la Roue HK ?</summary><p>La roue s'ouvre chaque soir à 20h. Tu peux la tourner une fois par jour.</p></details>
+  <details class="faq"><summary>Comment participer à un tournoi ?</summary><p>Remplis ton ID Free Fire dans la section Tournois. Tu apparais pendant 30 jours.</p></details>
 </section>
 </div>
 
@@ -796,20 +811,18 @@ body:has(.overlay.open){overflow:hidden;}
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="nstack" id="nstack" aria-live="assertive"></div>
 
+<!-- ============ OVERLAYS ============ -->
 <div class="overlay" id="guideOverlay">
   <div class="modal" role="dialog" aria-modal="true" aria-label="Aide">
     <div class="modal-head"><h3>❓ Bienvenue sur HK Espace Gaming</h3><button class="x" type="button" data-close>✕</button></div>
-    <div class="step"><i>1</i><div><b>Crée ton compte</b><span>Choisis ta langue, un pseudo et un mot de passe.</span></div></div>
-    <div class="step"><i>🔑</i><div><b>Mot de passe</b><span>Garde-le bien : il ne peut pas être récupéré par e-mail.</span></div></div>
-    <div class="step"><i>2</i><div><b>Ajoute des amis</b><span>Regarde les suggestions ou cherche un pseudo.</span></div></div>
-    <div class="step"><i>3</i><div><b>Discute et publie</b><span>Messages privés, groupes avec photos, publications.</span></div></div>
-    <div class="step"><i>👥</i><div><b>Groupes</b><span>Public ou privé avec un code. Écris @pseudo pour mentionner quelqu'un : il reçoit une notification.</span></div></div>
-    <div class="step"><i>⏳</i><div><b>48 heures</b><span>Les messages, photos et publications disparaissent après 48h. Chaque publication est vérifiée avant d'apparaître.</span></div></div>
-    <div class="step"><i>🎁</i><div><b>Parrainage</b><span>Invite un ami avec ton code : 2 points par ami. À 100 points, tu peux demander ton badge ✔.</span></div></div>
-    <div class="step"><i>🚫</i><div><b>Règles</b><span>Pas d'insultes, pas de pub, pas de numéros personnels. Un compte peut être suspendu en cas d'abus.</span></div></div>
-    <div class="step"><i>🏆</i><div><b>Tournois</b><span>Inscris-toi gratuitement dans la section Tournois.</span></div></div>
+    <div class="step"><i>1</i><div><b>Crée ton compte</b><span>Pseudo + mot de passe.</span></div></div>
+    <div class="step"><i>2</i><div><b>Ajoute des amis</b><span>Suggestions ou recherche.</span></div></div>
+    <div class="step"><i>3</i><div><b>Discute et publie</b><span>MP, groupes, posts.</span></div></div>
+    <div class="step"><i>@</i><div><b>Taguer quelqu'un</b><span>Écris @pseudo pour mentionner. Il reçoit une notif.</span></div></div>
+    <div class="step"><i>⏳</i><div><b>48 heures</b><span>Messages et publications disparaissent après 48h.</span></div></div>
+    <div class="step"><i>🎁</i><div><b>Parrainage</b><span>2 points par ami invité.</span></div></div>
+    <div class="step"><i>🏆</i><div><b>Top parrains</b><span>Chaque soir de 20h à 22h, les 3 meilleurs parrains s'affichent en haut du site.</span></div></div>
     <div class="step"><i>🎡</i><div><b>Roue HK</b><span>Un tour gratuit par jour à partir de 20h.</span></div></div>
-    <div class="step"><i>🛒</i><div><b>Boutique</b><span>Touche « Boutique » pour recharger. L'argent doit être envoyé AVANT la confirmation.</span></div></div>
     <button class="btn btn-primary btn-block" type="button" data-close style="margin-top:12px;">J'ai compris</button>
   </div>
 </div>
@@ -822,18 +835,26 @@ body:has(.overlay.open){overflow:hidden;}
       <div class="lang-row" style="margin:10px 0 0;"><button type="button" class="pay" data-lang="fr">Français</button><button type="button" class="pay" data-lang="en">English</button></div>
     </div>
     <div class="step" style="display:block;">
-      <b>Thème d'affichage</b><span>Choisis l'apparence du site sur cet appareil.</span>
+      <b>Thème d'affichage</b>
       <div class="pay-options" style="margin-top:10px;">
         <button type="button" class="pay" id="themeLight">☀️ Clair</button>
         <button type="button" class="pay" id="themeDark">🌙 Sombre</button>
       </div>
+    </div>
+    <div class="step" style="display:block;">
+      <b>🔐 Changer mon mot de passe</b><span>Utilise ton mot de passe actuel pour valider.</span>
+      <input type="password" id="pwOld" placeholder="Mot de passe actuel" style="margin-top:10px;">
+      <input type="password" id="pwNew" placeholder="Nouveau mot de passe" style="margin-top:8px;">
+      <input type="password" id="pwNew2" placeholder="Confirmer le nouveau" style="margin-top:8px;">
+      <button class="btn btn-primary btn-block" type="button" id="pwGo" style="margin-top:10px;">💾 Changer le mot de passe</button>
+      <p class="note" id="pwMsg" style="margin-top:8px;"></p>
     </div>
   </div>
 </div>
 
 <div class="overlay" id="lightboxOverlay">
   <div class="modal lightbox">
-    <div class="modal-head"><h3 id="lbTitle">Compte</h3><button class="x" type="button" data-close>✕</button></div>
+    <div class="modal-head"><h3 id="lbTitle">Image</h3><button class="x" type="button" data-close>✕</button></div>
     <img id="lbImg" src="" alt="Image agrandie">
     <div class="cap" id="lbCap"></div>
   </div>
@@ -855,25 +876,19 @@ body:has(.overlay.open){overflow:hidden;}
         <button type="button" class="pay" data-tab="texts">✏️ Textes</button>
         <button type="button" class="pay" data-tab="edit">⚙️ Prix &amp; images</button>
         <button type="button" class="pay" data-tab="stats">📊 Stats</button>
-<button type="button" class="pay" data-tab="tournoi">🏆 Tournoi</button>
+        <button type="button" class="pay" data-tab="tournoi">🏆 Tournoi</button>
         <button type="button" class="pay" data-tab="annonces">📢 Annonces</button>
-<button type="button" class="pay" data-tab="handler">🔔 Gestionnaire</button>
+        <button type="button" class="pay" data-tab="handler">🔔 Gestionnaire</button>
       </div>
-      <div id="adPosts">
-        <div class="subhead" style="margin-top:0;">En attente (<span id="adCount">0</span>)</div>
-        <div class="feed" id="adList"></div>
-      </div>
-      <div id="adMembers" style="display:none;">
-        <input type="text" id="mbSearch" placeholder="Chercher un pseudo..." style="margin-bottom:10px;">
-        <div class="feed" id="mbList" style="margin-top:0;"></div>
-      </div>
+      <div id="adPosts"><div class="subhead" style="margin-top:0;">En attente (<span id="adCount">0</span>)</div><div class="feed" id="adList"></div></div>
+      <div id="adMembers" style="display:none;"><input type="text" id="mbSearch" placeholder="Chercher un pseudo..."><div class="feed" id="mbList" style="margin-top:0;"></div></div>
       <div id="adGroups" style="display:none;"><div class="feed" id="gpList" style="margin-top:0;"></div></div>
       <div id="adTexts" style="display:none;"></div>
       <div id="adStats" style="display:none;"></div>
-<div id="adTournoi" style="display:none;"><div class="feed" id="trList" style="margin-top:0;"></div></div>
+      <div id="adTournoi" style="display:none;"><div class="feed" id="trList" style="margin-top:0;"></div></div>
       <div id="adHandler" style="display:none;"></div>
-<div id="adAnnonces" style="display:none;">
-        <p class="note" style="text-align:left;margin-bottom:10px;">Ton message arrive dans les notifications de tout le monde, au nom de « Support HK  ».</p>
+      <div id="adAnnonces" style="display:none;">
+        <p class="note" style="text-align:left;margin-bottom:10px;">Ton message arrive dans les notifications au nom de « Support HK ».</p>
         <textarea id="anText" maxlength="500" placeholder="Écris ton annonce..."></textarea>
         <button class="btn btn-gold btn-block" type="button" id="anSend" style="margin-top:10px;">📢 Envoyer à tout le monde</button>
         <div class="subhead">Dernières annonces</div>
@@ -902,14 +917,13 @@ body:has(.overlay.open){overflow:hidden;}
         <div class="lang-row" style="margin:0;"><button type="button" class="pay" data-lang="fr">Français</button><button type="button" class="pay" data-lang="en">English</button></div></div>
       <div><label class="lbl" for="auName">Pseudo</label>
         <input type="text" id="auName" maxlength="20" autocomplete="username" placeholder="Ex : HK_Sniper">
-        <div class="hint">3 à 20 caractères : lettres, chiffres, point, tiret, underscore.</div></div>
+        <div class="hint">3 à 20 caractères : lettres, chiffres, . _ -</div></div>
       <div><label class="lbl" for="auPass">Mot de passe</label>
         <input type="password" id="auPass" autocomplete="current-password" placeholder="6 caractères minimum"></div>
       <div id="auRefBox" style="display:none;"><label class="lbl" for="auRef">Code parrain (facultatif)</label>
-        <input type="text" id="auRef" maxlength="12" autocomplete="off" placeholder="Ex : kCF9zuZF">
-        <div class="hint">Si un ami t'a invité, entre son code : il gagne 2 points.</div></div>
+        <input type="text" id="auRef" maxlength="12" autocomplete="off" placeholder="Ex : kCF9zuZF"></div>
       <button class="btn btn-primary btn-block" type="submit" id="auGo">Se connecter</button>
-      <p class="note">Garde bien ton mot de passe : il ne peut pas être récupéré par e-mail.</p>
+      <p class="note">Garde bien ton mot de passe.</p>
     </form>
     <div id="auMe" style="display:none;text-align:center;">
       <div id="auWho" style="font-family:var(--f-head);font-size:26px;font-weight:700;"></div>
@@ -919,12 +933,11 @@ body:has(.overlay.open){overflow:hidden;}
   </div>
 </div>
 
-<div class="overlay" id="profOverlay">
-  <div class="modal" role="dialog" aria-modal="true" aria-label="Profil">
-    <div class="modal-head"><h3>👤 Profil</h3><button class="x" type="button" data-close>✕</button></div>
-    <div id="profBody"></div>
-  </div>
-</div>
+<!-- ✅ NOUVEAU : Profil plein écran + flèche ‹ -->
+<div class="overlay" id="profOverlay"><div class="modal prof-full">
+  <div class="modal-head"><button class="chat-ic" id="profBack" type="button">‹</button><h3>Profil</h3><span style="width:36px"></span></div>
+  <div id="profBody"></div>
+</div></div>
 
 <div class="overlay" id="hubOverlay">
   <div class="modal" role="dialog" aria-modal="true" aria-label="Messagerie">
@@ -948,7 +961,7 @@ body:has(.overlay.open){overflow:hidden;}
       <div><label class="lbl" for="gName">Nom du groupe</label><input type="text" id="gName" maxlength="30" placeholder="Ex : Les Snipers HK"></div>
       <div><label class="lbl" for="gDesc">Description (facultatif)</label><input type="text" id="gDesc" maxlength="120" placeholder="De quoi on parle ?"></div>
       <div><span class="lbl">Type de groupe</span>
-        <div class="pay-options" id="gType"><button type="button" class="pay sel" data-pub="1">🌍 Public</button><button type="button" class="pay" data-pub="0">🔒 Privé (code)</button></div></div>
+        <div class="pay-options" id="gType"><button type="button" class="pay sel" data-pub="1">🌍 Public</button><button type="button" class="pay" data-pub="0">🔒 Privé</button></div></div>
       <div><label class="lbl" for="gMax">Nombre max de membres</label><input type="number" id="gMax" min="2" max="200" value="50"></div>
       <button class="btn btn-primary btn-block" type="submit">Créer le groupe</button>
     </form>
@@ -970,10 +983,9 @@ body:has(.overlay.open){overflow:hidden;}
 </div>
 <script>
 /* =========================================================
-   HACKEN STORE — JS PRINCIPAL (corrigé)
+   HK ESPACE GAMING — JS PRINCIPAL
    ========================================================= */
 
-/* ---------- Handler global d'erreurs (debug) ---------- */
 window.addEventListener('error', e => console.error('[HK ERROR]', e.message, e.filename + ':' + e.lineno));
 window.addEventListener('unhandledrejection', e => console.error('[HK PROMISE]', e.reason));
 
@@ -981,7 +993,7 @@ window.addEventListener('unhandledrejection', e => console.error('[HK PROMISE]',
 'use strict';
 
 /* =========================================================
-   CONFIGURATION — chargée depuis Firebase, avec fallback local
+   CONFIGURATION — Firebase
    ========================================================= */
 const HK_DB = 'https://kenmukaya-f3f46-default-rtdb.europe-west1.firebasedatabase.app';
 const ADMIN_API_KEY = 'AIzaSyCdXkvGy90NDqYvOjYjmDwpuRSCTi3C95Q';
@@ -1029,7 +1041,6 @@ const TOURNOI = {
   api:HK_DB
 };
 
-/* Application de la config distante par-dessus les valeurs locales */
 (function applyCfg(){
   const n = (v, d) => (v === '' || v == null || isNaN(+v)) ? d : +v;
   (CFG.diamonds || []).forEach((d, i) => { if(!DIAMONDS[i] || !d) return;
@@ -1095,6 +1106,24 @@ try{ if(localStorage.getItem('hkstore-lang') === 'en') LANG = 'en'; }catch(e){}
 document.documentElement.lang = LANG;
 const L = (a, b) => LANG === 'en' ? b : a;
 HK.lang = () => LANG;
+
+/* =========================================================
+   EMOJIS SVG (✅ dessinés, remplacent les emojis système)
+   ========================================================= */
+const EMO = {
+  heart: '<svg class="emo" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 20s-8-5-8-10.5A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8 2.5C20 15 12 20 12 20z" fill="#FF5470"/></svg>',
+  hearto: '<svg class="emo" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 20s-8-5-8-10.5A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8 2.5C20 15 12 20 12 20z" fill="none" stroke="#90A4C8" stroke-width="2"/></svg>',
+  chat: '<svg class="emo" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z" fill="#49D8F0"/></svg>',
+  share: '<svg class="emo" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 15V4M8 8l4-4 4 4M5 13v7h14v-7" fill="none" stroke="#90A4C8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  trash: '<svg class="emo" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6" fill="none" stroke="#FF5470" stroke-width="2" stroke-linecap="round"/></svg>',
+  check: '<svg class="emo" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#2BD67B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  cross: '<svg class="emo" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="#FF5470" stroke-width="2.4" stroke-linecap="round"/></svg>',
+  camera: '<svg class="emo" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z" fill="#49D8F0"/><circle cx="12" cy="13" r="3.5" fill="#04202A"/></svg>',
+  send: '<svg class="emo" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M21 3L10 14M21 3l-7 18-4-7-7-4z" fill="#fff" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg>',
+  back: '<svg class="emo" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  reply: '<svg class="emo" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9 6L3 12l6 6M3 12h11a5 5 0 0 1 5 5v1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  tag: '<svg class="emo" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 12l-8 8-9-9V3h8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/></svg>'
+};
 
 /* =========================================================
    TOAST / OVERLAYS
@@ -1215,7 +1244,6 @@ function Carousel(root, opts){
   return { go, get index(){ return i; }, get moved(){ return moved; } };
 }
 
-/* Carrousel bonus */
 (function(){
   const root = $('#carBonus'); if(!root) return;
   const track = $('.car-track', root);
@@ -1238,7 +1266,7 @@ let promo = null;
 
 function card(opts){
   const b = document.createElement('div'); b.className = 'card'; b.setAttribute('role','button'); b.tabIndex = 0;
-b.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); b.click(); } });
+  b.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); b.click(); } });
   const pic = document.createElement('div'); pic.className = 'pic';
   picHTML(opts.img, opts.alt).forEach(elm => pic.appendChild(elm));
   const tag = (cls, txt) => { const t = document.createElement('span'); t.className = 'tag ' + cls; t.textContent = txt; pic.appendChild(t); };
@@ -1319,11 +1347,11 @@ if(barBtn) barBtn.addEventListener('click', () => $('#order').scrollIntoView({ b
 function calc(){
   const b = parseInt($('#budget').value, 10), box = $('#calcRes');
   if(!box) return;
-  if(!b || b < 0){ box.textContent = L('Entre ton budget pour voir le meilleur pack.', 'Enter your budget to see the best pack.'); return; }
+  if(!b || b < 0){ box.textContent = 'Entre ton budget.'; return; }
   const ok = DIAMONDS.filter(d => d[1] <= b).sort((x, y) => y[0] - x[0])[0];
-  if(!ok){ box.textContent = L('Le plus petit pack coûte ', 'The smallest pack costs ') + fmt(DIAMONDS[0][1]) + '.'; return; }
+  if(!ok){ box.textContent = 'Le plus petit pack coûte ' + fmt(DIAMONDS[0][1]) + '.'; return; }
   const left = b - ok[1];
-  box.innerHTML = L('Avec ton budget : ', 'With your budget: ') + '<strong></strong>' + (left > 0 ? L(' (il te reste ', ' (you keep ') + fmt(left) + ')' : '');
+  box.innerHTML = 'Avec ton budget : <strong></strong>' + (left > 0 ? ' (il te reste ' + fmt(left) + ')' : '');
   const st = $('strong', box);
   if(st) st.textContent = ok[0] + ' 💎 — ' + fmt(ok[1]);
 }
@@ -1338,11 +1366,10 @@ $$('#payOptions .pay[data-pay]').forEach(b => b.addEventListener('click', () => 
   $$('#payOptions .pay').forEach(x => x.classList.remove('sel'));
   b.classList.add('sel'); payKey = b.dataset.pay;
   const a = PAYS[payKey];
-  const po = $('#pdOperator'), pn = $('#pdNumber'), pnm = $('#pdName');
-  if(po) po.textContent = a.operator;
-  if(pn) pn.textContent = a.number;
-  if(pnm) pnm.textContent = a.name;
-  const pd = $('#payDetails'); if(pd) pd.classList.add('on');
+  $('#pdOperator').textContent = a.operator;
+  $('#pdNumber').textContent = a.number;
+  $('#pdName').textContent = a.name;
+  $('#payDetails').classList.add('on');
 }));
 if($('#copyNum')) $('#copyNum').addEventListener('click', () => copyText($('#pdNumber').textContent, 'Numéro copié'));
 if($('#copyAmt')) $('#copyAmt').addEventListener('click', () => {
@@ -1360,7 +1387,7 @@ if($('#orderForm')) $('#orderForm').addEventListener('submit', e => {
   if(!sel.label){ toast('Choisis d\'abord un article.', true); $('#packs').scrollIntoView({ behavior:'smooth' }); return; }
   if(!sel.compte && (id.length < 6 || id.length > 14)) return bad(idEl, 'ID joueur invalide : 6 à 14 chiffres.');
   if(!payKey){ toast('Choisis un moyen de paiement.', true); return; }
-  if(digits(phone).length < 9) return bad(phEl, 'Numéro de téléphone invalide.');
+  if(digits(phone).length < 9) return bad(phEl, 'Numéro invalide.');
   if(tx.length < 6) return bad(txEl, 'Numéro de transaction trop court.');
   if(!$('#acceptCond').checked){ toast('Coche la case après avoir envoyé l\'argent.', true); return; }
   const ref = 'HK' + Date.now().toString().slice(-6), tot = discounted(), withPromo = promo && !sel.compte;
@@ -1368,8 +1395,8 @@ if($('#orderForm')) $('#orderForm').addEventListener('submit', e => {
     + '🎮 Article : ' + sel.label + '\n' + (sel.compte ? '' : '🆔 ID joueur : ' + id + '\n')
     + '💳 Paiement : ' + PAYS[payKey].operator + '\n💰 Montant envoyé : ' + fmt(tot) + '\n'
     + (withPromo ? '🎁 Code Roue HK : ' + promo.code + ' (-' + promo.pct + '%)\n' : '')
-    + '📱 Numéro qui a envoyé l\'argent : ' + phone + '\n🔢 Numéro de transaction : ' + tx + '\n'
-    + '━━━━━━━━━━━━━━━━━━━\n✅ Je confirme avoir déjà envoyé l\'argent.\nMerci de vérifier et confirmer la recharge.';
+    + '📱 Numéro : ' + phone + '\n🔢 Transaction : ' + tx + '\n'
+    + '━━━━━━━━━━━━━━━━━━━\n✅ Je confirme avoir envoyé l\'argent.';
   $('#waLink').href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
   $('#confirm').classList.add('on');
   $('#confirm').scrollIntoView({ behavior:'smooth', block:'center' });
@@ -1437,14 +1464,14 @@ if($('#orderForm')) $('#orderForm').addEventListener('submit', e => {
     const box = $('#tList'); if(!box) return;
     box.innerHTML = '';
     $('#tCount').textContent = '(' + l.length + ')';
-    if(!l.length){ box.innerHTML = '<div class="t-empty">Aucun participant pour le moment. Sois le premier !</div>'; return; }
+    if(!l.length){ box.innerHTML = '<div class="t-empty">Aucun participant pour le moment.</div>'; return; }
     l.sort((a, b) => b[1].t - a[1].t).forEach(([k, p], i) => {
       const d = document.createElement('div'); d.className = 'trow';
       d.innerHTML = '<i></i><div class="tm"><b></b><span></span></div><button type="button" class="btn btn-ghost">👤</button>';
       const left = Math.max(1, Math.ceil((p.t + TTL - Date.now()) / DAY));
       $('i', d).textContent = l.length - i; $('b', d).textContent = p.name;
       if(HK.badgeEl){ try{ const bd = HK.badgeEl(k); if(bd) $('b', d).appendChild(bd); }catch(e){} }
-      $('span', d).textContent = 'ID ' + p.id + ' · ' + L('encore ' + left + ' j', left + ' d left');
+      $('span', d).textContent = 'ID ' + p.id + ' · encore ' + left + ' j';
       $('button', d).addEventListener('click', () => HK.openProfile && HK.openProfile(k, p.name));
       box.appendChild(d);
     });
@@ -1457,13 +1484,13 @@ if($('#orderForm')) $('#orderForm').addEventListener('submit', e => {
     const mu = HK.me && HK.me();
     if(!mu) return toast('Connecte-toi pour t\'inscrire.', true);
     const iEl = $('#tId'), id = digits(iEl.value);
-    if(id.length < 6 || id.length > 14) return bad(iEl, 'ID joueur invalide : 6 à 14 chiffres.');
+    if(id.length < 6 || id.length > 14) return bad(iEl, 'ID invalide : 6 à 14 chiffres.');
     if(!$('#tOk').checked) return toast('Coche la case pour accepter.', true);
     try{
       const cur = await HK.fb('GET', 'participants/' + mu.uid);
       if(cur && cur.t && Date.now() - cur.t < TTL) return toast('Tu es déjà inscrit.', true);
       await HK.fb('PUT', 'participants/' + mu.uid, { name: mu.name, id, t: Date.now(), uid: mu.uid });
-    }catch(err){ return toast('Inscription impossible, réessaie.', true); }
+    }catch(err){ return toast('Inscription impossible.', true); }
     tf.reset(); toast('🏆 Inscription enregistrée !'); reload();
   });
 })();
@@ -1498,9 +1525,9 @@ if($('#orderForm')) $('#orderForm').addEventListener('submit', e => {
   function showResult(s){
     const r = $('#wheelRes'); if(!r) return;
     if(s.pct){
-      r.innerHTML = '<strong></strong>' + L('Ton code (valable aujourd\'hui) :', 'Your code (valid today):') + '<br><span class="code"></span>';
+      r.innerHTML = '<strong></strong>Ton code (valable aujourd\'hui) :<br><span class="code"></span>';
       $('strong', r).textContent = '-' + s.pct + ' % !'; $('.code', r).textContent = s.code;
-    } else r.textContent = L('Pas de réduction cette fois. Reviens demain à 20h !', 'No discount this time. Come back tomorrow at 8 PM!');
+    } else r.textContent = 'Pas de réduction cette fois. Reviens demain à 20h !';
   }
   function applyPromo(s){ promo = s.pct ? s : null; refresh(); }
   let spun = load(), rot = 0, busy = false;
@@ -1513,23 +1540,23 @@ if($('#orderForm')) $('#orderForm').addEventListener('submit', e => {
     if(!btn) return;
     if(spun && spun.date !== today()){ spun = null; promo = null; refresh(); if(res) res.textContent = ''; }
     if(spun){
-      btn.disabled = true; btn.textContent = L('Reviens demain à ' + WHEEL_OPEN_H + 'h', 'Come back tomorrow at ' + WHEEL_OPEN_H + ':00');
+      btn.disabled = true; btn.textContent = 'Reviens demain à ' + WHEEL_OPEN_H + 'h';
       if(fab){ fab.textContent = '🎡 Roue HK'; fab.classList.remove('live'); }
       return;
     }
     if(isOpen()){
       btn.disabled = false; btn.textContent = 'Tourner la roue';
-      if(fab){ fab.textContent = L('🎡 Roue ouverte !', '🎡 Wheel open!'); fab.classList.add('live'); }
-      if(res) res.textContent = L('La roue est ouverte. Lance-la !', 'The wheel is open. Spin it!');
+      if(fab){ fab.textContent = '🎡 Roue ouverte !'; fab.classList.add('live'); }
+      if(res) res.textContent = 'La roue est ouverte. Lance-la !';
       return;
     }
     const d = new Date(); d.setHours(WHEEL_OPEN_H, 0, 0, 0);
     if(d <= new Date()) d.setDate(d.getDate() + 1);
     const s = Math.max(0, Math.floor((d - new Date()) / 1000));
     const t = pad(Math.floor(s / 3600)) + ':' + pad(Math.floor(s % 3600 / 60)) + ':' + pad(s % 60);
-    btn.disabled = true; btn.textContent = L('Ouverture à ' + WHEEL_OPEN_H + 'h', 'Opens at ' + WHEEL_OPEN_H + ':00');
-    if(fab){ fab.textContent = (L('🎡 Roue · ', '🎡 Wheel · ')) + t; fab.classList.remove('live'); }
-    if(res) res.innerHTML = L('La roue s\'ouvre chaque soir à ', 'The wheel opens every evening at ') + '<strong>' + WHEEL_OPEN_H + 'h</strong>' + L(' — Ouverture dans ', ' — Opens in ') + t;
+    btn.disabled = true; btn.textContent = 'Ouverture à ' + WHEEL_OPEN_H + 'h';
+    if(fab){ fab.textContent = '🎡 Roue · ' + t; fab.classList.remove('live'); }
+    if(res) res.innerHTML = 'La roue s\'ouvre chaque soir à <strong>' + WHEEL_OPEN_H + 'h</strong> — Ouverture dans ' + t;
   }
   tick(); setInterval(tick, 1000);
   $$('[data-open-wheel]').forEach(b => b.addEventListener('click', () => open('#wheelOverlay')));
@@ -1537,7 +1564,7 @@ if($('#orderForm')) $('#orderForm').addEventListener('submit', e => {
   if(spinB) spinB.addEventListener('click', () => {
     if(busy || spun || !isOpen()) return;
     busy = true; spinB.disabled = true;
-    const res = $('#wheelRes'); if(res) res.textContent = L('La roue tourne...', 'Spinning...');
+    const res = $('#wheelRes'); if(res) res.textContent = 'La roue tourne...';
     const k = Math.floor(Math.random() * N), center = (k + 0.5) * (360 / N), jitter = (Math.random() - 0.5) * (360 / N) * 0.6;
     rot = Math.ceil(rot / 360) * 360 + 360 * 5 + (360 - center) + jitter;
     cv.style.transform = 'rotate(' + rot + 'deg)';
@@ -1560,7 +1587,6 @@ let me = null, utok = '', uexp = 0, rtok = '', token = '';
 let BADGES = {}, BANNED = {};
 const AV = {};
 
-/* --- Session utilisateur --- */
 try{
   const sv = JSON.parse(localStorage.getItem('hkstore-session') || 'null');
   if(sv && sv.uid && sv.rt){ me = { uid: sv.uid, name: sv.name }; rtok = sv.rt; }
@@ -1609,7 +1635,6 @@ async function api(method, path, body){
   if(!r.ok) throw new Error(r.status);
   return r.json();
 }
-/* --- Temps réel (streaming Firebase) --- */
 const STREAMS = {};
 function stopListen(key){
   const s = STREAMS[key]; if(!s) return;
@@ -1636,7 +1661,6 @@ function listen(key, path, q, cb){
 function liveAll(){
   listen('g_inbox', 'inbox/' + me.uid, '', poll);
 }
-/* --- Badges --- */
 const BADGE_INFO = {
   verified:{ c:'#1D9BF0', label:'Compte vérifié' },
   officiel:{ c:'#F2B84B', label:'Officiel Hacken Store' },
@@ -1655,14 +1679,12 @@ HK.me = () => me;
 HK.fb = fb; HK.openProfile = (u, n) => openProfile(u, n);
 HK.badgeEl = uid => badgeEl(uid);
 
-/* --- Bio / ref message --- */
 const REF_DEF = {
   fr:'Rejoins HK Espace Gaming 🌍 discussions, amis, groupes, publications, tournois et recharge Free Fire. Inscris-toi avec mon code {code} : {link}',
   en:'Join HK Gaming Space 🌍 chat, friends, groups, posts, tournaments and Free Fire top-ups. Sign up with my code {code}: {link}'
 };
 HK.refMsg = (code, link) => ((CFG.refMsg && CFG.refMsg[LANG]) || REF_DEF[LANG]).replace(/\{code\}/g, code).replace(/\{link\}/g, link);
 
-/* --- Compress image --- */
 function compress(file, max, lim){
   lim = lim || 200000;
   return new Promise((res, rej) => {
@@ -1702,7 +1724,6 @@ function squareImg(file, S){
 }
 const okImg = s => typeof s === 'string' && s.indexOf('data:image/jpeg;base64,') === 0;
 
-/* --- Avatars (avec cache) --- */
 function avData(uid){
   if(!uid) return Promise.resolve('');
   if(AV[uid]) return AV[uid];
@@ -1730,7 +1751,6 @@ function setGav(node, gid){
    ========================================================= */
 function authUI(){
   document.body.classList.toggle('locked', !me);
-  if(!me) open('#authOverlay');
   const f = $('#auForm'), m = $('#auMe');
   if(f) f.style.display = me ? 'none' : 'flex';
   if(m) m.style.display = me ? 'block' : 'none';
@@ -1745,13 +1765,13 @@ function authUI(){
   if(w){
     w.innerHTML = '';
     if(me){
-      w.append(L('Publier en tant que ', 'Post as '));
+      w.append('Publier en tant que ');
       const b = document.createElement('b'); b.textContent = me.name; w.appendChild(b);
       const bd = badgeEl(me.uid); if(bd) w.appendChild(bd);
     }else{
       const btn = document.createElement('button');
       btn.type = 'button'; btn.className = 'btn btn-ghost';
-      btn.textContent = L('🔒 Se connecter pour publier', '🔒 Log in to post');
+      btn.textContent = '🔒 Se connecter pour publier';
       btn.addEventListener('click', () => openAuth(''));
       w.appendChild(btn);
     }
@@ -1776,10 +1796,10 @@ $$('#auForm [data-mode]').forEach(b => b.addEventListener('click', () => {
 const AUTH_ERR = {
   EMAIL_EXISTS:'Ce pseudo est déjà pris.', INVALID_LOGIN_CREDENTIALS:'Pseudo ou mot de passe incorrect.',
   INVALID_PASSWORD:'Pseudo ou mot de passe incorrect.', EMAIL_NOT_FOUND:'Pseudo ou mot de passe incorrect.',
-  WEAK_PASSWORD:'Mot de passe trop court (6 caractères minimum).', TOO_MANY_ATTEMPTS_TRY_LATER:'Trop d\'essais, réessaie plus tard.',
-  OPERATION_NOT_ALLOWED:'Inscription désactivée dans Firebase (méthode E-mail/Mot de passe).',
-  ADMIN_ONLY_OPERATION:'La création de comptes est désactivée dans Firebase.',
-  Requests:'Clé API bloquée pour ce site (restrictions de la clé dans Google Cloud).'
+  WEAK_PASSWORD:'Mot de passe trop court (6 caractères minimum).', TOO_MANY_ATTEMPTS_TRY_LATER:'Trop d\'essais.',
+  OPERATION_NOT_ALLOWED:'Inscription désactivée dans Firebase.',
+  ADMIN_ONLY_OPERATION:'Création de comptes désactivée.',
+  Requests:'Clé API bloquée.'
 };
 function authErr(msg){
   const m = $('#auMsg'); if(m){ m.textContent = '⚠ ' + msg; m.style.color = 'var(--red)'; }
@@ -1790,7 +1810,7 @@ $('#auForm').addEventListener('submit', async e => {
   const am = $('#auMsg'); if(am){ am.textContent = ''; am.style.color = 'var(--gold)'; }
   const name = $('#auName').value.trim(), pw = $('#auPass').value;
   if(!ADMIN.apiKey){ authErr('Clé API manquante.'); return; }
-  if(!/^(?!\.)(?!.*\.\.)(?!.*\.$)[A-Za-z0-9._-]{3,20}$/.test(name)){ authErr('Pseudo : 3 à 20 caractères (lettres, chiffres, . _ -).'); $('#auName').focus(); return; }
+  if(!/^(?!\.)(?!.*\.\.)(?!.*\.$)[A-Za-z0-9._-]{3,20}$/.test(name)){ authErr('Pseudo : 3 à 20 caractères.'); $('#auName').focus(); return; }
   if(pw.length < 6){ authErr('Mot de passe : 6 caractères minimum.'); $('#auPass').focus(); return; }
   const btn = $('#auGo'), label = btn.textContent;
   btn.disabled = true; btn.textContent = '...';
@@ -1809,7 +1829,7 @@ $('#auForm').addEventListener('submit', async e => {
     utok = d.idToken; uexp = Date.now() + (+d.expiresIn) * 1000; rtok = d.refreshToken;
     try{
       const bn = await (await fetch(DB + '/banned/' + d.localId + '.json?auth=' + utok)).json();
-      if(bn === true) throw new Error('Compte suspendu par Hacken Store.');
+      if(bn === true) throw new Error('Compte suspendu.');
     }catch(x){ if(String(x.message).indexOf('suspendu') > -1) throw x; }
     const putProfile = () => fetch(DB + '/users/' + d.localId + '.json?auth=' + utok, {
       method:'PUT', body: JSON.stringify({ name, t: Date.now(), lang: LANG })
@@ -1820,7 +1840,7 @@ $('#auForm').addEventListener('submit', async e => {
       if(!w.ok){
         try{ await fetch('https://identitytoolkit.googleapis.com/v1/accounts:delete?key=' + ADMIN.apiKey, {
           method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ idToken: d.idToken }) }); }catch(x){}
-        throw new Error('Inscription refusée par la base de données (règles Firebase, erreur ' + w.status + ').');
+        throw new Error('Inscription refusée (erreur ' + w.status + ').');
       }
     }else{
       let pr = null;
@@ -1837,9 +1857,46 @@ $('#auForm').addEventListener('submit', async e => {
     $('#auPass').value = '';
     if(ulang && ulang !== LANG){ try{ localStorage.setItem('hkstore-lang', ulang); }catch(x){} return location.reload(); }
     authUI(); closeAll(); loadFeed(); if(HK.sug) HK.sug();
-    toast(L('👋 Bienvenue ', '👋 Welcome ') + pname);
-  }catch(err){ authErr(err.message || 'Connexion impossible.'); console.error('[HK AUTH]', err); }
+    toast('👋 Bienvenue ' + pname);
+  }catch(err){ authErr(err.message || 'Connexion impossible.'); }
   btn.disabled = false; btn.textContent = label;
+});
+
+/* =========================================================
+   CHANGEMENT DE MOT DE PASSE (✅ NOUVEAU)
+   ========================================================= */
+$('#pwGo')?.addEventListener('click', async () => {
+  const oldPw = $('#pwOld').value, pw1 = $('#pwNew').value, pw2 = $('#pwNew2').value;
+  const msg = $('#pwMsg'); if(msg){ msg.textContent = ''; msg.style.color = 'var(--muted)'; }
+  if(!me) return toast('Connecte-toi.', true);
+  if(!oldPw) return toast('Entre ton mot de passe actuel.', true);
+  if(pw1.length < 6) return toast('Nouveau mot de passe : 6 caractères minimum.', true);
+  if(pw1 !== pw2) return toast('Les deux nouveaux mots de passe ne correspondent pas.', true);
+  const btn = $('#pwGo'); btn.disabled = true; btn.textContent = '...';
+  try{
+    const email = me.name.toLowerCase() + '@hackenstore.app';
+    const r = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + ADMIN.apiKey, {
+      method:'POST', headers:{ 'Content-Type':'application/json' },
+      body: JSON.stringify({ email, password: oldPw, returnSecureToken: true })
+    });
+    const d = await r.json();
+    if(!r.ok){ throw new Error('Mot de passe actuel incorrect.'); }
+    const r2 = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:update?key=' + ADMIN.apiKey, {
+      method:'POST', headers:{ 'Content-Type':'application/json' },
+      body: JSON.stringify({ idToken: d.idToken, password: pw1, returnSecureToken: true })
+    });
+    const d2 = await r2.json();
+    if(!r2.ok) throw new Error('Changement impossible (' + ((d2.error && d2.error.message) || r2.status) + ').');
+    utok = d2.idToken; rtok = d2.refreshToken; uexp = Date.now() + (+d2.expiresIn) * 1000;
+    saveSession();
+    $('#pwOld').value = ''; $('#pwNew').value = ''; $('#pwNew2').value = '';
+    if(msg){ msg.textContent = '✅ Mot de passe changé avec succès !'; msg.style.color = 'var(--green)'; }
+    toast('Mot de passe changé ✅');
+  }catch(err){
+    if(msg){ msg.textContent = '⚠ ' + (err.message || 'Erreur'); msg.style.color = 'var(--red)'; }
+    toast(err.message || 'Erreur', true);
+  }
+  btn.disabled = false; btn.textContent = '💾 Changer le mot de passe';
 });
 
 /* =========================================================
@@ -1850,28 +1907,53 @@ const when = t => new Date(t).toLocaleDateString(loc, { day:'numeric', month:'sh
 const hm = t => new Date(t).toLocaleTimeString(loc, { hour:'2-digit', minute:'2-digit' });
 const dayLbl = t => {
   const d = new Date(t), n = new Date(), y = new Date(); y.setDate(n.getDate() - 1);
-  return d.toDateString() === n.toDateString() ? L('Aujourd\'hui', 'Today')
-    : d.toDateString() === y.toDateString() ? L('Hier', 'Yesterday')
+  return d.toDateString() === n.toDateString() ? 'Aujourd\'hui'
+    : d.toDateString() === y.toDateString() ? 'Hier'
     : d.toLocaleDateString(loc, { day:'numeric', month:'long' });
 };
 const short = (t, n) => (t || '').length > n ? t.slice(0, n) + '…' : (t || '');
 const fmtAgo = t => {
   const m = Math.round((Date.now() - t) / 60000);
-  return m < 1 ? L('à l\'instant', 'just now')
-    : m < 60 ? L('il y a ' + m + ' min', m + ' min ago')
-    : m < 1440 ? L('il y a ' + Math.round(m / 60) + ' h', Math.round(m / 60) + ' h ago')
-    : L('il y a ' + Math.round(m / 1440) + ' j', Math.round(m / 1440) + ' d ago');
+  return m < 1 ? 'à l\'instant'
+    : m < 60 ? 'il y a ' + m + ' min'
+    : m < 1440 ? 'il y a ' + Math.round(m / 60) + ' h'
+    : 'il y a ' + Math.round(m / 1440) + ' j';
 };
 async function presence(uid){
   try{
     const t = await fb('GET', 'presence/' + uid);
     if(!t) return '';
-    return Date.now() - t < 120000 ? '🟢 ' + L('En ligne', 'Online') : L('Vu ', 'Seen ') + fmtAgo(t);
+    return Date.now() - t < 120000 ? '🟢 En ligne' : 'Vu ' + fmtAgo(t);
   }catch(e){ return ''; }
 }
 
 /* =========================================================
-   POSTS (publications + likes séparés)
+   TAG @pseudo -> notification automatique (✅ NOUVEAU)
+   ========================================================= */
+async function notifyTags(text, fromUid, fromName, context){
+  if(!text) return;
+  const tags = text.match(/@[A-Za-z0-9._-]{3,20}/g) || [];
+  if(!tags.length) return;
+  for(const tag of tags){
+    const nm = tag.slice(1).toLowerCase();
+    try{
+      const r = await fetch(await uurl('users') + '&orderBy=%22name%22&equalTo=' + encodeURIComponent('"' + nm + '"') + '&limitToFirst=1');
+      if(!r.ok) continue;
+      const o = Object.entries(await r.json() || {})[0];
+      if(!o || o[0] === fromUid) continue;
+      const targetUid = o[0], targetName = o[1].name || nm;
+      const notif = { type:'mention', from: fromUid, name: fromName, text: 't\'a mentionné dans ' + context + ' : ' + short(text, 60), t: Date.now() };
+      await fetch(await uurl('notifs/' + targetUid), { method:'POST', body: JSON.stringify(notif) });
+    }catch(e){}
+  }
+}
+HK.notifyTags = notifyTags;
+
+/* =========================================================
+   ⏸️ SUITE DANS LA PARTIE 4/4
+   ========================================================= */
+   /* =========================================================
+   11. POSTS — Publications (avec tags @pseudo)
    ========================================================= */
 function postEl(id, p, pm){
   const d = document.createElement('article'); d.className = 'post';
@@ -1880,25 +1962,40 @@ function postEl(id, p, pm){
     + '<p></p><div class="post-act"></div>';
   $('i', d).textContent = (p.name || '?').charAt(0).toUpperCase();
   setAv($('i', d), p.uid);
-  $('.po-head b', d).textContent = p.name;
-  if(p.uid){ const hb = $('.po-head b', d); hb.style.cursor = 'pointer'; hb.addEventListener('click', () => openProfile(p.uid, p.name)); }
+
+  /* ✅ Badge à côté du nom */
+  const bEl = $('.po-head b', d);
+  bEl.innerHTML = '';
+  bEl.appendChild(document.createTextNode(p.name || '?'));
+  if(p.uid){
+    const bg0 = BADGES[p.uid];
+    if(bg0 && BADGE_INFO[bg0]){
+      const bd0 = document.createElement('span');
+      bd0.className = 'bdg'; bd0.style.color = BADGE_INFO[bg0].c; bd0.innerHTML = BADGE_SVG;
+      bEl.appendChild(bd0);
+    }
+    bEl.style.cursor = 'pointer';
+    bEl.addEventListener('click', () => openProfile(p.uid, p.name));
+  }
+
   $('.po-head span', d).textContent = when(p.t) + (p.ta ? ' · ⏳ ' + Math.max(1, Math.ceil((p.ta + 172800000 - Date.now()) / 3600000)) + 'h' : '');
-  { const bg = BADGES[p.uid], bc = bg && BADGE_INFO[bg] ? BADGE_INFO[bg].c : '';
-    if(bc){ const sp = $('.po-head span', d); sp.style.color = bc; sp.style.fontWeight = '700'; } }
   if(okImg(p.img)) $('img', d).src = p.img;
   $('p', d).textContent = p.text || '';
+
   const act = $('.post-act', d);
-  const mk = (txt, cls, fn) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn ' + cls; b.textContent = txt; b.addEventListener('click', fn); act.appendChild(b); return b; };
+  const mk = (txt, cls, fn) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn ' + cls; b.innerHTML = txt; b.addEventListener('click', fn); act.appendChild(b); return b; };
+
   if(pm === 'pending'){
-    mk('✅ ' + L('Approuver', 'Approve'), 'btn-primary', () => approve(id, p));
-    mk('🗑 ' + L('Refuser', 'Reject'), 'btn-ghost', () => remove('pub_attente', id, loadPending));
+    mk('✅ Approuver', 'btn-primary', () => approve(id, p));
+    mk('🗑 Refuser', 'btn-ghost', () => remove('pub_attente', id, loadPending));
     return d;
   }
+
   // Likes
   let liked = !!(me && p._likes && p._likes[me.uid]);
   let nl = p._likes ? Object.keys(p._likes).length : 0;
   const lb = mk('', 'btn-ghost', async () => {
-    if(!me) return openAuth('Connecte-toi pour aimer une publication.');
+    if(!me) return openAuth('Connecte-toi pour aimer.');
     liked = !liked; nl += liked ? 1 : -1; paint();
     try{
       if(liked){
@@ -1911,12 +2008,13 @@ function postEl(id, p, pm){
       }
     }catch(e){ liked = !liked; nl += liked ? 1 : -1; paint(); toast('Action impossible.', true); }
   });
-  const paint = () => { lb.textContent = (liked ? '❤️ ' : '🤍 ') + nl; };
+  const paint = () => { lb.innerHTML = (liked ? EMO.heart : EMO.hearto) + ' <span>' + nl + '</span>'; };
   paint();
+
   // Commentaires
   const cmts = p.comments ? Object.entries(p.comments).sort((a, b) => a[1].t - b[1].t) : [];
-  const cb = mk('💬 ' + cmts.length, 'btn-ghost', () => { box.style.display = box.style.display === 'none' ? 'block' : 'none'; });
   const box = document.createElement('div'); box.className = 'cmts'; box.style.display = 'none';
+  const cb = mk(EMO.chat + ' <span>' + cmts.length + '</span>', 'btn-ghost', () => { box.style.display = box.style.display === 'none' ? 'block' : 'none'; });
   const list = document.createElement('div');
   const addCm = (cid, c) => {
     const e = document.createElement('div'); e.className = 'cm'; e.innerHTML = '<span class="cav"></span><div class="cbody"><b></b> <span class="ct"></span><small></small></div>';
@@ -1926,7 +2024,7 @@ function postEl(id, p, pm){
     { const a = $('.cav', e); a.textContent = (c.name || '?').charAt(0).toUpperCase(); setAv(a, c.uid); }
     { const bd = badgeEl(c.uid); if(bd) $('b', e).appendChild(bd); }
     if(token && cid){
-      const x = document.createElement('button'); x.type = 'button'; x.className = 'x'; x.textContent = '🗑';
+      const x = document.createElement('button'); x.type = 'button'; x.className = 'x'; x.innerHTML = EMO.trash;
       x.addEventListener('click', async () => { try{ await api('DELETE', 'publications/' + id + '/comments/' + cid); e.remove(); }catch(err){ toast('Action impossible.', true); } });
       e.appendChild(x);
     }
@@ -1935,27 +2033,29 @@ function postEl(id, p, pm){
   cmts.forEach(([cid, c]) => addCm(cid, c));
   const row = document.createElement('div'); row.className = 'cm-row';
   row.innerHTML = me
-    ? '<input type="text" maxlength="200" placeholder="Écris un commentaire..."><button type="button" class="btn btn-primary">' + L('Envoyer', 'Send') + '</button>'
+    ? '<input type="text" maxlength="200" placeholder="Écris un commentaire... Utilise @pseudo"><button type="button" class="btn btn-primary">Envoyer</button>'
     : '<button type="button" class="btn btn-ghost">🔒 Se connecter pour commenter</button>';
   const ti = $('input', row), sb = $('button', row);
   let lastCm = 0;
   sb.addEventListener('click', async () => {
     if(!me) return openAuth('Connecte-toi pour commenter.');
     const text = ti.value.trim();
-    if(!text) return toast(L('Écris un commentaire.', 'Write a comment.'), true);
-    if(Date.now() - lastCm < 15000) return toast(L('Attends quelques secondes.', 'Wait a few seconds.'), true);
+    if(!text) return toast('Écris un commentaire.', true);
+    if(Date.now() - lastCm < 15000) return toast('Attends quelques secondes.', true);
     const c = { name: me.name, uid: me.uid, text, t: Date.now() };
     try{
       const r = await fetch(await uurl('publications/' + id + '/comments'), { method:'POST', body: JSON.stringify(c) });
       if(!r.ok) throw 0;
       lastCm = Date.now();
       if(p.uid && p.uid !== me.uid) pushNotif(p.uid, 'comment', 'a commenté : ' + text);
-      addCm('', c); cmts.push(['', c]); cb.textContent = '💬 ' + cmts.length; ti.value = '';
+      /* ✅ Notification pour les tags @pseudo */
+      notifyTags(text, me.uid, me.name, 'un commentaire');
+      addCm('', c); cmts.push(['', c]); cb.innerHTML = EMO.chat + ' <span>' + cmts.length + '</span>'; ti.value = '';
     }catch(err){ toast('Commentaire impossible.', true); }
   });
   box.append(list, row); d.appendChild(box);
-  mk('📤 Partager', 'btn-ghost', () => window.open('https://wa.me/?text=' + encodeURIComponent('📰 ' + p.name + ' — Hacken Store :\n' + (p.text || '') + '\n' + location.href.split('#')[0]), '_blank'));
-  if(token) mk('🗑 Supprimer', 'btn-ghost', () => remove('publications', id, loadFeed));
+  mk(EMO.share, 'btn-ghost', () => window.open('https://wa.me/?text=' + encodeURIComponent('📰 ' + p.name + ' — Hacken Store :\n' + (p.text || '') + '\n' + location.href.split('#')[0]), '_blank'));
+  if(token) mk(EMO.trash, 'btn-ghost', () => remove('publications', id, loadFeed));
   return d;
 }
 async function approve(id, p){
@@ -1964,13 +2064,15 @@ async function approve(id, p){
     delete clean._likes;
     await api('PUT', 'publications/' + id, Object.assign(clean, { ta: Date.now() }));
     await api('DELETE', 'pub_attente/' + id);
+    /* ✅ Notification quand publi approuvée */
+    if(p.uid && p.uid !== me?.uid) pushNotif(p.uid, 'accept', 'ta publication a été approuvée ✅', 'appr_' + id);
     toast('Publication approuvée ✅'); loadPending(); loadFeed();
-  }catch(e){ toast('Action impossible (reconnecte-toi).', true); }
+  }catch(e){ toast('Action impossible.', true); }
 }
 async function remove(node, id, after){
-  if(!confirm(L('Supprimer cette publication ?', 'Delete this post?'))) return;
+  if(!confirm('Supprimer cette publication ?')) return;
   try{ await api('DELETE', node + '/' + id); toast('Supprimée'); after(); }
-  catch(e){ toast('Action impossible (reconnecte-toi).', true); }
+  catch(e){ toast('Action impossible.', true); }
 }
 async function purge(){
   try{
@@ -1979,7 +2081,6 @@ async function purge(){
     for(const id of Object.keys(o || {})) await api('DELETE', 'publications/' + id);
   }catch(e){}
 }
-
 async function purgeTournoi(){
   try{
     const o = await api('GET', 'participants') || {};
@@ -2000,7 +2101,6 @@ async function loadFeed(){
     HK.tReload && HK.tReload(); authUI();
     const o = await r.json() || {};
     const list = Object.entries(o).filter(([k, v]) => v.ta && Date.now() - v.ta < 172800000).sort((a, b) => b[1].ta - a[1].ta);
-    // Récupérer les likes pour chaque post (lecture publique)
     await Promise.all(list.map(async ([id, v]) => {
       try{
         const lr = await fetch(url('likes/' + id));
@@ -2008,13 +2108,13 @@ async function loadFeed(){
       }catch(e){ v._likes = {}; }
     }));
     feed.innerHTML = '';
-    if(!list.length){ feed.innerHTML = '<div class="t-empty">Aucune publication pour le moment. Sois le premier !</div>'; return; }
+    if(!list.length){ feed.innerHTML = '<div class="t-empty">Aucune publication pour le moment.</div>'; return; }
     list.forEach(([id, p]) => feed.appendChild(postEl(id, p, 'feed')));
-  }catch(e){ feed.innerHTML = '<div class="t-empty">Impossible de charger les publications.</div>'; }
+  }catch(e){ feed.innerHTML = '<div class="t-empty">Impossible de charger.</div>'; }
 }
 
 /* =========================================================
-   FORMULAIRE PUBLICATION
+   12. FORMULAIRE PUBLICATION
    ========================================================= */
 let imgData = '';
 $('#pFile').addEventListener('change', async e => {
@@ -2023,7 +2123,7 @@ $('#pFile').addEventListener('change', async e => {
   try{
     imgData = await compress(f);
     $('#pPrev').src = imgData; $('#pPrevBox').style.display = 'block';
-  }catch(err){ imgData = ''; $('#pFile').value = ''; toast('Image trop lourde ou illisible.', true); }
+  }catch(err){ imgData = ''; $('#pFile').value = ''; toast('Image trop lourde.', true); }
 });
 $('#pRm').addEventListener('click', () => { imgData = ''; $('#pFile').value = ''; $('#pPrevBox').style.display = 'none'; });
 $('#pForm').addEventListener('submit', async e => {
@@ -2041,14 +2141,16 @@ $('#pForm').addEventListener('submit', async e => {
     const r = await fetch(await uurl('pub_attente'), { method:'POST', body: JSON.stringify(post) });
     if(!r.ok) throw 0;
     try{ localStorage.setItem('hkstore-lastpost', String(Date.now())); }catch(x){}
+    /* ✅ Notifier les personnes taguées */
+    if(text) notifyTags(text, me.uid, me.name, 'une publication');
     $('#pForm').reset(); imgData = ''; $('#pPrevBox').style.display = 'none';
     try{ const h = await fb('GET', 'admin_handler'); if(h && h.uid) pushNotif(h.uid, 'admin', 'a envoyé une publication à valider'); }catch(x){}
     toast('📨 Envoyé ! Visible après validation.');
-  }catch(err){ toast('Envoi impossible, réessaie.', true); }
+  }catch(err){ toast('Envoi impossible.', true); }
 });
 
 /* =========================================================
-   PROFIL + AMIS + PARRAINAGE
+   13. PROFIL + AMIS + PARRAINAGE (✅ plein écran + zoom photo)
    ========================================================= */
 const GOAL = 100;
 const refCode = () => me.uid.slice(0, 8);
@@ -2067,7 +2169,7 @@ async function useRef(code){
     pushNotif(o[0], 'ref', 'a utilisé ton code parrain : +2 points 🎁', 'ref_' + me.uid);
     try{ localStorage.removeItem('hkstore-ref'); }catch(e){}
     toast('Parrain validé ✅'); return true;
-  }catch(e){ toast('Code refusé (déjà parrainé ou invalide).', true); return false; }
+  }catch(e){ toast('Code refusé.', true); return false; }
 }
 
 function nameB(uid, name){ const b = el('b', '', name); const bd = badgeEl(uid); if(bd) b.appendChild(bd); return b; }
@@ -2096,7 +2198,7 @@ function pickAvatar(){
   f.addEventListener('change', async () => {
     if(!f.files[0]) return;
     try{
-      const d = await squareImg(f.files[0], 160);
+      const d = await squareImg(f.files[0], 200);
       await fb('PUT', 'avatars/' + me.uid, d);
       AV[me.uid] = Promise.resolve(d);
       toast('Photo mise à jour ✅'); openProfile(me.uid, me.name); loadFeed();
@@ -2126,22 +2228,36 @@ async function openProfile(uid, name){
     const head = el('div', 'prof-head');
     const bg = BADGES[uid], bc = bg && BADGE_INFO[bg] ? BADGE_INFO[bg].c : '';
     if(bc) head.style.cssText = 'padding:16px 10px;border-radius:16px;border:1px solid ' + bc + ';background:linear-gradient(180deg,color-mix(in srgb,' + bc + ' 24%,transparent),transparent 75%);';
-    { const av = el('div', 'avatar', nm.charAt(0).toUpperCase()); setAv(av, uid);
-      if(bc) av.style.boxShadow = '0 0 0 3px ' + bc + ',0 0 22px ' + bc + '66';
-      if(mine){ av.classList.add('edit'); av.title = 'Changer ma photo'; av.addEventListener('click', pickAvatar); }
-      head.appendChild(av); }
-    { const nb = nameB(uid, nm); if(bc) nb.style.color = bc; head.appendChild(nb); }
-    const meta = (user.t ? L('Membre depuis le ', 'Member since ') + new Date(user.t).toLocaleDateString(loc) : '')
-      + (mine ? ' · ' + Object.keys(friends).length + L(' ami(s)', ' friend(s)') : '');
+
+    /* ✅ Avatar avec zoom sur tap */
+    const av = el('div', 'avatar', nm.charAt(0).toUpperCase()); setAv(av, uid);
+    if(bc) av.style.boxShadow = '0 0 0 3px ' + bc + ',0 0 22px ' + bc + '66';
+    if(mine){
+      av.classList.add('edit'); av.title = 'Changer ma photo';
+      av.addEventListener('click', pickAvatar);
+    } else {
+      av.addEventListener('click', () => {
+        avData(uid).then(url => {
+          if(!url) return;
+          $('#lbImg').style.display = 'block'; $('#lbImg').src = url;
+          $('#lbTitle').textContent = nm; $('#lbCap').textContent = '';
+          open('#lightboxOverlay');
+        });
+      });
+    }
+    head.appendChild(av);
+    head.appendChild(nameB(uid, nm));
+    const meta = (user.t ? 'Membre depuis le ' + new Date(user.t).toLocaleDateString(loc) : '')
+      + (mine ? ' · ' + Object.keys(friends).length + ' ami(s)' : '');
     if(meta) head.appendChild(el('div', 'prof-meta', meta));
-    if(!mine && refs && Object.keys(refs).length) head.appendChild(el('div', 'prof-meta', '🎁 ' + Object.keys(refs).length * 2 + L(' points de parrainage', ' referral points')));
+    if(!mine && refs && Object.keys(refs).length) head.appendChild(el('div', 'prof-meta', '🎁 ' + Object.keys(refs).length * 2 + ' points'));
     if(!mine && user.bio) head.appendChild(el('div', 'prof-bio', user.bio));
     box.appendChild(head);
     presence(uid).then(t => { if(t) head.appendChild(el('div', 'prof-meta', t)); });
 
     if(mine){
       const s = el('div', 'prof-sec');
-      const ta = el('textarea'); ta.maxLength = 160; ta.placeholder = L('Ta bio (160 caractères max)', 'Your bio (160 characters max)');
+      const ta = el('textarea'); ta.maxLength = 160; ta.placeholder = 'Ta bio (160 caractères max)';
       ta.value = user.bio || '';
       const sv = el('button', 'btn btn-ghost btn-block', '💾 Enregistrer la bio'); sv.type = 'button'; sv.style.marginTop = '8px';
       sv.addEventListener('click', async () => { try{ await fb('PUT', 'users/' + me.uid + '/bio', ta.value.trim()); toast('Bio enregistrée ✅'); }catch(e){ toast('Action impossible.', true); } });
@@ -2150,7 +2266,7 @@ async function openProfile(uid, name){
 
       const rs = Object.entries(rq || {});
       if(rs.length){
-        const s2 = el('div', 'prof-sec'); s2.appendChild(el('div', 'subhead', '🔔 ' + L('Demandes d\'amis', 'Friend requests') + ' (' + rs.length + ')'));
+        const s2 = el('div', 'prof-sec'); s2.appendChild(el('div', 'subhead', '🔔 Demandes d\'amis (' + rs.length + ')'));
         rs.forEach(([fid, v]) => {
           const r = frow(fid, v.name);
           const ok = el('button', 'btn btn-primary', '✔'); ok.type = 'button';
@@ -2162,8 +2278,8 @@ async function openProfile(uid, name){
         box.appendChild(s2);
       }
       const fs = Object.entries(friends);
-      const s3 = el('div', 'prof-sec'); s3.appendChild(el('div', 'subhead', '👥 ' + L('Mes amis', 'My friends') + ' (' + fs.length + ')'));
-      if(!fs.length) s3.appendChild(el('div', 't-empty', L('Pas encore d\'amis.', 'No friends yet.')));
+      const s3 = el('div', 'prof-sec'); s3.appendChild(el('div', 'subhead', '👥 Mes amis (' + fs.length + ')'));
+      if(!fs.length) s3.appendChild(el('div', 't-empty', 'Pas encore d\'amis.'));
       fs.forEach(([fid, v]) => {
         const r = frow(fid, v.name);
         const m = el('button', 'btn btn-primary', '💬'); m.type = 'button';
@@ -2172,36 +2288,36 @@ async function openProfile(uid, name){
       });
       box.appendChild(s3);
 
-      const s4 = el('div', 'prof-sec'); s4.appendChild(el('div', 'subhead', '🔎 ' + L('Trouver un joueur', 'Find a player')));
-      const row = el('div', 'chat-row'); const qi = el('input'); qi.type = 'text'; qi.placeholder = L('Pseudo exact', 'Exact username');
-      const qb = el('button', 'btn btn-ghost', L('Chercher', 'Search')); qb.type = 'button';
+      const s4 = el('div', 'prof-sec'); s4.appendChild(el('div', 'subhead', '🔎 Trouver un joueur'));
+      const row = el('div', 'chat-row'); const qi = el('input'); qi.type = 'text'; qi.placeholder = 'Pseudo exact';
+      const qb = el('button', 'btn btn-ghost', 'Chercher'); qb.type = 'button';
       qb.addEventListener('click', async () => {
         const q = qi.value.trim(); if(!q) return;
         try{
           const r = await fetch(await uurl('users') + '&orderBy=%22name%22&equalTo=' + encodeURIComponent('"' + q + '"'));
           if(!r.ok) throw 0;
           const o = Object.entries(await r.json() || {})[0];
-          if(!o) return toast(L('Aucun joueur avec ce pseudo.', 'No player with this username.'), true);
+          if(!o) return toast('Aucun joueur avec ce pseudo.', true);
           openProfile(o[0], o[1].name);
         }catch(e){ toast('Recherche impossible.', true); }
       });
       row.append(qi, qb); s4.appendChild(row); box.appendChild(s4);
 
-      const lo = el('button', 'btn btn-ghost btn-block', L('Se déconnecter', 'Log out')); lo.type = 'button'; lo.style.marginTop = '16px';
+      const lo = el('button', 'btn btn-ghost btn-block', 'Se déconnecter'); lo.type = 'button'; lo.style.marginTop = '16px';
       lo.addEventListener('click', () => logout()); box.appendChild(lo);
     } else {
       const a = el('div', 'prof-acts');
       const mk = (t, c, f) => { const b = el('button', 'btn ' + c, t); b.type = 'button'; b.addEventListener('click', f); a.appendChild(b); };
       if(friends[uid]){
         mk('💬 Message', 'btn-primary', () => openChat(uid, nm));
-        mk(L('Retirer', 'Remove'), 'btn-ghost', async () => {
-          if(!confirm(L('Retirer cet ami ?', 'Remove this friend?'))) return;
+        mk('Retirer', 'btn-ghost', async () => {
+          if(!confirm('Retirer cet ami ?')) return;
           try{ await fb('DELETE', 'friends/' + me.uid + '/' + uid); await fb('DELETE', 'friends/' + uid + '/' + me.uid); openProfile(uid, nm); }
           catch(e){ toast('Action impossible.', true); }
         });
-      } else if(got) mk('✔ ' + L('Accepter sa demande', 'Accept request'), 'btn-primary', () => acceptFr(uid, nm));
-      else if(sent) mk('⏳ ' + L('Demande envoyée', 'Request sent'), 'btn-ghost', () => {});
-      else mk('➕ ' + L('Ajouter en ami', 'Add friend'), 'btn-primary', async () => {
+      } else if(got) mk('✔ Accepter sa demande', 'btn-primary', () => acceptFr(uid, nm));
+      else if(sent) mk('⏳ Demande envoyée', 'btn-ghost', () => {});
+      else mk('➕ Ajouter en ami', 'btn-primary', async () => {
         try{ await fb('PUT', 'friend_req/' + uid + '/' + me.uid, { name: me.name, t: Date.now() }); toast('Demande envoyée 🤝'); openProfile(uid, nm); }
         catch(e){ toast('Action impossible.', true); }
       });
@@ -2212,41 +2328,82 @@ async function openProfile(uid, name){
 
 function renderRef(box, refs, myRef){
   const list = Object.values(refs || {}).sort((a, b) => b.t - a.t), pts = list.length * 2;
-  const s = el('div', 'prof-sec'); s.appendChild(el('div', 'subhead', '🎁 ' + L('Parrainage', 'Referral')));
+  const s = el('div', 'prof-sec'); s.appendChild(el('div', 'subhead', '🎁 Parrainage'));
   const c = el('div', 'ref'); s.appendChild(c);
   const top = el('div', 'ref-top');
-  top.append(el('b', '', pts + ' pts'), el('span', '', list.length + L(' filleul(s) · 2 pts par ami invité', ' referral(s) · 2 pts per friend')));
+  top.append(el('b', '', pts + ' pts'), el('span', '', list.length + ' filleul(s) · 2 pts/ami'));
   const bar = el('div', 'ref-bar'); const fill = el('i'); fill.style.width = Math.min(100, pts / GOAL * 100) + '%'; bar.appendChild(fill);
   c.append(top, bar, el('div', 'prof-meta',
-    pts >= GOAL ? L('🎉 Objectif atteint !', '🎉 Goal reached!')
-      : L('Encore ', '') + (GOAL - pts) + L(' pts pour demander un badge', ' pts left to request a badge')));
+    pts >= GOAL ? '🎉 Objectif atteint !' : 'Encore ' + (GOAL - pts) + ' pts pour demander un badge'));
   const link = location.href.split('#')[0].split('?')[0] + '?ref=' + refCode();
   const row = el('div', 'ref-code'); row.appendChild(el('code', '', refCode()));
-  const cp = el('button', 'btn btn-ghost', '📋 ' + L('Lien', 'Link')); cp.type = 'button';
-  cp.addEventListener('click', () => copyText(link, L('Lien copié', 'Link copied')));
-  const sh = el('button', 'btn btn-wa', L('Partager', 'Share')); sh.type = 'button';
+  const cp = el('button', 'btn btn-ghost', '📋 Lien'); cp.type = 'button';
+  cp.addEventListener('click', () => copyText(link, 'Lien copié'));
+  const sh = el('button', 'btn btn-wa', 'Partager'); sh.type = 'button';
   sh.addEventListener('click', () => window.open('https://wa.me/?text=' + encodeURIComponent(HK.refMsg(refCode(), link)), '_blank'));
   row.append(cp, sh); c.appendChild(row);
   if(pts >= GOAL){
-    const g = el('button', 'btn btn-gold btn-block', '🏅 ' + L('Demander mon badge', 'Request my badge')); g.type = 'button'; g.style.marginTop = '12px';
+    const g = el('button', 'btn btn-gold btn-block', '🏅 Demander mon badge'); g.type = 'button'; g.style.marginTop = '12px';
     g.addEventListener('click', () => window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent('Bonjour, je suis ' + me.name + ' (code ' + refCode() + '). J\'ai ' + pts + ' points de parrainage.'), '_blank'));
     c.appendChild(g);
   }
-  if(list.length) c.appendChild(el('div', 'ref-list', L('Filleuls : ', 'Referrals: ') + list.slice(0, 12).map(x => x.name).join(', ') + (list.length > 12 ? '…' : '')));
+  if(list.length) c.appendChild(el('div', 'ref-list', 'Filleuls : ' + list.slice(0, 12).map(x => x.name).join(', ') + (list.length > 12 ? '…' : '')));
   if(!myRef){
-    const r2 = el('div', 'chat-row'); const qi = el('input'); qi.type = 'text'; qi.maxLength = 12; qi.placeholder = L('Tu as un code parrain ?', 'Got a referral code?');
-    const qb = el('button', 'btn btn-ghost', L('Valider', 'Confirm')); qb.type = 'button';
+    const r2 = el('div', 'chat-row'); const qi = el('input'); qi.type = 'text'; qi.maxLength = 12; qi.placeholder = 'Tu as un code parrain ?';
+    const qb = el('button', 'btn btn-ghost', 'Valider'); qb.type = 'button';
     qb.addEventListener('click', async () => { if(await useRef(qi.value)) openProfile(me.uid, me.name); });
     r2.append(qi, qb); c.appendChild(r2);
-  } else c.appendChild(el('div', 'prof-meta', '✔ ' + L('Tu as été parrainé', 'You were referred')));
+  } else c.appendChild(el('div', 'prof-meta', '✔ Tu as été parrainé'));
   box.appendChild(s);
 }
 
 /* =========================================================
-   NOTIFICATIONS / BANNIÈRES / PRÉSENCE
+   14. TOP 3 PARRAINS (✅ NOUVEAU - visible 20h-22h)
+   ========================================================= */
+async function loadTopRefs(){
+  const sec = $('#topRefSection'), list = $('#topRefList'), timer = $('#topRefTimer');
+  if(!sec || !list) return;
+  const h = new Date().getHours();
+  const visible = h >= 20 && h < 22;
+  if(!visible){ sec.style.display = 'none'; return; }
+  /* Timer d'expiration */
+  const now = new Date();
+  const end = new Date(now); end.setHours(22, 0, 0, 0);
+  const left = Math.max(0, Math.floor((end - now) / 1000));
+  if(timer) timer.textContent = '(' + String(Math.floor(left/60)).padStart(2,'0') + ':' + String(left%60).padStart(2,'0') + ')';
+  try{
+    const r = await fetch(url('referrals'));
+    if(!r.ok) throw 0;
+    const o = await r.json() || {};
+    const users = await (await fetch(url('users'))).json() || {};
+    const counts = {};
+    Object.entries(o).forEach(([uid, refs]) => { counts[uid] = Object.keys(refs || {}).length; });
+    const top = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 3);
+    if(!top.length || top[0][1] === 0){ sec.style.display = 'none'; return; }
+    sec.style.display = 'block';
+    list.innerHTML = '';
+    await ensureBadges();
+    top.forEach(([uid, n], i) => {
+      const row = el('div', 'top-ref-row');
+      const rank = el('div', 'rank g' + (i + 1), String(i + 1));
+      const av = el('div', 'av', (users[uid] && users[uid].name || '?').charAt(0).toUpperCase()); setAv(av, uid);
+      const nmEl = el('div', 'nm');
+      nmEl.appendChild(nameB(uid, (users[uid] && users[uid].name) || '?'));
+      nmEl.addEventListener('click', () => openProfile(uid, (users[uid] && users[uid].name) || '?'));
+      const pts = el('div', 'pts', n * 2 + ' pts');
+      row.append(rank, av, nmEl, pts);
+      list.appendChild(row);
+    });
+  }catch(e){ sec.style.display = 'none'; }
+}
+setInterval(loadTopRefs, 30000);
+loadTopRefs();
+
+/* =========================================================
+   15. NOTIFICATIONS / BANNIÈRES
    ========================================================= */
 const TITLE0 = document.title;
-const ICONS = { like:'❤️', comment:'💬', accept:'🤝', badge:'✔', ref:'🎁', group:'👥', mention:'📣', admin:'🔔' };
+const ICONS = { like:'❤️', comment:'💬', accept:'✅', badge:'✔', ref:'🎁', group:'👥', mention:'📣', admin:'🔔', friend:'🤝' };
 const SUPPORT = 'Support HK ';
 const annSeen = () => { try{ let s = localStorage.getItem('hk-ann-seen'); if(s === null){ s = String(Date.now()); localStorage.setItem('hk-ann-seen', s); } return +s; }catch(e){ return 0; } };
 const annMark = () => { try{ localStorage.setItem('hk-ann-seen', String(Date.now())); }catch(e){} };
@@ -2321,17 +2478,17 @@ async function poll(){
     setCounts(inc.length, Object.keys(ST.req).length + nn);
     const items = [];
     inc.forEach(([k, x]) => { if(k !== ST.open) items.push({ key:'m:' + k + ':' + x.t, kind:'msg', icon:'💬', uid:k, title:'💬 ' + x.name, text:x.text, onClick:() => openChat(k, x.name) }); });
-    Object.entries(ST.req).forEach(([k, v]) => items.push({ key:'r:' + k, kind:'req', icon:'🤝', uid:k, title:'🤝 ' + v.name, text:L('veut devenir ton ami', 'wants to be your friend'), onClick:() => openHub('notif') }));
+    Object.entries(ST.req).forEach(([k, v]) => items.push({ key:'r:' + k, kind:'req', icon:'🤝', uid:k, title:'🤝 ' + v.name, text:'veut devenir ton ami', onClick:() => openHub('notif') }));
     ST.ann.forEach(([k, a]) => { if(!a.r) items.push({ key:'a:' + k, kind:'ntf', icon:'📢', title:SUPPORT, text:short(a.text, 80), onClick:() => openHub('notif') }); });
     Object.entries(ST.notifs).forEach(([k, x]) => { if(!x.r) items.push({ key:'n:' + k, kind:'ntf', icon:ICONS[x.type] || '🔔', uid:x.from !== 'admin' ? x.from : '', title:x.name, text:x.text, onClick:() => openHub('notif') }); });
     const fresh = items.filter(i => !ST.seen.has(i.key));
     fresh.forEach(i => ST.seen.add(i.key));
     if(!ST.init){
       ST.init = true;
-      if(items.length) banner({ icon:'🔔', kind:'ntf', title:L('Tu as ' + items.length + ' nouveauté' + (items.length > 1 ? 's' : ''), 'You have ' + items.length + ' new item' + (items.length > 1 ? 's' : '')), text:inc.length + L(' message(s) non lu(s) · ', ' unread · ') + (items.length - inc.length) + L(' notification(s)', ' notification(s)'), onClick:() => openHub(inc.length ? 'msg' : 'notif'), ms:8000 });
+      if(items.length) banner({ icon:'🔔', kind:'ntf', title:'Tu as ' + items.length + ' nouveauté(s)', text:inc.length + ' message(s) non lu(s) · ' + (items.length - inc.length) + ' notification(s)', onClick:() => openHub(inc.length ? 'msg' : 'notif'), ms:8000 });
     } else if(fresh.length){
       ping(); ring();
-      if(fresh.length > 3) banner({ icon:'🔔', kind:'ntf', title:fresh.length + L(' nouvelles notifications', ' new notifications'), text:L('Touche pour voir', 'Tap to view'), onClick:() => openHub('msg') });
+      if(fresh.length > 3) banner({ icon:'🔔', kind:'ntf', title:fresh.length + ' nouvelles notifications', text:'Touche pour voir', onClick:() => openHub('msg') });
       else fresh.forEach(banner);
       const f = fresh[0]; flashTitle(f.title + ' : ' + f.text);
       if(document.hidden && window.Notification && Notification.permission === 'granted'){
@@ -2345,11 +2502,11 @@ async function poll(){
 }
 
 /* =========================================================
-   HUB (Messages + Notifications)
+   16. HUB
    ========================================================= */
 let hubTab = 'msg', chatT = 0;
 function openHub(tab){
-  if(!me) return openAuth('Connecte-toi pour voir tes messages.');
+  if(!me) return openAuth('Connecte-toi.');
   hubTab = tab; closeAll(); ST.open = ''; clearInterval(chatT);
   open('#hubOverlay'); renderHub(); poll();
 }
@@ -2362,7 +2519,7 @@ function renderHub(){
   if(hubTab === 'msg') renderConvs(box); else renderNotifs(box);
 }
 async function renderConvs(box){
-  const sr = el('input', 'hub-search'); sr.type = 'text'; sr.placeholder = '🔎 ' + L('Chercher une conversation', 'Search a conversation');
+  const sr = el('input', 'hub-search'); sr.type = 'text'; sr.placeholder = '🔎 Chercher une conversation';
   box.appendChild(sr);
   const list = el('div'); box.appendChild(list);
   let fr = {};
@@ -2375,13 +2532,7 @@ async function renderConvs(box){
     list.innerHTML = ''; const q = sr.value.trim().toLowerCase();
     const l = rows.filter(r => !q || r.name.toLowerCase().includes(q));
     if(!l.length){
-      list.appendChild(el('div', 't-empty', rows.length ? L('Aucun résultat.', 'No results.') : L('Pas encore de conversation.', 'No conversations yet.')));
-      if(!rows.length){
-        const b = el('button', 'btn btn-primary btn-block', '🔎 ' + L('Trouver des amis', 'Find friends'));
-        b.type = 'button'; b.style.marginTop = '10px';
-        b.addEventListener('click', () => openProfile(me.uid, me.name));
-        list.appendChild(b);
-      }
+      list.appendChild(el('div', 't-empty', rows.length ? 'Aucun résultat.' : 'Pas encore de conversation.'));
       return;
     }
     l.forEach(r => {
@@ -2389,9 +2540,9 @@ async function renderConvs(box){
       const row = el('div', 'conv' + (unread ? ' unread' : ''));
       const av = el('div', 'av-lg', r.name.charAt(0).toUpperCase()); setAv(av, r.id);
       const mid = el('div', 'conv-mid'); mid.appendChild(nameB(r.id, r.name));
-      mid.appendChild(el('span', '', r.e ? (r.e.from === me.uid ? L('Toi : ', 'You: ') : '') + r.e.text : L('Dis bonjour', 'Say hello')));
+      mid.appendChild(el('span', '', r.e ? (r.e.from === me.uid ? 'Toi : ' : '') + r.e.text : 'Dis bonjour'));
       const right = el('div', 'conv-r');
-      if(r.e) right.appendChild(el('small', '', dayLbl(r.e.t) === L('Aujourd\'hui', 'Today') ? hm(r.e.t) : dayLbl(r.e.t)));
+      if(r.e) right.appendChild(el('small', '', hm(r.e.t)));
       if(unread) right.appendChild(el('i', 'dotb'));
       row.append(av, mid, right);
       row.addEventListener('click', () => openChat(r.id, r.name));
@@ -2404,16 +2555,16 @@ const NOPEN = new Set();
 function renderNotifs(box){
   const tools = el('div', 'hub-tools');
   const mkb = (t, f) => { const b = el('button', 'btn btn-ghost', t); b.type = 'button'; b.addEventListener('click', f); tools.appendChild(b); };
-  mkb('✔ ' + L('Tout lu', 'Mark all read'), async () => {
+  mkb('✔ Tout lu', async () => {
     await Promise.all(Object.entries(ST.notifs).filter(([k, n]) => !n.r).map(([k]) => fb('PUT', 'notifs/' + me.uid + '/' + k + '/r', true).catch(() => {})));
-    annMark(); toast(L('Tout est lu', 'All read')); poll();
+    annMark(); toast('Tout est lu'); poll();
   });
-  mkb(SND ? '🔊 ' + L('Son : oui', 'Sound: on') : '🔇 ' + L('Son : non', 'Sound: off'), () => { SND = !SND; try{ localStorage.setItem('hkstore-snd', SND ? '1' : '0'); }catch(e){} renderHub(); });
-  if('Notification' in window && Notification.permission === 'default') mkb('🔔 ' + L('Alertes navigateur', 'Browser alerts'), () => Notification.requestPermission().then(renderHub));
+  mkb(SND ? '🔊 Son : oui' : '🔇 Son : non', () => { SND = !SND; try{ localStorage.setItem('hkstore-snd', SND ? '1' : '0'); }catch(e){} renderHub(); });
+  if('Notification' in window && Notification.permission === 'default') mkb('🔔 Alertes navigateur', () => Notification.requestPermission().then(renderHub));
   box.appendChild(tools);
   const rq = Object.entries(ST.req || {});
   if(rq.length){
-    box.appendChild(el('div', 'subhead', '🤝 ' + L('Demandes d\'amis', 'Friend requests')));
+    box.appendChild(el('div', 'subhead', '🤝 Demandes d\'amis'));
     rq.forEach(([fid, v]) => {
       const r = frow(fid, v.name);
       const ok = el('button', 'btn btn-primary', '✔'); ok.type = 'button'; ok.addEventListener('click', () => acceptFr(fid, v.name));
@@ -2422,9 +2573,9 @@ function renderNotifs(box){
       r.append(ok, no); box.appendChild(r);
     });
   }
-  box.appendChild(el('div', 'subhead', L('Activité', 'Activity')));
+  box.appendChild(el('div', 'subhead', 'Activité'));
   const nf = Object.entries(ST.notifs || {}).concat(ST.ann || []).sort((a, b) => b[1].t - a[1].t).slice(0, 40);
-  if(!nf.length) box.appendChild(el('div', 't-empty', L('Aucune notification pour le moment.', 'No notifications yet.')));
+  if(!nf.length) box.appendChild(el('div', 't-empty', 'Aucune notification.'));
   nf.forEach(([k, n]) => {
     const row = el('div', 'conv notif' + (n.r ? '' : ' unread'));
     const av = el('div', 'av-lg', n.ann ? '📢' : (ICONS[n.type] || '🔔'));
@@ -2432,11 +2583,11 @@ function renderNotifs(box){
     const mid = el('div', 'conv-mid'); mid.append(el('b', '', n.name || ''), el('span', '', ' ' + n.text));
     const go = () => {
       if(n.type === 'badge') return openProfile(me.uid, me.name);
-      if(n.type === 'like' || n.type === 'comment'){ closeAll(); return $('#communaute').scrollIntoView({ behavior:'smooth' }); }
+      if(n.type === 'like' || n.type === 'comment' || n.type === 'accept'){ closeAll(); return $('#communaute').scrollIntoView({ behavior:'smooth' }); }
       if(n.type === 'group' || n.type === 'mention'){ closeAll(); return $('#groupes').scrollIntoView({ behavior:'smooth' }); }
       if(n.from && n.from !== 'admin') openProfile(n.from, n.name);
     };
-    const ob = el('button', 'btn btn-ghost btn-sm go', L('Ouvrir ›', 'Open ›')); ob.type = 'button';
+    const ob = el('button', 'btn btn-ghost btn-sm go', 'Ouvrir ›'); ob.type = 'button';
     ob.addEventListener('click', e => { e.stopPropagation(); go(); });
     if(!n.ann && n.type !== 'admin') mid.appendChild(ob);
     const setOpen = on => { mid.classList.toggle('open', on); ob.style.display = on ? 'inline-flex' : 'none'; };
@@ -2458,8 +2609,9 @@ function renderNotifs(box){
     box.appendChild(row);
   });
 }
+
 /* =========================================================
-   CHAT PRIVÉ (48h)
+   17. CHAT PRIVÉ (✅ répondre en glissant)
    ========================================================= */
 const H48 = 172800000;
 function openChat(fid, fname){
@@ -2478,45 +2630,70 @@ function openChat(fid, fname){
   presence(fid).then(t => { st.textContent = t; });
   const list = el('div', 'chat-msgs'); box.appendChild(list);
   const bar = el('div', 'chat-bar'), inp = el('textarea'), sb = el('button', 'chat-send', '➤');
-  inp.rows = 1; inp.maxLength = 500; inp.placeholder = L('Écris un message...', 'Write a message...'); sb.type = 'button';
+  inp.rows = 1; inp.maxLength = 500; inp.placeholder = 'Écris un message... (glisse un message pour répondre)'; sb.type = 'button';
   inp.addEventListener('input', () => { inp.style.height = 'auto'; inp.style.height = Math.min(inp.scrollHeight, 110) + 'px'; });
   const ph = el('label', 'chat-photo'); ph.innerHTML = '📷';
   const pf = document.createElement('input'); pf.type = 'file'; pf.accept = 'image/*'; ph.appendChild(pf);
   pf.addEventListener('change', async () => {
     const f = pf.files[0]; if(!f) return; pf.value = '';
     if(!/^image\//.test(f.type)) return toast('Choisis une image.', true);
-    try{ send(await compress(f, 640, 100000)); }catch(e){ toast('Image trop lourde ou illisible.', true); }
+    try{ send(await compress(f, 640, 100000)); }catch(e){ toast('Image trop lourde.', true); }
   });
   bar.append(ph, inp, sb); box.append(bar);
-  let sig = '', peerRead = 0, first = true, lastKey = '', purged = false;
 
+  /* ✅ Barre de réponse (swipe) */
+  const rb = el('div', 'reply-bar'); rb.style.display = 'none';
+  box.insertBefore(rb, bar);
+  let replyTo = null;
+  const clearReply = () => { replyTo = null; rb.style.display = 'none'; rb.innerHTML = ''; };
+  const setReply = m => {
+    replyTo = { id: m.id || '', text: (m.text || '📷 Photo').slice(0, 80) };
+    rb.innerHTML = ''; rb.style.display = 'flex';
+    const t = el('div', 'rq'); t.append(el('b', '', m.from === me.uid ? 'Toi' : (m.name || fname)), el('span', '', replyTo.text));
+    const c = el('button', 'chat-ic', '✕'); c.type = 'button'; c.addEventListener('click', clearReply);
+    rb.append(t, c); inp.focus();
+  };
+
+  let sig = '', peerRead = 0, first = true, lastKey = '', purged = false;
   function render(msgs, near){
     list.innerHTML = '';
-    if(!msgs.length){ list.appendChild(el('div', 'chat-empty', L('Aucun message. Dis bonjour 👋', 'No messages. Say hello 👋'))); return; }
+    if(!msgs.length){ list.appendChild(el('div', 'chat-empty', 'Aucun message. Dis bonjour 👋')); return; }
     let lastDay = '', lastFrom = '', lastMine = null;
     msgs.forEach(([k, m]) => {
       const dl = dayLbl(m.t);
       if(dl !== lastDay){ list.appendChild(el('div', 'day', dl)); lastDay = dl; lastFrom = ''; }
       const mine = m.from === me.uid;
       const b = el('div', 'bub' + (mine ? ' me' : '') + (lastFrom === m.from ? ' cont' : ''));
+      if(m.reply){
+        const q = el('div', 'quote');
+        q.append(el('b', '', m.reply.name || '?'), el('span', '', m.reply.text || '📷 Photo'));
+        b.appendChild(q);
+      }
       const exp = m.img && Date.now() - m.t > 86400000;
       if(m.img && !exp){
         const im = el('img', 'gi'); im.src = m.img; im.alt = '';
-        im.addEventListener('click', e => { e.stopPropagation(); $('#lbImg').style.display = 'block'; $('#lbImg').src = m.img; $('#lbTitle').textContent = fname; $('#lbCap').textContent = L('Disparaît 24h après l\'envoi', 'Disappears 24h after sending'); open('#lightboxOverlay'); });
+        im.addEventListener('click', e => { e.stopPropagation(); $('#lbImg').style.display = 'block'; $('#lbImg').src = m.img; $('#lbTitle').textContent = fname; $('#lbCap').textContent = 'Disparaît 24h après l\'envoi'; open('#lightboxOverlay'); });
         b.appendChild(im);
       }
-      if(exp){ b.appendChild(el('span', '', '📷 ' + L('Photo expirée', 'Photo expired'))); fb('DELETE', 'chats/' + id + '/' + k + '/img').catch(() => {}); }
+      if(exp){ b.appendChild(el('span', '', '📷 Photo expirée')); fb('DELETE', 'chats/' + id + '/' + k + '/img').catch(() => {}); }
       if(m.text) b.appendChild(el('span', '', m.text));
       b.appendChild(el('small', '', hm(m.t)));
       if(mine){
         b.addEventListener('click', () => b.classList.toggle('act'));
-        const del = el('button', 'del', '🗑 ' + L('Supprimer', 'Delete')); del.type = 'button';
+        const del = el('button', 'del', '🗑 Supprimer'); del.type = 'button';
         del.addEventListener('click', async e => { e.stopPropagation(); try{ await fb('DELETE', 'chats/' + id + '/' + k); sig = ''; pull(); }catch(x){ toast('Suppression impossible.', true); } });
         b.appendChild(del); lastMine = [b, m.t];
       }
+      /* ✅ Swipe pour répondre */
+      let sx = 0, sy = 0;
+      b.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive:true });
+      b.addEventListener('touchend', e => {
+        const t = e.changedTouches[0];
+        if(t.clientX - sx > 70 && Math.abs(t.clientY - sy) < 35){ setReply(Object.assign({ id: k }, m)); }
+      }, { passive:true });
       list.appendChild(b); lastFrom = m.from;
     });
-    if(lastMine) lastMine[0].appendChild(el('em', '', peerRead >= lastMine[1] ? '✓✓ ' + L('Vu', 'Seen') : '✓ ' + L('Envoyé', 'Sent')));
+    if(lastMine) lastMine[0].appendChild(el('em', '', peerRead >= lastMine[1] ? '✓✓ Vu' : '✓ Envoyé'));
     if(near) list.scrollTop = list.scrollHeight;
   }
   async function pull(){
@@ -2555,11 +2732,15 @@ function openChat(fid, fname){
     const m = { from: me.uid, name: me.name, t };
     if(text) m.text = text;
     if(img) m.img = img;
+    if(replyTo) m.reply = replyTo;
     try{
       await fb('POST', 'chats/' + id, m);
       const e = { name: me.name, text: short(text || '📷 Photo', 60), t, from: me.uid };
       fb('PUT', 'inbox/' + fid + '/' + me.uid, e).catch(() => {});
       fb('PUT', 'inbox/' + me.uid + '/' + fid, Object.assign({}, e, { name: fname })).catch(() => {});
+      /* ✅ Notifier les tags */
+      if(text) notifyTags(text, me.uid, me.name, 'un message privé');
+      clearReply();
       pull();
     }catch(err){ if(text) inp.value = text; toast('Message non envoyé.', true); }
   }
@@ -2572,7 +2753,7 @@ function openChat(fid, fname){
 }
 
 /* =========================================================
-   GROUPES
+   18. GROUPES
    ========================================================= */
 let GR = [], OPENG = '', GUNREAD = {}, GCNT = {};
 const gSeen = id => { try{ return +localStorage.getItem('hk-g-' + id) || 0; }catch(e){ return 0; } };
@@ -2605,8 +2786,8 @@ function watchGroups(){
 }
 async function loadGroups(){
   const box = $('#grpList'); if(!box) return;
-  if(!me){ box.innerHTML = ''; box.appendChild(el('div', 't-empty', L('Connecte-toi pour voir les groupes.', 'Log in to see groups.'))); return; }
-  box.innerHTML = '<div class="t-empty">' + L('Chargement...', 'Loading...') + '</div>';
+  if(!me){ box.innerHTML = ''; box.appendChild(el('div', 't-empty', 'Connecte-toi pour voir les groupes.')); return; }
+  box.innerHTML = '<div class="t-empty">Chargement...</div>';
   try{
     const o = Object.entries(await fb('GET', 'groups', undefined, '&orderBy=%22t%22&limitToLast=30') || {}).sort((a, b) => b[1].t - a[1].t);
     const mem = await Promise.all(o.map(([id]) => fb('GET', 'gmembers/' + id + '/' + me.uid).catch(() => null)));
@@ -2618,7 +2799,7 @@ function drawGroups(){
   const box = $('#grpList'); if(!box) return;
   const q = $('#grpSearch').value.trim().toLowerCase(); box.innerHTML = '';
   const l = GR.filter(x => !q || x.g.name.toLowerCase().includes(q)).sort((a, b) => (b.mine - a.mine));
-  if(!l.length){ box.appendChild(el('div', 't-empty', L('Aucun groupe. Crée le premier !', 'No groups yet. Create the first!'))); return; }
+  if(!l.length){ box.appendChild(el('div', 't-empty', 'Aucun groupe. Crée le premier !')); return; }
   l.forEach(({ id, g, mine }) => {
     const r = el('div', 'grp');
     const gav = el('div', 'av-lg', g.name.charAt(0).toUpperCase()); setGav(gav, id); r.appendChild(gav);
@@ -2626,11 +2807,11 @@ function drawGroups(){
     const nb = el('b', '', g.name);
     if(!g.pub) nb.appendChild(el('span', 'lock-tag', ' 🔒'));
     mid.appendChild(nb);
-    mid.appendChild(el('span', 'grp-meta', g.desc || (g.pub ? L('Groupe public', 'Public group') : L('Groupe privé', 'Private group'))));
+    mid.appendChild(el('span', 'grp-meta', g.desc || (g.pub ? 'Groupe public' : 'Groupe privé')));
     r.appendChild(mid);
     const gn = mine ? (GCNT[id] || 0) : 0;
     if(gn){ r.appendChild(el('span', 'gcnt', gn >= 50 ? '50+' : String(gn))); r.classList.add('unread'); }
-    const b = el('button', 'btn ' + (mine ? 'btn-primary' : 'btn-ghost'), mine ? L('Ouvrir', 'Open') : L('Rejoindre', 'Join')); b.type = 'button';
+    const b = el('button', 'btn ' + (mine ? 'btn-primary' : 'btn-ghost'), mine ? 'Ouvrir' : 'Rejoindre'); b.type = 'button';
     b.addEventListener('click', e => { e.stopPropagation(); mine ? openGroup(id, g) : joinGroup(id, g); });
     r.appendChild(b);
     r.addEventListener('click', () => mine ? openGroup(id, g) : joinGroup(id, g));
@@ -2640,48 +2821,48 @@ function drawGroups(){
 if($('#grpSearch')) $('#grpSearch').addEventListener('input', drawGroups);
 
 async function joinGroup(id, g, code){
-  if(!me) return openAuth('Connecte-toi pour voir tes messages.');
+  if(!me) return openAuth('Connecte-toi.');
   try{
     const ms = await fb('GET', 'gmembers/' + id, undefined, '&shallow=true');
-    if(Object.keys(ms || {}).length >= (g.max || 50)) return toast(L('Groupe complet.', 'Group is full.'), true);
+    if(Object.keys(ms || {}).length >= (g.max || 50)) return toast('Groupe complet.', true);
     const rec = { name: me.name, t: Date.now() };
     if(!g.pub && code) rec.code = code;
     await fb('PUT', 'gmembers/' + id + '/' + me.uid, rec);
     gMark(id);
     if(g.owner && g.owner !== me.uid) pushNotif(g.owner, 'group', 'a rejoint ton groupe « ' + short(g.name, 30) + ' »', 'gj_' + id + '_' + me.uid);
-    toast(L('Groupe rejoint ✅', 'Group joined ✅'));
+    toast('Groupe rejoint ✅');
     loadGroups(); openGroup(id, g);
-  }catch(e){ toast(L('Impossible de rejoindre.', 'Could not join.'), true); }
+  }catch(e){ toast('Impossible de rejoindre.', true); }
 }
 if($('#grpJoinCode')) $('#grpJoinCode').addEventListener('click', async () => {
-  if(!me) return openAuth('Connecte-toi pour voir tes messages.');
-  const code = (prompt(L('Code du groupe :', 'Group code:')) || '').trim().toLowerCase();
+  if(!me) return openAuth('Connecte-toi.');
+  const code = (prompt('Code du groupe :') || '').trim().toLowerCase();
   if(code.length < 4) return;
   try{
     const r = await fetch(await uurl('groups') + '&orderBy=%22%24key%22&startAt=' + encodeURIComponent('"g' + code + '"') + '&endAt=' + encodeURIComponent('"g' + code + '\uf8ff"') + '&limitToFirst=1');
     const o = Object.entries(await r.json() || {})[0];
-    if(!o) return toast(L('Code introuvable.', 'Code not found.'), true);
+    if(!o) return toast('Code introuvable.', true);
     joinGroup(o[0], o[1], o[1].code);
-  }catch(e){ toast(L('Code introuvable.', 'Code not found.'), true); }
+  }catch(e){ toast('Code introuvable.', true); }
 });
 $$('#gType .pay').forEach(b => b.addEventListener('click', () => { $$('#gType .pay').forEach(x => x.classList.toggle('sel', x === b)); }));
-if($('#grpNew')) $('#grpNew').addEventListener('click', () => { if(!me) return openAuth('Connecte-toi pour publier.'); open('#grpNewOverlay'); });
+if($('#grpNew')) $('#grpNew').addEventListener('click', () => { if(!me) return openAuth('Connecte-toi.'); open('#grpNewOverlay'); });
 if($('#grpForm')) $('#grpForm').addEventListener('submit', async e => {
   e.preventDefault();
   const name = $('#gName').value.trim(), desc = $('#gDesc').value.trim();
   const pub = $('#gType .sel').dataset.pub === '1';
   const max = Math.max(2, Math.min(200, +$('#gMax').value || 50));
-  if(name.length < 3) return bad($('#gName'), L('Nom : 3 caractères minimum.', 'Name: 3 characters minimum.'));
+  if(name.length < 3) return bad($('#gName'), 'Nom : 3 caractères minimum.');
   const code = (Math.random().toString(36) + '000000').slice(2, 8);
   const id = 'g' + code + Date.now().toString(36);
   try{
     await fb('PUT', 'groups/' + id, { name, desc, owner: me.uid, pub, code, max, t: Date.now() });
     await fb('PUT', 'gmembers/' + id + '/' + me.uid, { name: me.name, t: Date.now() });
     $('#grpForm').reset(); closeAll();
-    toast(L('Groupe créé ✅', 'Group created ✅'));
+    toast('Groupe créé ✅');
     loadGroups();
     openGroup(id, { name, desc, owner: me.uid, pub, code, max });
-  }catch(err){ toast(L('Création impossible.', 'Could not create.'), true); }
+  }catch(err){ toast('Création impossible.', true); }
 });
 
 async function openGroup(gid, g){
@@ -2696,7 +2877,7 @@ async function openGroup(gid, g){
   back.addEventListener('click', () => { stop(); closeAll(); document.getElementById('groupes').scrollIntoView(); });
   const who = el('div', 'chat-who');
   const gb = el('b', '', g.name);
-  who.append(gb, el('small', '', g.pub ? L('Groupe public', 'Public group') : L('Groupe privé', 'Private group')));
+  who.append(gb, el('small', '', g.pub ? 'Groupe public' : 'Groupe privé'));
   const inf = el('button', 'chat-ic', 'ⓘ'); inf.type = 'button';
   const x = el('button', 'chat-ic', '✕'); x.type = 'button';
   x.addEventListener('click', () => { stop(); closeAll(); });
@@ -2706,7 +2887,7 @@ async function openGroup(gid, g){
   const bar = el('div', 'chat-bar'), inp = el('textarea'), sb = el('button', 'chat-send', '➤');
   const ph = el('label', 'chat-photo'); ph.innerHTML = '📷';
   const pf = document.createElement('input'); pf.type = 'file'; pf.accept = 'image/*'; ph.appendChild(pf);
-  inp.rows = 1; inp.maxLength = 500; inp.placeholder = L('Écris un message...', 'Write a message...'); sb.type = 'button';
+  inp.rows = 1; inp.maxLength = 500; inp.placeholder = 'Écris un message... (glisse pour répondre)'; sb.type = 'button';
   inp.addEventListener('input', () => { inp.style.height = 'auto'; inp.style.height = Math.min(inp.scrollHeight, 110) + 'px'; });
   const rb = el('div', 'reply-bar'); rb.style.display = 'none';
   box.appendChild(rb);
@@ -2726,7 +2907,7 @@ async function openGroup(gid, g){
     const p = el('div', 'prof-sec');
     const big = el('div', 'avatar', g.name.charAt(0).toUpperCase()); setGav(big, gid);
     if(owner){
-      big.classList.add('edit'); big.title = L('Changer la photo du groupe', 'Change group photo');
+      big.classList.add('edit'); big.title = 'Changer la photo du groupe';
       big.addEventListener('click', () => {
         const f = document.createElement('input'); f.type = 'file'; f.accept = 'image/*';
         f.addEventListener('change', async () => {
@@ -2737,8 +2918,8 @@ async function openGroup(gid, g){
             GAV[gid] = Promise.resolve(d);
             [big, gav].forEach(n => { n.style.backgroundImage = 'url(' + d + ')'; n.classList.add('img'); });
             loadGroups();
-            toast(L('Photo du groupe mise à jour ✅', 'Group photo updated ✅'));
-          }catch(e){ toast(L('Photo impossible.', 'Could not update photo.'), true); }
+            toast('Photo du groupe mise à jour ✅');
+          }catch(e){ toast('Photo impossible.', true); }
         });
         f.click();
       });
@@ -2749,9 +2930,9 @@ async function openGroup(gid, g){
     const link = location.href.split('#')[0].split('?')[0];
     const cr = el('div', 'ref-code'); cr.appendChild(el('code', '', g.code || '—'));
     const cc = el('button', 'btn btn-ghost', '📋'); cc.type = 'button';
-    cc.addEventListener('click', () => copyText(L('Rejoins mon groupe « ', 'Join my group "') + g.name + L(' » sur Hacken Store. Code : ', '" on Hacken Store. Code: ') + g.code + ' ' + link, L('Invitation copiée', 'Invitation copied')));
+    cc.addEventListener('click', () => copyText('Rejoins mon groupe « ' + g.name + ' » sur Hacken Store. Code : ' + g.code + ' ' + link, 'Invitation copiée'));
     cr.appendChild(cc); p.appendChild(cr);
-    p.appendChild(el('div', 'subhead', '👥 ' + L('Membres', 'Members')));
+    p.appendChild(el('div', 'subhead', '👥 Membres'));
     try{
       Object.entries(await fb('GET', 'gmembers/' + gid) || {}).forEach(([uid, m]) => {
         const r = frow(uid, m.name);
@@ -2763,10 +2944,10 @@ async function openGroup(gid, g){
         p.appendChild(r);
       });
     }catch(e){}
-    const lv = el('button', 'btn btn-ghost btn-block', owner ? '🗑 ' + L('Supprimer le groupe', 'Delete group') : L('Quitter le groupe', 'Leave group'));
+    const lv = el('button', 'btn btn-ghost btn-block', owner ? '🗑 Supprimer le groupe' : 'Quitter le groupe');
     lv.type = 'button'; lv.style.marginTop = '12px';
     lv.addEventListener('click', async () => {
-      if(!confirm(L('Confirmer ?', 'Confirm?'))) return;
+      if(!confirm('Confirmer ?')) return;
       try{
         if(owner){ await fb('DELETE', 'glast/' + gid).catch(() => {}); await fb('DELETE', 'gmsgs/' + gid).catch(() => {}); await fb('DELETE', 'gmembers/' + gid); await fb('DELETE', 'groups/' + gid); }
         else await fb('DELETE', 'gmembers/' + gid + '/' + me.uid);
@@ -2774,7 +2955,7 @@ async function openGroup(gid, g){
       }catch(e){ toast('Action impossible.', true); }
     });
     p.appendChild(lv);
-    const bk = el('button', 'btn btn-primary btn-block', L('Retour au chat', 'Back to chat'));
+    const bk = el('button', 'btn btn-primary btn-block', 'Retour au chat');
     bk.type = 'button'; bk.style.marginTop = '8px';
     bk.addEventListener('click', () => { sig = ''; OPENG = gid; chatT = setInterval(pull, 10000); live(); pull(); });
     p.appendChild(bk); list.appendChild(p);
@@ -2782,7 +2963,7 @@ async function openGroup(gid, g){
 
   function render(msgs){
     list.innerHTML = '';
-    if(!msgs.length){ list.appendChild(el('div', 'chat-empty', L('Aucun message. Dis bonjour 👋', 'No messages. Say hello 👋'))); return; }
+    if(!msgs.length){ list.appendChild(el('div', 'chat-empty', 'Aucun message. Dis bonjour 👋')); return; }
     let lastDay = '', lastFrom = '';
     msgs.forEach(([k, m]) => {
       const dl = dayLbl(m.t);
@@ -2808,14 +2989,15 @@ async function openGroup(gid, g){
       if(m.text) b.appendChild(el('span', '', m.text));
       b.appendChild(el('small', '', hm(m.t)));
       b.addEventListener('click', () => b.classList.toggle('act'));
-      const rep = el('button', 'del', '↩ ' + L('Répondre', 'Reply')); rep.type = 'button';
+      const rep = el('button', 'del', '↩ Répondre'); rep.type = 'button';
       rep.addEventListener('click', e => { e.stopPropagation(); b.classList.remove('act'); setReply(m); });
       b.appendChild(rep);
       if(mine || owner){
-        const del = el('button', 'del', '🗑 ' + L('Supprimer', 'Delete')); del.type = 'button'; del.style.marginLeft = '6px';
+        const del = el('button', 'del', '🗑 Supprimer'); del.type = 'button'; del.style.marginLeft = '6px';
         del.addEventListener('click', async e => { e.stopPropagation(); try{ await fb('DELETE', 'gmsgs/' + gid + '/' + k); sig = ''; pull(); }catch(x){ toast('Suppression impossible.', true); } });
         b.appendChild(del);
       }
+      /* ✅ Swipe pour répondre */
       let sx = 0, sy = 0;
       b.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
       b.addEventListener('touchend', e => { const t = e.changedTouches[0]; if(t.clientX - sx > 70 && Math.abs(t.clientY - sy) < 35) setReply(m); }, { passive: true });
@@ -2842,7 +3024,7 @@ async function openGroup(gid, g){
       if(!first && lm && lm[1].from !== me.uid && lm[0] !== lastKey) ping();
       lastKey = lm ? lm[0] : ''; first = false; render(msgs); gMark(gid);
     }catch(e){
-      if(first){ first = false; list.innerHTML = ''; list.appendChild(el('div', 'chat-empty', L('Impossible de charger les messages.', 'Could not load messages.'))); }
+      if(first){ first = false; list.innerHTML = ''; list.appendChild(el('div', 'chat-empty', 'Impossible de charger.')); }
     }
   }
   async function send(img){
@@ -2855,11 +3037,8 @@ async function openGroup(gid, g){
     try{
       await fb('POST', 'gmsgs/' + gid, m);
       fb('PUT', 'glast/' + gid, { t: m.t, from: me.uid, name: me.name, text: short(text || '📷 Photo', 60) }).catch(() => {});
-      if(text) (text.match(/@[A-Za-z0-9._-]{3,20}/g) || []).forEach(tag => {
-        const nm = tag.slice(1).toLowerCase();
-        const hit = Object.entries(MEM).find(([u, v]) => u !== me.uid && (v.name || '').toLowerCase() === nm);
-        if(hit) pushNotif(hit[0], 'mention', 't\'a mentionné dans « ' + short(g.name, 25) + ' »');
-      });
+      /* ✅ Notifier les @pseudo */
+      if(text) notifyTags(text, me.uid, me.name, 'le groupe « ' + short(g.name, 25) + ' »');
       pull();
     }
     catch(err){ if(text) inp.value = text; toast('Message non envoyé.', true); }
@@ -2867,15 +3046,16 @@ async function openGroup(gid, g){
   pf.addEventListener('change', async () => {
     const f = pf.files[0]; if(!f) return; pf.value = '';
     if(!/^image\//.test(f.type)) return toast('Choisis une image.', true);
-    try{ send(await compress(f, 640, 100000)); }catch(e){ toast('Image trop lourde ou illisible.', true); }
+    try{ send(await compress(f, 640, 100000)); }catch(e){ toast('Image trop lourde.', true); }
   });
   sb.addEventListener('click', () => send());
   inp.addEventListener('keydown', e => { if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); send(); } });
   pull(); chatT = setInterval(pull, 10000);
   live();
 }
+
 /* =========================================================
-   SUGGESTIONS
+   19. SUGGESTIONS
    ========================================================= */
 HK.sug = async function(){
   const sec = $('#suggest'), row = $('#sugRow');
@@ -2904,8 +3084,8 @@ HK.sug = async function(){
       const av = el('div', 'av-lg', (v.name || '?').charAt(0).toUpperCase()); setAv(av, id); c.appendChild(av);
       const nb = nameB(id, v.name); nb.style.cursor = 'pointer';
       nb.addEventListener('click', () => openProfile(id, v.name)); c.appendChild(nb);
-      if(refs[id]) c.appendChild(el('div', 'grp-meta', '🎁 ' + L('Ton filleul', 'Your referral')));
-      const b = el('button', 'btn btn-primary', '➕ ' + L('Ajouter', 'Add')); b.type = 'button';
+      if(refs[id]) c.appendChild(el('div', 'grp-meta', '🎁 Ton filleul'));
+      const b = el('button', 'btn btn-primary', '➕ Ajouter'); b.type = 'button';
       b.addEventListener('click', async () => {
         try{ await fb('PUT', 'friend_req/' + id + '/' + me.uid, { name: me.name, t: Date.now() }); b.textContent = '⏳'; b.disabled = true; toast('Demande envoyée 🤝'); }
         catch(e){ toast('Action impossible.', true); }
@@ -2918,13 +3098,13 @@ HK.sug = async function(){
       list.slice(shown, shown + 10).forEach(x => row.appendChild(mkCard(x)));
       shown = Math.min(list.length, shown + 10);
       more.style.display = shown < list.length ? 'block' : 'none';
-      more.textContent = L('Voir plus', 'See more') + ' (' + (list.length - shown) + ')';
+      more.textContent = 'Voir plus (' + (list.length - shown) + ')';
     };
     more.addEventListener('click', add);
     row.after(more); add();
   }catch(e){ sec.style.display = 'none'; }
 };
-/* Recherche en haut de page : joueurs + groupes */
+
 (function(){
   const inp = $('#gSearchTop'), box = $('#gSearchRes'); if(!inp || !box) return;
   let tm = 0, seq = 0, UC = null, UCt = 0;
@@ -2941,13 +3121,13 @@ HK.sug = async function(){
     if(my !== seq) return;
     const us = Object.entries(u).filter(([id, v]) => id !== me.uid && (v.name || '').toLowerCase().includes(q)).slice(0, 8);
     const gl = GR.filter(x => x.g.name.toLowerCase().includes(q)).slice(0, 5);
-    if(!us.length && !gl.length){ box.appendChild(el('div', 't-empty', L('Aucun résultat.', 'No results.'))); return; }
+    if(!us.length && !gl.length){ box.appendChild(el('div', 't-empty', 'Aucun résultat.')); return; }
     us.forEach(([id, v]) => box.appendChild(frow(id, v.name)));
     gl.forEach(({ id, g, mine }) => {
       const r = el('div', 'grp');
       const av = el('div', 'av-lg', g.name.charAt(0).toUpperCase()); setGav(av, id); r.appendChild(av);
       const mid = el('div', 'conv-mid'); mid.appendChild(el('b', '', g.name));
-      mid.appendChild(el('span', 'grp-meta', '👥 ' + (mine ? L('Ouvrir', 'Open') : L('Rejoindre', 'Join'))));
+      mid.appendChild(el('span', 'grp-meta', '👥 ' + (mine ? 'Ouvrir' : 'Rejoindre')));
       r.appendChild(mid);
       r.addEventListener('click', () => mine ? openGroup(id, g) : joinGroup(id, g));
       box.appendChild(r);
@@ -2955,8 +3135,9 @@ HK.sug = async function(){
   }
   inp.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(run, 300); });
 })();
+
 /* =========================================================
-   ADMIN
+   20. ADMIN
    ========================================================= */
 function showAdmin(){
   const l = $('#adLogin'), p = $('#adPanel');
@@ -3025,7 +3206,7 @@ function mkImg(parent, key, label){
   f.addEventListener('change', async () => {
     if(!f.files[0]) return;
     try{ staged[key] = await compress(f.files[0]); t.textContent = '📷 ' + label + ' ✓ (nouvelle)'; }
-    catch(err){ toast('Image trop lourde ou illisible.', true); }
+    catch(err){ toast('Image trop lourde.', true); }
   });
   l.append(t, f); parent.appendChild(l);
 }
@@ -3036,7 +3217,7 @@ function buildEditor(){
     const it = item(b, 'Pack ' + (i + 1));
     mkField(it, 'Diamants', 'd' + i + '_q', d[0], 1);
     mkField(it, 'Prix (FC)', 'd' + i + '_p', d[1], 1);
-    mkField(it, 'Ancien prix (vide = aucun)', 'd' + i + '_o', d[2] || '', 1);
+    mkField(it, 'Ancien prix', 'd' + i + '_o', d[2] || '', 1);
     mkImg(it, 'd' + i, 'Changer l\'image');
   });
   b = section('🎟 Booyah Pass et abonnements');
@@ -3100,12 +3281,11 @@ $$('#adTabs button').forEach(b => b.addEventListener('click', () => {
   if(b.dataset.tab === 'groups') loadAdGroups();
   if(b.dataset.tab === 'texts') buildTexts();
   if(b.dataset.tab === 'stats') loadStats();
-if(b.dataset.tab === 'tournoi') loadAdTournoi();
+  if(b.dataset.tab === 'tournoi') loadAdTournoi();
   if(b.dataset.tab === 'annonces') loadAnnonces();
   if(b.dataset.tab === 'handler') loadHandler();
 }));
 
-/* Admin : membres */
 let MB = [], RF = {};
 async function loadMembers(){
   const box = $('#mbList'); box.innerHTML = '<div class="t-empty">Chargement...</div>';
@@ -3194,11 +3374,11 @@ async function loadAdTournoi(){
       const r = document.createElement('div'); r.className = 'trow';
       r.innerHTML = '<div class="tm"><b></b><span></span></div><button type="button" class="btn btn-ghost">🗑</button>';
       $('b', r).textContent = p.name || '?';
-      $('span', r).textContent = 'ID ' + (p.id || '') + ' · ' + (p.phone || '');
+      $('span', r).textContent = 'ID ' + (p.id || '');
       $('button', r).addEventListener('click', async () => {
-        if(!confirm('Supprimer « ' + (p.name || '?') + ' » du tournoi ?')) return;
+        if(!confirm('Supprimer « ' + (p.name || '?') + ' » ?')) return;
         try{ await api('DELETE', 'participants/' + id); r.remove(); toast('Participant supprimé'); if(HK.tReload) HK.tReload(); }
-        catch(e){ toast('Action impossible (règles Firebase ou reconnecte-toi).', true); }
+        catch(e){ toast('Action impossible.', true); }
       });
       box.appendChild(r);
     });
@@ -3216,7 +3396,7 @@ async function loadAnnonces(){
       $('b', r).textContent = short(a.text, 40);
       $('span', r).textContent = when(a.t);
       $('button', r).addEventListener('click', async () => {
-        if(!confirm('Supprimer cette annonce ?')) return;
+        if(!confirm('Supprimer ?')) return;
         try{ await api('DELETE', 'announces/' + id); r.remove(); toast('Annonce supprimée'); }
         catch(e){ toast('Action impossible.', true); }
       });
@@ -3254,13 +3434,13 @@ async function loadHandler(){
 $('#anSend').addEventListener('click', async () => {
   const ta = $('#anText'), text = ta.value.trim();
   if(text.length < 3) return toast('Écris ton annonce.', true);
-  if(!confirm('Envoyer cette annonce à tout le monde ?')) return;
+  if(!confirm('Envoyer à tout le monde ?')) return;
   try{ await api('POST', 'announces', { text, t: Date.now() }); ta.value = ''; toast('📢 Annonce envoyée ✅'); loadAnnonces(); }
-  catch(e){ toast('Action impossible (reconnecte-toi).', true); }
+  catch(e){ toast('Action impossible.', true); }
 });
 function buildTexts(){
   const box = $('#adTexts'); box.innerHTML = '';
-  box.innerHTML = '<p class="note" style="text-align:left;margin-bottom:12px;">Message envoyé quand un membre partage son lien de parrainage. Utilise <b>{code}</b> et <b>{link}</b>.</p>';
+  box.innerHTML = '<p class="note" style="text-align:left;margin-bottom:12px;">Message envoyé quand un membre partage son lien. Utilise <b>{code}</b> et <b>{link}</b>.</p>';
   const mk = (lbl, key) => {
     const w = document.createElement('div'); w.className = 'ed-item';
     const l = document.createElement('label'); l.className = 'ed-f';
@@ -3269,7 +3449,7 @@ function buildTexts(){
     l.append(s, t); w.appendChild(l); box.appendChild(w); return t;
   };
   const tf = mk('Message (français)', 'fr'), te = mk('Message (English)', 'en');
-  const sv = document.createElement('button'); sv.type = 'button'; sv.className = 'btn btn-gold btn-block'; sv.textContent = '💾 Enregistrer les textes';
+  const sv = document.createElement('button'); sv.type = 'button'; sv.className = 'btn btn-gold btn-block'; sv.textContent = '💾 Enregistrer';
   sv.addEventListener('click', async () => {
     try{
       const v = { fr: tf.value.trim() || REF_DEF.fr, en: te.value.trim() || REF_DEF.en };
@@ -3290,7 +3470,7 @@ async function loadStats(){
   };
   const [u, g, w, p, b] = await Promise.all([cnt('users'), cnt('groups'), cnt('pub_attente'), cnt('participants'), cnt('badges')]);
   box.innerHTML = '';
-  [['👥 Membres', u], ['🗂 Groupes', g], ['⏳ Publications en attente', w], ['🏆 Inscrits au tournoi', p], ['✔ Badges donnés', b]].forEach(([t, n]) => {
+  [['👥 Membres', u], ['🗂 Groupes', g], ['⏳ En attente', w], ['🏆 Tournoi', p], ['✔ Badges', b]].forEach(([t, n]) => {
     const r = document.createElement('div'); r.className = 'trow';
     r.innerHTML = '<div class="tm"><b></b></div><b></b>';
     $('b', r).textContent = t;
@@ -3300,11 +3480,13 @@ async function loadStats(){
 }
 
 /* =========================================================
-   DÉMARRAGE
+   21. DÉMARRAGE
    ========================================================= */
 $('#lightboxOverlay').style.zIndex = 70;
-document.addEventListener('visibilitychange', () => { if(!document.hidden){ clearInterval(flashT); poll(); } });
+document.addEventListener('visibilitychange', () => { if(!document.hidden){ clearInterval(flashT); poll(); loadTopRefs(); } });
 addEventListener('focus', () => poll());
+
+$('#profBack')?.addEventListener('click', () => closeAll());
 
 try{
   const q = new URLSearchParams(location.search).get('ref');
@@ -3315,7 +3497,7 @@ try{
     setTimeout(() => {
       const up = $('#auForm [data-mode="up"]');
       if(up) up.click();
-      openAuth(L('🎁 Tu as été invité ! Crée ton compte : le code parrain est déjà rempli.', '🎁 You were invited! Create your account: the referral code is pre-filled.'));
+      openAuth('🎁 Tu as été invité ! Crée ton compte : le code parrain est déjà rempli.');
     }, 1200);
   }
 }catch(e){}
@@ -3331,6 +3513,7 @@ $$('[data-lang]').forEach(b => {
 authUI(); poll(); setInterval(poll, 15000);
 setInterval(() => { if(me && !document.hidden) GR.filter(x => x.mine).slice(0, 5).forEach(x => checkG(x)); }, 20000);
 loadFeed(); HK.sug();
+loadTopRefs();
 
 })(); /* fin IIFE */
 
@@ -3359,7 +3542,6 @@ loadFeed(); HK.sug();
   frame();
 })();
 
-/* APPARITION DES SECTIONS */
 (function(){
   const els = [...document.querySelectorAll('.rv')];
   if(!('IntersectionObserver' in window)){ els.forEach(e => e.classList.add('in')); return; }
@@ -3368,11 +3550,11 @@ loadFeed(); HK.sug();
 })();
 </script>
 
-<!-- PWA -->
 <script>
 if('serviceWorker' in navigator){
   addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
 }
 </script>
 </body>
-  </html>
+</html>
+   
