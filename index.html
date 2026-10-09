@@ -1610,8 +1610,24 @@ async function poll(){
       supabase.from('conversations').select('*').or(`user_a.eq.${me.uid},user_b.eq.${me.uid}`).then(r=>r.data||[])
     ]);
     ST.req = {}; rq.forEach(r => ST.req[r.from_id] = r);
-    ST.inbox = {}; (cs||[]).forEach(c => { const other = c.user_a === me.uid ? c.user_b : c.user_a;
-      if(c.last_at) ST.inbox[other] = { from:c.last_from, text:c.last_text, t:new Date(c.last_at).getTime(), r:c.last_from===me.uid }; });
+    ST.inbox = {};
+(cs||[]).forEach(c => {
+  const other = c.user_a === me.uid ? c.user_b : c.user_a;
+  if(!c.last_at) return;
+  // Suis-je dans cette conv comme user_a ou user_b ?
+  const iAmA = c.user_a === me.uid;
+  const myReadAt = iAmA ? c.a_read_at : c.b_read_at;
+  const lastAt = new Date(c.last_at).getTime();
+  // Lu si last_from = moi OU si j'ai lu après le dernier message
+  const read = (c.last_from === me.uid) || (myReadAt && new Date(myReadAt).getTime() >= lastAt);
+  ST.inbox[other] = {
+    from: c.last_from,
+    text: c.last_text,
+    t: lastAt,
+    r: read,
+    name: '' // on n'a pas le nom ici, mais le code gère plus bas
+  };
+});
     ST.notifs = {}; (nf||[]).forEach(n => ST.notifs[n.id] = { ...n, t:new Date(n.created_at).getTime() });
     const seenA = annSeen();
     ST.ann = (an||[]).map(a => [a.id, { type:'admin', from:'admin', name:SUPPORT, text:a.text, t:new Date(a.created_at).getTime(), ann:true, r:new Date(a.created_at).getTime()<=seenA }]);
@@ -1671,7 +1687,7 @@ async function renderConvs(box){
     const l = rows.filter(r => !q || r.name.toLowerCase().includes(q));
     if(!l.length){ list.appendChild(el('div','t-empty','Pas encore de conversation.')); return; }
     l.forEach(r => {
-      const unread = r.e && r.e.from !== me.uid && !r.e.r;
+      const unread = r.e && !r.e.r;
       const row = el('div', 'conv' + (unread ? ' unread' : ''));
       const av = el('div','av-lg', r.name.charAt(0).toUpperCase()); setAv(av, r.id);
       const mid = el('div','conv-mid'); mid.appendChild(nameB(r.id, r.name));
@@ -1843,10 +1859,19 @@ function openChat(fid, fname){
       const near = first || list.scrollHeight - list.scrollTop - list.clientHeight < 120;
       first = false; render(data || [], near);
     }
-    /* ✅ Marquer comme lu : update direct sur conversations */
+       /* ✅ Marquer comme lu : update a_read_at ou b_read_at */
     const myCol = CONV.user_a === me.uid ? 'a_read_at' : 'b_read_at';
     const obj = {}; obj[myCol] = new Date().toISOString();
-    await supabase.from('conversations').update(obj).eq('id', CONV.id);
+    const { error: readErr } = await supabase.from('conversations').update(obj).eq('id', CONV.id);
+    // Rafraîchir la liste des convs pour retirer le "non-lu"
+if(ST.inbox && ST.inbox[fid]){
+  ST.inbox[fid].r = true;
+}
+// Si l'onglet Messagerie est ouvert, re-render
+if($('#hubOverlay')?.classList.contains('open')) renderHub();
+    if(readErr) console.warn('[HK pull] read update:', readErr);
+    // Mettre à jour localement pour ne plus voir "non lu"
+    CONV[myCol] = obj[myCol];
 }
   async function send(img){
     const text = img ? '' : inp.value.trim(); if(!text && !img) return;
@@ -2655,4 +2680,4 @@ if('serviceWorker' in navigator){
 }
 </script>
 </body>
-                                                                                                                                                        </html>
+                                                                                                           </html>
