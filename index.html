@@ -789,6 +789,16 @@ const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   }
 });
 
+/* Client Supabase dédié admin (session séparée) */
+const supabaseAdmin = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+    detectSessionInUrl: false,
+    storageKey: 'hk-admin-token'
+  }
+});
+
 /* =========================================================
    2. CONSTANTES
    ========================================================= */
@@ -1292,8 +1302,7 @@ async function loadFeed(){
     await ensureBadges();
     const { data, error } = await supabase.from('publications')
       .select('*').eq('status','approved')
-      .gt('expires_at', new Date().toISOString())
-      .order('approved_at', { ascending:false }).limit(20);
+      .order('approved_at', { ascending:false, nullsFirst:false }).limit(20);
     if(error) throw error;
     feed.innerHTML = '';
     if(!data?.length){ feed.innerHTML = '<div class="t-empty">Aucune publication pour le moment.</div>'; return; }
@@ -2106,11 +2115,10 @@ $('#adminLink').addEventListener('click', e => { e.preventDefault(); open('#admi
 $('#adLogout').addEventListener('click', async () => {
   token = '';
   try{
-    const { data } = await supabase.auth.getSession();
+    const { data } = await supabaseAdmin.auth.getSession();
     if(data?.session){
-      const uid = data.session.user.id;
-      const { data: adm } = await supabase.from('admin_users').select('user_id').eq('user_id', uid).maybeSingle();
-      if(uid === ADMIN_UID || adm){ await supabase.auth.signOut(); me = null; authUI(); }
+      await supabaseAdmin.auth.signOut();
+      toast('Admin déconnecté');
     }
   }catch(e){}
   showAdmin(); loadFeed();
@@ -2119,11 +2127,11 @@ $('#adLogin').addEventListener('submit', async e => {
   e.preventDefault();
   try{
     const email = $('#adMail').value.trim(), password = $('#adPass').value;
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    const { data, error } = await supabaseAdmin.auth.signInWithPassword({ email, password });
     if(error) throw error;
     const uid = data.user.id;
     const { data: adm } = await supabase.from('admin_users').select('user_id').eq('user_id', uid).maybeSingle();
-    if(uid !== ADMIN_UID && !adm){ await supabase.auth.signOut(); throw new Error('Compte non admin.'); }
+    if(uid !== ADMIN_UID && !adm){ await supabaseAdmin.auth.signOut(); throw new Error('Compte non admin.'); }
     token = data.session.access_token;
     setTimeout(() => { token = ''; }, 3600000);
     $('#adPass').value = ''; showAdmin(); loadFeed(); toast('✅ Admin connecté');
@@ -2627,4 +2635,4 @@ if('serviceWorker' in navigator){
 }
 </script>
 </body>
-    </html>
+                                                                                                                                                        </html>
