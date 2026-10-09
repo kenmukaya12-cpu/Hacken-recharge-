@@ -1034,7 +1034,7 @@ function setGav(node, gid){
    ========================================================= */
 function authUI(){
   document.body.classList.toggle('locked', !me);
-  if(!me) open('#authOverlay');
+  
   const f = $('#auForm'), m = $('#auMe');
   if(f) f.style.display = me ? 'none' : 'flex';
   if(m) m.style.display = me ? 'block' : 'none';
@@ -1816,18 +1816,22 @@ function openChat(fid, fname){
   }
   async function pull(){
     if(!$('#chatOverlay').classList.contains('open')){ stop(); return; }
-    if(!CONV){ CONV = await getConversation(fid); if(!CONV){ list.innerHTML = ''; list.appendChild(el('div','chat-empty','Erreur conv.')); return; } }
+    if(!CONV){ CONV = await getConversation(fid); if(!CONV){ list.innerHTML=''; list.appendChild(el('div','chat-empty','Erreur conv.')); return; } }
     const cut = new Date(Date.now() - H48).toISOString();
     const { data } = await supabase.from('chat_messages').select('*')
       .eq('conversation_id', CONV.id).gte('created_at', cut)
       .order('created_at', { ascending:true }).limit(100);
     const s = (data || []).map(m => m.id).join();
-    if(s === sig) return;
-    sig = s;
-    const near = first || list.scrollHeight - list.scrollTop - list.clientHeight < 120;
-    first = false; render(data || [], near);
-    try{ await supabase.rpc('mark_conversation_read', { p_other: fid }); }catch(e){}
-  }
+    if(s !== sig){
+      sig = s;
+      const near = first || list.scrollHeight - list.scrollTop - list.clientHeight < 120;
+      first = false; render(data || [], near);
+    }
+    /* ✅ Marquer comme lu : update direct sur conversations */
+    const myCol = CONV.user_a === me.uid ? 'a_read_at' : 'b_read_at';
+    const obj = {}; obj[myCol] = new Date().toISOString();
+    await supabase.from('conversations').update(obj).eq('id', CONV.id);
+}
   async function send(img){
     const text = img ? '' : inp.value.trim(); if(!text && !img) return;
     if(!img) inp.value = '';
@@ -2635,4 +2639,4 @@ if('serviceWorker' in navigator){
 }
 </script>
 </body>
-                                                                                                                                                        </html>
+  </html>
