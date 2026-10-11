@@ -502,7 +502,11 @@ footer .btn{margin-top:14px;font-size:15px;}
 .post{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
 .po-head{display:flex;align-items:center;gap:10px;padding:12px 14px;}
 .po-head i{flex:0 0 36px;width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--gold));color:#04202A;font-style:normal;font-weight:900;display:grid;place-items:center;font-family:var(--f-head);font-size:18px;overflow:hidden;background-size:cover;background-position:center;}
-.po-head b{display:flex;align-items:center;gap:4px;font-family:var(--f-head);font-size:17px;line-height:1.1;color:var(--text)!important;}
+.po-head > div{flex:1;min-width:0;}
+.po-head b{display:flex;align-items:center;gap:5px;font-family:var(--f-head);font-size:17px;line-height:1.15;color:var(--text)!important;flex-wrap:nowrap;}
+.po-head b span{color:var(--text);}
+.po-head b .bdg{display:inline-flex!important;align-items:center;margin-left:0;flex:0 0 auto;}
+.po-head b .bdg svg{width:16px;height:16px;display:block;}
 .po-head b span{color:var(--text);}
 .po-head .bdg{display:inline-flex!important;margin-left:0;flex:0 0 auto;}
 .po-head span{font-size:12px;color:var(--muted);}
@@ -2206,30 +2210,34 @@ HK.notifyTags = notifyTags;
    ========================================================= */
 function postEl(id, p, pm){
   const d = document.createElement('article'); d.className = 'post';
-  d.innerHTML = '<div class="po-head"><i></i><div><b></b><span></span></div></div>'
-    + (okImg(p.img) ? '<img alt="Publication">' : '')
-    + '<p></p><div class="post-act"></div>';
+  d.innerHTML = '<div class="po-head"><i></i><div style="flex:1;min-width:0;"><b></b><span></span></div></div>'
+  + (okImg(p.img) ? '<img alt="Publication">' : '')
+  + '<p></p><div class="post-act"></div>';
   $('i', d).textContent = (p.name || '?').charAt(0).toUpperCase();
   setAv($('i', d), p.uid);
   const bEl = $('.po-head b', d);
 bEl.innerHTML = '';
-bEl.style.cssText = 'display:flex;align-items:center;gap:4px;color:var(--text);cursor:pointer;';
+bEl.style.cssText = 'display:flex;align-items:center;gap:5px;color:var(--text)!important;cursor:pointer;font-family:var(--f-head);font-size:17px;';
 const nameSpan = document.createElement('span');
 nameSpan.textContent = p.name || '?';
+nameSpan.style.color = 'var(--text)';
 bEl.appendChild(nameSpan);
-// ✅ Badge coloré à côté du nom
+/* ✅ Badge collé au nom */
 if(p.uid){
   const bg0 = BADGES[p.uid];
   if(bg0 && BADGE_INFO[bg0]){
     const bd0 = document.createElement('span');
     bd0.className = 'bdg';
-    bd0.style.cssText = 'display:inline-flex;color:' + BADGE_INFO[bg0].c + ';margin-left:2px;';
+    bd0.style.cssText = 'display:inline-flex;align-items:center;color:' + BADGE_INFO[bg0].c + ';margin-left:0;';
     bd0.innerHTML = BADGE_SVG;
     bEl.appendChild(bd0);
   }
   bEl.addEventListener('click', () => openProfile(p.uid, p.name));
 }
-  $('.po-head span', d).textContent = when(p.t) + (p.ta ? ' · ⏳ ' + Math.max(1, Math.ceil((p.ta + 172800000 - Date.now()) / 3600000)) + 'h' : '');
+/* ✅ Date sous le nom */
+const metaEl = $('.po-head span', d);
+metaEl.textContent = when(p.t) + (p.ta ? ' · ⏳ ' + Math.max(1, Math.ceil((p.ta + 172800000 - Date.now()) / 3600000)) + 'h' : '');
+metaEl.style.cssText = 'display:block;font-size:12px;color:var(--muted);margin-top:2px;';
   if(okImg(p.img)) $('img', d).src = p.img;
   $('p', d).textContent = p.text || '';
   const act = $('.post-act', d);
@@ -4004,4 +4012,4 @@ if('serviceWorker' in navigator){
 }
 </script>
 </body>
-                                                                                                                                     </html>
+        </html>
