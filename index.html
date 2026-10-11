@@ -3495,31 +3495,58 @@ async function openGroup(gid, g){
     cr.appendChild(cc); p.appendChild(cr);
 
 
-    /* Quitter / Supprimer */
-    const lv = el('button', 'btn btn-ghost btn-block', owner ? '🗑 Supprimer le groupe' : 'Quitter le groupe');
-    lv.type = 'button'; lv.style.marginTop = '12px';
-    lv.addEventListener('click', async () => {
-      if(!confirm('Confirmer ?')) return;
-      try{
-        if(owner){
-          await fb('DELETE', 'glast/' + gid).catch(() => {});
-          await fb('DELETE', 'gmsgs/' + gid).catch(() => {});
-          await fb('DELETE', 'gmembers/' + gid);
-          await fb('DELETE', 'groups/' + gid);
-        } else {
-          await fb('DELETE', 'gmembers/' + gid + '/' + me.uid);
-        }
-        closeAll(); loadGroups();
-      }catch(e){ toast('Action impossible.', true); }
-    });
-    p.appendChild(lv);
-
-    /* Retour au chat */
-    const bk = el('button', 'btn btn-primary btn-block', 'Retour au chat');
-    bk.type = 'button'; bk.style.marginTop = '8px';
-    bk.addEventListener('click', () => { sig = ''; OPENG = gid; chatT = setInterval(pull, 10000); live(); pull(); });
-    p.appendChild(bk); list.appendChild(p);
+      /* ✅ BOUTON INVITER UN AMI */
+  const inviteBtn = el('button', 'btn btn-primary btn-block', '➕ Inviter un ami');
+  inviteBtn.type = 'button'; inviteBtn.style.marginTop = '12px';
+  inviteBtn.addEventListener('click', () => {
+    const oldBox = p.querySelector('.invite-box');
+    if(oldBox){ oldBox.remove(); return; }
+    const invBox = el('div', 'invite-box');
+    invBox.style.marginTop = '10px';
+    p.appendChild(invBox);
+    openGroupInviteBox(invBox, gid, g);
   });
+  p.appendChild(inviteBtn);
+
+  /* Membres */
+  p.appendChild(el('div', 'subhead', '👥 Membres'));
+  try{
+    Object.entries(await fb('GET', 'gmembers/' + gid) || {}).forEach(([uid, m]) => {
+      const r = frow(uid, m.name);
+      if(owner && uid !== me.uid){
+        const k = el('button', 'btn btn-ghost', '✕'); k.type = 'button';
+        k.addEventListener('click', async () => { try{ await fb('DELETE', 'gmembers/' + gid + '/' + uid); r.remove(); }catch(e){ toast('Action impossible.', true); } });
+        r.appendChild(k);
+      }
+      p.appendChild(r);
+    });
+  }catch(e){}
+
+  /* Quitter / Supprimer */
+  const lv = el('button', 'btn btn-ghost btn-block', owner ? '🗑 Supprimer le groupe' : 'Quitter le groupe');
+  lv.type = 'button'; lv.style.marginTop = '12px';
+  lv.addEventListener('click', async () => {
+    if(!confirm('Confirmer ?')) return;
+    try{
+      if(owner){
+        await fb('DELETE', 'glast/' + gid).catch(() => {});
+        await fb('DELETE', 'gmsgs/' + gid).catch(() => {});
+        await fb('DELETE', 'gmembers/' + gid);
+        await fb('DELETE', 'groups/' + gid);
+      } else {
+        await fb('DELETE', 'gmembers/' + gid + '/' + me.uid);
+      }
+      closeAll(); loadGroups();
+    }catch(e){ toast('Action impossible.', true); }
+  });
+  p.appendChild(lv);
+
+  /* Retour au chat */
+  const bk = el('button', 'btn btn-primary btn-block', 'Retour au chat');
+  bk.type = 'button'; bk.style.marginTop = '8px';
+  bk.addEventListener('click', () => { sig = ''; OPENG = gid; chatT = setInterval(pull, 10000); live(); pull(); });
+  p.appendChild(bk); list.appendChild(p);
+});
 
   /* RENDU MESSAGES */
   function render(msgs){
@@ -4125,4 +4152,4 @@ if('serviceWorker' in navigator){
 }
 </script>
 </body>
-                             </html>
+        </html>
