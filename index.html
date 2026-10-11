@@ -474,6 +474,8 @@ body:has(.overlay.open){overflow:hidden;}
 .nb.msg{border-color:var(--cyan);}
 .nb.req{border-color:var(--gold);border-left-color:var(--gold);}
 .nb.ntf{border-color:var(--green);border-left-color:var(--green);}
+.nb.mention{border-color:var(--violet);border-left-color:var(--violet);box-shadow:0 0 24px -4px color-mix(in srgb,var(--violet) 50%,transparent);}
+.nb.mention .av-lg{background:linear-gradient(135deg,var(--violet),var(--cyan));color:#fff;font-weight:900;font-size:20px;}
 .nb.out{opacity:0;transform:translateY(-14px);}
 .nb .t{flex:1;min-width:0;}
 .nb .t b{display:block;font-family:var(--f-head);font-size:16px;line-height:1.2;}
@@ -2111,23 +2113,49 @@ async function notifyTags(text, fromUid, fromName, context){
   if(!text) return;
   const tags = text.match(/@[A-Za-z0-9._-]{3,20}/g) || [];
   if(!tags.length) return;
-  for(const tag of tags){
-    const nm = tag.slice(1).toLowerCase();
+
+  const uniq = [...new Set(tags.map(t => t.slice(1)))];
+
+  let allUsers = {};
+  try{
+    const r = await fetch(await uurl('users'));
+    if(r.ok) allUsers = await r.json() || {};
+  }catch(e){ return; }
+
+  const byName = {};
+  Object.entries(allUsers).forEach(([uid, u]) => {
+    if(u && u.name) byName[u.name.toLowerCase()] = { uid, name: u.name };
+  });
+
+  const label =
+    context === 'une publication' ? 'une publication 📰' :
+    context === 'un commentaire'  ? 'un commentaire 💬' :
+    context === 'un message privé'? 'un message privé ✉️' :
+    context.indexOf('le groupe') === 0 ? context + ' 👥' :
+    context;
+
+  for(const pseudo of uniq){
+    const target = byName[pseudo.toLowerCase()];
+    if(!target) continue;
+    if(target.uid === fromUid) continue;
+
+    const notif = {
+      type: 'mention',
+      from: fromUid,
+      name: (fromName || '').slice(0, 20),
+      text: (
+        't\'a tagué dans ' + label + ' : « ' + short(text, 70) + ' »'
+      ).slice(0, 145),
+      t: Date.now()
+    };
+
     try{
-      const r = await fetch(await uurl('users') + '&orderBy=%22name%22&equalTo=' + encodeURIComponent('"' + nm + '"') + '&limitToFirst=1');
-      if(!r.ok) continue;
-      const o = Object.entries(await r.json() || {})[0];
-      if(!o || o[0] === fromUid) continue;
-      const targetUid = o[0];
-      const notif = {
-        type:'mention',
-        from: fromUid,
-        name: (fromName || '').slice(0, 20),
-        text: ('t\'a mentionné dans ' + context + ' : ' + short(text, 60)).slice(0, 145),
-        t: Date.now()
-      };
-      await fetch(await uurl('notifs/' + targetUid), { method:'POST', body: JSON.stringify(notif) });
-    }catch(e){}
+      const post = await fetch(await uurl('notifs/' + target.uid), {
+        method:'POST',
+        body: JSON.stringify(notif)
+      });
+      if(!post.ok) console.warn('[HK TAG] notif refusée pour', target.name, post.status);
+    }catch(e){ console.warn('[HK TAG] erreur', e); }
   }
 }
 HK.notifyTags = notifyTags;
@@ -2706,7 +2734,7 @@ loadTopRefs();
    NOTIFICATIONS / BANNIÈRES
    ========================================================= */
 const TITLE0 = document.title;
-const ICONS = { like:'❤️', comment:'💬', accept:'✅', badge:'✔', ref:'🎁', group:'👥', mention:'📣', admin:'🔔', friend:'🤝' };
+const ICONS = { like:'❤️', comment:'💬', accept:'✅', badge:'✔', ref:'🎁', group:'👥', mention:'@', admin:'🔔', friend:'🤝' };
 const SUPPORT = 'Support HK ';
 const annSeen = () => { try{ let s = localStorage.getItem('hk-ann-seen'); if(s === null){ s = String(Date.now()); localStorage.setItem('hk-ann-seen', s); } return +s; }catch(e){ return 0; } };
 const annMark = () => { try{ localStorage.setItem('hk-ann-seen', String(Date.now())); }catch(e){} };
@@ -2738,6 +2766,7 @@ function banner(o){
   const st = $('#nstack'); if(!st) return;
   while(st.children.length >= 3) st.firstChild.remove();
   const b = el('div', 'nb ' + (o.kind || 'msg'));
+  if(o.mention) b.classList.add('mention');
   const av = el('div', 'av-lg', o.icon || '🔔'); if(o.uid) setAv(av, o.uid);
   const t = el('div', 't'); t.append(el('b', '', o.title), el('span', '', o.text));
   const x = el('button', 'chat-ic', '✕'); x.type = 'button';
@@ -2783,7 +2812,24 @@ async function poll(){
     inc.forEach(([k, x]) => { if(k !== ST.open) items.push({ key:'m:' + k + ':' + x.t, kind:'msg', icon:'💬', uid:k, title:'💬 ' + x.name, text:x.text, onClick:() => { setTab('messages'); setTimeout(() => openChat(k, x.name), 250); } }); });
     Object.entries(ST.req).forEach(([k, v]) => items.push({ key:'r:' + k, kind:'req', icon:'🤝', uid:k, title:'🤝 ' + v.name, text:'veut devenir ton ami', onClick:() => { setTab('friends'); setTimeout(() => open('#hubOverlay'), 250); } }));
     ST.ann.forEach(([k, a]) => { if(!a.r) items.push({ key:'a:' + k, kind:'ntf', icon:'📢', title:SUPPORT, text:short(a.text, 80), onClick:() => openHub() }); });
-    Object.entries(ST.notifs).forEach(([k, x]) => { if(!x.r) items.push({ key:'n:' + k, kind:'ntf', icon:ICONS[x.type] || '🔔', uid:x.from !== 'admin' ? x.from : '', title:x.name, text:x.text, onClick:() => openHub() }); });
+    Object.entries(ST.notifs).forEach(([k, x]) => {
+  if(x.r) return;
+  const isMention = x.type === 'mention';
+  items.push({
+    key:'n:' + k,
+    kind:'ntf',
+    mention: isMention,
+    icon: isMention ? '@' : (ICONS[x.type] || '🔔'),
+    uid: x.from !== 'admin' ? x.from : '',
+    title: isMention ? ('📣 ' + x.name + ' t\'a tagué') : x.name,
+    text: x.text,
+    onClick: () => {
+      if(isMention && x.from && x.from !== 'admin'){
+        closeAll(); openProfile(x.from, x.name);
+      } else openHub();
+    }
+  });
+});
     const fresh = items.filter(i => !ST.seen.has(i.key));
     fresh.forEach(i => ST.seen.add(i.key));
     if(!ST.init){
@@ -2851,11 +2897,16 @@ function renderHub(){
     if(n.from && n.from !== 'admin') setAv(av, n.from);
     const mid = el('div', 'conv-mid'); mid.append(el('b', '', n.name || ''), el('span', '', ' ' + n.text));
     const go = () => {
-      if(n.type === 'badge') return setTab('profile');
-      if(n.type === 'like' || n.type === 'comment' || n.type === 'accept'){ closeAll(); setTab('home'); return; }
-      if(n.type === 'group' || n.type === 'mention'){ closeAll(); setTab('community'); return; }
-      if(n.from && n.from !== 'admin'){ closeAll(); openProfile(n.from, n.name); }
-    };
+  if(n.type === 'badge') return setTab('profile');
+  if(n.type === 'like' || n.type === 'comment' || n.type === 'accept'){ closeAll(); setTab('home'); return; }
+  if(n.type === 'group'){ closeAll(); setTab('community'); return; }
+  if(n.type === 'mention'){
+    closeAll();
+    if(n.from && n.from !== 'admin'){ openProfile(n.from, n.name); }
+    return;
+  }
+  if(n.from && n.from !== 'admin'){ closeAll(); openProfile(n.from, n.name); }
+};
     const ob = el('button', 'btn btn-ghost btn-sm go', 'Ouvrir ›'); ob.type = 'button';
     ob.addEventListener('click', e => { e.stopPropagation(); go(); });
     if(!n.ann && n.type !== 'admin') mid.appendChild(ob);
@@ -3881,4 +3932,4 @@ if('serviceWorker' in navigator){
 }
 </script>
 </body>
-  </html>
+           </html>
