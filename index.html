@@ -560,15 +560,23 @@ footer .btn{margin-top:14px;font-size:15px;}
   white-space:nowrap;
 }
 .po-head b .bdg{
-  display:inline-flex;
+  display:inline-flex !important;
   align-items:center;
   flex:0 0 auto;
   margin-left:0;
+  visibility:visible !important;
+  opacity:1 !important;
 }
 .po-head b .bdg svg{
   width:16px;
   height:16px;
-  display:block;
+  display:block !important;
+  visibility:visible !important;
+}
+.po-head b > span{
+  display:inline-block !important;
+  visibility:visible !important;
+  opacity:1 !important;
 }
 .po-head > div > span{
   display:block;
@@ -2272,7 +2280,9 @@ HK.notifyTags = notifyTags;
    ========================================================= */
 function postEl(id, p, pm){
   const d = document.createElement('article'); d.className = 'post';
-  d.innerHTML = '<div class="po-head" style="display:flex;align-items:center;gap:12px;padding:12px 14px;"><i></i><div style="flex:1 1 auto;min-width:0;display:flex;flex-direction:column;"><b></b><span></span></div></div>'
+  d.innerHTML = '<div class="po-head"><i></i><div><b></b><span></span></div></div>'
++ (okImg(p.img) ? '<img alt="Publication">' : '')
++ '<p></p><div class="post-act"></div>';
 + (okImg(p.img) ? '<img alt="Publication">' : '')
 + '<p></p><div class="post-act"></div>';
   $('i', d).textContent = (p.name || '?').charAt(0).toUpperCase();
@@ -2291,7 +2301,8 @@ if(p.uid){
   const bg0 = BADGES[p.uid];
   if(bg0 && BADGE_INFO[bg0]){
     const bd0 = document.createElement('span');
-    bd0.setAttribute('style', 'display:inline-flex !important; align-items:center; justify-content:center; color:' + BADGE_INFO[bg0].c + '; flex:0 0 auto; margin:0; padding:0; line-height:1;');
+    bd0.className = 'bdg';
+    bd0.setAttribute('style', 'display:inline-flex !important; align-items:center; justify-content:center; color:' + BADGE_INFO[bg0].c + '; flex:0 0 auto; margin:0; padding:0; line-height:1; visibility:visible !important; opacity:1 !important;');
     bd0.innerHTML = BADGE_SVG;
     bEl.appendChild(bd0);
   }
@@ -3018,7 +3029,6 @@ if(n.type === 'invite'){
     const ok = confirm('Rejoindre le groupe « ' + n.gname + ' » ?');
     if(ok) acceptGroupInvite(n.gid, n.gname);
     else {
-      /* Refuser → supprimer l'invitation */
       fb('DELETE', 'group_invites/' + me.uid + '/' + n.gid).catch(() => {});
     }
   }
@@ -3109,11 +3119,15 @@ function openChat(fid, fname){
   const rb = el('div', 'reply-bar'); rb.style.display = 'none';
   box.appendChild(rb);
 
-  /* BARRE SAISIE — tout déclaré AVANT utilisation */
+  /* BARRE SAISIE */
   const bar = el('div', 'chat-bar');
   const inp = el('textarea');
   const sbb = el('button', 'chat-send', '➤'); sbb.type = 'button';
-  const eBtn = el('button', 'chat-ic-sm', '😊'); eBtn.type = 'button';
+  const eBtn = el('button', 'chat-ic-sm', '@'); eBtn.type = 'button';
+  eBtn.title = 'Taguer un ami';
+  eBtn.style.fontWeight = '900';
+  eBtn.style.fontSize = '18px';
+  eBtn.style.color = 'var(--cyan)';
   const ph = el('label', 'chat-ic-sm'); ph.innerHTML = '📷';
   const pfile = document.createElement('input'); pfile.type = 'file'; pfile.accept = 'image/*'; ph.appendChild(pfile);
 
@@ -3126,7 +3140,16 @@ function openChat(fid, fname){
       openTagPicker(inp, name => { inp.value = v.slice(0, at) + '@' + name + ' '; inp.focus(); });
     }
   });
-  eBtn.addEventListener('click', () => { inp.value += '😀'; inp.focus(); });
+  eBtn.addEventListener('click', () => {
+    const v = inp.value;
+    if(v.length && !v.endsWith(' ')) inp.value = v + ' @';
+    else inp.value = v + '@';
+    inp.focus();
+    setTimeout(() => openTagPicker(inp, name => {
+      inp.value = inp.value.slice(0, -1) + '@' + name + ' ';
+      inp.focus();
+    }), 50);
+  });
   bar.append(eBtn, ph, inp, sbb);
   box.appendChild(bar);
 
@@ -3277,146 +3300,101 @@ function openChat(fid, fname){
 }
 
 /* =========================================================
-   GROUPES — CORRIGÉ (header propre avec gid/g)
+   INVITER UN AMI DANS LE GROUPE
    ========================================================= */
-let GR = [], OPENG = '', GUNREAD = {}, GCNT = {};
-const gSeen = id => { try{ return +localStorage.getItem('hk-g-' + id) || 0; }catch(e){ return 0; } };
-const gMark = id => { try{ localStorage.setItem('hk-g-' + id, String(Date.now())); }catch(e){} delete GUNREAD[id]; delete GCNT[id]; drawGroups(); };
-async function checkG(x, quiet){
+async function openGroupInviteBox(box, gid, g){
+  box.innerHTML = '<div class="t-empty">Chargement de tes amis...</div>';
+  let friends = {}, members = {}, invites = {};
   try{
-    const l = await fb('GET', 'glast/' + x.id);
-    if(!l || l.from === me.uid) return;
-    if(x.id === OPENG && $('#chatOverlay').classList.contains('open')) return;
-    if(l.t > gSeen(x.id)){
-      const isNew = GUNREAD[x.id] !== l.t;
-      GUNREAD[x.id] = l.t;
-      if(isNew){
+    const [fr, mb, iv] = await Promise.all([
+      fb('GET', 'friends/' + me.uid).catch(() => ({})),
+      fb('GET', 'gmembers/' + gid).catch(() => ({})),
+      fb('GET', 'group_invites/' + me.uid).catch(() => ({}))
+    ]);
+    friends = fr || {}; members = mb || {}; invites = iv || {};
+  }catch(e){ box.innerHTML = '<div class="t-empty">Impossible de charger tes amis.</div>'; return; }
+
+  const ids = Object.keys(friends).filter(uid => uid !== me.uid);
+  box.innerHTML = '';
+  if(!ids.length){
+    box.appendChild(el('div', 't-empty', 'Tu n\'as pas encore d\'amis à inviter.'));
+    return;
+  }
+
+  const title = el('div', 'subhead', 'Choisis qui inviter');
+  title.style.margin = '6px 0 10px';
+  box.appendChild(title);
+
+  ids.forEach(uid => {
+    const f = friends[uid] || {};
+    const row = el('div', 'invite-row');
+    const av = el('div', 'av', (f.name || '?').charAt(0).toUpperCase()); setAv(av, uid);
+    const nm = el('div', 'nm', f.name || '?');
+    row.append(av, nm);
+
+    if(members[uid]){
+      const b = el('button', 'btn btn-ghost', '✔ Membre');
+      b.type = 'button'; b.disabled = true;
+      row.appendChild(b);
+    } else if(invites[uid] && invites[uid].gid === gid){
+      const b = el('button', 'btn btn-ghost', '⏳ Invité');
+      b.type = 'button'; b.disabled = true;
+      row.appendChild(b);
+    } else {
+      const b = el('button', 'btn btn-primary', 'Inviter');
+      b.type = 'button';
+      b.addEventListener('click', async () => {
+        b.disabled = true;
+        b.textContent = '...';
         try{
-          const o = await fb('GET', 'gmsgs/' + x.id, undefined, '&orderBy=%22t%22&startAt=' + (gSeen(x.id) + 1) + '&limitToLast=50') || {};
-          GCNT[x.id] = Object.values(o).filter(m => m.from !== me.uid).length || 1;
-        }catch(e){ GCNT[x.id] = GCNT[x.id] || 1; }
-        drawGroups();
-        if(!quiet){
-          ping(); ring();
-          banner({ icon:'👥', kind:'msg', title:'👥 ' + short(x.g.name, 24), text:l.name + ' : ' + l.text, onClick:() => openGroup(x.id, x.g) });
+          await fb('PUT', 'group_invites/' + uid + '/' + gid, {
+            gid: gid, gname: short(g.name, 30),
+            from: me.uid, fromName: me.name,
+            t: Date.now()
+          });
+          await fb('POST', 'notifs/' + uid, {
+            type: 'invite',
+            from: me.uid,
+            name: (me.name || '').slice(0, 20),
+            text: ('t\'invite à rejoindre le groupe « ' + short(g.name, 30) + ' »').slice(0, 145),
+            t: Date.now(),
+            gid: gid, gname: short(g.name, 30)
+          });
+          b.textContent = '⏳ Invité';
+          b.className = 'btn btn-ghost';
+          toast('Invitation envoyée à ' + (f.name || '?'));
+        }catch(err){
+          b.disabled = false;
+          b.textContent = 'Inviter';
+          toast('Impossible d\'inviter.', true);
         }
-      }
-      poll();
+      });
+      row.appendChild(b);
     }
-  }catch(e){}
-}
-function watchGroups(){
-  GR.filter(x => x.mine).slice(0, 5).forEach(x => checkG(x, true));
-}
-async function loadGroups(){
-  const box = $('#grpList'); if(!box) return;
-  if(!me){ box.innerHTML = ''; box.appendChild(el('div', 't-empty', 'Connecte-toi.')); return; }
-  box.innerHTML = '<div class="t-empty">Chargement...</div>';
-  try{
-    const o = Object.entries(await fb('GET', 'groups', undefined, '&orderBy=%22t%22&limitToLast=30') || {}).sort((a, b) => b[1].t - a[1].t);
-    const mem = await Promise.all(o.map(([id]) => fb('GET', 'gmembers/' + id + '/' + me.uid).catch(() => null)));
-    GR = o.map(([id, g], i) => ({ id, g, mine: !!mem[i] })).filter(x => x.g.pub || x.mine);
-    drawGroups(); watchGroups();
-  }catch(e){ box.innerHTML = '<div class="t-empty">Groupes indisponibles.</div>'; }
-}
-function drawGroups(){
-  const box = $('#grpList'); if(!box) return;
-  const q = ($('#grpSearch') && $('#grpSearch').value.trim().toLowerCase()) || ''; box.innerHTML = '';
-  const l = GR.filter(x => !q || x.g.name.toLowerCase().includes(q)).sort((a, b) => (b.mine - a.mine));
-  if(!l.length){ box.appendChild(el('div', 't-empty', 'Aucun groupe. Crée le premier !')); return; }
-  l.forEach(({ id, g, mine }) => {
-    const r = el('div', 'grp');
-    const gav = el('div', 'av-lg', g.name.charAt(0).toUpperCase()); setGav(gav, id); r.appendChild(gav);
-    const mid = el('div', 'conv-mid');
-    const nb = el('b', '', g.name);
-    if(!g.pub) nb.appendChild(el('span', 'lock-tag', ' 🔒'));
-    mid.appendChild(nb);
-    mid.appendChild(el('span', 'grp-meta', g.desc || (g.pub ? 'Groupe public' : 'Groupe privé')));
-    r.appendChild(mid);
-    const gn = mine ? (GCNT[id] || 0) : 0;
-    if(gn){ r.appendChild(el('span', 'gcnt', gn >= 50 ? '50+' : String(gn))); r.classList.add('unread'); }
-    const b = el('button', 'btn ' + (mine ? 'btn-primary' : 'btn-ghost'), mine ? 'Ouvrir' : 'Rejoindre'); b.type = 'button';
-    b.addEventListener('click', e => { e.stopPropagation(); mine ? openGroup(id, g) : joinGroup(id, g); });
-    r.appendChild(b);
-    r.addEventListener('click', () => mine ? openGroup(id, g) : joinGroup(id, g));
-    box.appendChild(r);
+    box.appendChild(row);
   });
 }
-const grpSearchEl = $('#grpSearch');
-if(grpSearchEl) grpSearchEl.addEventListener('input', drawGroups);
-async function joinGroup(id, g, code){
-  if(!me) return openAuth('Connecte-toi.');
+
+/* ✅ Accepter une invitation à rejoindre un groupe */
+async function acceptGroupInvite(gid, gname){
   try{
-    const ms = await fb('GET', 'gmembers/' + id, undefined, '&shallow=true');
-    if(Object.keys(ms || {}).length >= (g.max || 50)) return toast('Groupe complet.', true);
-    const rec = { name: me.name, t: Date.now() };
-    if(!g.pub && code) rec.code = code;
-    await fb('PUT', 'gmembers/' + id + '/' + me.uid, rec);
-    gMark(id);
-    if(g.owner && g.owner !== me.uid) pushNotif(g.owner, 'group', 'a rejoint ton groupe « ' + short(g.name, 30) + ' »', 'gj_' + id + '_' + me.uid);
-    toast('Groupe rejoint ✅'); loadGroups(); openGroup(id, g);
+    const g = await fb('GET', 'groups/' + gid);
+    if(!g){ toast('Ce groupe n\'existe plus.', true); fb('DELETE', 'group_invites/' + me.uid + '/' + gid).catch(() => {}); return; }
+    await fb('PUT', 'gmembers/' + gid + '/' + me.uid, { name: me.name, t: Date.now() });
+    await fb('DELETE', 'group_invites/' + me.uid + '/' + gid).catch(() => {});
+    if(g.owner && g.owner !== me.uid){
+      pushNotif(g.owner, 'group', 'a rejoint ton groupe « ' + short(g.name, 30) + ' »', 'gj_' + gid + '_' + me.uid);
+    }
+    toast('Tu as rejoint « ' + (g.name || gname) + ' » ✅');
+    loadGroups();
+    openGroup(gid, g);
   }catch(e){ toast('Impossible de rejoindre.', true); }
 }
-const grpJoin = $('#grpJoinCode');
-if(grpJoin) grpJoin.addEventListener('click', async () => {
-  if(!me) return openAuth('Connecte-toi.');
-  const code = (prompt('Code du groupe :') || '').trim().toLowerCase();
-  if(code.length < 4) return;
-  try{
-    const r = await fetch(await uurl('groups') + '&orderBy=%22%24key%22&startAt=' + encodeURIComponent('"g' + code + '"') + '&endAt=' + encodeURIComponent('"g' + code + '\uf8ff"') + '&limitToFirst=1');
-    const o = Object.entries(await r.json() || {})[0];
-    if(!o) return toast('Code introuvable.', true);
-    joinGroup(o[0], o[1], o[1].code);
-  }catch(e){ toast('Code introuvable.', true); }
-});
-$$('#gType .pay').forEach(b => b.addEventListener('click', () => { $$('#gType .pay').forEach(x => x.classList.toggle('sel', x === b)); }));
-const grpNew = $('#grpNew');
-if(grpNew) grpNew.addEventListener('click', () => { if(!me) return openAuth('Connecte-toi.'); open('#grpNewOverlay'); });
-const grpFormEl = $('#grpForm');
-if(grpFormEl) grpFormEl.addEventListener('submit', async e => {
-  e.preventDefault();
-  const name = $('#gName').value.trim(), desc = $('#gDesc').value.trim();
-  const pub = $('#gType .sel').dataset.pub === '1';
-  const max = Math.max(2, Math.min(200, +$('#gMax').value || 50));
-  if(name.length < 3) return bad($('#gName'), 'Nom : 3 caractères minimum.');
-  const code = (Math.random().toString(36) + '000000').slice(2, 8);
-  const id = 'g' + code + Date.now().toString(36);
-  try{
-    await fb('PUT', 'groups/' + id, { name, desc, owner: me.uid, pub, code, max, t: Date.now() });
-    await fb('PUT', 'gmembers/' + id + '/' + me.uid, { name: me.name, t: Date.now() });
-    $('#grpForm').reset(); closeAll();
-    toast('Groupe créé ✅'); loadGroups();
-    openGroup(id, { name, desc, owner: me.uid, pub, code, max });
-  }catch(err){ toast('Création impossible.', true); }
-});
 
+/* =========================================================
+   OUVRIRE UN GROUPE — PROPRE
+   ========================================================= */
 async function openGroup(gid, g){
-/* ✅ BOUTON INVITER UN AMI */
-const inviteBtn = el('button', 'btn btn-primary btn-block', '➕ Inviter un ami');
-inviteBtn.type = 'button'; inviteBtn.style.marginTop = '12px';
-inviteBtn.addEventListener('click', () => {
-  const oldBox = p.querySelector('.invite-box');
-  if(oldBox){ oldBox.remove(); return; }
-  const invBox = el('div', 'invite-box');
-  invBox.style.marginTop = '10px';
-  p.appendChild(invBox);
-  openGroupInviteBox(invBox, gid, g);
-});
-p.appendChild(inviteBtn);
-
-p.appendChild(el('div', 'subhead', '👥 Membres'));
-try{
-  Object.entries(await fb('GET', 'gmembers/' + gid) || {}).forEach(([uid, m]) => {
-    const r = frow(uid, m.name);
-    if(owner && uid !== me.uid){
-      const k = el('button', 'btn btn-ghost', '✕'); k.type = 'button';
-      k.addEventListener('click', async () => { try{ await fb('DELETE', 'gmembers/' + gid + '/' + uid); r.remove(); }catch(e){ toast('Action impossible.', true); } });
-      r.appendChild(k);
-    }
-    p.appendChild(r);
-  });
-}catch(e){}
-
   closeAll(); clearInterval(chatT); ST.open = ''; open('#chatOverlay');
   OPENG = gid; gMark(gid);
   const box = $('#chatBody'); box.innerHTML = '';
@@ -3424,7 +3402,7 @@ try{
   const owner = g.owner === me.uid;
   const live = () => listen('chat', 'gmsgs/' + gid, '&orderBy=%22t%22&limitToLast=1', pull);
 
-  /* HEADER PROPRE (avec gid / g, pas fid / fname) */
+  /* HEADER */
   const head = el('div', 'chat-head');
   const back = el('button', 'chat-ic-sm', '‹'); back.type = 'button';
   back.addEventListener('click', () => { stop(); closeAll(); });
@@ -3440,11 +3418,15 @@ try{
   const rb = el('div', 'reply-bar'); rb.style.display = 'none';
   box.appendChild(rb);
 
-  /* BARRE SAISIE — tout déclaré AVANT */
+  /* BARRE SAISIE */
   const bar = el('div', 'chat-bar');
   const inp = el('textarea');
   const sbb = el('button', 'chat-send', '➤'); sbb.type = 'button';
-  const eBtn = el('button', 'chat-ic-sm', '😊'); eBtn.type = 'button';
+  const eBtn = el('button', 'chat-ic-sm', '@'); eBtn.type = 'button';
+  eBtn.title = 'Taguer un ami';
+  eBtn.style.fontWeight = '900';
+  eBtn.style.fontSize = '18px';
+  eBtn.style.color = 'var(--cyan)';
   const ph = el('label', 'chat-ic-sm'); ph.innerHTML = '📷';
   const pfile = document.createElement('input'); pfile.type = 'file'; pfile.accept = 'image/*'; ph.appendChild(pfile);
 
@@ -3457,7 +3439,16 @@ try{
       openTagPicker(inp, name => { inp.value = v.slice(0, at) + '@' + name + ' '; inp.focus(); });
     }
   });
-  eBtn.addEventListener('click', () => { inp.value += '😀'; inp.focus(); });
+  eBtn.addEventListener('click', () => {
+    const v = inp.value;
+    if(v.length && !v.endsWith(' ')) inp.value = v + ' @';
+    else inp.value = v + '@';
+    inp.focus();
+    setTimeout(() => openTagPicker(inp, name => {
+      inp.value = inp.value.slice(0, -1) + '@' + name + ' ';
+      inp.focus();
+    }), 50);
+  });
   bar.append(eBtn, ph, inp, sbb);
   box.appendChild(bar);
 
@@ -3471,6 +3462,7 @@ try{
     rb.append(t, c); inp.focus();
   };
 
+  /* INFOS GROUPE */
   inf.addEventListener('click', async () => {
     stop(); list.innerHTML = '';
     const p = el('div', 'prof-sec');
@@ -3496,53 +3488,67 @@ try{
     p.appendChild(big);
     p.appendChild(el('div', 'subhead', g.name));
     if(g.desc) p.appendChild(el('div', 'prof-bio', g.desc));
+
     const link = location.href.split('#')[0].split('?')[0];
     const cr = el('div', 'ref-code'); cr.appendChild(el('code', '', g.code || '—'));
     const cc = el('button', 'btn btn-ghost', '📋'); cc.type = 'button';
     cc.addEventListener('click', () => copyText('Rejoins mon groupe « ' + g.name + ' » sur Hacken Store. Code : ' + g.code + ' ' + link, 'Invitation copiée'));
     cr.appendChild(cc); p.appendChild(cr);
-    /* ✅ BOUTON INVITER UN AMI */
-const inviteBtn = el('button', 'btn btn-primary btn-block', '➕ Inviter un ami');
-inviteBtn.type = 'button'; inviteBtn.style.marginTop = '12px';
-inviteBtn.addEventListener('click', () => {
-  const oldBox = p.querySelector('.invite-box');
-  if(oldBox){ oldBox.remove(); return; }
-  const invBox = el('div', 'invite-box');
-  invBox.style.marginTop = '10px';
-  p.appendChild(invBox);
-  openGroupInviteBox(invBox, gid, g);
-});
-p.appendChild(inviteBtn);
 
-p.appendChild(el('div', 'subhead', '👥 Membres'));
-try{
-  Object.entries(await fb('GET', 'gmembers/' + gid) || {}).forEach(([uid, m]) => {
-    const r = frow(uid, m.name);
-    if(owner && uid !== me.uid){
-      const k = el('button', 'btn btn-ghost', '✕'); k.type = 'button';
-      k.addEventListener('click', async () => { try{ await fb('DELETE', 'gmembers/' + gid + '/' + uid); r.remove(); }catch(e){ toast('Action impossible.', true); } });
-      r.appendChild(k);
-    }
-    p.appendChild(r);
-  });
-}catch(e){}
+    /* ✅ BOUTON INVITER UN AMI */
+    const inviteBtn = el('button', 'btn btn-primary btn-block', '➕ Inviter un ami');
+    inviteBtn.type = 'button'; inviteBtn.style.marginTop = '12px';
+    inviteBtn.addEventListener('click', () => {
+      const oldBox = p.querySelector('.invite-box');
+      if(oldBox){ oldBox.remove(); return; }
+      const invBox = el('div', 'invite-box');
+      invBox.style.marginTop = '10px';
+      p.appendChild(invBox);
+      openGroupInviteBox(invBox, gid, g);
+    });
+    p.appendChild(inviteBtn);
+
+    /* Membres */
+    p.appendChild(el('div', 'subhead', '👥 Membres'));
+    try{
+      Object.entries(await fb('GET', 'gmembers/' + gid) || {}).forEach(([uid, m]) => {
+        const r = frow(uid, m.name);
+        if(owner && uid !== me.uid){
+          const k = el('button', 'btn btn-ghost', '✕'); k.type = 'button';
+          k.addEventListener('click', async () => { try{ await fb('DELETE', 'gmembers/' + gid + '/' + uid); r.remove(); }catch(e){ toast('Action impossible.', true); } });
+          r.appendChild(k);
+        }
+        p.appendChild(r);
+      });
+    }catch(e){}
+
+    /* Quitter / Supprimer */
     const lv = el('button', 'btn btn-ghost btn-block', owner ? '🗑 Supprimer le groupe' : 'Quitter le groupe');
     lv.type = 'button'; lv.style.marginTop = '12px';
     lv.addEventListener('click', async () => {
       if(!confirm('Confirmer ?')) return;
       try{
-        if(owner){ await fb('DELETE', 'glast/' + gid).catch(() => {}); await fb('DELETE', 'gmsgs/' + gid).catch(() => {}); await fb('DELETE', 'gmembers/' + gid); await fb('DELETE', 'groups/' + gid); }
-        else await fb('DELETE', 'gmembers/' + gid + '/' + me.uid);
+        if(owner){
+          await fb('DELETE', 'glast/' + gid).catch(() => {});
+          await fb('DELETE', 'gmsgs/' + gid).catch(() => {});
+          await fb('DELETE', 'gmembers/' + gid);
+          await fb('DELETE', 'groups/' + gid);
+        } else {
+          await fb('DELETE', 'gmembers/' + gid + '/' + me.uid);
+        }
         closeAll(); loadGroups();
       }catch(e){ toast('Action impossible.', true); }
     });
     p.appendChild(lv);
+
+    /* Retour au chat */
     const bk = el('button', 'btn btn-primary btn-block', 'Retour au chat');
     bk.type = 'button'; bk.style.marginTop = '8px';
     bk.addEventListener('click', () => { sig = ''; OPENG = gid; chatT = setInterval(pull, 10000); live(); pull(); });
     p.appendChild(bk); list.appendChild(p);
   });
 
+  /* RENDU MESSAGES */
   function render(msgs){
     list.innerHTML = '';
     if(!msgs.length){ list.appendChild(el('div', 'chat-empty', 'Aucun message. Dis bonjour 👋')); return; }
