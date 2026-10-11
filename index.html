@@ -2283,8 +2283,7 @@ function postEl(id, p, pm){
   d.innerHTML = '<div class="po-head"><i></i><div><b></b><span></span></div></div>'
 + (okImg(p.img) ? '<img alt="Publication">' : '')
 + '<p></p><div class="post-act"></div>';
-+ (okImg(p.img) ? '<img alt="Publication">' : '')
-+ '<p></p><div class="post-act"></div>';
+
   $('i', d).textContent = (p.name || '?').charAt(0).toUpperCase();
   setAv($('i', d), p.uid);
   /* ✅ NOM + BADGE sur la première ligne */
@@ -3495,32 +3494,6 @@ async function openGroup(gid, g){
     cc.addEventListener('click', () => copyText('Rejoins mon groupe « ' + g.name + ' » sur Hacken Store. Code : ' + g.code + ' ' + link, 'Invitation copiée'));
     cr.appendChild(cc); p.appendChild(cr);
 
-    /* ✅ BOUTON INVITER UN AMI */
-    const inviteBtn = el('button', 'btn btn-primary btn-block', '➕ Inviter un ami');
-    inviteBtn.type = 'button'; inviteBtn.style.marginTop = '12px';
-    inviteBtn.addEventListener('click', () => {
-      const oldBox = p.querySelector('.invite-box');
-      if(oldBox){ oldBox.remove(); return; }
-      const invBox = el('div', 'invite-box');
-      invBox.style.marginTop = '10px';
-      p.appendChild(invBox);
-      openGroupInviteBox(invBox, gid, g);
-    });
-    p.appendChild(inviteBtn);
-
-    /* Membres */
-    p.appendChild(el('div', 'subhead', '👥 Membres'));
-    try{
-      Object.entries(await fb('GET', 'gmembers/' + gid) || {}).forEach(([uid, m]) => {
-        const r = frow(uid, m.name);
-        if(owner && uid !== me.uid){
-          const k = el('button', 'btn btn-ghost', '✕'); k.type = 'button';
-          k.addEventListener('click', async () => { try{ await fb('DELETE', 'gmembers/' + gid + '/' + uid); r.remove(); }catch(e){ toast('Action impossible.', true); } });
-          r.appendChild(k);
-        }
-        p.appendChild(r);
-      });
-    }catch(e){}
 
     /* Quitter / Supprimer */
     const lv = el('button', 'btn btn-ghost btn-block', owner ? '🗑 Supprimer le groupe' : 'Quitter le groupe');
@@ -4152,4 +4125,4 @@ if('serviceWorker' in navigator){
 }
 </script>
 </body>
-  </html>
+                             </html>
