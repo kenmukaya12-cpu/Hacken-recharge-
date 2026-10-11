@@ -479,6 +479,13 @@ footer .btn{margin-top:14px;font-size:15px;}
 .conv-mid.open>span{white-space:normal!important;}
 .conv-mid .go{margin-top:8px;}
 .grp{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-bottom:8px;cursor:pointer;}
+
+/* ===== INVITATION GROUPE ===== */
+.invite-row{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px 10px;margin-bottom:8px;}
+.invite-row .av{flex:0 0 36px;width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--gold));color:#04202A;display:grid;place-items:center;font-weight:900;font-family:var(--f-head);overflow:hidden;background-size:cover;background-position:center;font-size:16px;}
+.invite-row .nm{flex:1;min-width:0;font-family:var(--f-head);font-size:16px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.invite-row .btn{padding:7px 12px;font-size:14px;border-radius:10px;}
+.invite-row .btn[disabled]{opacity:.5;cursor:not-allowed;}
 .grp .av-lg{border-radius:14px!important;}
 .grp .btn{padding:7px 12px;font-size:14px;}
 .grp-meta{font-size:12px;color:var(--muted);}
@@ -760,10 +767,6 @@ body.shop-open #shopEntry{display:none;}
         <div class="top-ref-title">🏆 Top 3 parrains du soir <small id="topRefTimer"></small></div>
         <div id="topRefList"></div>
       </div>
-    </section>
-
-    <section id="shopEntry" class="shop-enter rv" style="padding:6px 0;">
-      <button class="btn btn-ghost btn-sm" type="button" data-shop><svg viewBox="0 0 24 24" style="width:18px;height:18px"><use href="#i-shop"/></svg> Boutique</button>
     </section>
 
     <section id="communaute" class="rv">
@@ -2269,34 +2272,36 @@ HK.notifyTags = notifyTags;
    ========================================================= */
 function postEl(id, p, pm){
   const d = document.createElement('article'); d.className = 'post';
-  d.innerHTML = '<div class="po-head"><i></i><div><b></b><span></span></div></div>'
+  d.innerHTML = '<div class="po-head" style="display:flex;align-items:center;gap:12px;padding:12px 14px;"><i></i><div style="flex:1 1 auto;min-width:0;display:flex;flex-direction:column;"><b></b><span></span></div></div>'
 + (okImg(p.img) ? '<img alt="Publication">' : '')
 + '<p></p><div class="post-act"></div>';
   $('i', d).textContent = (p.name || '?').charAt(0).toUpperCase();
   setAv($('i', d), p.uid);
-  const bEl = $('.po-head b', d);
+  /* ✅ NOM + BADGE sur la première ligne */
+const bEl = $('.po-head b', d);
 bEl.innerHTML = '';
-bEl.style.cssText = 'display:flex;align-items:center;gap:5px;color:var(--text)!important;cursor:pointer;font-family:var(--f-head);font-size:17px;';
+bEl.setAttribute('style', 'display:flex !important; align-items:center; gap:6px; color:var(--text) !important; font-family:var(--f-head); font-size:17px; line-height:1.15; cursor:pointer; margin:0; padding:0; overflow:hidden;');
+
 const nameSpan = document.createElement('span');
-nameSpan.textContent = p.name || '?';
-nameSpan.style.color = 'var(--text)';
+nameSpan.textContent = (p.name || '?');
+nameSpan.setAttribute('style', 'color:var(--text) !important; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; display:inline-block; max-width:180px;');
 bEl.appendChild(nameSpan);
-/* ✅ Badge collé au nom */
+
 if(p.uid){
   const bg0 = BADGES[p.uid];
   if(bg0 && BADGE_INFO[bg0]){
     const bd0 = document.createElement('span');
-    bd0.className = 'bdg';
-    bd0.style.cssText = 'display:inline-flex;align-items:center;color:' + BADGE_INFO[bg0].c + ';margin-left:0;';
+    bd0.setAttribute('style', 'display:inline-flex !important; align-items:center; justify-content:center; color:' + BADGE_INFO[bg0].c + '; flex:0 0 auto; margin:0; padding:0; line-height:1;');
     bd0.innerHTML = BADGE_SVG;
     bEl.appendChild(bd0);
   }
   bEl.addEventListener('click', () => openProfile(p.uid, p.name));
 }
-/* ✅ Date sous le nom */
+
+/* ✅ DATE + HEURE + ⏳ sur la deuxième ligne */
 const metaEl = $('.po-head span', d);
 metaEl.textContent = when(p.t) + (p.ta ? ' · ⏳ ' + Math.max(1, Math.ceil((p.ta + 172800000 - Date.now()) / 3600000)) + 'h' : '');
-metaEl.style.cssText = 'display:block;font-size:12px;color:var(--muted);margin-top:2px;';
+metaEl.setAttribute('style', 'display:block !important; font-size:12px; color:var(--muted); margin-top:3px; font-weight:400;');
   if(okImg(p.img)) $('img', d).src = p.img;
   $('p', d).textContent = p.text || '';
   const act = $('.post-act', d);
@@ -2840,7 +2845,7 @@ loadTopRefs();
    NOTIFICATIONS / BANNIÈRES
    ========================================================= */
 const TITLE0 = document.title;
-const ICONS = { like:'❤️', comment:'💬', accept:'✅', badge:'✔', ref:'🎁', group:'👥', mention:'@', admin:'🔔', friend:'🤝' };
+const ICONS = { like:'❤️', comment:'💬', accept:'✅', badge:'✔', ref:'🎁', group:'👥', mention:'@', admin:'🔔', friend:'🤝', invite:'✉️' };
 const SUPPORT = 'Support HK ';
 const annSeen = () => { try{ let s = localStorage.getItem('hk-ann-seen'); if(s === null){ s = String(Date.now()); localStorage.setItem('hk-ann-seen', s); } return +s; }catch(e){ return 0; } };
 const annMark = () => { try{ localStorage.setItem('hk-ann-seen', String(Date.now())); }catch(e){} };
@@ -3007,6 +3012,37 @@ function renderHub(){
       if(n.type === 'badge') return setTab('profile');
       if(n.type === 'like' || n.type === 'comment' || n.type === 'accept'){ closeAll(); setTab('home'); return; }
       if(n.type === 'group'){ closeAll(); setTab('community'); return; }
+if(n.type === 'invite'){
+  closeAll();
+  if(n.gid && n.gname){
+    const ok = confirm('Rejoindre le groupe « ' + n.gname + ' » ?');
+    if(ok) acceptGroupInvite(n.gid, n.gname);
+    else {
+      /* Refuser → supprimer l'invitation */
+      fb('DELETE', 'group_invites/' + me.uid + '/' + n.gid).catch(() => {});
+    }
+  }
+  return;
+}
+/* ✅ Accepter une invitation à rejoindre un groupe */
+async function acceptGroupInvite(gid, gname){
+  try{
+    /* Vérifier que le groupe existe encore */
+    const g = await fb('GET', 'groups/' + gid);
+    if(!g){ toast('Ce groupe n\'existe plus.', true); fb('DELETE', 'group_invites/' + me.uid + '/' + gid).catch(() => {}); return; }
+    /* Rejoindre le groupe */
+    await fb('PUT', 'gmembers/' + gid + '/' + me.uid, { name: me.name, t: Date.now() });
+    /* Supprimer l'invitation */
+    await fb('DELETE', 'group_invites/' + me.uid + '/' + gid).catch(() => {});
+    /* Notifier l'owner du groupe */
+    if(g.owner && g.owner !== me.uid){
+      pushNotif(g.owner, 'group', 'a rejoint ton groupe « ' + short(g.name, 30) + ' »', 'gj_' + gid + '_' + me.uid);
+    }
+    toast('Tu as rejoint « ' + (g.name || gname) + ' » ✅');
+    loadGroups();
+    openGroup(gid, g);
+  }catch(e){ toast('Impossible de rejoindre.', true); }
+}
       if(n.type === 'mention'){
         closeAll();
         if(n.from && n.from !== 'admin'){ openProfile(n.from, n.name); }
@@ -3355,6 +3391,32 @@ if(grpFormEl) grpFormEl.addEventListener('submit', async e => {
 });
 
 async function openGroup(gid, g){
+/* ✅ BOUTON INVITER UN AMI */
+const inviteBtn = el('button', 'btn btn-primary btn-block', '➕ Inviter un ami');
+inviteBtn.type = 'button'; inviteBtn.style.marginTop = '12px';
+inviteBtn.addEventListener('click', () => {
+  const oldBox = p.querySelector('.invite-box');
+  if(oldBox){ oldBox.remove(); return; }
+  const invBox = el('div', 'invite-box');
+  invBox.style.marginTop = '10px';
+  p.appendChild(invBox);
+  openGroupInviteBox(invBox, gid, g);
+});
+p.appendChild(inviteBtn);
+
+p.appendChild(el('div', 'subhead', '👥 Membres'));
+try{
+  Object.entries(await fb('GET', 'gmembers/' + gid) || {}).forEach(([uid, m]) => {
+    const r = frow(uid, m.name);
+    if(owner && uid !== me.uid){
+      const k = el('button', 'btn btn-ghost', '✕'); k.type = 'button';
+      k.addEventListener('click', async () => { try{ await fb('DELETE', 'gmembers/' + gid + '/' + uid); r.remove(); }catch(e){ toast('Action impossible.', true); } });
+      r.appendChild(k);
+    }
+    p.appendChild(r);
+  });
+}catch(e){}
+
   closeAll(); clearInterval(chatT); ST.open = ''; open('#chatOverlay');
   OPENG = gid; gMark(gid);
   const box = $('#chatBody'); box.innerHTML = '';
@@ -3439,18 +3501,31 @@ async function openGroup(gid, g){
     const cc = el('button', 'btn btn-ghost', '📋'); cc.type = 'button';
     cc.addEventListener('click', () => copyText('Rejoins mon groupe « ' + g.name + ' » sur Hacken Store. Code : ' + g.code + ' ' + link, 'Invitation copiée'));
     cr.appendChild(cc); p.appendChild(cr);
-    p.appendChild(el('div', 'subhead', '👥 Membres'));
-    try{
-      Object.entries(await fb('GET', 'gmembers/' + gid) || {}).forEach(([uid, m]) => {
-        const r = frow(uid, m.name);
-        if(owner && uid !== me.uid){
-          const k = el('button', 'btn btn-ghost', '✕'); k.type = 'button';
-          k.addEventListener('click', async () => { try{ await fb('DELETE', 'gmembers/' + gid + '/' + uid); r.remove(); }catch(e){ toast('Action impossible.', true); } });
-          r.appendChild(k);
-        }
-        p.appendChild(r);
-      });
-    }catch(e){}
+    /* ✅ BOUTON INVITER UN AMI */
+const inviteBtn = el('button', 'btn btn-primary btn-block', '➕ Inviter un ami');
+inviteBtn.type = 'button'; inviteBtn.style.marginTop = '12px';
+inviteBtn.addEventListener('click', () => {
+  const oldBox = p.querySelector('.invite-box');
+  if(oldBox){ oldBox.remove(); return; }
+  const invBox = el('div', 'invite-box');
+  invBox.style.marginTop = '10px';
+  p.appendChild(invBox);
+  openGroupInviteBox(invBox, gid, g);
+});
+p.appendChild(inviteBtn);
+
+p.appendChild(el('div', 'subhead', '👥 Membres'));
+try{
+  Object.entries(await fb('GET', 'gmembers/' + gid) || {}).forEach(([uid, m]) => {
+    const r = frow(uid, m.name);
+    if(owner && uid !== me.uid){
+      const k = el('button', 'btn btn-ghost', '✕'); k.type = 'button';
+      k.addEventListener('click', async () => { try{ await fb('DELETE', 'gmembers/' + gid + '/' + uid); r.remove(); }catch(e){ toast('Action impossible.', true); } });
+      r.appendChild(k);
+    }
+    p.appendChild(r);
+  });
+}catch(e){}
     const lv = el('button', 'btn btn-ghost btn-block', owner ? '🗑 Supprimer le groupe' : 'Quitter le groupe');
     lv.type = 'button'; lv.style.marginTop = '12px';
     lv.addEventListener('click', async () => {
