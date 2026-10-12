@@ -2121,6 +2121,68 @@ async function openTagPicker(targetEl, onPick){
   setTimeout(() => document.addEventListener('pointerdown', outside), 100);
 }
 HK.openTagPicker = openTagPicker;
+/* =========================================================
+   PICKER D'INVITATION DE GROUPE
+   ========================================================= */
+let INV_PICKER = null;
+function closeInvitePicker(){
+  if(INV_PICKER){ INV_PICKER.remove(); INV_PICKER = null; }
+}
+async function openInvitePicker(gid, gname){
+  closeInvitePicker();
+  if(!me) return;
+  let friends = {};
+  try{ friends = await fb('GET', 'friends/' + me.uid) || {}; }catch(e){}
+  const ids = Object.keys(friends).filter(uid => uid !== me.uid);
+  if(!ids.length){ toast('Tu n\'as pas d\'amis à inviter.', true); return; }
+  // Membres déjà présents dans le groupe
+  let members = {};
+  try{ members = await fb('GET', 'gmembers/' + gid) || {}; }catch(e){}
+  const picker = el('div', 'tag-picker');
+  const title = el('h4');
+  title.appendChild(document.createTextNode('Inviter dans « ' + short(gname, 20) + ' »'));
+  const close = el('button', '', '✕'); close.type = 'button';
+  close.addEventListener('click', closeInvitePicker);
+  title.appendChild(close);
+  const list = el('div', 'tp-list');
+  picker.append(title, list);
+  ids.forEach(uid => {
+    const f = friends[uid] || {};
+    const item = el('div', 'tp-item');
+    const av = el('div', 'av', (f.name || '?').charAt(0).toUpperCase()); setAv(av, uid);
+    const nm = el('div', 'nm', f.name || '?');
+    item.append(av, nm);
+    if(members[uid]){
+      item.appendChild(el('span', 'grp-meta', '✓ Déjà membre'));
+      item.style.opacity = '.5';
+    } else {
+      item.addEventListener('click', async () => {
+        try{
+          await fb('PUT', 'group_invites/' + uid + '/' + gid, {
+            from: me.uid,
+            name: me.name,
+            gname: gname,
+            t: Date.now()
+          });
+          toast('✉️ Invitation envoyée à ' + (f.name || '?'));
+          item.remove();
+          if(!list.children.length) closeInvitePicker();
+        }catch(e){ toast('Envoi impossible.', true); }
+      });
+    }
+    list.appendChild(item);
+  });
+  document.body.appendChild(picker);
+  INV_PICKER = picker;
+  setTimeout(() => picker.classList.add('on'), 10);
+  const outside = e => {
+    if(INV_PICKER && !INV_PICKER.contains(e.target)){
+      closeInvitePicker();
+      document.removeEventListener('pointerdown', outside);
+    }
+  };
+  setTimeout(() => document.addEventListener('pointerdown', outside), 100);
+}
 
 /* =========================================================
    NOTIFIER LES TAGS
@@ -3379,28 +3441,11 @@ async function openGroup(gid, g){
     cc.addEventListener('click', () => copyText('Rejoins mon groupe « ' + g.name + ' » sur Hacken Store. Code : ' + g.code + ' ' + link, 'Invitation copiée'));
     cr.appendChild(cc); p.appendChild(cr);
     
-    // NOUVEAU : Bouton d'invitation d'amis
-    const invBtn = el('button', 'btn btn-primary btn-block', '✉️ Inviter un ami'); 
-    invBtn.type = 'button'; invBtn.style.marginTop = '8px';
-    invBtn.addEventListener('click', async () => {
-      const friends = await fb('GET', 'friends/' + me.uid).catch(() => ({}));
-      const fids = Object.keys(friends);
-      if(!fids.length) return toast('Tu n\'as pas d\'amis à inviter.', true);
-      const choice = prompt('Pseudo de l\'ami à inviter :');
-      if(!choice) return;
-      const target = fids.find(id => (friends[id].name || '').toLowerCase() === choice.toLowerCase());
-      if(!target) return toast('Ami introuvable.', true);
-      try{
-        await fb('PUT', 'group_invites/' + target + '/' + gid, {
-          from: me.uid,
-          name: me.name,
-          gname: g.name,
-          t: Date.now()
-        });
-        toast('Invitation envoyée à ' + friends[target].name);
-      }catch(e){ toast('Erreur lors de l\'envoi.', true); }
-    });
-    p.appendChild(invBtn);
+    // Bouton d'invitation d'amis — ouvre la liste
+const invBtn = el('button', 'btn btn-primary btn-block', '✉️ Inviter un ami');
+invBtn.type = 'button'; invBtn.style.marginTop = '8px';
+invBtn.addEventListener('click', () => openInvitePicker(gid, g.name));
+p.appendChild(invBtn);
 
     p.appendChild(el('div', 'subhead', '👥 Membres'));
     try{
@@ -3419,7 +3464,19 @@ async function openGroup(gid, g){
     lv.addEventListener('click', async () => {
       if(!confirm('Confirmer ?')) return;
       try{
-        if(owner){ await fb('DELETE', 'glast/' + gid).catch(() => {}); await fb('DELETE', 'gmsgs/' + gid).catch(() => {}); await fb('DELETE', 'gmembers/' + gid); await fb('DELETE', 'groups/' + gid); }
+        if(owner){ 
+  await fb('DELETE', 'glast/' + gid).catch(() => {}); 
+  await fb('DELETE', 'gmsgs/' + gid).catch(() => {}); 
+  await fb('DELETE', 'gmembers/' + gid); 
+  await fb('DELETE', 'groups/' + gid);
+  // Nettoie les invitations en attente pour ce groupe
+  try{
+    const inv = await fb('GET', 'group_invites').catch(() => ({}));
+    Object.keys(inv || {}).forEach(uid => {
+      if(inv[uid] && inv[uid][gid]) fb('DELETE', 'group_invites/' + uid + '/' + gid).catch(() => {});
+    });
+  }catch(e){}
+}
         else await fb('DELETE', 'gmembers/' + gid + '/' + me.uid);
         closeAll(); loadGroups();
       }catch(e){ toast('Action impossible.', true); }
@@ -4074,4 +4131,4 @@ if('serviceWorker' in navigator){
 }
 </script>
 </body>
-        </html>
+  </html>
