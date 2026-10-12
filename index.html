@@ -17,7 +17,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
 <style>
 /* ===== BASE ===== */
 .reply-bar{display:flex;align-items:center;gap:10px;padding:8px 12px;border-top:1px solid var(--line);background:var(--panel);}
@@ -27,8 +26,12 @@
 .bub .quote{border-left:4px solid var(--gold);background:rgba(0,0,0,.18);border-radius:8px;padding:4px 8px;margin-bottom:5px;}
 .bub .quote b{display:block;font-family:var(--f-head);font-size:13px;}
 .bub .quote span{display:block;font-size:12.5px;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
-body.locked main,body.locked footer,body.locked .fab,body.locked .bar,body.locked .nstack,body.locked .nav-actions,body.locked .tabbar{display:none!important;}
+
+/* CORRECTION : On cache tout sauf l'authPage quand locked */
+body.locked main,body.locked footer,body.locked .fab,body.locked .bar,body.locked .nstack,body.locked .nav-actions,body.locked .tabbar,body.locked .navbar{display:none!important;}
 body.locked #authPage .x{display:none;}
+/* On s'assure que l'authPage est bien au-dessus de tout */
+body.locked #authPage { z-index: 9999 !important; display: block !important; }
 
 :root{
   box-sizing:border-box;
@@ -377,7 +380,8 @@ footer .btn{margin-top:14px;font-size:15px;}
 .bub .acts button{border:0;border-radius:8px;padding:5px 9px;font-size:12px;cursor:pointer;background:rgba(0,0,0,.25);color:#fff;font-weight:600;}
 .bub .acts button:active{transform:scale(.95);}
 .chat-empty{margin:auto;color:var(--muted);font-size:14px;text-align:center;padding:30px 20px;}
-/* ===== BARRE DE SAISIE CHAT — PROPRE ===== */
+
+/* ===== BARRE DE SAISIE CHAT — PROPRE (sans sticker) ===== */
 .chat-bar{
   display:flex;
   gap:6px;
@@ -405,23 +409,6 @@ footer .btn{margin-top:14px;font-size:15px;}
 }
 .chat-bar textarea::placeholder{color:var(--muted);}
 .chat-bar textarea:focus{outline:none;border-color:var(--cyan);}
-.chat-ic-sm{
-  flex:0 0 40px;
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  border:1px solid var(--line);
-  background:var(--panel2);
-  color:var(--muted);
-  cursor:pointer;
-  display:grid;
-  place-items:center;
-  font-size:17px;
-  transition:all .15s;
-  padding:0;
-}
-.chat-ic-sm:hover{color:var(--cyan);border-color:var(--cyan);}
-.chat-ic-sm:active{transform:scale(.9);}
 .chat-send{
   flex:0 0 44px;
   width:44px;
@@ -439,10 +426,6 @@ footer .btn{margin-top:14px;font-size:15px;}
   transition:transform .15s;
 }
 .chat-send:active{transform:scale(.9);}
-
-/* Cacher le texte natif "Choisir un fichier" du label photo */
-.chat-bar label.chat-ic-sm input[type=file]{display:none!important;}
-.chat-bar label.chat-ic-sm{position:relative;overflow:hidden;}
 
 /* ===== TAG PICKER ===== */
 .tag-picker{position:fixed;left:50%;transform:translateX(-50%) scale(.95);bottom:calc(env(safe-area-inset-bottom,0px) + 100px);z-index:120;background:var(--panel2);border:1px solid var(--cyan);border-radius:16px;padding:10px;box-shadow:0 20px 40px -12px rgba(0,0,0,.7);width:min(340px,90vw);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;}
@@ -582,7 +565,7 @@ body.shop-open #shopEntry{display:none;}
 #page-messages,#page-profile{padding:20px 18px 30px;}
 
 /* ===== FLIP AUTH ===== */
-#authPage{position:fixed;inset:0;z-index:200;display:none;overflow-y:auto;background:radial-gradient(circle at 50% 0%,color-mix(in srgb,var(--cyan) 12%,var(--bg)),var(--bg) 55%);padding:20px 16px;padding-top:calc(env(safe-area-inset-top,0px) + 20px);}
+#authPage{position:fixed;inset:0;z-index:9999;display:none;overflow-y:auto;background:radial-gradient(circle at 50% 0%,color-mix(in srgb,var(--cyan) 12%,var(--bg)),var(--bg) 55%);padding:20px 16px;padding-top:calc(env(safe-area-inset-top,0px) + 20px);}
 #authPage.on{display:block;}
 .flip-scene{perspective:1400px;max-width:420px;margin:30px auto;position:relative;min-height:560px;}
 .flip-card{position:relative;width:100%;height:100%;transition:transform .8s cubic-bezier(.4,.2,.2,1);transform-style:preserve-3d;}
@@ -605,7 +588,6 @@ body.shop-open #shopEntry{display:none;}
 .flip-link b{color:var(--cyan);cursor:pointer;font-weight:700;}
 @media(max-width:420px){.flip-face{padding:24px 18px;border-radius:22px;}.flip-scene{min-height:540px;}}
 </style>
-</head>
 <body>
 <script>document.body.classList.add('js-on');</script>
 
@@ -1103,8 +1085,12 @@ body.shop-open #shopEntry{display:none;}
       <div><span class="lbl">Type de groupe</span>
         <div class="pay-options" id="gType"><button type="button" class="pay sel" data-pub="1">🌍 Public</button><button type="button" class="pay" data-pub="0">🔒 Privé</button></div></div>
       <div><label class="lbl" for="gMax">Nombre max de membres</label><input type="number" id="gMax" min="2" max="200" value="50"></div>
-      <button class="btn btn-primary btn-block" type="submit">Créer le groupe</button>
+      <button type="submit" class="btn btn-primary btn-block">Créer le groupe</button>
     </form>
+    <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--line);">
+      <p class="note" style="text-align:left;margin-bottom:8px;">Une fois le groupe créé, tu pourras inviter tes amis depuis le menu du groupe.</p>
+      <button type="button" class="btn btn-ghost btn-block" id="grpInviteHint" style="font-size:13px;" onclick="alert('Ouvre ton groupe après création, clique sur ⓘ (en haut à droite), puis descends pour voir le bouton « Inviter un ami ».')">💡 Comment inviter ?</button>
+    </div>
   </div>
 </div>
 
@@ -2178,9 +2164,6 @@ async function notifyTags(text, fromUid, fromName, context){
 HK.notifyTags = notifyTags;
 
 /* =========================================================
-   ⏸️ SUITE DANS LA PARTIE 4/4
-   ========================================================= */
-   /* =========================================================
    POSTS — Publications
    ========================================================= */
 function postEl(id, p, pm){
@@ -2751,7 +2734,7 @@ const ICONS = { like:'❤️', comment:'💬', accept:'✅', badge:'✔', ref:'�
 const SUPPORT = 'Support HK ';
 const annSeen = () => { try{ let s = localStorage.getItem('hk-ann-seen'); if(s === null){ s = String(Date.now()); localStorage.setItem('hk-ann-seen', s); } return +s; }catch(e){ return 0; } };
 const annMark = () => { try{ localStorage.setItem('hk-ann-seen', String(Date.now())); }catch(e){} };
-const ST = { req:{}, inbox:{}, notifs:{}, tick:0, sg:'', open:'', uid:'', init:false, seen:new Set() };
+const ST = { req:{}, inbox:{}, notifs:{}, ginv:{}, tick:0, sg:'', open:'', uid:'', init:false, seen:new Set() };
 
 async function pushNotif(to, type, text, id){
   if(!me || !to || to === me.uid) return;
@@ -2809,22 +2792,37 @@ async function poll(){
   if(!me){ setCounts(0, 0); return; }
   if(ST.uid !== me.uid){ ST.uid = me.uid; ST.init = false; ST.seen = new Set(); liveAll(); }
   try{
-    const [rq, ib, nf, an] = await Promise.all([
+    const [rq, ib, nf, an, ginv] = await Promise.all([
       fb('GET', 'friend_req/' + me.uid).catch(() => ({})),
       fb('GET', 'inbox/' + me.uid).catch(() => ({})),
       fb('GET', 'notifs/' + me.uid, undefined, '&orderBy=%22t%22&limitToLast=40').catch(() => ({})),
-      fb('GET', 'announces', undefined, '&orderBy=%22t%22&limitToLast=5').catch(() => ({}))
+      fb('GET', 'announces', undefined, '&orderBy=%22t%22&limitToLast=5').catch(() => ({})),
+      fb('GET', 'group_invites/' + me.uid).catch(() => ({}))
     ]);
-    ST.req = rq || {}; ST.inbox = ib || {}; ST.notifs = nf || {};
+    ST.req = rq || {}; ST.inbox = ib || {}; ST.notifs = nf || {}; ST.ginv = ginv || {};
     const seenA = annSeen();
     ST.ann = Object.entries(an || {}).map(([k, a]) => [k, { type:'admin', from:'admin', name:SUPPORT, text:a.text, t:a.t, ann:true, r: a.t <= seenA }]);
     const inc = Object.entries(ST.inbox).filter(([k, x]) => x.from !== me.uid && !x.r);
-    const nn = Object.values(ST.notifs).filter(x => !x.r).length + ST.ann.filter(([k, a]) => !a.r).length;
+    const nn = Object.values(ST.notifs).filter(x => !x.r).length + ST.ann.filter(([k, a]) => !a.r).length + Object.keys(ST.ginv).length;
     setCounts(inc.length, Object.keys(ST.req).length + nn);
     const items = [];
     inc.forEach(([k, x]) => { if(k !== ST.open) items.push({ key:'m:' + k + ':' + x.t, kind:'msg', icon:'💬', uid:k, title:'💬 ' + x.name, text:x.text, onClick:() => { setTab('messages'); setTimeout(() => openChat(k, x.name), 250); } }); });
     Object.entries(ST.req).forEach(([k, v]) => items.push({ key:'r:' + k, kind:'req', icon:'🤝', uid:k, title:'🤝 ' + v.name, text:'veut devenir ton ami', onClick:() => { setTab('friends'); setTimeout(() => openHub(), 250); } }));
     ST.ann.forEach(([k, a]) => { if(!a.r) items.push({ key:'a:' + k, kind:'ntf', icon:'📢', title:SUPPORT, text:short(a.text, 80), onClick:() => openHub() }); });
+    
+    // NOUVEAU : Invitations de groupe
+    Object.entries(ST.ginv || {}).forEach(([gid, inv]) => {
+      items.push({
+        key: 'gi:' + gid,
+        kind: 'req',
+        icon: '👥',
+        uid: inv.from,
+        title: '👥 Invitation de groupe',
+        text: inv.name + ' t\'invite à rejoindre « ' + inv.gname + ' »',
+        onClick: () => openGroupInvite(gid, inv)
+      });
+    });
+
     Object.entries(ST.notifs).forEach(([k, x]) => {
       if(x.r) return;
       const isMention = x.type === 'mention';
@@ -2857,7 +2855,7 @@ async function poll(){
         try{ new Notification('HK Gaming — ' + f.title, { body:f.text }); }catch(e){}
       }
     }
-    const sg = JSON.stringify([ST.req, ST.inbox, ST.notifs, ST.ann]);
+    const sg = JSON.stringify([ST.req, ST.inbox, ST.notifs, ST.ann, ST.ginv]);
     if(sg !== ST.sg){
       ST.sg = sg;
       if($('#hubOverlay').classList.contains('open')) renderHub();
@@ -2866,6 +2864,29 @@ async function poll(){
     }
     if(ST.tick++ % 3 === 0) fb('PUT', 'presence/' + me.uid, Date.now()).catch(() => {});
   }catch(e){}
+}
+
+/* =========================================================
+   INVITATION DE GROUPE (Option B)
+   ========================================================= */
+async function openGroupInvite(gid, inv){
+  closeAll();
+  const ok = confirm(inv.name + ' t\'invite à rejoindre le groupe « ' + inv.gname + ' ».\n\nRejoindre ?');
+  if(!ok){
+    // Refuser
+    try{ await fb('DELETE', 'group_invites/' + me.uid + '/' + gid); poll(); }catch(e){}
+    return;
+  }
+  // Accepter
+  try{
+    const g = await fb('GET', 'groups/' + gid);
+    if(!g) return toast('Ce groupe n\'existe plus.', true);
+    await fb('PUT', 'gmembers/' + gid + '/' + me.uid, { name: me.name, t: Date.now() });
+    await fb('DELETE', 'group_invites/' + me.uid + '/' + gid);
+    toast('Tu as rejoint le groupe ! 🎉');
+    loadGroups();
+    openGroup(gid, g);
+  }catch(e){ toast('Impossible de rejoindre.', true); }
 }
 
 /* =========================================================
@@ -2902,6 +2923,24 @@ function renderHub(){
       r.append(ok, no); box.appendChild(r);
     });
   }
+  
+  // NOUVEAU : Section Invitations de groupe dans le hub
+  const ginv = Object.entries(ST.ginv || {});
+  if(ginv.length){
+    box.appendChild(el('div', 'subhead', '👥 Invitations de groupe'));
+    ginv.forEach(([gid, inv]) => {
+      const r = el('div', 'frow');
+      const av = el('span', 'av', '👥'); r.appendChild(av);
+      const n = el('span', 'fn', inv.gname);
+      r.appendChild(n);
+      const ok = el('button', 'btn btn-primary', '✔'); ok.type = 'button';
+      ok.addEventListener('click', () => openGroupInvite(gid, inv));
+      const no = el('button', 'btn btn-ghost', '✕'); no.type = 'button';
+      no.addEventListener('click', async () => { try{ await fb('DELETE', 'group_invites/' + me.uid + '/' + gid); poll(); }catch(e){ toast('Action impossible.', true); } });
+      r.append(ok, no); box.appendChild(r);
+    });
+  }
+
   box.appendChild(el('div', 'subhead', 'Activité'));
   const nf = Object.entries(ST.notifs || {}).concat(ST.ann || []).sort((a, b) => b[1].t - a[1].t).slice(0, 40);
   if(!nf.length) box.appendChild(el('div', 't-empty', 'Aucune notification.'));
@@ -2945,7 +2984,7 @@ function renderHub(){
 }
 
 /* =========================================================
-   CHAT PRIVÉ — CORRIGÉ (eBtn déclaré avant utilisation)
+   CHAT PRIVÉ — CORRIGÉ (sans sticker)
    ========================================================= */
 const H48 = 172800000;
 let chatT = 0;
@@ -2980,14 +3019,11 @@ function openChat(fid, fname){
   const rb = el('div', 'reply-bar'); rb.style.display = 'none';
   box.appendChild(rb);
 
-  /* BARRE SAISIE — tout déclaré AVANT utilisation */
+  /* BARRE SAISIE — SANS STICKER (juste texte + envoi) */
   const bar = el('div', 'chat-bar');
   const inp = el('textarea');
   const sbb = el('button', 'chat-send', '➤'); sbb.type = 'button';
-  const eBtn = el('button', 'chat-ic-sm', '😊'); eBtn.type = 'button';
-  const ph = el('label', 'chat-ic-sm'); ph.innerHTML = '📷';
-  const pfile = document.createElement('input'); pfile.type = 'file'; pfile.accept = 'image/*'; ph.appendChild(pfile);
-
+  
   inp.rows = 1; inp.maxLength = 500; inp.placeholder = 'Écris un message...';
   inp.addEventListener('input', () => {
     inp.style.height = 'auto'; inp.style.height = Math.min(inp.scrollHeight, 120) + 'px';
@@ -2997,8 +3033,8 @@ function openChat(fid, fname){
       openTagPicker(inp, name => { inp.value = v.slice(0, at) + '@' + name + ' '; inp.focus(); });
     }
   });
-  eBtn.addEventListener('click', () => { inp.value += '😀'; inp.focus(); });
-  bar.append(eBtn, ph, inp, sbb);
+  
+  bar.append(inp, sbb);
   box.appendChild(bar);
 
   /* REPLY */
@@ -3134,11 +3170,9 @@ function openChat(fid, fname){
     }catch(err){ if(text) inp.value = text; toast('Message non envoyé.', true); }
   }
 
-  pfile.addEventListener('change', async () => {
-    const f = pfile.files[0]; if(!f) return; pfile.value = '';
-    if(!/^image\//.test(f.type)) return toast('Choisis une image.', true);
-    try{ send(await compress(f, 640, 100000)); }catch(e){ toast('Image trop lourde.', true); }
-  });
+  // Envoi de photo : on garde la fonction mais sans le bouton dans l'UI
+  // On peut l'appeler via un éventuel événement externe si besoin
+  
   sbb.addEventListener('click', () => send());
   inp.addEventListener('keydown', e => { if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); send(); } });
   pull(); chatT = setInterval(pull, 10000);
@@ -3148,7 +3182,7 @@ function openChat(fid, fname){
 }
 
 /* =========================================================
-   GROUPES — CORRIGÉ (header propre avec gid/g)
+   GROUPES — CORRIGÉ (sans sticker + invitation)
    ========================================================= */
 let GR = [], OPENG = '', GUNREAD = {}, GCNT = {};
 const gSeen = id => { try{ return +localStorage.getItem('hk-g-' + id) || 0; }catch(e){ return 0; } };
@@ -3223,6 +3257,7 @@ async function joinGroup(id, g, code){
     const rec = { name: me.name, t: Date.now() };
     if(!g.pub && code) rec.code = code;
     await fb('PUT', 'gmembers/' + id + '/' + me.uid, rec);
+    await fb('DELETE', 'group_invites/' + me.uid + '/' + id); // Nettoie l'invitation si elle existe
     gMark(id);
     if(g.owner && g.owner !== me.uid) pushNotif(g.owner, 'group', 'a rejoint ton groupe « ' + short(g.name, 30) + ' »', 'gj_' + id + '_' + me.uid);
     toast('Groupe rejoint ✅'); loadGroups(); openGroup(id, g);
@@ -3269,7 +3304,7 @@ async function openGroup(gid, g){
   const owner = g.owner === me.uid;
   const live = () => listen('chat', 'gmsgs/' + gid, '&orderBy=%22t%22&limitToLast=1', pull);
 
-  /* HEADER PROPRE (avec gid / g, pas fid / fname) */
+  /* HEADER PROPRE */
   const head = el('div', 'chat-head');
   const back = el('button', 'chat-ic-sm', '‹'); back.type = 'button';
   back.addEventListener('click', () => { stop(); closeAll(); });
@@ -3285,13 +3320,10 @@ async function openGroup(gid, g){
   const rb = el('div', 'reply-bar'); rb.style.display = 'none';
   box.appendChild(rb);
 
-  /* BARRE SAISIE — tout déclaré AVANT */
+  /* BARRE SAISIE — SANS STICKER (juste texte + envoi) */
   const bar = el('div', 'chat-bar');
   const inp = el('textarea');
   const sbb = el('button', 'chat-send', '➤'); sbb.type = 'button';
-  const eBtn = el('button', 'chat-ic-sm', '😊'); eBtn.type = 'button';
-  const ph = el('label', 'chat-ic-sm'); ph.innerHTML = '📷';
-  const pfile = document.createElement('input'); pfile.type = 'file'; pfile.accept = 'image/*'; ph.appendChild(pfile);
 
   inp.rows = 1; inp.maxLength = 500; inp.placeholder = 'Écris un message...';
   inp.addEventListener('input', () => {
@@ -3302,8 +3334,8 @@ async function openGroup(gid, g){
       openTagPicker(inp, name => { inp.value = v.slice(0, at) + '@' + name + ' '; inp.focus(); });
     }
   });
-  eBtn.addEventListener('click', () => { inp.value += '😀'; inp.focus(); });
-  bar.append(eBtn, ph, inp, sbb);
+  
+  bar.append(inp, sbb);
   box.appendChild(bar);
 
   let sig = '', first = true, purged = false, lastKey = '', replyTo = null;
@@ -3346,6 +3378,30 @@ async function openGroup(gid, g){
     const cc = el('button', 'btn btn-ghost', '📋'); cc.type = 'button';
     cc.addEventListener('click', () => copyText('Rejoins mon groupe « ' + g.name + ' » sur Hacken Store. Code : ' + g.code + ' ' + link, 'Invitation copiée'));
     cr.appendChild(cc); p.appendChild(cr);
+    
+    // NOUVEAU : Bouton d'invitation d'amis
+    const invBtn = el('button', 'btn btn-primary btn-block', '✉️ Inviter un ami'); 
+    invBtn.type = 'button'; invBtn.style.marginTop = '8px';
+    invBtn.addEventListener('click', async () => {
+      const friends = await fb('GET', 'friends/' + me.uid).catch(() => ({}));
+      const fids = Object.keys(friends);
+      if(!fids.length) return toast('Tu n\'as pas d\'amis à inviter.', true);
+      const choice = prompt('Pseudo de l\'ami à inviter :');
+      if(!choice) return;
+      const target = fids.find(id => (friends[id].name || '').toLowerCase() === choice.toLowerCase());
+      if(!target) return toast('Ami introuvable.', true);
+      try{
+        await fb('PUT', 'group_invites/' + target + '/' + gid, {
+          from: me.uid,
+          name: me.name,
+          gname: g.name,
+          t: Date.now()
+        });
+        toast('Invitation envoyée à ' + friends[target].name);
+      }catch(e){ toast('Erreur lors de l\'envoi.', true); }
+    });
+    p.appendChild(invBtn);
+
     p.appendChild(el('div', 'subhead', '👥 Membres'));
     try{
       Object.entries(await fb('GET', 'gmembers/' + gid) || {}).forEach(([uid, m]) => {
@@ -3469,11 +3525,6 @@ async function openGroup(gid, g){
     }catch(err){ if(text) inp.value = text; toast('Message non envoyé.', true); }
   }
 
-  pfile.addEventListener('change', async () => {
-    const f = pfile.files[0]; if(!f) return; pfile.value = '';
-    if(!/^image\//.test(f.type)) return toast('Choisis une image.', true);
-    try{ send(await compress(f, 640, 100000)); }catch(e){ toast('Image trop lourde.', true); }
-  });
   sbb.addEventListener('click', () => send());
   inp.addEventListener('keydown', e => { if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); send(); } });
   pull(); chatT = setInterval(pull, 10000);
@@ -3977,5 +4028,50 @@ if('serviceWorker' in navigator){
   addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
 }
 </script>
+<script>
+/* =========================================================
+   FOND ANIMÉ
+   ========================================================= */
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const cv = document.getElementById('fx'); if(!cv) return;
+  const c = cv.getContext('2d');
+  let W, H, items = [];
+  function size(){ W = cv.width = innerWidth; H = cv.height = innerHeight; }
+  size(); addEventListener('resize', size);
+  const count = innerWidth < 600 ? 8 : 16;
+  for(let i = 0; i < count; i++) items.push({ x: Math.random(), y: Math.random(), s: 5 + Math.random() * 12, v: .02 + Math.random() * .05, a: .08 + Math.random() * .18, g: Math.random() > .75 });
+  function frame(){
+    c.clearRect(0, 0, W, H);
+    items.forEach(p => {
+      p.y -= p.v / 60; if(p.y < -.05){ p.y = 1.05; p.x = Math.random(); }
+      const x = p.x * W, y = p.y * H, s = p.s;
+      c.globalAlpha = p.a; c.fillStyle = p.g ? '#F2B84B' : '#49D8F0';
+      c.beginPath(); c.moveTo(x, y - s); c.lineTo(x + s * .7, y); c.lineTo(x, y + s); c.lineTo(x - s * .7, y); c.closePath(); c.fill();
+    });
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+/* =========================================================
+   ANIMATIONS D'APPARITION (.rv)
+   ========================================================= */
+(function(){
+  const els = [...document.querySelectorAll('.rv')];
+  if(!('IntersectionObserver' in window)){ els.forEach(e => e.classList.add('in')); return; }
+  const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .08 });
+  els.forEach(e => io.observe(e));
+})();
+</script>
+
+<script>
+/* =========================================================
+   SERVICE WORKER (Mode hors-ligne)
+   ========================================================= */
+if('serviceWorker' in navigator){
+  addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+}
+</script>
 </body>
-  </html>
+        </html>
